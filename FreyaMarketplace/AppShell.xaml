@@ -26,24 +26,34 @@
 		</ResourceDictionary>
 	</Shell.Resources>
 
+<!--TODO: greeting és tabbar isvisible false volt alapból, kódból állítom igazra. teszteléshez most true-->
 
 
-    <ShellContent
+    <!--<ShellContent
         Shell.NavBarIsVisible="true"
         Title="Monkeys"
         ContentTemplate="{DataTemplate view:MainPage}"
-        Route="MainPage" />
-
+        Route="MainPage" />-->
 
 
     <!-- Start with GreetingPage -->
 
+    <!--TODO: ezzel működik, de valamiért nem jelenik meg az oldalon semmi - megjelenik csak fehérek az elemek-->
     <ShellContent
+        Shell.NavBarIsVisible="true"
         Title="Greeting"
         ContentTemplate="{DataTemplate startingPages:GreetingPage}"
-        Route="GreetingPage"
-        IsVisible="False" />
+        Route="GreetingPage"/>
 
+    <!--TODO: ha ez tkikkomenteled meghal minden xdd-->
+    <!--<ShellContent
+        Shell.NavBarIsVisible="true"
+        Title="Listings"
+        ContentTemplate="{DataTemplate listings:ListingsPage}"
+        Route="ListingsPage" />-->
+
+    
+    
     <!-- Register routes but keep them hidden from navigation -->
     <!--Remaining StartingPages-->
 
@@ -56,8 +66,13 @@
     <ShellContent Route="ListingDetailsPage" ContentTemplate="{DataTemplate listings:ListingDetailsPage}" IsVisible="False" />
 
     <!-- Main Navigation Tabs (hidden when not logged in) -->
-
-    <TabBar x:Name="MainTabBar" IsVisible="False">
+    <TabBar x:Name="MainTabBar" IsVisible="True">
+        <Tab Title="Home" Icon="home.png">
+            <ShellContent
+                Title="Monkeys"
+                ContentTemplate="{DataTemplate view:MainPage}"
+                Route="MainPage" /> 
+        </Tab>
         <Tab Title="Home" Icon="home.png">
             <ShellContent
                 Title="Home"

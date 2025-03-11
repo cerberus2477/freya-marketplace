@@ -3,6 +3,58 @@
   "WorkspaceRootPath": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{C60F2B1C-790E-4432-A719-52182A333ADE}|FreyaMarketplace\\FreyaMarketplace.csproj|c:\\xampp\\htdocs\\freya\\freya-marketplace\\freyamarketplace\\appshell.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{C60F2B1C-790E-4432-A719-52182A333ADE}|FreyaMarketplace\\FreyaMarketplace.csproj|solutionrelative:freyamarketplace\\appshell.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\obj\\Debug\\net9.0-windows10.0.19041\\win10-x64\\Platforms\\Windows\\App.g.i.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:FreyaMarketplace\\obj\\Debug\\net9.0-windows10.0.19041\\win10-x64\\Platforms\\Windows\\App.g.i.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C60F2B1C-790E-4432-A719-52182A333ADE}|FreyaMarketplace\\FreyaMarketplace.csproj|c:\\xampp\\htdocs\\freya\\freya-marketplace\\freyamarketplace\\view\\mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C60F2B1C-790E-4432-A719-52182A333ADE}|FreyaMarketplace\\FreyaMarketplace.csproj|solutionrelative:freyamarketplace\\view\\mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C60F2B1C-790E-4432-A719-52182A333ADE}|FreyaMarketplace\\FreyaMarketplace.csproj|c:\\xampp\\htdocs\\freya\\freya-marketplace\\freyamarketplace\\view\\startingpages\\greetingpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{C60F2B1C-790E-4432-A719-52182A333ADE}|FreyaMarketplace\\FreyaMarketplace.csproj|solutionrelative:freyamarketplace\\view\\startingpages\\greetingpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C60F2B1C-790E-4432-A719-52182A333ADE}|FreyaMarketplace\\FreyaMarketplace.csproj|c:\\xampp\\htdocs\\freya\\freya-marketplace\\freyamarketplace\\view\\startingpages\\greetingpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C60F2B1C-790E-4432-A719-52182A333ADE}|FreyaMarketplace\\FreyaMarketplace.csproj|solutionrelative:freyamarketplace\\view\\startingpages\\greetingpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C60F2B1C-790E-4432-A719-52182A333ADE}|FreyaMarketplace\\FreyaMarketplace.csproj|c:\\xampp\\htdocs\\freya\\freya-marketplace\\freyamarketplace\\appsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C60F2B1C-790E-4432-A719-52182A333ADE}|FreyaMarketplace\\FreyaMarketplace.csproj|solutionrelative:freyamarketplace\\appsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C60F2B1C-790E-4432-A719-52182A333ADE}|FreyaMarketplace\\FreyaMarketplace.csproj|c:\\xampp\\htdocs\\freya\\freya-marketplace\\freyamarketplace\\viewmodel\\listingsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C60F2B1C-790E-4432-A719-52182A333ADE}|FreyaMarketplace\\FreyaMarketplace.csproj|solutionrelative:freyamarketplace\\viewmodel\\listingsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C60F2B1C-790E-4432-A719-52182A333ADE}|FreyaMarketplace\\FreyaMarketplace.csproj|c:\\xampp\\htdocs\\freya\\freya-marketplace\\freyamarketplace\\viewmodel\\monkeysviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C60F2B1C-790E-4432-A719-52182A333ADE}|FreyaMarketplace\\FreyaMarketplace.csproj|solutionrelative:freyamarketplace\\viewmodel\\monkeysviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C60F2B1C-790E-4432-A719-52182A333ADE}|FreyaMarketplace\\FreyaMarketplace.csproj|c:\\xampp\\htdocs\\freya\\freya-marketplace\\freyamarketplace\\services\\listingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C60F2B1C-790E-4432-A719-52182A333ADE}|FreyaMarketplace\\FreyaMarketplace.csproj|solutionrelative:freyamarketplace\\services\\listingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C60F2B1C-790E-4432-A719-52182A333ADE}|FreyaMarketplace\\FreyaMarketplace.csproj|c:\\xampp\\htdocs\\freya\\freya-marketplace\\freyamarketplace\\services\\monkeyservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C60F2B1C-790E-4432-A719-52182A333ADE}|FreyaMarketplace\\FreyaMarketplace.csproj|solutionrelative:freyamarketplace\\services\\monkeyservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C60F2B1C-790E-4432-A719-52182A333ADE}|FreyaMarketplace\\FreyaMarketplace.csproj|c:\\xampp\\htdocs\\freya\\freya-marketplace\\freyamarketplace\\view\\listings\\listingspage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C60F2B1C-790E-4432-A719-52182A333ADE}|FreyaMarketplace\\FreyaMarketplace.csproj|solutionrelative:freyamarketplace\\view\\listings\\listingspage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C60F2B1C-790E-4432-A719-52182A333ADE}|FreyaMarketplace\\FreyaMarketplace.csproj|c:\\xampp\\htdocs\\freya\\freya-marketplace\\freyamarketplace\\view\\listings\\listingspage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{C60F2B1C-790E-4432-A719-52182A333ADE}|FreyaMarketplace\\FreyaMarketplace.csproj|solutionrelative:freyamarketplace\\view\\listings\\listingspage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C60F2B1C-790E-4432-A719-52182A333ADE}|FreyaMarketplace\\FreyaMarketplace.csproj|c:\\xampp\\htdocs\\freya\\freya-marketplace\\freyamarketplace\\view\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{C60F2B1C-790E-4432-A719-52182A333ADE}|FreyaMarketplace\\FreyaMarketplace.csproj|solutionrelative:freyamarketplace\\view\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{C60F2B1C-790E-4432-A719-52182A333ADE}|FreyaMarketplace\\FreyaMarketplace.csproj|c:\\xampp\\htdocs\\freya\\freya-marketplace\\freyamarketplace\\freyamarketplace.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
       "RelativeMoniker": "D:0:0:{C60F2B1C-790E-4432-A719-52182A333ADE}|FreyaMarketplace\\FreyaMarketplace.csproj|solutionrelative:freyamarketplace\\freyamarketplace.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
@@ -27,20 +79,8 @@
       "RelativeMoniker": "D:0:0:{C60F2B1C-790E-4432-A719-52182A333ADE}|FreyaMarketplace\\FreyaMarketplace.csproj|solutionrelative:freyamarketplace\\view\\homepage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C60F2B1C-790E-4432-A719-52182A333ADE}|FreyaMarketplace\\FreyaMarketplace.csproj|c:\\xampp\\htdocs\\freya\\freya-marketplace\\freyamarketplace\\view\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{C60F2B1C-790E-4432-A719-52182A333ADE}|FreyaMarketplace\\FreyaMarketplace.csproj|solutionrelative:freyamarketplace\\view\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C60F2B1C-790E-4432-A719-52182A333ADE}|FreyaMarketplace\\FreyaMarketplace.csproj|c:\\xampp\\htdocs\\freya\\freya-marketplace\\freyamarketplace\\appshell.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{C60F2B1C-790E-4432-A719-52182A333ADE}|FreyaMarketplace\\FreyaMarketplace.csproj|solutionrelative:freyamarketplace\\appshell.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{C60F2B1C-790E-4432-A719-52182A333ADE}|FreyaMarketplace\\FreyaMarketplace.csproj|c:\\xampp\\htdocs\\freya\\freya-marketplace\\freyamarketplace\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C60F2B1C-790E-4432-A719-52182A333ADE}|FreyaMarketplace\\FreyaMarketplace.csproj|solutionrelative:freyamarketplace\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C60F2B1C-790E-4432-A719-52182A333ADE}|FreyaMarketplace\\FreyaMarketplace.csproj|c:\\xampp\\htdocs\\freya\\freya-marketplace\\freyamarketplace\\view\\startingpages\\greetingpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C60F2B1C-790E-4432-A719-52182A333ADE}|FreyaMarketplace\\FreyaMarketplace.csproj|solutionrelative:freyamarketplace\\view\\startingpages\\greetingpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{393B8F30-F402-46A9-B209-8C71897A3416}|Solution Items{393B8F30-F402-46A9-B209-8C71897A3416}|C:\\xampp\\htdocs\\freya\\freya-marketplace\\README.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
@@ -67,20 +107,8 @@
       "RelativeMoniker": "D:0:0:{C60F2B1C-790E-4432-A719-52182A333ADE}|FreyaMarketplace\\FreyaMarketplace.csproj|solutionrelative:freyamarketplace\\globalusings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C60F2B1C-790E-4432-A719-52182A333ADE}|FreyaMarketplace\\FreyaMarketplace.csproj|c:\\xampp\\htdocs\\freya\\freya-marketplace\\freyamarketplace\\view\\listings\\listingspage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C60F2B1C-790E-4432-A719-52182A333ADE}|FreyaMarketplace\\FreyaMarketplace.csproj|solutionrelative:freyamarketplace\\view\\listings\\listingspage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{C60F2B1C-790E-4432-A719-52182A333ADE}|FreyaMarketplace\\FreyaMarketplace.csproj|c:\\xampp\\htdocs\\freya\\freya-marketplace\\freyamarketplace\\view\\listings\\listingdetailspage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{C60F2B1C-790E-4432-A719-52182A333ADE}|FreyaMarketplace\\FreyaMarketplace.csproj|solutionrelative:freyamarketplace\\view\\listings\\listingdetailspage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C60F2B1C-790E-4432-A719-52182A333ADE}|FreyaMarketplace\\FreyaMarketplace.csproj|c:\\xampp\\htdocs\\freya\\freya-marketplace\\freyamarketplace\\services\\listingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C60F2B1C-790E-4432-A719-52182A333ADE}|FreyaMarketplace\\FreyaMarketplace.csproj|solutionrelative:freyamarketplace\\services\\listingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C60F2B1C-790E-4432-A719-52182A333ADE}|FreyaMarketplace\\FreyaMarketplace.csproj|c:\\xampp\\htdocs\\freya\\freya-marketplace\\freyamarketplace\\viewmodel\\listingsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C60F2B1C-790E-4432-A719-52182A333ADE}|FreyaMarketplace\\FreyaMarketplace.csproj|solutionrelative:freyamarketplace\\viewmodel\\listingsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C60F2B1C-790E-4432-A719-52182A333ADE}|FreyaMarketplace\\FreyaMarketplace.csproj|c:\\xampp\\htdocs\\freya\\freya-marketplace\\freyamarketplace\\resources\\raw\\listingdata.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
@@ -103,10 +131,6 @@
       "RelativeMoniker": "D:0:0:{C60F2B1C-790E-4432-A719-52182A333ADE}|FreyaMarketplace\\FreyaMarketplace.csproj|solutionrelative:freyamarketplace\\viewmodel\\monkeydetailsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C60F2B1C-790E-4432-A719-52182A333ADE}|FreyaMarketplace\\FreyaMarketplace.csproj|c:\\xampp\\htdocs\\freya\\freya-marketplace\\freyamarketplace\\appsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C60F2B1C-790E-4432-A719-52182A333ADE}|FreyaMarketplace\\FreyaMarketplace.csproj|solutionrelative:freyamarketplace\\appsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{C60F2B1C-790E-4432-A719-52182A333ADE}|FreyaMarketplace\\FreyaMarketplace.csproj|c:\\xampp\\htdocs\\freya\\freya-marketplace\\freyamarketplace\\platforms\\android\\androidmanifest.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
       "RelativeMoniker": "D:0:0:{C60F2B1C-790E-4432-A719-52182A333ADE}|FreyaMarketplace\\FreyaMarketplace.csproj|solutionrelative:freyamarketplace\\platforms\\android\\androidmanifest.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
@@ -120,341 +144,29 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "DockedWidth": 321,
+          "SelectedChildIndex": 3,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ProfilePage.xaml.cs",
-              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\View\\ProfilePage.xaml.cs",
-              "RelativeDocumentMoniker": "FreyaMarketplace\\View\\ProfilePage.xaml.cs",
-              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\View\\ProfilePage.xaml.cs",
-              "RelativeToolTip": "FreyaMarketplace\\View\\ProfilePage.xaml.cs",
-              "ViewState": "AgIAACEAAAAAAAAAAADwvzYAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-11T22:20:38.304Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ProfilePage.xaml",
-              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\View\\ProfilePage.xaml",
-              "RelativeDocumentMoniker": "FreyaMarketplace\\View\\ProfilePage.xaml",
-              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\View\\ProfilePage.xaml",
-              "RelativeToolTip": "FreyaMarketplace\\View\\ProfilePage.xaml",
-              "ViewState": "AgIAABkAAAAAAAAAAAAAACcAAAAOAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-03-11T22:20:21.318Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "HomePage.xaml.cs",
-              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\View\\HomePage.xaml.cs",
-              "RelativeDocumentMoniker": "FreyaMarketplace\\View\\HomePage.xaml.cs",
-              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\View\\HomePage.xaml.cs",
-              "RelativeToolTip": "FreyaMarketplace\\View\\HomePage.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-11T22:19:28.319Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "HomePage.xaml",
-              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\View\\HomePage.xaml",
-              "RelativeDocumentMoniker": "FreyaMarketplace\\View\\HomePage.xaml",
-              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\View\\HomePage.xaml",
-              "RelativeToolTip": "FreyaMarketplace\\View\\HomePage.xaml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-03-11T22:19:17.889Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "MainPage.xaml",
-              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\View\\MainPage.xaml",
-              "RelativeDocumentMoniker": "FreyaMarketplace\\View\\MainPage.xaml",
-              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\View\\MainPage.xaml",
-              "RelativeToolTip": "FreyaMarketplace\\View\\MainPage.xaml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-03-11T22:17:25.299Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "AppShell.xaml",
-              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\AppShell.xaml",
-              "RelativeDocumentMoniker": "FreyaMarketplace\\AppShell.xaml",
-              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\AppShell.xaml",
-              "RelativeToolTip": "FreyaMarketplace\\AppShell.xaml",
-              "ViewState": "AgIAAEcAAAAAAAAAAAAAAF4AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-03-11T22:03:09.867Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "NewListingPage.xaml.cs",
-              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\View\\Listings\\NewListingPage.xaml.cs",
-              "RelativeDocumentMoniker": "FreyaMarketplace\\View\\Listings\\NewListingPage.xaml.cs",
-              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\View\\Listings\\NewListingPage.xaml.cs",
-              "RelativeToolTip": "FreyaMarketplace\\View\\Listings\\NewListingPage.xaml.cs",
-              "ViewState": "AgIAACQAAAAAAAAAAADwvzkAAAAbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-11T18:43:30.255Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "FreyaMarketplace.csproj",
-              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\FreyaMarketplace.csproj",
-              "RelativeDocumentMoniker": "FreyaMarketplace\\FreyaMarketplace.csproj",
-              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\FreyaMarketplace.csproj",
-              "RelativeToolTip": "FreyaMarketplace\\FreyaMarketplace.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAlAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-03-11T14:48:26.576Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "App.xaml.cs",
-              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\App.xaml.cs",
-              "RelativeDocumentMoniker": "FreyaMarketplace\\App.xaml.cs",
-              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\App.xaml.cs",
-              "RelativeToolTip": "FreyaMarketplace\\App.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-11T21:44:42.113Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "GreetingPage.xaml.cs",
-              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\View\\StartingPages\\GreetingPage.xaml.cs",
-              "RelativeDocumentMoniker": "FreyaMarketplace\\View\\StartingPages\\GreetingPage.xaml.cs",
-              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\View\\StartingPages\\GreetingPage.xaml.cs",
-              "RelativeToolTip": "FreyaMarketplace\\View\\StartingPages\\GreetingPage.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-11T22:13:45.712Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "App.xaml",
-              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\App.xaml",
-              "RelativeDocumentMoniker": "FreyaMarketplace\\App.xaml",
-              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\App.xaml",
-              "RelativeToolTip": "FreyaMarketplace\\App.xaml",
+              "DocumentIndex": 3,
+              "Title": "GreetingPage.xaml",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\View\\StartingPages\\GreetingPage.xaml",
+              "RelativeDocumentMoniker": "FreyaMarketplace\\View\\StartingPages\\GreetingPage.xaml",
+              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\View\\StartingPages\\GreetingPage.xaml",
+              "RelativeToolTip": "FreyaMarketplace\\View\\StartingPages\\GreetingPage.xaml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-03-11T21:44:19.31Z",
+              "WhenOpened": "2025-03-11T22:44:44.223Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "README.md",
-              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\README.md",
-              "RelativeDocumentMoniker": "README.md",
-              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\README.md",
-              "RelativeToolTip": "README.md",
-              "ViewState": "AgIAAB8AAAAAAAAAAAAAACsAAAAxAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
-              "WhenOpened": "2025-03-11T21:45:43.949Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "NewListingPage.xaml",
-              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\View\\Listings\\NewListingPage.xaml",
-              "RelativeDocumentMoniker": "FreyaMarketplace\\View\\Listings\\NewListingPage.xaml",
-              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\View\\Listings\\NewListingPage.xaml",
-              "RelativeToolTip": "FreyaMarketplace\\View\\Listings\\NewListingPage.xaml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAA0AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-03-11T21:48:12.997Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "devMauiProgram.cs.txt",
-              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\fromdev\\devMauiProgram.cs.txt",
-              "RelativeDocumentMoniker": "FreyaMarketplace\\fromdev\\devMauiProgram.cs.txt",
-              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\fromdev\\devMauiProgram.cs.txt",
-              "RelativeToolTip": "FreyaMarketplace\\fromdev\\devMauiProgram.cs.txt",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
-              "WhenOpened": "2025-03-11T18:49:04.036Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "ListingDetailsPage.xaml.cs",
-              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\View\\Listings\\ListingDetailsPage.xaml.cs",
-              "RelativeDocumentMoniker": "FreyaMarketplace\\View\\Listings\\ListingDetailsPage.xaml.cs",
-              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\View\\Listings\\ListingDetailsPage.xaml.cs",
-              "RelativeToolTip": "FreyaMarketplace\\View\\Listings\\ListingDetailsPage.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-11T18:42:19.743Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "GlobalUsings.cs",
-              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\GlobalUsings.cs",
-              "RelativeDocumentMoniker": "FreyaMarketplace\\GlobalUsings.cs",
-              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\GlobalUsings.cs",
-              "RelativeToolTip": "FreyaMarketplace\\GlobalUsings.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAeAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-11T18:44:17.709Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "ListingsPage.xaml.cs",
-              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\View\\Listings\\ListingsPage.xaml.cs",
-              "RelativeDocumentMoniker": "FreyaMarketplace\\View\\Listings\\ListingsPage.xaml.cs",
-              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\View\\Listings\\ListingsPage.xaml.cs",
-              "RelativeToolTip": "FreyaMarketplace\\View\\Listings\\ListingsPage.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-11T18:43:22.493Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "ListingDetailsPage.xaml",
-              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\View\\Listings\\ListingDetailsPage.xaml",
-              "RelativeDocumentMoniker": "FreyaMarketplace\\View\\Listings\\ListingDetailsPage.xaml",
-              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\View\\Listings\\ListingDetailsPage.xaml",
-              "RelativeToolTip": "FreyaMarketplace\\View\\Listings\\ListingDetailsPage.xaml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-03-11T18:42:08.519Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "ListingsViewModel.cs",
-              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\ViewModel\\ListingsViewModel.cs",
-              "RelativeDocumentMoniker": "FreyaMarketplace\\ViewModel\\ListingsViewModel.cs",
-              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\ViewModel\\ListingsViewModel.cs",
-              "RelativeToolTip": "FreyaMarketplace\\ViewModel\\ListingsViewModel.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAAAwCEAAAAdAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-11T18:27:35.781Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "ListingService.cs",
-              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\Services\\ListingService.cs",
-              "RelativeDocumentMoniker": "FreyaMarketplace\\Services\\ListingService.cs",
-              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\Services\\ListingService.cs",
-              "RelativeToolTip": "FreyaMarketplace\\Services\\ListingService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-11T18:31:25.53Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "Listingdata.json",
-              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\Resources\\Raw\\Listingdata.json",
-              "RelativeDocumentMoniker": "FreyaMarketplace\\Resources\\Raw\\Listingdata.json",
-              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\Resources\\Raw\\Listingdata.json",
-              "RelativeToolTip": "FreyaMarketplace\\Resources\\Raw\\Listingdata.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAUAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-03-11T18:30:42.234Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "Listing.cs",
-              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\Model\\Listing.cs",
-              "RelativeDocumentMoniker": "FreyaMarketplace\\Model\\Listing.cs",
-              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\Model\\Listing.cs",
-              "RelativeToolTip": "FreyaMarketplace\\Model\\Listing.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAArAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-11T18:29:07.914Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
-              "Title": "BaseViewModel.cs",
-              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\ViewModel\\BaseViewModel.cs",
-              "RelativeDocumentMoniker": "FreyaMarketplace\\ViewModel\\BaseViewModel.cs",
-              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\ViewModel\\BaseViewModel.cs",
-              "RelativeToolTip": "FreyaMarketplace\\ViewModel\\BaseViewModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-11T18:27:56.585Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 24,
-              "Title": "MonkeyDetailsViewModel.cs",
-              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\ViewModel\\MonkeyDetailsViewModel.cs",
-              "RelativeDocumentMoniker": "FreyaMarketplace\\ViewModel\\MonkeyDetailsViewModel.cs",
-              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\ViewModel\\MonkeyDetailsViewModel.cs",
-              "RelativeToolTip": "FreyaMarketplace\\ViewModel\\MonkeyDetailsViewModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-11T18:26:28.261Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 23,
-              "Title": "ListingDetailsModel.cs",
-              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\ViewModel\\ListingDetailsModel.cs",
-              "RelativeDocumentMoniker": "FreyaMarketplace\\ViewModel\\ListingDetailsModel.cs",
-              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\ViewModel\\ListingDetailsModel.cs",
-              "RelativeToolTip": "FreyaMarketplace\\ViewModel\\ListingDetailsModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-11T18:26:15.217Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 5,
               "Title": "AppSettings.cs",
               "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\AppSettings.cs",
               "RelativeDocumentMoniker": "FreyaMarketplace\\AppSettings.cs",
@@ -467,7 +179,358 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AppShell.xaml",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\AppShell.xaml",
+              "RelativeDocumentMoniker": "FreyaMarketplace\\AppShell.xaml",
+              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\AppShell.xaml",
+              "RelativeToolTip": "FreyaMarketplace\\AppShell.xaml",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAAADAAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-03-11T22:03:09.867Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MainPage.xaml.cs",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\View\\MainPage.xaml.cs",
+              "RelativeDocumentMoniker": "FreyaMarketplace\\View\\MainPage.xaml.cs",
+              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\View\\MainPage.xaml.cs",
+              "RelativeToolTip": "FreyaMarketplace\\View\\MainPage.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-11T22:30:01.952Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "App.g.i.cs",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\obj\\Debug\\net9.0-windows10.0.19041\\win10-x64\\Platforms\\Windows\\App.g.i.cs",
+              "RelativeDocumentMoniker": "FreyaMarketplace\\obj\\Debug\\net9.0-windows10.0.19041\\win10-x64\\Platforms\\Windows\\App.g.i.cs",
+              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\obj\\Debug\\net9.0-windows10.0.19041\\win10-x64\\Platforms\\Windows\\App.g.i.cs",
+              "RelativeToolTip": "FreyaMarketplace\\obj\\Debug\\net9.0-windows10.0.19041\\win10-x64\\Platforms\\Windows\\App.g.i.cs",
+              "ViewState": "AgIAADMAAAAAAAAAAIAwwEQAAABEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-11T22:38:03.627Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "MonkeyService.cs",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\Services\\MonkeyService.cs",
+              "RelativeDocumentMoniker": "FreyaMarketplace\\Services\\MonkeyService.cs",
+              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\Services\\MonkeyService.cs",
+              "RelativeToolTip": "FreyaMarketplace\\Services\\MonkeyService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-11T22:30:19.089Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "GreetingPage.xaml.cs",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\View\\StartingPages\\GreetingPage.xaml.cs",
+              "RelativeDocumentMoniker": "FreyaMarketplace\\View\\StartingPages\\GreetingPage.xaml.cs",
+              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\View\\StartingPages\\GreetingPage.xaml.cs",
+              "RelativeToolTip": "FreyaMarketplace\\View\\StartingPages\\GreetingPage.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-11T22:13:45.712Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ListingsViewModel.cs",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\ViewModel\\ListingsViewModel.cs",
+              "RelativeDocumentMoniker": "FreyaMarketplace\\ViewModel\\ListingsViewModel.cs",
+              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\ViewModel\\ListingsViewModel.cs",
+              "RelativeToolTip": "FreyaMarketplace\\ViewModel\\ListingsViewModel.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAiwB4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-11T18:27:35.781Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ListingsPage.xaml",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\View\\Listings\\ListingsPage.xaml",
+              "RelativeDocumentMoniker": "FreyaMarketplace\\View\\Listings\\ListingsPage.xaml",
+              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\View\\Listings\\ListingsPage.xaml",
+              "RelativeToolTip": "FreyaMarketplace\\View\\Listings\\ListingsPage.xaml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-03-11T22:28:23.974Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "HomePage.xaml",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\View\\HomePage.xaml",
+              "RelativeDocumentMoniker": "FreyaMarketplace\\View\\HomePage.xaml",
+              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\View\\HomePage.xaml",
+              "RelativeToolTip": "FreyaMarketplace\\View\\HomePage.xaml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-03-11T22:19:17.889Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "MainPage.xaml",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\View\\MainPage.xaml",
+              "RelativeDocumentMoniker": "FreyaMarketplace\\View\\MainPage.xaml",
+              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\View\\MainPage.xaml",
+              "RelativeToolTip": "FreyaMarketplace\\View\\MainPage.xaml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-03-11T22:17:25.299Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "NewListingPage.xaml.cs",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\View\\Listings\\NewListingPage.xaml.cs",
+              "RelativeDocumentMoniker": "FreyaMarketplace\\View\\Listings\\NewListingPage.xaml.cs",
+              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\View\\Listings\\NewListingPage.xaml.cs",
+              "RelativeToolTip": "FreyaMarketplace\\View\\Listings\\NewListingPage.xaml.cs",
+              "ViewState": "AgIAACQAAAAAAAAAAADwvzkAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-11T18:43:30.255Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "FreyaMarketplace.csproj",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\FreyaMarketplace.csproj",
+              "RelativeDocumentMoniker": "FreyaMarketplace\\FreyaMarketplace.csproj",
+              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\FreyaMarketplace.csproj",
+              "RelativeToolTip": "FreyaMarketplace\\FreyaMarketplace.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-03-11T14:48:26.576Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "HomePage.xaml.cs",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\View\\HomePage.xaml.cs",
+              "RelativeDocumentMoniker": "FreyaMarketplace\\View\\HomePage.xaml.cs",
+              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\View\\HomePage.xaml.cs",
+              "RelativeToolTip": "FreyaMarketplace\\View\\HomePage.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-11T22:19:28.319Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ListingsPage.xaml.cs",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\View\\Listings\\ListingsPage.xaml.cs",
+              "RelativeDocumentMoniker": "FreyaMarketplace\\View\\Listings\\ListingsPage.xaml.cs",
+              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\View\\Listings\\ListingsPage.xaml.cs",
+              "RelativeToolTip": "FreyaMarketplace\\View\\Listings\\ListingsPage.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-11T18:43:22.493Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "ProfilePage.xaml",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\View\\ProfilePage.xaml",
+              "RelativeDocumentMoniker": "FreyaMarketplace\\View\\ProfilePage.xaml",
+              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\View\\ProfilePage.xaml",
+              "RelativeToolTip": "FreyaMarketplace\\View\\ProfilePage.xaml",
+              "ViewState": "AgIAABkAAAAAAAAAAAAAACcAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-03-11T22:20:21.318Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "ProfilePage.xaml.cs",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\View\\ProfilePage.xaml.cs",
+              "RelativeDocumentMoniker": "FreyaMarketplace\\View\\ProfilePage.xaml.cs",
+              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\View\\ProfilePage.xaml.cs",
+              "RelativeToolTip": "FreyaMarketplace\\View\\ProfilePage.xaml.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAADwvzYAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-11T22:20:38.304Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "App.xaml.cs",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\App.xaml.cs",
+              "RelativeDocumentMoniker": "FreyaMarketplace\\App.xaml.cs",
+              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\App.xaml.cs",
+              "RelativeToolTip": "FreyaMarketplace\\App.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-11T21:44:42.113Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "App.xaml",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\App.xaml",
+              "RelativeDocumentMoniker": "FreyaMarketplace\\App.xaml",
+              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\App.xaml",
+              "RelativeToolTip": "FreyaMarketplace\\App.xaml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-03-11T21:44:19.31Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "README.md",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\README.md",
+              "RelativeDocumentMoniker": "README.md",
+              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\README.md",
+              "RelativeToolTip": "README.md",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAAACsAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2025-03-11T21:45:43.949Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "NewListingPage.xaml",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\View\\Listings\\NewListingPage.xaml",
+              "RelativeDocumentMoniker": "FreyaMarketplace\\View\\Listings\\NewListingPage.xaml",
+              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\View\\Listings\\NewListingPage.xaml",
+              "RelativeToolTip": "FreyaMarketplace\\View\\Listings\\NewListingPage.xaml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-03-11T21:48:12.997Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "devMauiProgram.cs.txt",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\fromdev\\devMauiProgram.cs.txt",
+              "RelativeDocumentMoniker": "FreyaMarketplace\\fromdev\\devMauiProgram.cs.txt",
+              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\fromdev\\devMauiProgram.cs.txt",
+              "RelativeToolTip": "FreyaMarketplace\\fromdev\\devMauiProgram.cs.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2025-03-11T18:49:04.036Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "ListingDetailsPage.xaml.cs",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\View\\Listings\\ListingDetailsPage.xaml.cs",
+              "RelativeDocumentMoniker": "FreyaMarketplace\\View\\Listings\\ListingDetailsPage.xaml.cs",
+              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\View\\Listings\\ListingDetailsPage.xaml.cs",
+              "RelativeToolTip": "FreyaMarketplace\\View\\Listings\\ListingDetailsPage.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-11T18:42:19.743Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "GlobalUsings.cs",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\GlobalUsings.cs",
+              "RelativeDocumentMoniker": "FreyaMarketplace\\GlobalUsings.cs",
+              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\GlobalUsings.cs",
+              "RelativeToolTip": "FreyaMarketplace\\GlobalUsings.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-11T18:44:17.709Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "ListingDetailsPage.xaml",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\View\\Listings\\ListingDetailsPage.xaml",
+              "RelativeDocumentMoniker": "FreyaMarketplace\\View\\Listings\\ListingDetailsPage.xaml",
+              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\View\\Listings\\ListingDetailsPage.xaml",
+              "RelativeToolTip": "FreyaMarketplace\\View\\Listings\\ListingDetailsPage.xaml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-03-11T18:42:08.519Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 27,
+              "Title": "Listingdata.json",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\Resources\\Raw\\Listingdata.json",
+              "RelativeDocumentMoniker": "FreyaMarketplace\\Resources\\Raw\\Listingdata.json",
+              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\Resources\\Raw\\Listingdata.json",
+              "RelativeToolTip": "FreyaMarketplace\\Resources\\Raw\\Listingdata.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-03-11T18:30:42.234Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "Listing.cs",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\Model\\Listing.cs",
+              "RelativeDocumentMoniker": "FreyaMarketplace\\Model\\Listing.cs",
+              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\Model\\Listing.cs",
+              "RelativeToolTip": "FreyaMarketplace\\Model\\Listing.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-11T18:29:07.914Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "BaseViewModel.cs",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\ViewModel\\BaseViewModel.cs",
+              "RelativeDocumentMoniker": "FreyaMarketplace\\ViewModel\\BaseViewModel.cs",
+              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\ViewModel\\BaseViewModel.cs",
+              "RelativeToolTip": "FreyaMarketplace\\ViewModel\\BaseViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-11T18:27:56.585Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "MonkeyDetailsViewModel.cs",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\ViewModel\\MonkeyDetailsViewModel.cs",
+              "RelativeDocumentMoniker": "FreyaMarketplace\\ViewModel\\MonkeyDetailsViewModel.cs",
+              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\ViewModel\\MonkeyDetailsViewModel.cs",
+              "RelativeToolTip": "FreyaMarketplace\\ViewModel\\MonkeyDetailsViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-11T18:26:28.261Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "ListingDetailsModel.cs",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\ViewModel\\ListingDetailsModel.cs",
+              "RelativeDocumentMoniker": "FreyaMarketplace\\ViewModel\\ListingDetailsModel.cs",
+              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\ViewModel\\ListingDetailsModel.cs",
+              "RelativeToolTip": "FreyaMarketplace\\ViewModel\\ListingDetailsModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-11T18:26:15.217Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
               "Title": "Xamarin.Android.Aapt2.targets",
               "DocumentMoniker": "C:\\Program Files\\dotnet\\packs\\Microsoft.Android.Sdk.Windows\\35.0.24\\tools\\Xamarin.Android.Aapt2.targets",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\Program Files\\dotnet\\packs\\Microsoft.Android.Sdk.Windows\\35.0.24\\tools\\Xamarin.Android.Aapt2.targets",
@@ -479,7 +542,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 32,
               "Title": "AndroidManifest.xml",
               "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\Platforms\\Android\\AndroidManifest.xml",
               "RelativeDocumentMoniker": "FreyaMarketplace\\Platforms\\Android\\AndroidManifest.xml",
@@ -488,6 +551,38 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
               "WhenOpened": "2025-03-11T14:40:13.756Z"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 79,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "MonkeysViewModel.cs",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\ViewModel\\MonkeysViewModel.cs",
+              "RelativeDocumentMoniker": "FreyaMarketplace\\ViewModel\\MonkeysViewModel.cs",
+              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\ViewModel\\MonkeysViewModel.cs",
+              "RelativeToolTip": "FreyaMarketplace\\ViewModel\\MonkeysViewModel.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAQwBgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-11T22:34:19.741Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ListingService.cs",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\Services\\ListingService.cs",
+              "RelativeDocumentMoniker": "FreyaMarketplace\\Services\\ListingService.cs",
+              "ToolTip": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\Services\\ListingService.cs",
+              "RelativeToolTip": "FreyaMarketplace\\Services\\ListingService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-11T18:31:25.53Z",
+              "EditorCaption": ""
             }
           ]
         }

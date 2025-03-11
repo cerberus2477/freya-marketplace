@@ -1,32 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Net.Http.Json;
-using FreyaMarketplace.Model;
-
+﻿using System.Net.Http.Json;
 
 namespace FreyaMarketplace.Services;
 
 public class ListingService
 {
-    HttpClient _httpClient;
+    HttpClient httpClient;
     public ListingService()
     {
-        _httpClient = new HttpClient();
+        this.httpClient = new HttpClient();
     }
 
-    List<Listing> listingList;
+    List<Listing> listings;
 
     public async Task<List<Listing>> GetListings()
     {
-        if (listingList?.Count > 0)
-            return listingList;
+        if (listings?.Count > 0)
+            return listings;
 
         // Call API for listings
-        var response = await _httpClient.GetAsync($"{AppSettings.ApiBaseUrl}listings?all");
-
+        var response = await httpClient.GetAsync($"{AppSettings.ApiBaseUrl}listings?all");
         if (response.IsSuccessStatusCode)
         {
             var apiResponse = await response.Content.ReadFromJsonAsync<ApiResponse>();
@@ -34,22 +26,17 @@ public class ListingService
             // Check if the response status is 200 (success)
             if (apiResponse?.Status == 200)
             {
-                listingList = apiResponse.Data;
-                return listingList;
+                listings = apiResponse.Data;
+
             }
             else
             {
                 // If the status is not 200, display the error message
                 Console.WriteLine($"Error: {apiResponse?.Message}");
-                return new List<Listing>(); // Return empty list if error
+
             }
         }
-        else
-        {
-            // If the response was not successful
-            Console.WriteLine("Error: Unable to fetch listings.");
-            return new List<Listing>(); // Return empty list on failure
-        }
+        return listings;
     }
 }
 
