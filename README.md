@@ -1,3 +1,172 @@
+## appshell.xaml
+```csharp
+<!--<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="FreyaMarketplace.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:startingPages="clr-namespace:FreyaMarketplace.View.StartingPages"
+    xmlns:listings="clr-namespace:FreyaMarketplace.View.Listings"
+    xmlns:view="clr-namespace:FreyaMarketplace.View"
+    Title="FreyaMarketplace">
+
+    --><!-- Start with GreetingPage --><!--
+    <ShellContent
+        Title="Greeting"
+        ContentTemplate="{DataTemplate startingPages:GreetingPage}"
+        Route="GreetingPage"
+        IsVisible="False" />
+
+    --><!-- Register routes but keep them hidden from navigation -->
+    <!--Remaining StartingPages--><!--
+    <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate startingPages:LoginPage}" IsVisible="False" />
+    <ShellContent Route="RegisterPage" ContentTemplate="{DataTemplate startingPages:RegisterPage}" IsVisible="False" />
+
+    --><!--other pages--><!--
+    <ShellContent Route="ListingDetailsPage" ContentTemplate="{DataTemplate listings:ListingDetailsPage}" IsVisible="False" />
+
+    --><!-- Main Navigation Tabs (hidden when not logged in) --><!--
+    <TabBar x:Name="MainTabBar" IsVisible="False">
+        <Tab Title="Home" Icon="home.png">
+            <ShellContent
+                Title="Home"
+                ContentTemplate="{DataTemplate view:HomePage}"
+                Route="HomePage" />
+        </Tab>
+
+        <Tab Title="Listings" Icon="list.png">
+            <ShellContent
+                Title="Listings"
+                ContentTemplate="{DataTemplate listings:ListingsPage}"
+                Route="ListingsPage" />
+        </Tab>
+
+        <Tab Title="New Listing" Icon="plus.png">
+            <ShellContent
+                Title="New Listing"
+                ContentTemplate="{DataTemplate listings:NewListingPage}"
+                Route="NewListingPage" />
+        </Tab>
+
+        <Tab Title="Profile" Icon="profile.png">
+            <ShellContent
+                Title="Profile"
+                ContentTemplate="{DataTemplate view:ProfilePage}"
+                Route="ProfilePage" />
+        </Tab>
+    </TabBar>
+
+</Shell>-->
+```
+
+
+## appshell.xaml.cs
+```csharp
+//using FreyaMarketplace.View;
+//using FreyaMarketplace.View.StartingPages;
+//using FreyaMarketplace.View.Listings;
+//using Microsoft.Maui.Controls;
+
+//namespace FreyaMarketplace
+//{
+
+//    //namespace FreyaMarketplace;
+
+//    //public partial class AppShell : Shell
+//    //{
+//    //    public AppShell()
+//    //    {
+//    //        InitializeComponent();
+
+//    //        Routing.RegisterRoute(nameof(DetailsPage), typeof(DetailsPage));
+//    //    }
+//    //}
+
+
+//    public partial class AppShell : Shell
+//    {
+//        public AppShell()
+//        {
+//            InitializeComponent();
+
+//            if (BindingContext == null)
+//            {
+//                Console.WriteLine("ERROR: BindingContext is NULL!");
+//            }
+
+//            // Register routes for navigation
+//            Routing.RegisterRoute(nameof(GreetingPage), typeof(GreetingPage));
+//            Routing.RegisterRoute("LoginPage", typeof(LoginPage));
+//            Routing.RegisterRoute("RegisterPage", typeof(RegisterPage));
+//            Routing.RegisterRoute("HomePage", typeof(HomePage));
+//            Routing.RegisterRoute("ListingsPage", typeof(ListingsPage));
+//            Routing.RegisterRoute("NewListingPage", typeof(NewListingPage));
+//            Routing.RegisterRoute("ProfilePage", typeof(ProfilePage));
+//            Routing.RegisterRoute("ListingDetailsPage", typeof(ListingDetailsPage));
+
+//            // Determine start page based on login state
+//            //if (IsUserLoggedIn())
+//            //{
+//            //    NavigateToHomePage();
+//            //}
+//            //else
+//            //{
+//            //    NavigateToGreetingPage();
+//            //}
+
+//            // Adjust navigation style
+//            //AdjustNavigationBar();
+//        }
+
+//        private bool IsUserLoggedIn()
+//        {
+//            //TODO: Replace with actual login check (e.g., SecureStorage, Preferences, or API)
+//            return Preferences.Get("IsLoggedIn", false);
+//        }
+
+//        public void NavigateToHomePage()
+//        {
+//            MainTabBar.IsVisible = true;
+//            //GoToAsync("//HomePage");
+//        }
+
+//        public void NavigateToLoginPage()
+//        {
+//            MainTabBar.IsVisible = false;
+//            //GoToAsync("//LoginPage");
+//        }
+
+//        public void NavigateToRegisterPage()
+//        {
+//            MainTabBar.IsVisible = false;
+//            //GoToAsync("//RegisterPage");
+//        }
+
+//        public void NavigateToGreetingPage()
+//        {
+//            MainTabBar.IsVisible = false;
+//            //GoToAsync("//GreetingPage");
+//        }
+
+//        private void AdjustNavigationBar()
+//        {
+//            if (DeviceInfo.Platform == DevicePlatform.WinUI)
+//            {
+//                Shell.SetTabBarIsVisible(this, false); // Hide bottom bar
+//                Shell.SetFlyoutBehavior(this, FlyoutBehavior.Flyout); // Show side menu
+//            }
+//            else
+//            {
+//                Shell.SetFlyoutBehavior(this, FlyoutBehavior.Disabled); // Disable sidebar
+//                Shell.SetTabBarIsVisible(this, true); // Show bottom bar
+//            }
+//        }
+//    }
+//}
+
+```
+
+
 ## Navigation
 
 In Part 3 we will add simple navigation to push a new page onto the stack to display details about the monkey.
@@ -220,8 +389,8 @@ Let's add UI to the DetailsPage. Our end goal is to get a fancy profile screen l
     <ContentPage
         xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
         xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-        x:Class="MonkeyFinder.DetailsPage"
-        xmlns:viewmodel="clr-namespace:MonkeyFinder.ViewModel"
+        x:Class="FreyaMarketplace.DetailsPage"
+        xmlns:viewmodel="clr-namespace:FreyaMarketplace.ViewModel"
         x:DataType="viewmodel:MonkeyDetailsViewModel"
         Title="{Binding Monkey.Name}">
 

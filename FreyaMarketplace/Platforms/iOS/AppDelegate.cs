@@ -1,6 +1,6 @@
 ﻿using Foundation;
 
-namespace MonkeyFinder;
+namespace FreyaMarketplace;
 
 [Register("AppDelegate")]
 public class AppDelegate : MauiUIApplicationDelegate

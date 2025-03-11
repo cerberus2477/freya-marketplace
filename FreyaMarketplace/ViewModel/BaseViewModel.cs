@@ -1,4 +1,4 @@
-﻿namespace MonkeyFinder.ViewModel;
+﻿namespace FreyaMarketplace.ViewModel;
 
 public partial class BaseViewModel : ObservableObject
 {

@@ -1,6 +1,6 @@
-﻿using MonkeyFinder.Services;
+﻿using FreyaMarketplace.Services;
 
-namespace MonkeyFinder.ViewModel;
+namespace FreyaMarketplace.ViewModel;
 
 public partial class MonkeysViewModel : BaseViewModel
 {

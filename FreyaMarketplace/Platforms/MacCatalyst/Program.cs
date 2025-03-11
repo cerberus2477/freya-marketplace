@@ -1,7 +1,7 @@
 ﻿using ObjCRuntime;
 using UIKit;
 
-namespace MonkeyFinder;
+namespace FreyaMarketplace;
 
 public class Program
 {

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FreyaMarketplace.View.StartingPages.LoginPage"
+             Title="LoginPage">
+    <VerticalStackLayout Padding="20">
+        <Label Text="Username:" />
+        <Entry x:Name="txtUserName" />
+
+        <Label Text="Password:" />
+        <Entry x:Name="txtPassword" IsPassword="True" />
+
+        <Button Text="Login" Clicked="Login_Clicked" />
+
+
+        <!-- this is a button too functionally, but with different styling (label with onclick vs. button) -->
+        <Label Text="Forgot Password?" 
+       TextColor="Blue" 
+       HorizontalOptions="Center">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Tapped="ForgotPassword_Tapped" />
+            </Label.GestureRecognizers>
+        </Label>
+
+        <Label Text="Don't have an account?" HorizontalOptions="Center" />
+        <Button Text="Register"
+                Clicked="OnRegisterClicked"
+                HorizontalOptions="Center" />
+    </VerticalStackLayout>
+</ContentPage>

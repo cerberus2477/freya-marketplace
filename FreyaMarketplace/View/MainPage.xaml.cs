@@ -1,4 +1,4 @@
-﻿namespace MonkeyFinder.View;
+﻿namespace FreyaMarketplace.View;
 
 public partial class MainPage : ContentPage
 {

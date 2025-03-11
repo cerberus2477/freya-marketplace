@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
-using MonkeyFinder.Services;
-using MonkeyFinder.View;
+using FreyaMarketplace.Services;
+using FreyaMarketplace.View;
 
-namespace MonkeyFinder;
+namespace FreyaMarketplace;
 
 public static class MauiProgram
 {

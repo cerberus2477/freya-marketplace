@@ -1,0 +1,39 @@
+﻿//using FreyaMarketplace.Services;
+//using FreyaMarketplace.View;
+//using Microsoft.Extensions.Logging;
+//using Microsoft.UI.Xaml.Documents;
+//using static Microsoft.Maui.ApplicationModel.Permissions;
+//using System.Xml;
+
+//namespace FreyaMarketplace
+//{
+//    public static class MauiProgram
+//    {
+//        public static MauiApp CreateMauiApp()
+//        {
+//            var builder = MauiApp.CreateBuilder();
+//            builder
+//                .UseMauiApp<App>()
+//                .ConfigureFonts(fonts =>
+//                {
+//                    fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+//                    fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+//                });
+
+//#if DEBUG
+//    		builder.Logging.AddDebug();
+//#endif
+
+//            //We are registering the ListingService and ListingViewModel as singletons.This means they will only be created once, if we wanted a unique instance to be created each request we would register them as Transient.
+
+//            builder.Services.AddSingleton<ListingService>();
+//            builder.Services.AddSingleton<ListingsViewModel>();
+
+//            builder.Services.AddTransient<ListingDetailsViewModel>();
+
+
+//            return builder.Build();
+
+//        }
+//    }
+//}

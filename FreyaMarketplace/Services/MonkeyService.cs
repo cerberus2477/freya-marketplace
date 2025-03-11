@@ -1,6 +1,6 @@
 ﻿using System.Net.Http.Json;
 
-namespace MonkeyFinder.Services;
+namespace FreyaMarketplace.Services;
 
 public class MonkeyService
 {

@@ -15,7 +15,7 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = FreyaMarketplace
-build_property.ProjectDir = D:\TÜNDE - ne töröld\FREYA\marketplace-new\FreyaMarketplace\
+build_property.ProjectDir = C:\xampp\htdocs\freya\freya-marketplace\FreyaMarketplace\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.CsWinRTAotExportsEnabled = 
@@ -27,26 +27,74 @@ build_property.CsWinRTUseWindowsUIXamlProjections = false
 build_property.EffectiveAnalysisLevelStyle = 9.0
 build_property.EnableCodeStyleSeverity = 
 
-[D:/TÜNDE - ne töröld/FREYA/marketplace-new/FreyaMarketplace/App.xaml]
+[C:/xampp/htdocs/freya/freya-marketplace/FreyaMarketplace/App.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = FreyaMarketplace.App.xaml
 build_metadata.AdditionalFiles.TargetPath = App.xaml
 build_metadata.AdditionalFiles.RelativePath = App.xaml
 
-[D:/TÜNDE - ne töröld/FREYA/marketplace-new/FreyaMarketplace/AppShell.xaml]
+[C:/xampp/htdocs/freya/freya-marketplace/FreyaMarketplace/AppShell.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = FreyaMarketplace.AppShell.xaml
 build_metadata.AdditionalFiles.TargetPath = AppShell.xaml
 build_metadata.AdditionalFiles.RelativePath = AppShell.xaml
 
-[D:/TÜNDE - ne töröld/FREYA/marketplace-new/FreyaMarketplace/View/DetailsPage.xaml]
+[C:/xampp/htdocs/freya/freya-marketplace/FreyaMarketplace/View/DetailsPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = FreyaMarketplace.View.DetailsPage.xaml
 build_metadata.AdditionalFiles.TargetPath = View\DetailsPage.xaml
 build_metadata.AdditionalFiles.RelativePath = View\DetailsPage.xaml
 
-[D:/TÜNDE - ne töröld/FREYA/marketplace-new/FreyaMarketplace/View/MainPage.xaml]
+[C:/xampp/htdocs/freya/freya-marketplace/FreyaMarketplace/View/HomePage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = FreyaMarketplace.View.HomePage.xaml
+build_metadata.AdditionalFiles.TargetPath = View\HomePage.xaml
+build_metadata.AdditionalFiles.RelativePath = View\HomePage.xaml
+
+[C:/xampp/htdocs/freya/freya-marketplace/FreyaMarketplace/View/Listings/ListingDetailsPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = FreyaMarketplace.View.Listings.ListingDetailsPage.xaml
+build_metadata.AdditionalFiles.TargetPath = View\Listings\ListingDetailsPage.xaml
+build_metadata.AdditionalFiles.RelativePath = View\Listings\ListingDetailsPage.xaml
+
+[C:/xampp/htdocs/freya/freya-marketplace/FreyaMarketplace/View/Listings/ListingsPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = FreyaMarketplace.View.Listings.ListingsPage.xaml
+build_metadata.AdditionalFiles.TargetPath = View\Listings\ListingsPage.xaml
+build_metadata.AdditionalFiles.RelativePath = View\Listings\ListingsPage.xaml
+
+[C:/xampp/htdocs/freya/freya-marketplace/FreyaMarketplace/View/Listings/NewListingPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = FreyaMarketplace.View.Listings.NewListingPage.xaml
+build_metadata.AdditionalFiles.TargetPath = View\Listings\NewListingPage.xaml
+build_metadata.AdditionalFiles.RelativePath = View\Listings\NewListingPage.xaml
+
+[C:/xampp/htdocs/freya/freya-marketplace/FreyaMarketplace/View/MainPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = FreyaMarketplace.View.MainPage.xaml
 build_metadata.AdditionalFiles.TargetPath = View\MainPage.xaml
 build_metadata.AdditionalFiles.RelativePath = View\MainPage.xaml
+
+[C:/xampp/htdocs/freya/freya-marketplace/FreyaMarketplace/View/ProfilePage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = FreyaMarketplace.View.ProfilePage.xaml
+build_metadata.AdditionalFiles.TargetPath = View\ProfilePage.xaml
+build_metadata.AdditionalFiles.RelativePath = View\ProfilePage.xaml
+
+[C:/xampp/htdocs/freya/freya-marketplace/FreyaMarketplace/View/StartingPages/GreetingPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = FreyaMarketplace.View.StartingPages.GreetingPage.xaml
+build_metadata.AdditionalFiles.TargetPath = View\StartingPages\GreetingPage.xaml
+build_metadata.AdditionalFiles.RelativePath = View\StartingPages\GreetingPage.xaml
+
+[C:/xampp/htdocs/freya/freya-marketplace/FreyaMarketplace/View/StartingPages/LoginPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = FreyaMarketplace.View.StartingPages.LoginPage.xaml
+build_metadata.AdditionalFiles.TargetPath = View\StartingPages\LoginPage.xaml
+build_metadata.AdditionalFiles.RelativePath = View\StartingPages\LoginPage.xaml
+
+[C:/xampp/htdocs/freya/freya-marketplace/FreyaMarketplace/View/StartingPages/RegisterPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = FreyaMarketplace.View.StartingPages.RegisterPage.xaml
+build_metadata.AdditionalFiles.TargetPath = View\StartingPages\RegisterPage.xaml
+build_metadata.AdditionalFiles.RelativePath = View\StartingPages\RegisterPage.xaml

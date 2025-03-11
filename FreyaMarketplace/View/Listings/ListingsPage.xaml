@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="FreyaMarketplace.View.Listings.ListingsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:model="clr-namespace:FreyaMarketplace.Model"
+    xmlns:viewmodel="clr-namespace:FreyaMarketplace.ViewModel"
+    x:DataType="viewmodel:ListingsViewModel"
+    Title="{Binding Title}">
+
+    <Grid
+        ColumnDefinitions="*,*"
+        ColumnSpacing="5"
+        RowDefinitions="*,Auto"
+        RowSpacing="0">
+
+        <CollectionView
+            Grid.ColumnSpan="2"
+            ItemsSource="{Binding Listings}"
+            SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:Listing">
+                    <Grid Padding="10">
+                        <Border HeightRequest="150" Style="{StaticResource CardView}">
+                            <Grid Padding="0" ColumnDefinitions="150,*">
+
+                                <!-- Image (if available) -->
+                                <Image Aspect="AspectFill" Source="{Binding Media}"
+                                       WidthRequest="150"
+                                       HeightRequest="150"
+                                       BackgroundColor="LightGray"/>
+
+                                <!-- Listing Details -->
+                                <VerticalStackLayout
+                                    VerticalOptions="Center"
+                                    Grid.Column="1"
+                                    Padding="10">
+                                    <Label Style="{StaticResource LargeLabel}" Text="{Binding Title}" />
+                                    <Label Style="{StaticResource MediumLabel}" Text="{Binding Plant}" />
+                                    <Label Style="{StaticResource SmallLabel}" Text="{Binding Type}" />
+                                    <Label Style="{StaticResource SmallLabel}" Text="{Binding Stage}" />
+                                    <Label Style="{StaticResource SmallLabel}" Text="{Binding User}" />
+                                    <Label Style="{StaticResource SmallLabel}" Text="{Binding Price, StringFormat='₤{0:F2}'}" />
+                                    <Label Style="{StaticResource SmallLabel}" Text="{Binding CreatedAt, StringFormat='{0:yyyy-MM-dd}'}" />
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Button Text="Get Listings" 
+                Command="{Binding GetListingsCommand}"
+                IsEnabled="{Binding IsNotBusy}"
+                Grid.Row="1"
+                Grid.Column="0"
+                Style="{StaticResource ButtonOutline}"
+                Margin="8"/>
+
+        <ActivityIndicator IsVisible="{Binding IsBusy}"
+                           IsRunning="{Binding IsBusy}"
+                           HorizontalOptions="Fill"
+                           VerticalOptions="Center"
+                           Color="{StaticResource Primary}"
+                           Grid.RowSpan="2"
+                           Grid.ColumnSpan="2"/>
+    </Grid>
+</ContentPage>

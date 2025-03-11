@@ -1,4 +1,4 @@
-﻿namespace MonkeyFinder;
+﻿namespace FreyaMarketplace;
 
 public partial class App : Application
 {

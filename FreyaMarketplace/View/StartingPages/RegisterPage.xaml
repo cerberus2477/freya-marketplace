@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FreyaMarketplace.View.StartingPages.RegisterPage"
+             Title="Regisztráció">
+
+    <VerticalStackLayout Padding="20">
+        <Label Text="Username:" />
+        <Entry x:Name="txtRegisterUserName" />
+
+        <Label Text="Email:" />
+        <Entry x:Name="txtRegisterEmail" Keyboard="Email" />
+
+        <Label Text="Password:" />
+        <Entry x:Name="txtRegisterPassword" IsPassword="True" />
+
+        <Label Text="Confirm Password:" />
+        <Entry x:Name="txtRegisterConfirmPassword" IsPassword="True" />
+
+        <Button Text="Register" Clicked="Register_Clicked" />
+
+        <Label Text="Already have an account?" HorizontalOptions="Center" />
+        <Button Text="Login"
+                Clicked="OnLoginClicked"
+                HorizontalOptions="Center" />
+    </VerticalStackLayout>
+</ContentPage>

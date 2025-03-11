@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FreyaMarketplace.View.ProfilePage"
+             Title="Profile">
+
+    <VerticalStackLayout Padding="20">
+        <Image Source="profile_placeholder.png" WidthRequest="100" HeightRequest="100" HorizontalOptions="Center"/>
+
+        <!-- Username -->
+        <Label Text="Username:" FontSize="16"/>
+        <Entry x:Name="UsernameEntry" Text="{Binding Username}" IsEnabled="False"/>
+
+        <!-- Email -->
+        <Label Text="Email:" FontSize="16"/>
+        <Entry x:Name="EmailEntry" Text="{Binding Email}" IsEnabled="False"/>
+
+        <!-- City -->
+        <Label Text="City:" FontSize="16"/>
+        <Entry x:Name="CityEntry" Text="{Binding City}" IsEnabled="False"/>
+
+        <!-- Birthdate -->
+        <Label Text="Birthdate:" FontSize="16"/>
+        <Entry x:Name="BirthdateEntry" Text="{Binding Birthdate}" IsEnabled="False"/>
+
+        <!-- Edit & Save Buttons -->
+        <Button x:Name="EditButton" Text="Edit Profile" Clicked="EditProfile_Clicked" Margin="10"/>
+        <Button x:Name="SaveButton" Text="Save Changes - Not implemented" Clicked="SaveProfile_Clicked" IsVisible="False" Margin="10"/>
+
+        <!-- Other Actions -->
+        <Label Text="Not implemented yet" FontSize="16"/>
+        <Button Text="Show My Plants" Margin="10"/>
+        <Button Text="Show Favourite Listings" Margin="10"/>
+        <Button Text="Show My Listings" Margin="10"/>
+
+        <!-- Logout -->
+        <Button Text="Logout" BackgroundColor="Red" TextColor="White" Clicked="Logout_Clicked" Margin="10"/>
+    </VerticalStackLayout>
+
+</ContentPage>

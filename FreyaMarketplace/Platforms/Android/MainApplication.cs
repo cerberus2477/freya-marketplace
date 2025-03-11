@@ -1,7 +1,7 @@
 ﻿using Android.App;
 using Android.Runtime;
 
-namespace MonkeyFinder;
+namespace FreyaMarketplace;
 
 [Application]
 public class MainApplication : MauiApplication

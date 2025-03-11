@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MonkeyFinder.AppShell"
-             xmlns:view="clr-namespace:MonkeyFinder.View"
-             FlyoutBehavior="Disabled">
+             x:Class="FreyaMarketplace.AppShell"
+             xmlns:view="clr-namespace:FreyaMarketplace.View"
+                xmlns:startingPages="clr-namespace:FreyaMarketplace.View.StartingPages"
+                xmlns:listings="clr-namespace:FreyaMarketplace.View.Listings"
+       >
 
 
 
@@ -32,4 +34,61 @@
         ContentTemplate="{DataTemplate view:MainPage}"
         Route="MainPage" />
 
+
+
+    <!-- Start with GreetingPage -->
+
+    <ShellContent
+        Title="Greeting"
+        ContentTemplate="{DataTemplate startingPages:GreetingPage}"
+        Route="GreetingPage"
+        IsVisible="False" />
+
+    <!-- Register routes but keep them hidden from navigation -->
+    <!--Remaining StartingPages-->
+
+    <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate startingPages:LoginPage}" IsVisible="False" />
+    <ShellContent Route="RegisterPage" ContentTemplate="{DataTemplate startingPages:RegisterPage}" IsVisible="False" />
+
+
+    <!--other pages-->
+
+    <ShellContent Route="ListingDetailsPage" ContentTemplate="{DataTemplate listings:ListingDetailsPage}" IsVisible="False" />
+
+    <!-- Main Navigation Tabs (hidden when not logged in) -->
+
+    <TabBar x:Name="MainTabBar" IsVisible="False">
+        <Tab Title="Home" Icon="home.png">
+            <ShellContent
+                Title="Home"
+                ContentTemplate="{DataTemplate view:HomePage}"
+                Route="HomePage" />
+        </Tab>
+
+        <Tab Title="Listings" Icon="list.png">
+            <ShellContent
+                Title="Listings"
+                ContentTemplate="{DataTemplate listings:ListingsPage}"
+                Route="ListingsPage" />
+        </Tab>
+
+        <Tab Title="New Listing" Icon="plus.png">
+            <ShellContent
+                Title="New Listing"
+                ContentTemplate="{DataTemplate listings:NewListingPage}"
+                Route="NewListingPage" />
+        </Tab>
+
+        <Tab Title="Profile" Icon="profile.png">
+            <ShellContent
+                Title="Profile"
+                ContentTemplate="{DataTemplate view:ProfilePage}"
+                Route="ProfilePage" />
+        </Tab>
+    </TabBar>
+
+    
+    
+
 </Shell>
+

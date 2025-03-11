@@ -10,7 +10,7 @@
 using System.Diagnostics.CodeAnalysis;
 
 
-namespace MonkeyFinder.WinUI
+namespace FreyaMarketplace.WinUI
 {
     public partial class App : global::Microsoft.UI.Xaml.Markup.IXamlMetadataProvider
     {
