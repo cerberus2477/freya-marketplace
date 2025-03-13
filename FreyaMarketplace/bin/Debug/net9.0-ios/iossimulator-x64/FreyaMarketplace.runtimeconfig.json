@@ -4,11 +4,11 @@
     "includedFrameworks": [
       {
         "name": "Microsoft.NETCore.App",
-        "version": "9.0.1"
+        "version": "9.0.0"
       },
       {
         "name": "Microsoft.iOS",
-        "version": "18.2.9173"
+        "version": "18.1.9163"
       }
     ],
     "configProperties": {

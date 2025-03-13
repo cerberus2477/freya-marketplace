@@ -8,8 +8,10 @@
         <Label Text="Welcome to FreyaDev!" FontSize="24" HorizontalOptions="Center"/>
         <Label Text="This is your home page. Browse and explore." FontSize="16" HorizontalOptions="Center"/>
 
-        <Button Text="Go to Listings" Margin="10"/>
-        <Button Text="Create New Listing" Margin="10"/>
+        <Button Text="Go to Listings" Margin="10" Clicked="OnListingsClicked"
+HorizontalOptions="Center" />
+        <Button Text="Create New Listing" Margin="10" Clicked="OnNewListingClicked"
+HorizontalOptions="Center" />
     </VerticalStackLayout>
 
 </ContentPage>

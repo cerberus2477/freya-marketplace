@@ -1,5 +1,4 @@
 ﻿using FreyaMarketplace.Services;
-using System.Reflection;
 
 namespace FreyaMarketplace.ViewModel;
 

@@ -20,10 +20,13 @@ public static class MauiProgram
 		builder.Logging.AddDebug();
 #endif
 
+        //view model is Transient so a new view model is created each time the page is navigated to
 		builder.Services.AddSingleton<MonkeyService>();
 		builder.Services.AddSingleton<MonkeysViewModel>();
-		
+        builder.Services.AddTransient<ListingDetailsViewModel>();
+        builder.Services.AddSingleton<ListingService>();
 
-		return builder.Build();
+
+        return builder.Build();
 	}
 }

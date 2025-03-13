@@ -4,10 +4,7 @@
              x:Class="FreyaMarketplace.AppShell"
              xmlns:view="clr-namespace:FreyaMarketplace.View"
                 xmlns:startingPages="clr-namespace:FreyaMarketplace.View.StartingPages"
-                xmlns:listings="clr-namespace:FreyaMarketplace.View.Listings"
-       >
-
-
+                xmlns:listings="clr-namespace:FreyaMarketplace.View.Listings">
 
 	<Shell.Resources>
 		<ResourceDictionary>
@@ -28,8 +25,7 @@
 
 <!--TODO: greeting és tabbar isvisible false volt alapból, kódból állítom igazra. teszteléshez most true-->
 
-
-    <!--<ShellContent
+<!--<ShellContent
         Shell.NavBarIsVisible="true"
         Title="Monkeys"
         ContentTemplate="{DataTemplate view:MainPage}"
@@ -38,27 +34,19 @@
 
     <!-- Start with GreetingPage -->
 
-    <!--TODO: ezzel működik, de valamiért nem jelenik meg az oldalon semmi - megjelenik csak fehérek az elemek-->
+    <!--todo: otthon fehér a felirat, suliban nem, valószínűleg a system theme miatt, erre figyelni kéne úgy általában-->
     <ShellContent
         Shell.NavBarIsVisible="true"
         Title="Greeting"
         ContentTemplate="{DataTemplate startingPages:GreetingPage}"
         Route="GreetingPage"/>
 
-    <!--TODO: ha ez tkikkomenteled meghal minden xdd-->
-    <!--<ShellContent
-        Shell.NavBarIsVisible="true"
-        Title="Listings"
-        ContentTemplate="{DataTemplate listings:ListingsPage}"
-        Route="ListingsPage" />-->
 
-    
-    
     <!-- Register routes but keep them hidden from navigation -->
     <!--Remaining StartingPages-->
 
-    <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate startingPages:LoginPage}" IsVisible="False" />
-    <ShellContent Route="RegisterPage" ContentTemplate="{DataTemplate startingPages:RegisterPage}" IsVisible="False" />
+    <!--<ShellContent Title="Login" Route="LoginPage" ContentTemplate="{DataTemplate startingPages:LoginPage}" IsVisible="False" />
+    <ShellContent Title="Register" Route="RegisterPage" ContentTemplate="{DataTemplate startingPages:RegisterPage}" IsVisible="False" />-->
 
 
     <!--other pages-->

@@ -1,24 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\FreyaMarketplace.csproj": {}
+    "D:\\TÜNDE - ne töröld\\FREYA\\marketplace-new\\FreyaMarketplace\\FreyaMarketplace.csproj": {}
   },
   "projects": {
-    "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\FreyaMarketplace.csproj": {
+    "D:\\TÜNDE - ne töröld\\FREYA\\marketplace-new\\FreyaMarketplace\\FreyaMarketplace.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\FreyaMarketplace.csproj",
+        "projectUniqueName": "D:\\TÜNDE - ne töröld\\FREYA\\marketplace-new\\FreyaMarketplace\\FreyaMarketplace.csproj",
         "projectName": "FreyaMarketplace",
-        "projectPath": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\FreyaMarketplace.csproj",
-        "packagesPath": "C:\\Users\\Tünde\\.nuget\\packages\\",
-        "outputPath": "C:\\xampp\\htdocs\\freya\\freya-marketplace\\FreyaMarketplace\\obj\\",
+        "projectPath": "D:\\TÜNDE - ne töröld\\FREYA\\marketplace-new\\FreyaMarketplace\\FreyaMarketplace.csproj",
+        "packagesPath": "C:\\Users\\3041TAN-13\\.nuget\\packages\\",
+        "outputPath": "D:\\TÜNDE - ne töröld\\FREYA\\marketplace-new\\FreyaMarketplace\\obj\\",
         "projectStyle": "PackageReference",
         "crossTargeting": true,
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Tünde\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\3041TAN-13\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -32,7 +32,7 @@
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net9.0-ios18.2": {
+          "net9.0-ios18.1": {
             "targetAlias": "net9.0-ios",
             "projectReferences": {}
           },
@@ -49,12 +49,12 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
-          "auditMode": "direct"
+          "auditMode": "all"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
-        "net9.0-ios18.2": {
+        "net9.0-ios18.1": {
           "targetAlias": "net9.0-ios",
           "dependencies": {
             "CommunityToolkit.Mvvm": {
@@ -67,16 +67,16 @@
             },
             "Microsoft.Maui.Controls": {
               "target": "Package",
-              "version": "[9.0.14, )"
+              "version": "[9.0.0, )"
             },
             "Microsoft.Maui.Controls.Compatibility": {
               "target": "Package",
-              "version": "[9.0.14, )"
+              "version": "[9.0.0, )"
             },
             "Microsoft.NET.ILLink.Tasks": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[9.0.1, )",
+              "version": "[9.0.0, )",
               "autoReferenced": true
             }
           },
@@ -99,7 +99,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200-preview.0.24575.35/PortableRuntimeIdentifierGraph.json"
         },
         "net9.0-windows10.0.19041": {
           "targetAlias": "net9.0-windows10.0.19041",
@@ -114,11 +114,11 @@
             },
             "Microsoft.Maui.Controls": {
               "target": "Package",
-              "version": "[9.0.14, )"
+              "version": "[9.0.0, )"
             },
             "Microsoft.Maui.Controls.Compatibility": {
               "target": "Package",
-              "version": "[9.0.14, )"
+              "version": "[9.0.0, )"
             }
           },
           "imports": [
@@ -146,7 +146,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200-preview.0.24575.35\\RuntimeIdentifierGraph.json"
         }
       },
       "runtimes": {

@@ -21,12 +21,12 @@ public partial class ListingsViewModel : BaseViewModel
         try
         {
             IsBusy = true;
-            var listingsData = await listingService.GetListings(); // Rename variable
+            var listings = await listingService.GetListings(); // Rename variable
 
             if (Listings.Count != 0)
                 Listings.Clear(); // Correctly clear the ObservableCollection
 
-            foreach (var listing in listingsData)
+            foreach (var listing in listings)
                 Listings.Add(listing); // Add fetched listings
 
         }

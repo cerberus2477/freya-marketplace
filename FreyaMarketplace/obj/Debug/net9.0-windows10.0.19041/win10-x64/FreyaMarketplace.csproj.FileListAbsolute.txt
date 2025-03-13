@@ -1888,3 +1888,5 @@ C:\xampp\htdocs\freya\freya-marketplace\FreyaMarketplace\obj\Debug\net9.0-window
 C:\xampp\htdocs\freya\freya-marketplace\FreyaMarketplace\obj\Debug\net9.0-windows10.0.19041\win10-x64\qualifiers.txt
 C:\xampp\htdocs\freya\freya-marketplace\FreyaMarketplace\obj\Debug\net9.0-windows10.0.19041\win10-x64\qualifiers.txt.intermediate
 C:\xampp\htdocs\freya\freya-marketplace\FreyaMarketplace\obj\Debug\net9.0-windows10.0.19041\win10-x64\MultipleQualifiersPerDimensionFound.txt
+D:\TÜNDE - ne töröld\FREYA\marketplace-new\FreyaMarketplace\bin\Debug\net9.0-windows10.0.19041\win10-x64\Listingdata.json
+D:\TÜNDE - ne töröld\FREYA\marketplace-new\FreyaMarketplace\obj\Debug\net9.0-windows10.0.19041\win10-x64\FreyaMarketplace.sourcelink.json

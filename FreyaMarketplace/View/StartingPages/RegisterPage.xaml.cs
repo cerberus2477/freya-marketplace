@@ -33,7 +33,8 @@ namespace FreyaMarketplace.View.StartingPages
             if (registrationSuccess)
             {
                 await DisplayAlert("Success", "Registration successful", "OK");
-                await Shell.Current.GoToAsync("//LoginPage");
+                //TODO: log the user in, or popup sikeres regisztrávió, most már beléphetsz
+                await Shell.Current.GoToAsync("HomePage");
             }
             else
             {
@@ -43,7 +44,7 @@ namespace FreyaMarketplace.View.StartingPages
 
         private async void OnLoginClicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync("//LoginPage");
+            await Shell.Current.GoToAsync("LoginPage");
         }
     }
 }

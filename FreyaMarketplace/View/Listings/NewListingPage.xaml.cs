@@ -84,6 +84,8 @@ namespace FreyaMarketplace.View.Listings
             }
 
             // Create new listing object
+            //TODO: make it trigger a put api request
+            //lehet hogy úgy kell hogy a viewmodel listinglistjéhez adod hozzá somehow, egyelõre csak helyben létrehozza és nem csinál vele semmit
             var newListing = new
             {
                 Title = title,
@@ -96,20 +98,18 @@ namespace FreyaMarketplace.View.Listings
                 Stage = stage
             };
 
-            // Simulate saving (replace with actual API/database save)
             await DisplayAlert("Success", "Listing added successfully!", "OK");
 
-            // Optionally navigate back
-            await Navigation.PopAsync();
+            await Shell.Current.GoToAsync(".."); // Goes back to the previous page in Shell
         }
 
 
-        // Handle the button click to navigate to MyPlantsPage
+        // TODO: Handle the button click to navigate to MyPlantsPage
         private async void OnMyListingsClicked(object sender, EventArgs e)
         {
 
             // Navigate to the MyPlantsPage
-            //await Navigation.PushAsync(new MyListingsPage());
+            //await Shell.Current.GoToAsync("");
             await DisplayAlert("Saját hirdetések", "Saját hirdetések - Notimplemented, ki kell listázni õket és módosítani (külön EditListingPage ig)", "OK");
         }
     }

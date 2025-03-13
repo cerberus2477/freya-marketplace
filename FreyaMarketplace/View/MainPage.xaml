@@ -12,6 +12,7 @@
         ColumnSpacing="5"
         RowDefinitions="*,Auto"
         RowSpacing="0">
+        
         <CollectionView
             Grid.ColumnSpan="2"
             ItemsSource="{Binding Monkeys}"
@@ -21,9 +22,11 @@
                     <Grid Padding="10">
                         <Border HeightRequest="125" Style="{StaticResource CardView}">
                             <Grid Padding="0" ColumnDefinitions="125,*">
+                                
                                 <Image Aspect="AspectFill" Source="{Binding Image}"
                                        WidthRequest="125"
                                        HeightRequest="125"/>
+                                
                                 <VerticalStackLayout
                                     VerticalOptions="Center"
                                     Grid.Column="1"

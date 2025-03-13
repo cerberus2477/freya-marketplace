@@ -26,10 +26,7 @@ namespace FreyaMarketplace.View.StartingPages
             if (loginSuccess)
             {
                 Preferences.Set("IsLoggedIn", true);
-                //if (Shell.Current is AppShell shell)
-                //{
-                //    shell.NavigateToHomePage();
-                //}
+                await Shell.Current.GoToAsync("HomePage");
             }
             else
             {
@@ -37,12 +34,9 @@ namespace FreyaMarketplace.View.StartingPages
             }
         }
 
-        private void OnRegisterClicked(object sender, EventArgs e)
+        private async void OnRegisterClicked(object sender, EventArgs e)
         {
-            //if (Shell.Current is AppShell shell)
-            //{
-            //    shell.NavigateToRegisterPage(); 
-            //}
+            await Shell.Current.GoToAsync("RegisterPage");
         }
 
         private async void ForgotPassword_Tapped(object sender, EventArgs e)
