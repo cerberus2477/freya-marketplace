@@ -18,7 +18,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FreyaMarketplace")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+518c166439ba5beab1f6da3ea28660f098b5c6df")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+12c6b3b8fd5bfc421e6dc52d93bab65b50ab1676")]
 [assembly: System.Reflection.AssemblyProductAttribute("FreyaMarketplace")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FreyaMarketplace")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

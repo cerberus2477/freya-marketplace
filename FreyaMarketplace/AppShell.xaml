@@ -1,29 +1,33 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="FreyaMarketplace.AppShell"
-             xmlns:view="clr-namespace:FreyaMarketplace.View"
-                xmlns:startingPages="clr-namespace:FreyaMarketplace.View.StartingPages"
-                xmlns:listings="clr-namespace:FreyaMarketplace.View.Listings">
+        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+        x:Class="FreyaMarketplace.AppShell"
+        xmlns:view="clr-namespace:FreyaMarketplace.View"
+        xmlns:startingPages="clr-namespace:FreyaMarketplace.View.StartingPages"
+        xmlns:listings="clr-namespace:FreyaMarketplace.View.Listings"
+        Shell.FlyoutBehavior="Locked"
+ 
 
-	<Shell.Resources>
+    Shell.TabBarIsVisible="False"
+    Shell.NavBarIsVisible="false"
+>
+    <!--<Shell.Resources>
 		<ResourceDictionary>
 			<Style TargetType="Shell" ApplyToDerivedTypes="True">
 				<Setter Property="Shell.BackgroundColor" Value="{StaticResource Primary}" />
 				<Setter Property="Shell.ForegroundColor" Value="{OnPlatform WinUI={StaticResource Primary}, Default=White}" />
 				<Setter Property="Shell.TitleColor" Value="White" />
 				<Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
-				<Setter Property="Shell.UnselectedColor" Value="{AppThemeBinding Dark=#95FFFFFF, Light=#95000000}" />
-				<Setter Property="Shell.NavBarHasShadow" Value="False" />
-				<Setter Property="Shell.TabBarBackgroundColor" Value="{AppThemeBinding Dark={StaticResource DarkBackground}, Light={StaticResource LightBackground}}" />
+                <Setter Property="Shell.UnselectedColor" Value="{AppThemeBinding Dark=#95FFFFFF, Light=#95000000}" />
+                <Setter Property="Shell.TabBarBackgroundColor" Value="{AppThemeBinding Dark={StaticResource DarkBackground}, Light={StaticResource LightBackground}}" />
 				<Setter Property="Shell.TabBarForegroundColor" Value="{AppThemeBinding Dark={StaticResource LightBackground}, Light={StaticResource DarkBackground}}" />
 				<Setter Property="Shell.TabBarTitleColor" Value="{AppThemeBinding Dark={StaticResource LightBackground}, Light={StaticResource DarkBackground}}" />
 				<Setter Property="Shell.TabBarUnselectedColor" Value="{AppThemeBinding Dark=#95FFFFFF, Light=#95000000}" />
-			</Style>
+            </Style>
 		</ResourceDictionary>
-	</Shell.Resources>
+	</Shell.Resources>-->
 
-<!--TODO: greeting és tabbar isvisible false volt alapból, kódból állítom igazra. teszteléshez most true-->
+
 
 <!--<ShellContent
         Shell.NavBarIsVisible="true"
@@ -36,62 +40,47 @@
 
     <!--todo: otthon fehér a felirat, suliban nem, valószínűleg a system theme miatt, erre figyelni kéne úgy általában-->
     <ShellContent
-        Shell.NavBarIsVisible="true"
         Title="Greeting"
         ContentTemplate="{DataTemplate startingPages:GreetingPage}"
-        Route="GreetingPage"/>
+        Route="GreetingPage"
+        IsVisible="False"/>
 
 
     <!-- Register routes but keep them hidden from navigation -->
-    <!--Remaining StartingPages-->
-
-    <!--<ShellContent Title="Login" Route="LoginPage" ContentTemplate="{DataTemplate startingPages:LoginPage}" IsVisible="False" />
-    <ShellContent Title="Register" Route="RegisterPage" ContentTemplate="{DataTemplate startingPages:RegisterPage}" IsVisible="False" />-->
-
-
-    <!--other pages-->
-
+    <ShellContent Title="Login" Route="LoginPage" ContentTemplate="{DataTemplate startingPages:LoginPage}" IsVisible="False"/>
+    <ShellContent Title="Register" Route="RegisterPage" ContentTemplate="{DataTemplate startingPages:RegisterPage}" IsVisible="False"/>
     <ShellContent Route="ListingDetailsPage" ContentTemplate="{DataTemplate listings:ListingDetailsPage}" IsVisible="False" />
 
+ 
     <!-- Main Navigation Tabs (hidden when not logged in) -->
-    <TabBar x:Name="MainTabBar" IsVisible="True">
-        <Tab Title="Home" Icon="home.png">
-            <ShellContent
-                Title="Monkeys"
-                ContentTemplate="{DataTemplate view:MainPage}"
-                Route="MainPage" /> 
-        </Tab>
-        <Tab Title="Home" Icon="home.png">
-            <ShellContent
+    <FlyoutItem x:Name="MainFlyoutItem" Title="Dashboard"  IsVisible="True" FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent
                 Title="Home"
                 ContentTemplate="{DataTemplate view:HomePage}"
-                Route="HomePage" />
-        </Tab>
+                Route="HomePage" 
+                Icon="dotnet.bot.png"/>
 
-        <Tab Title="Listings" Icon="list.png">
-            <ShellContent
+        <ShellContent
                 Title="Listings"
                 ContentTemplate="{DataTemplate listings:ListingsPage}"
-                Route="ListingsPage" />
-        </Tab>
+                Route="ListingsPage" 
+                Icon="dotnet.bot.png"/>
 
-        <Tab Title="New Listing" Icon="plus.png">
-            <ShellContent
+        <ShellContent
                 Title="New Listing"
                 ContentTemplate="{DataTemplate listings:NewListingPage}"
-                Route="NewListingPage" />
-        </Tab>
+                Route="NewListingPage" 
+                Icon="dotnet.bot.png"/>
 
-        <Tab Title="Profile" Icon="profile.png">
-            <ShellContent
+        <ShellContent
                 Title="Profile"
                 ContentTemplate="{DataTemplate view:ProfilePage}"
-                Route="ProfilePage" />
-        </Tab>
-    </TabBar>
+                Route="ProfilePage" 
+                Icon="dotnet.bot.png"/>
 
-    
-    
+    </FlyoutItem>
+
+
 
 </Shell>
 
