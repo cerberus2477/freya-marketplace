@@ -5,7 +5,7 @@
              Title="Profile">
 
     <VerticalStackLayout Padding="20">
-        <Image Source="profile_placeholder.png" WidthRequest="100" HeightRequest="100" HorizontalOptions="Center"/>
+        <Image Source="dotnet_bot.png" WidthRequest="100" HeightRequest="100" HorizontalOptions="Center"/>
 
         <!-- Username -->
         <Label Text="Username:" FontSize="16"/>

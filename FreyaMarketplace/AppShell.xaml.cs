@@ -21,7 +21,7 @@ public partial class AppShell : Shell
         Routing.RegisterRoute(nameof(DetailsPage), typeof(DetailsPage));
         Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
 
-        //DetermineStartPage();
+        DetermineStartPage();
         //AdjustNavigationBar();
     }
 
@@ -39,13 +39,13 @@ public partial class AppShell : Shell
         Shell.SetTabBarIsVisible(this, true);
     }
 
-    //protected override void OnNavigated(ShellNavigatedEventArgs args)
-    //{
-    //    base.OnNavigated(args);
-    //    bool hideTabBar = args.Current.Location.OriginalString.Contains("GreetingPage") ||
-    //                      args.Current.Location.OriginalString.Contains("LoginPage") ||
-    //                      args.Current.Location.OriginalString.Contains("RegisterPage");
+    protected override void OnNavigated(ShellNavigatedEventArgs args)
+    {
+        base.OnNavigated(args);
+        bool hideFlyout = args.Current.Location.OriginalString.Contains("GreetingPage") ||
+                          args.Current.Location.OriginalString.Contains("LoginPage") ||
+                          args.Current.Location.OriginalString.Contains("RegisterPage");
 
-    //    //MainTabBar.IsVisible = !hideTabBar;
-    //}
+        SetFlyoutBehavior(this, hideFlyout ? FlyoutBehavior.Disabled : FlyoutBehavior.Locked);
+    }
 }

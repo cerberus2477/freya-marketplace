@@ -77,7 +77,6 @@
                 ContentTemplate="{DataTemplate view:ProfilePage}"
                 Route="ProfilePage" 
                 Icon="dotnet.bot.png"/>
-
     </FlyoutItem>
 
 

@@ -66,10 +66,8 @@ namespace FreyaMarketplace.View
         {
             Preferences.Set("IsLoggedIn", false);
 
-            //if (Shell.Current is AppShell shell)
-            //{
-            //    shell.NavigateToLoginPage();
-            //}
+            //TODO: make sure to (clear the navigation stack), hide the nav
+            await Shell.Current.GoToAsync("LoginPage");
         }
     }
 }
