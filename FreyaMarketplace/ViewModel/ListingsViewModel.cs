@@ -21,13 +21,13 @@ public partial class ListingsViewModel : BaseViewModel
         try
         {
             IsBusy = true;
-            var listings = await listingService.GetListings(); // Rename variable
+            var listings = await listingService.GetListings(); 
 
             if (Listings.Count != 0)
-                Listings.Clear(); // Correctly clear the ObservableCollection
+                Listings.Clear(); 
 
             foreach (var listing in listings)
-                Listings.Add(listing); // Add fetched listings
+                Listings.Add(listing); 
 
         }
         catch (Exception ex)

@@ -9,7 +9,17 @@ namespace FreyaMarketplace.Model
         public string Title { get; set; }
         public string Description { get; set; }
         public string Media { get; set; }
-        public bool Sell { get; set; }
+
+        [JsonPropertyName("sell")]
+        public int SellInt { get; set; }
+
+        [JsonIgnore]
+        public bool Sell
+        {
+            get => SellInt == 1;
+            set => SellInt = value ? 1 : 0;
+        }
+
         public decimal Price { get; set; }
         public DateTime CreatedAt { get; set; }
         public string User { get; set; }
