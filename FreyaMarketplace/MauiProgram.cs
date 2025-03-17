@@ -21,11 +21,10 @@ public static class MauiProgram
 #endif
 
         //view model is Transient so a new view model is created each time the page is navigated to
-		builder.Services.AddSingleton<MonkeyService>();
-		builder.Services.AddSingleton<MonkeysViewModel>();
-        builder.Services.AddTransient<ListingDetailsViewModel>();
-        builder.Services.AddTransient<ListingsViewModel>();
+        builder.Services.AddTransient<ListingsViewModel>(); //TODO: can this be a singleton?
         builder.Services.AddSingleton<ListingService>();
+
+        builder.Services.AddTransient<ListingDetailsViewModel>();
 
 
         return builder.Build();

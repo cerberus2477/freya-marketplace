@@ -23,13 +23,13 @@
                     Margin="0,8,0,0"
                     HorizontalOptions="Center"
                     VerticalOptions="Center">
-                <Image Aspect="AspectFill"
+                    <Image Aspect="AspectFill"
                         HeightRequest="160"
                         HorizontalOptions="Center"
                         VerticalOptions="Center"
                         Source="{Binding Listing.Media}" 
-                    WidthRequest="160"/>
-                <!-- TODO: Bind Media to display image (probably an api request) -->
+                        WidthRequest="160"/>
+                    <!-- TODO: Bind Media to display image (probably an api request) -->
             </Border>
 
             <Label Style="{StaticResource LargeLabel}" 
@@ -37,7 +37,7 @@
                    TextColor="White"
                    FontAttributes="Bold"
                    Text="{Binding Listing.Title}"  
-                HorizontalOptions="Center"
+                    HorizontalOptions="Center"
                    Margin="0,0,0,8"/>
 
                 <VerticalStackLayout Grid.Row="2" Padding="10" Spacing="10">

@@ -12,14 +12,15 @@ public partial class AppShell : Shell
 
         Routing.RegisterRoute(nameof(ListingsPage), typeof(ListingsPage));
         Routing.RegisterRoute(nameof(ListingDetailsPage), typeof(ListingDetailsPage));
+
         Routing.RegisterRoute(nameof(NewListingPage), typeof(NewListingPage));
+
         Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
         Routing.RegisterRoute(nameof(RegisterPage), typeof(RegisterPage));
         Routing.RegisterRoute(nameof(GreetingPage), typeof(GreetingPage));
+
         Routing.RegisterRoute(nameof(HomePage), typeof(HomePage));
         Routing.RegisterRoute(nameof(ProfilePage), typeof(ProfilePage));
-        Routing.RegisterRoute(nameof(DetailsPage), typeof(DetailsPage));
-        Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
 
         DetermineStartPage();
         //AdjustNavigationBar();

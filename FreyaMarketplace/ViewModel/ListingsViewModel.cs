@@ -8,8 +8,24 @@ public partial class ListingsViewModel : BaseViewModel
     ListingService listingService;
     public ListingsViewModel(ListingService listingService)
     {
-        Title = "Listing Finder";
+        Title = "Listings";
         this.listingService = listingService;
+    }
+
+    //This code checks to see if the selected item is non-null
+    //and then uses the built in Shell Navigation API to push a new page
+    //with the listing as a parameter and then deselects the item.
+
+    [RelayCommand]
+    async Task GoToListingDetails(Listing listing)
+    {
+        if (listing == null)
+            return;
+
+        await Shell.Current.GoToAsync("ListingsPage", true, new Dictionary<string, object>
+        {
+            {"Listing", listing }
+        });
     }
 
     [RelayCommand]
@@ -40,5 +56,6 @@ public partial class ListingsViewModel : BaseViewModel
             IsBusy = false;
         }
     }
+
 
 }

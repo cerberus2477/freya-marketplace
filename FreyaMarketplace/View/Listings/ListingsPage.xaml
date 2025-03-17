@@ -22,6 +22,15 @@
                 <DataTemplate x:DataType="model:Listing">
                     <Grid Padding="10">
                         <Border HeightRequest="150" Style="{StaticResource CardView}">
+
+                            <!--//TODO: ez miért relativesource? mit lehet ezzel pontosan elérni-->
+                            <!--which means that it isn't binding to the listing anymore in the DataTemplate, but instead it is looking up the hierarchy specifically for an AncestorType of ListingsViewModel. This allows for more advanced scenarios like this.-->
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ListingsViewModel}}, x:DataType=viewmodel:ListingsViewModel, Path=GoToListingDetailsCommand}"
+                                CommandParameter="{Binding .}"/>
+                            </Border.GestureRecognizers>
+
                             <Grid Padding="0" ColumnDefinitions="150,*">
 
                                 <!-- Image (if available) -->

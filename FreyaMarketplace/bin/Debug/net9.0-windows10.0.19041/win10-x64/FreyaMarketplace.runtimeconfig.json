@@ -11,7 +11,8 @@
       "System.Runtime.Loader.UseRidGraph": true,
       "CSWINRT_USE_WINDOWS_UI_XAML_PROJECTIONS": false,
       "Microsoft.Maui.RuntimeFeature.IsIVisualAssemblyScanningEnabled": false,
-      "Microsoft.Maui.RuntimeFeature.AreBindingInterceptorsSupported": true
+      "Microsoft.Maui.RuntimeFeature.AreBindingInterceptorsSupported": true,
+      "Microsoft.Maui.RuntimeFeature.IsXamlCBindingWithSourceCompilationEnabled": true
     }
   }
 }

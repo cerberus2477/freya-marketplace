@@ -39,17 +39,17 @@ build_metadata.AdditionalFiles.ManifestResourceName = FreyaMarketplace.AppShell.
 build_metadata.AdditionalFiles.TargetPath = AppShell.xaml
 build_metadata.AdditionalFiles.RelativePath = AppShell.xaml
 
-[D:/TÜNDE - ne töröld/FREYA/marketplace-new/FreyaMarketplace/View/DetailsPage.xaml]
-build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = FreyaMarketplace.View.DetailsPage.xaml
-build_metadata.AdditionalFiles.TargetPath = View\DetailsPage.xaml
-build_metadata.AdditionalFiles.RelativePath = View\DetailsPage.xaml
-
 [D:/TÜNDE - ne töröld/FREYA/marketplace-new/FreyaMarketplace/View/HomePage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = FreyaMarketplace.View.HomePage.xaml
 build_metadata.AdditionalFiles.TargetPath = View\HomePage.xaml
 build_metadata.AdditionalFiles.RelativePath = View\HomePage.xaml
+
+[D:/TÜNDE - ne töröld/FREYA/marketplace-new/FreyaMarketplace/View/Listings/DetailsPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = FreyaMarketplace.View.Listings.DetailsPage.xaml
+build_metadata.AdditionalFiles.TargetPath = View\Listings\DetailsPage.xaml
+build_metadata.AdditionalFiles.RelativePath = View\Listings\DetailsPage.xaml
 
 [D:/TÜNDE - ne töröld/FREYA/marketplace-new/FreyaMarketplace/View/Listings/ListingDetailsPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
@@ -63,17 +63,17 @@ build_metadata.AdditionalFiles.ManifestResourceName = FreyaMarketplace.View.List
 build_metadata.AdditionalFiles.TargetPath = View\Listings\ListingsPage.xaml
 build_metadata.AdditionalFiles.RelativePath = View\Listings\ListingsPage.xaml
 
+[D:/TÜNDE - ne töröld/FREYA/marketplace-new/FreyaMarketplace/View/Listings/MainPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = FreyaMarketplace.View.Listings.MainPage.xaml
+build_metadata.AdditionalFiles.TargetPath = View\Listings\MainPage.xaml
+build_metadata.AdditionalFiles.RelativePath = View\Listings\MainPage.xaml
+
 [D:/TÜNDE - ne töröld/FREYA/marketplace-new/FreyaMarketplace/View/Listings/NewListingPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = FreyaMarketplace.View.Listings.NewListingPage.xaml
 build_metadata.AdditionalFiles.TargetPath = View\Listings\NewListingPage.xaml
 build_metadata.AdditionalFiles.RelativePath = View\Listings\NewListingPage.xaml
-
-[D:/TÜNDE - ne töröld/FREYA/marketplace-new/FreyaMarketplace/View/MainPage.xaml]
-build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = FreyaMarketplace.View.MainPage.xaml
-build_metadata.AdditionalFiles.TargetPath = View\MainPage.xaml
-build_metadata.AdditionalFiles.RelativePath = View\MainPage.xaml
 
 [D:/TÜNDE - ne töröld/FREYA/marketplace-new/FreyaMarketplace/View/ProfilePage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml

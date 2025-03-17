@@ -11,6 +11,8 @@
     Shell.TabBarIsVisible="False"
     Shell.NavBarIsVisible="false"
 >
+    
+    <!--STYLING-->
     <!--<Shell.Resources>
 		<ResourceDictionary>
 			<Style TargetType="Shell" ApplyToDerivedTypes="True">
@@ -27,13 +29,6 @@
 		</ResourceDictionary>
 	</Shell.Resources>-->
 
-
-
-<!--<ShellContent
-        Shell.NavBarIsVisible="true"
-        Title="Monkeys"
-        ContentTemplate="{DataTemplate view:MainPage}"
-        Route="MainPage" />-->
 
 
     <!-- Start with GreetingPage -->
