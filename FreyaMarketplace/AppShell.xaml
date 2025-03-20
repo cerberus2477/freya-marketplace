@@ -10,65 +10,46 @@
 
     Shell.TabBarIsVisible="False"
     Shell.NavBarIsVisible="false"
->
-    
-    <!--STYLING-->
-    <!--<Shell.Resources>
-		<ResourceDictionary>
-			<Style TargetType="Shell" ApplyToDerivedTypes="True">
-				<Setter Property="Shell.BackgroundColor" Value="{StaticResource Primary}" />
-				<Setter Property="Shell.ForegroundColor" Value="{OnPlatform WinUI={StaticResource Primary}, Default=White}" />
-				<Setter Property="Shell.TitleColor" Value="White" />
-				<Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
-                <Setter Property="Shell.UnselectedColor" Value="{AppThemeBinding Dark=#95FFFFFF, Light=#95000000}" />
-                <Setter Property="Shell.TabBarBackgroundColor" Value="{AppThemeBinding Dark={StaticResource DarkBackground}, Light={StaticResource LightBackground}}" />
-				<Setter Property="Shell.TabBarForegroundColor" Value="{AppThemeBinding Dark={StaticResource LightBackground}, Light={StaticResource DarkBackground}}" />
-				<Setter Property="Shell.TabBarTitleColor" Value="{AppThemeBinding Dark={StaticResource LightBackground}, Light={StaticResource DarkBackground}}" />
-				<Setter Property="Shell.TabBarUnselectedColor" Value="{AppThemeBinding Dark=#95FFFFFF, Light=#95000000}" />
-            </Style>
-		</ResourceDictionary>
-	</Shell.Resources>-->
-
 
 
     <!-- Start with GreetingPage -->
 
     <!--todo: otthon fehér a felirat, suliban nem, valószínűleg a system theme miatt, erre figyelni kéne úgy általában-->
     <ShellContent
-        Title="Greeting"
+        Title="Üdvözlünk!"
         ContentTemplate="{DataTemplate startingPages:GreetingPage}"
         Route="GreetingPage"
         IsVisible="False"/>
 
 
     <!-- Register routes but keep them hidden from navigation -->
-    <ShellContent Title="Login" Route="LoginPage" ContentTemplate="{DataTemplate startingPages:LoginPage}" IsVisible="False"/>
-    <ShellContent Title="Register" Route="RegisterPage" ContentTemplate="{DataTemplate startingPages:RegisterPage}" IsVisible="False"/>
-    <ShellContent Route="ListingDetailsPage" ContentTemplate="{DataTemplate listings:ListingDetailsPage}" IsVisible="False" />
+    <ShellContent Title="Bejelentkezés" Route="LoginPage" ContentTemplate="{DataTemplate startingPages:LoginPage}" IsVisible="False"/>
+    <ShellContent Title="Regisztráció" Route="RegisterPage" ContentTemplate="{DataTemplate startingPages:RegisterPage}" IsVisible="False"/>
+    <ShellContent Title="Hirdetés részletei" Route="ListingDetailsPage" ContentTemplate="{DataTemplate listings:ListingDetailsPage}" IsVisible="False" />
 
  
     <!-- Main Navigation Tabs (hidden when not logged in) -->
     <FlyoutItem x:Name="MainFlyoutItem" Title="Dashboard"  IsVisible="True" FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent
-                Title="Home"
+                Title="Kezdőlap"
                 ContentTemplate="{DataTemplate view:HomePage}"
                 Route="HomePage" 
                 Icon="dotnet.bot.png"/>
 
         <ShellContent
-                Title="Listings"
+                Title="Keresés"
                 ContentTemplate="{DataTemplate listings:ListingsPage}"
                 Route="ListingsPage" 
                 Icon="dotnet.bot.png"/>
 
         <ShellContent
-                Title="New Listing"
+                Title="Eladás"
                 ContentTemplate="{DataTemplate listings:NewListingPage}"
                 Route="NewListingPage" 
                 Icon="dotnet.bot.png"/>
 
         <ShellContent
-                Title="Profile"
+                Title="Profil"
                 ContentTemplate="{DataTemplate view:ProfilePage}"
                 Route="ProfilePage" 
                 Icon="dotnet.bot.png"/>

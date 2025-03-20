@@ -13,10 +13,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\T\u00DCNDE - ne t\u00F6r\u00F6ld\\FREYA\\marketplace-new\\FreyaMarketplace\\obj\\Debug\\net9.0-windows10.0.19041\\win10-x64\\Platforms\\Windows\\App.g.i.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:FreyaMarketplace\\obj\\Debug\\net9.0-windows10.0.19041\\win10-x64\\Platforms\\Windows\\App.g.i.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C60F2B1C-790E-4432-A719-52182A333ADE}|FreyaMarketplace\\FreyaMarketplace.csproj|d:\\t\u00FCnde - ne t\u00F6r\u00F6ld\\freya\\marketplace-new\\freyamarketplace\\model\\monkey.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C60F2B1C-790E-4432-A719-52182A333ADE}|FreyaMarketplace\\FreyaMarketplace.csproj|solutionrelative:freyamarketplace\\model\\monkey.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 54,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -34,15 +30,20 @@
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
-            },
-            {
-              "$type": "Bookmark",
               "Name": "ST:0:0:{004be353-6879-467c-9d1e-9ac23cdf6d49}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ListingsViewModel.cs",
+              "DocumentMoniker": "D:\\T\u00DCNDE - ne t\u00F6r\u00F6ld\\FREYA\\marketplace-new\\FreyaMarketplace\\ViewModel\\ListingsViewModel.cs",
+              "RelativeDocumentMoniker": "FreyaMarketplace\\ViewModel\\ListingsViewModel.cs",
+              "ToolTip": "D:\\T\u00DCNDE - ne t\u00F6r\u00F6ld\\FREYA\\marketplace-new\\FreyaMarketplace\\ViewModel\\ListingsViewModel.cs",
+              "RelativeToolTip": "FreyaMarketplace\\ViewModel\\ListingsViewModel.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAAADMAAABJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-14T12:02:44.345Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -57,17 +58,12 @@
               "WhenOpened": "2025-03-14T12:06:35.601Z"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ListingsViewModel.cs",
-              "DocumentMoniker": "D:\\T\u00DCNDE - ne t\u00F6r\u00F6ld\\FREYA\\marketplace-new\\FreyaMarketplace\\ViewModel\\ListingsViewModel.cs",
-              "RelativeDocumentMoniker": "FreyaMarketplace\\ViewModel\\ListingsViewModel.cs",
-              "ToolTip": "D:\\T\u00DCNDE - ne t\u00F6r\u00F6ld\\FREYA\\marketplace-new\\FreyaMarketplace\\ViewModel\\ListingsViewModel.cs",
-              "RelativeToolTip": "FreyaMarketplace\\ViewModel\\ListingsViewModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-14T12:02:44.345Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
             },
             {
               "$type": "Document",
@@ -81,18 +77,6 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-14T12:01:48.329Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Monkey.cs",
-              "DocumentMoniker": "D:\\T\u00DCNDE - ne t\u00F6r\u00F6ld\\FREYA\\marketplace-new\\FreyaMarketplace\\Model\\Monkey.cs",
-              "RelativeDocumentMoniker": "FreyaMarketplace\\Model\\Monkey.cs",
-              "ToolTip": "D:\\T\u00DCNDE - ne t\u00F6r\u00F6ld\\FREYA\\marketplace-new\\FreyaMarketplace\\Model\\Monkey.cs",
-              "RelativeToolTip": "FreyaMarketplace\\Model\\Monkey.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAoAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-14T11:52:55.934Z"
             }
           ]
         }

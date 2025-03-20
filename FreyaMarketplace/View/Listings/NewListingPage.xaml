@@ -9,7 +9,7 @@
             <!-- Add a button to navigate to MyPlantsPage -->
             <Button Text="Saját hirdetéseim" BackgroundColor="Blue" TextColor="White" Clicked="OnMyListingsClicked"/>
 
-            <Label Text="Add a New Listing" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center" />
+            <Label Text="Eladás" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center" />
 
             <Entry x:Name="TitleEntry" Placeholder="Title" />
 
@@ -48,18 +48,6 @@
                     </x:Array>
                 </Picker.ItemsSource>
             </Picker>
-
-            <Switch x:Name="SellSwitch" IsToggled="False"/>
-            <Label Text="For Sale?" />
-
-            <!-- Multiple Image Upload -->
-            <Button Text="Upload Photos" Clicked="OnUploadPhotosClicked"/>
-
-            <ScrollView Orientation="Horizontal" HeightRequest="150">
-                <StackLayout x:Name="ImageContainer" Orientation="Horizontal" Spacing="10"/>
-            </ScrollView>
-
-            <Button Text="OK" BackgroundColor="Green" TextColor="White" Clicked="OnOkClicked"/>
 
         </VerticalStackLayout>
     </ScrollView>
