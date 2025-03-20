@@ -8,59 +8,68 @@
     x:DataType="viewmodel:ListingsViewModel"
     Title="{Binding Title}">
 
-    <VerticalStackLayout>
-        <CollectionView
-    ItemsSource="{Binding Listings}"
-    SelectionMode="None">
-            <CollectionView.ItemsLayout>
-                <GridItemsLayout Orientation="Vertical" Span="2" />
-            </CollectionView.ItemsLayout>
 
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="model:Listing">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="2*" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
+    <Grid
+     ColumnSpacing="5"
+    RowDefinitions="*,Auto"
+            RowSpacing="0"
+        >
+        <RefreshView
+            Grid.ColumnSpan="2"
+            Command="{Binding GetListingsCommand}"
+            IsRefreshing="{Binding IsRefreshing}">
+            <ContentView>
+                <CollectionView
+                    ItemsSource="{Binding Listings}"
+                    SelectionMode="None">
+                    
+                    <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="2" />
+                </CollectionView.ItemsLayout>
 
-                        <Border>
-                            <!--//TODO: ez miért relativesource? mit lehet ezzel pontosan elérni
-                    which means that it isn't binding to the listing anymore in the DataTemplate, but instead it is looking up the hierarchy specifically for an AncestorType of ListingsViewModel. This allows for more advanced scenarios like this.-->
-                            <Border.GestureRecognizers>
-                                <TapGestureRecognizer 
-                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ListingsViewModel}}, x:DataType=viewmodel:ListingsViewModel, Path=GoToListingDetailsCommand}"
-                        CommandParameter="{Binding .}"/>
-                            </Border.GestureRecognizers>
-                            <VerticalStackLayout>
-                                <!-- Image (if available) -->
-                                <Image Aspect="AspectFill" Source="{Binding Media}"
-                               WidthRequest="150"
-                               HeightRequest="150"
-                               BackgroundColor="LightGray"
-                               VerticalOptions="Start"/>
 
-                                <!-- Listing Details -->
-                                <VerticalStackLayout
-                            VerticalOptions="Center"
-                            Grid.Row="1"
-                            Padding="10">
-                                    <Label Style="{StaticResource LargeLabel}" Text="{Binding Title}" />
-                                    <Label Style="{StaticResource MediumLabel}" Text="{Binding Plant}" />
-                                    <Label Style="{StaticResource SmallLabel}" Text="{Binding Type}" />
-                                    <Label Style="{StaticResource SmallLabel}" Text="{Binding Stage}" />
-                                    <Label Style="{StaticResource SmallLabel}" Text="{Binding User}" />
-                                    <Label Style="{StaticResource SmallLabel}" Text="{Binding Price, StringFormat='₤{0:F2}'}" />
-                                    <Label Style="{StaticResource SmallLabel}" Text="{Binding CreatedAt, StringFormat='{0:yyyy-MM-dd}'}" />
-                                </VerticalStackLayout>
-                            </VerticalStackLayout>
+                <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:Listing">
+                            <Grid Padding="10">
+                                <Border>
+                                    <!--//TODO: ez miért relativesource? mit lehet ezzel pontosan elérni
+                                        which means that it isn't binding to the listing anymore in the DataTemplate, but instead it is looking up the hierarchy specifically for an AncestorType of ListingsViewModel. This allows for more advanced scenarios like this.-->
+                                    <Border.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ListingsViewModel}}, x:DataType=viewmodel:ListingsViewModel, Path=GoToListingDetailsCommand}"
+                                            CommandParameter="{Binding .}"/>
+                                    </Border.GestureRecognizers>
+                                    <VerticalStackLayout>
+                                        <!-- Image (if available) -->
+                                        <Image Aspect="AspectFill" Source="{Binding Media}"
+                                           WidthRequest="150"
+                                           HeightRequest="150"
+                                           BackgroundColor="LightGray"
+                                           VerticalOptions="Start"/>
 
-                        </Border>
+                                        <!-- Listing Details -->
+                                        <VerticalStackLayout
+                                            VerticalOptions="Center"
+                                            Grid.Row="1"
+                                            Padding="10">
+                                            <Label Style="{StaticResource LargeLabel}" Text="{Binding Title}" />
+                                            <Label Style="{StaticResource MediumLabel}" Text="{Binding Plant}" />
+                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding Type}" />
+                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding Stage}" />
+                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding User}" />
+                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding Price, StringFormat='₤{0:F2}'}" />
+                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding CreatedAt, StringFormat='{0:yyyy-MM-dd}'}" />
+                                        </VerticalStackLayout>
+                                    </VerticalStackLayout>
+                                </Border>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                
+            </ContentView>
+        </RefreshView>
 
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
 
         <Button Text="Get Listings" 
         Command="{Binding GetListingsCommand}"
@@ -77,5 +86,5 @@
                    Color="{StaticResource Primary}"
                    Grid.RowSpan="2"
                    Grid.ColumnSpan="2"/>
-    </VerticalStackLayout>
+    </Grid>
 </ContentPage>

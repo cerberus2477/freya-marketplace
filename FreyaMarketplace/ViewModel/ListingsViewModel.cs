@@ -6,10 +6,15 @@ public partial class ListingsViewModel : BaseViewModel
 {
     public ObservableCollection<Listing> Listings { get; } = new();
     ListingService listingService;
+
+    [ObservableProperty]
+    bool isRefreshing;
     public ListingsViewModel(ListingService listingService)
     {
         Title = "Listings";
         this.listingService = listingService;
+        //load the listings automatically when navigated to the page
+        Task.Run(GetListingsAsync);
     }
 
     //This code checks to see if the selected item is non-null
@@ -54,6 +59,7 @@ public partial class ListingsViewModel : BaseViewModel
         finally
         {
             IsBusy = false;
+            IsRefreshing = false;
         }
     }
 

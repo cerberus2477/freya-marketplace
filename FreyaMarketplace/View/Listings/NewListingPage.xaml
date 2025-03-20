@@ -11,6 +11,13 @@
 
             <Label Text="Eladás" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center" />
 
+            <!-- Multiple Image Upload -->
+            <Button Text="Upload Photos" Clicked="OnUploadPhotosClicked"/>
+
+            <ScrollView Orientation="Horizontal" HeightRequest="150">
+                <StackLayout x:Name="ImageContainer" Orientation="Horizontal" Spacing="10"/>
+            </ScrollView>
+
             <Entry x:Name="TitleEntry" Placeholder="Title" />
 
             <Editor x:Name="DescriptionEditor" Placeholder="Description" AutoSize="TextChanges" HeightRequest="100"/>
@@ -48,7 +55,9 @@
                     </x:Array>
                 </Picker.ItemsSource>
             </Picker>
-
+            
+            <Button Text="OK" BackgroundColor="Green" TextColor="White" Clicked="OnOkClicked"/>
+            
         </VerticalStackLayout>
     </ScrollView>
 

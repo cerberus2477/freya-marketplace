@@ -61,7 +61,6 @@ namespace FreyaMarketplace.View.Listings
             string plant = PlantPicker.SelectedItem?.ToString();
             string type = TypePicker.SelectedItem?.ToString();
             string stage = StagePicker.SelectedItem?.ToString();
-            bool sell = SellSwitch.IsToggled;
 
             if (string.IsNullOrWhiteSpace(title) || string.IsNullOrWhiteSpace(description) ||
                 string.IsNullOrWhiteSpace(priceText) || string.IsNullOrWhiteSpace(plant) ||
@@ -91,7 +90,6 @@ namespace FreyaMarketplace.View.Listings
                 Title = title,
                 Description = description,
                 Media = uploadedImages, // List of image paths
-                Sell = sell ? 1 : 0,
                 Price = price,
                 Plant = plant,
                 Type = type,

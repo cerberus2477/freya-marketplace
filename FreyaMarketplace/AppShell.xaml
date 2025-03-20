@@ -10,6 +10,7 @@
 
     Shell.TabBarIsVisible="False"
     Shell.NavBarIsVisible="false"
+       >
 
 
     <!-- Start with GreetingPage -->
