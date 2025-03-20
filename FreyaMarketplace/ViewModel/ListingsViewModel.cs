@@ -22,11 +22,25 @@ public partial class ListingsViewModel : BaseViewModel
         if (listing == null)
             return;
 
-        await Shell.Current.GoToAsync("ListingsPage", true, new Dictionary<string, object>
+        await Shell.Current.GoToAsync("ListingDetailsPage", true, new Dictionary<string, object>
         {
             {"Listing", listing }
         });
     }
+
+
+    //[RelayCommand]
+    //async Task GoToDetails(Monkey monkey)
+    //{
+    //    if (monkey == null)
+    //        return;
+
+    //    await Shell.Current.GoToAsync(nameof(DetailsPage), true, new Dictionary<string, object>
+    //    {
+    //        {"Monkey", monkey }
+    //    });
+    //}
+
 
     [RelayCommand]
     async Task GetListingsAsync()
