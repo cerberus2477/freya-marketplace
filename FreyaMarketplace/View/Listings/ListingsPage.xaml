@@ -9,26 +9,48 @@
     Title="{Binding Title}">
 
 
-    <Grid
+    <!--<Grid
      ColumnSpacing="5"
     RowDefinitions="*,Auto"
             RowSpacing="0"
-        >
+        >-->
+    <Grid RowDefinitions="Auto, Auto, *" ColumnSpacing="5" RowSpacing="10" HorizontalOptions="Center" WidthRequest="1000">
+
+        <VerticalStackLayout Padding="10" Grid.Row="0" HorizontalOptions="Fill">
+            <Entry 
+                x:Name="SearchEntry"
+                Placeholder="Keresés..."
+                TextChanged="OnSearchTextChanged"
+                HorizontalOptions="Fill"
+                WidthRequest="1000"/>
+        </VerticalStackLayout>
+
+        <Grid Grid.Row="1" HorizontalOptions="Center">
+            <Button 
+                Text="Szűrők" 
+                Clicked="OnFilterButtonClicked"
+                WidthRequest="200"/>
+        </Grid>
+
         <RefreshView
+            Grid.Row="2"
             Grid.ColumnSpan="2"
             Command="{Binding GetListingsCommand}"
-            IsRefreshing="{Binding IsRefreshing}">
+            IsRefreshing="{Binding IsRefreshing}"
+            Style="{StaticResource ButtonOutline}"
+            >
+            
             <ContentView>
                 <CollectionView
                     ItemsSource="{Binding Listings}"
                     SelectionMode="None">
-                    
+
                     <CollectionView.ItemsLayout>
-                    <GridItemsLayout Orientation="Vertical" Span="2" />
-                </CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical" Span="2" />
+                    </CollectionView.ItemsLayout>
 
 
-                <CollectionView.ItemTemplate>
+                    <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="model:Listing">
                             <Grid Padding="10">
                                 <Border>
@@ -66,18 +88,9 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-                
+
             </ContentView>
         </RefreshView>
-
-
-        <Button Text="Get Listings" 
-        Command="{Binding GetListingsCommand}"
-        IsEnabled="{Binding IsNotBusy}"
-        Grid.Row="1"
-        Grid.Column="0"
-        Style="{StaticResource ButtonOutline}"
-        Margin="8"/>
 
         <ActivityIndicator IsVisible="{Binding IsBusy}"
                    IsRunning="{Binding IsBusy}"

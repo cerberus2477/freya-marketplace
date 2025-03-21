@@ -42,18 +42,48 @@ public partial class ListingsViewModel : BaseViewModel
         try
         {
             IsBusy = true;
-            var listings = await listingService.GetListings(); 
+            var listings = await listingService.GetListings();
 
-            if (Listings.Count != 0)
-                Listings.Clear(); 
+                Listings.Clear();
 
             foreach (var listing in listings)
-                Listings.Add(listing); 
+                Listings.Add(listing);
 
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Unable to get Listings: {ex.Message}");
+            Debug.WriteLine($"Hiba a keresés során: {ex.Message}");
+            await Shell.Current.DisplayAlert("Hiba a keresés során:", ex.Message, "OK");
+        }
+        finally
+        {
+            IsBusy = false;
+            IsRefreshing = false;
+        }
+    }
+
+
+    [ObservableProperty]
+    private string searchQuery = string.Empty;
+
+    [RelayCommand]
+    async Task SearchListingsAsync()
+    {
+        if (IsBusy)
+            return;
+
+        try
+        {
+            IsBusy = true;
+            var listings = await listingService.GetListings(SearchQuery);
+
+            Listings.Clear();
+            foreach (var listing in listings)
+                Listings.Add(listing);
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Hiba a keresés során: {ex.Message}");
             await Shell.Current.DisplayAlert("Error!", ex.Message, "OK");
         }
         finally
@@ -62,6 +92,7 @@ public partial class ListingsViewModel : BaseViewModel
             IsRefreshing = false;
         }
     }
+
 
 
 }

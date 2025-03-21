@@ -12,18 +12,19 @@ public class ListingService
 
     List<Listing> listings;
 
-    public async Task<List<Listing>> GetListings()
+    public async Task<List<Listing>> GetListings(string query = "")
     {
-        if (listings?.Count > 0)
-            return listings;
+        var url = $"{AppSettings.ApiBaseUrl}listings/search?all";
+        if (!string.IsNullOrWhiteSpace(query))
+        {
+            url += $"&q={Uri.EscapeDataString(query)}";
+        }
 
-        // Call API for listings
-        var response = await httpClient.GetAsync($"{AppSettings.ApiBaseUrl}listings?all");
+        var response = await httpClient.GetAsync(url);
         if (response.IsSuccessStatusCode)
         {
             var apiResponse = await response.Content.ReadFromJsonAsync<ApiResponse>();
 
-            // Check if the response status is 200 (success)
             if (apiResponse?.Status == 200)
             {
                 listings = apiResponse.Data;
@@ -39,6 +40,9 @@ public class ListingService
         return listings;
     }
 }
+
+
+
 
 public class ApiResponse
 {
