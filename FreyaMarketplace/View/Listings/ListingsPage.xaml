@@ -16,21 +16,54 @@
         >-->
     <Grid RowDefinitions="Auto, Auto, *" ColumnSpacing="5" RowSpacing="10" HorizontalOptions="Center" WidthRequest="1000">
 
+
+
+
+
+        <!-- Search bar with Filter Button -->
         <VerticalStackLayout Padding="10" Grid.Row="0" HorizontalOptions="Fill">
-            <Entry 
-                x:Name="SearchEntry"
-                Placeholder="Keresés..."
-                TextChanged="OnSearchTextChanged"
-                HorizontalOptions="Fill"
-                WidthRequest="1000"/>
+            <HorizontalStackLayout Spacing="10">
+                <Entry 
+                    x:Name="SearchEntry"
+                    Placeholder="Keresés..."
+                    TextChanged="OnSearchTextChanged"
+                    HorizontalOptions="Fill"
+
+                <Button 
+                    Text="🔍" 
+                    Command="{Binding SearchListingsCommand}" />
+
+            </HorizontalStackLayout>
+
+            <Button 
+                    Text="Szűrők" 
+                    Command="{Binding ToggleFiltersCommand}" />
         </VerticalStackLayout>
 
-        <Grid Grid.Row="1" HorizontalOptions="Center">
-            <Button 
-                Text="Szűrők" 
-                Clicked="OnFilterButtonClicked"
-                WidthRequest="200"/>
-        </Grid>
+        <!-- Filters Section (Initially Hidden) -->
+        <VerticalStackLayout x:Name="FiltersSection" IsVisible="{Binding AreFiltersVisible}" Grid.Row="1" Padding="10">
+
+            <Label Text="Szűrők" FontSize="18" FontAttributes="Bold"/>
+
+            <Picker Title="Felhasználó" ItemsSource="{Binding Users}" SelectedItem="{Binding SelectedUser}" />
+            <Picker Title="Növény" ItemsSource="{Binding Plants}" SelectedItem="{Binding SelectedPlant}" />
+            <Picker Title="Típus" ItemsSource="{Binding Types}" SelectedItem="{Binding SelectedType}" />
+            <Picker Title="Fázis" ItemsSource="{Binding Stages}" SelectedItem="{Binding SelectedStage}" />
+
+            <Button Text="Szűrés" Command="{Binding SearchListingsCommand}" />
+            <Button Text="Szűrők törlése" Command="{Binding ClearFiltersCommand}" />
+        </VerticalStackLayout>
+
+
+
+
+
+
+
+
+
+
+
 
         <RefreshView
             Grid.Row="2"
@@ -92,12 +125,13 @@
             </ContentView>
         </RefreshView>
 
-        <ActivityIndicator IsVisible="{Binding IsBusy}"
+        <ActivityIndicator 
+                  Grid.ColumnSpan="2"
+            IsVisible="{Binding IsBusy}"
                    IsRunning="{Binding IsBusy}"
                    HorizontalOptions="Fill"
                    VerticalOptions="Center"
                    Color="{StaticResource Primary}"
-                   Grid.RowSpan="2"
                    Grid.ColumnSpan="2"/>
     </Grid>
 </ContentPage>
