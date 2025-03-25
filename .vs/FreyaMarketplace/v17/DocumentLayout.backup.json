@@ -56,7 +56,7 @@
               "RelativeDocumentMoniker": "FreyaMarketplace\\View\\Listings\\ListingsPage.xaml",
               "ToolTip": "D:\\FREYA\u0027S GARDEN\\Marketplace\\FreyaMarketplace\\View\\Listings\\ListingsPage.xaml",
               "RelativeToolTip": "FreyaMarketplace\\View\\Listings\\ListingsPage.xaml",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAAAEUAAAAuAAAAAAAAAA==",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAAABYAAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
               "WhenOpened": "2025-03-20T08:17:51.06Z",
               "EditorCaption": ""
@@ -71,8 +71,7 @@
               "RelativeToolTip": "FreyaMarketplace\\View\\Listings\\ListingDetailsPage.xaml",
               "ViewState": "AgIAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-03-20T08:46:01.34Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-20T08:46:01.34Z"
             },
             {
               "$type": "Document",
@@ -84,8 +83,7 @@
               "RelativeToolTip": "FreyaMarketplace\\AppShell.xaml",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAAB8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-03-20T08:43:28.356Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-20T08:43:28.356Z"
             },
             {
               "$type": "Document",
@@ -110,8 +108,7 @@
               "RelativeToolTip": "FreyaMarketplace\\obj\\Debug\\net9.0-windows10.0.19041\\win10-x64\\Platforms\\Windows\\App.g.i.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAEQAAABEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-14T12:06:35.601Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-14T12:06:35.601Z"
             },
             {
               "$type": "Document",
@@ -123,8 +120,7 @@
               "RelativeToolTip": "FreyaMarketplace\\ViewModel\\ListingsViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAADoAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-14T12:02:44.345Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-14T12:02:44.345Z"
             },
             {
               "$type": "Document",
@@ -136,8 +132,7 @@
               "RelativeToolTip": "FreyaMarketplace\\ViewModel\\ListingDetailsViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-14T12:01:48.329Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-14T12:01:48.329Z"
             },
             {
               "$type": "Document",

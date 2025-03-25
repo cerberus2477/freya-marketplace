@@ -8,7 +8,6 @@
     x:DataType="viewmodel:ListingsViewModel"
     Title="{Binding Title}">
 
-    <VerticalStackLayout>
         <CollectionView
     ItemsSource="{Binding Listings}"
     SelectionMode="None">
@@ -23,28 +22,27 @@
                             <RowDefinition Height="2*" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-
                         <Border>
                             <!--//TODO: ez miért relativesource? mit lehet ezzel pontosan elérni
                     which means that it isn't binding to the listing anymore in the DataTemplate, but instead it is looking up the hierarchy specifically for an AncestorType of ListingsViewModel. This allows for more advanced scenarios like this.-->
                             <Border.GestureRecognizers>
                                 <TapGestureRecognizer 
-                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ListingsViewModel}}, x:DataType=viewmodel:ListingsViewModel, Path=GoToListingDetailsCommand}"
-                        CommandParameter="{Binding .}"/>
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ListingsViewModel}}, x:DataType=viewmodel:ListingsViewModel, Path=GoToListingDetailsCommand}"
+                                    CommandParameter="{Binding .}"/>
                             </Border.GestureRecognizers>
                             <VerticalStackLayout>
                                 <!-- Image (if available) -->
                                 <Image Aspect="AspectFill" Source="{Binding Media}"
-                               WidthRequest="150"
-                               HeightRequest="150"
-                               BackgroundColor="LightGray"
-                               VerticalOptions="Start"/>
+                                    WidthRequest="150"
+                                    HeightRequest="150"
+                                    BackgroundColor="LightGray"
+                                    VerticalOptions="Start"/>
 
                                 <!-- Listing Details -->
                                 <VerticalStackLayout
-                            VerticalOptions="Center"
-                            Grid.Row="1"
-                            Padding="10">
+                                    VerticalOptions="Center"
+                                    Grid.Row="1"
+                                    Padding="10">
                                     <Label Style="{StaticResource LargeLabel}" Text="{Binding Title}" />
                                     <Label Style="{StaticResource MediumLabel}" Text="{Binding Plant}" />
                                     <Label Style="{StaticResource SmallLabel}" Text="{Binding Type}" />
@@ -56,6 +54,7 @@
                             </VerticalStackLayout>
 
                         </Border>
+
 
                     </Grid>
                 </DataTemplate>
@@ -70,12 +69,11 @@
         Style="{StaticResource ButtonOutline}"
         Margin="8"/>
 
-        <ActivityIndicator IsVisible="{Binding IsBusy}"
+    <ActivityIndicator IsVisible="{Binding IsBusy}"
                    IsRunning="{Binding IsBusy}"
                    HorizontalOptions="Fill"
                    VerticalOptions="Center"
                    Color="{StaticResource Primary}"
                    Grid.RowSpan="2"
                    Grid.ColumnSpan="2"/>
-    </VerticalStackLayout>
 </ContentPage>
