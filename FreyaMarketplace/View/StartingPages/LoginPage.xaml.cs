@@ -1,4 +1,5 @@
 using Microsoft.Maui.Controls;
+using FreyaMarketplace.Services;
 
 namespace FreyaMarketplace.View.StartingPages
 {
@@ -11,16 +12,17 @@ namespace FreyaMarketplace.View.StartingPages
 
         private async void Login_Clicked(object sender, EventArgs e)
         {
-            string userName = txtUserName.Text;
+            string userEmail = txtEmail.Text;
             string password = txtPassword.Text;
 
-            if (string.IsNullOrWhiteSpace(userName) || string.IsNullOrWhiteSpace(password))
+            if (string.IsNullOrWhiteSpace(userEmail) || string.IsNullOrWhiteSpace(password))
             {
-                await DisplayAlert("Error", "Missing username or password", "OK");
+                await DisplayAlert("Error", "Missing email or password", "OK");
                 return;
             }
 
             // Authentication logic here (to be replaced)
+            UserService.Login(userEmail, password);
             bool loginSuccess = true;
 
             if (loginSuccess)

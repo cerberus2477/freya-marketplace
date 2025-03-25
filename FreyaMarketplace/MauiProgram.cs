@@ -26,7 +26,8 @@ public static class MauiProgram
 
         builder.Services.AddTransient<ListingDetailsViewModel>();
 
-
+        builder.Services.AddSingleton<IAuthService, AuthService>();
+        builder.Services.AddTransient<LoginViewModel>();
         return builder.Build();
 	}
 }

@@ -4,8 +4,8 @@
              x:Class="FreyaMarketplace.View.StartingPages.LoginPage"
              Title="LoginPage">
     <VerticalStackLayout Padding="20">
-        <Label Text="Username:" />
-        <Entry x:Name="txtUserName" />
+        <Label Text="Email:" />
+        <Entry x:Name="txtEmail" />
 
         <Label Text="Password:" />
         <Entry x:Name="txtPassword" IsPassword="True" />
