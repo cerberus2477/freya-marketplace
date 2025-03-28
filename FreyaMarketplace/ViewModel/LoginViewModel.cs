@@ -1,6 +1,10 @@
-﻿public partial class LoginViewModel : BaseViewModel
+﻿using FreyaMarketplace.Services;
+
+namespace FreyaMarketplace.ViewModel;
+
+public partial class LoginViewModel : BaseViewModel
 {
-    private readonly IAuthService _authService;
+    AuthenticationService authService;
 
     [ObservableProperty]
     string email;
@@ -8,47 +12,44 @@
     [ObservableProperty]
     string password;
 
-    public LoginViewModel(IAuthService authService)
+    public LoginViewModel(AuthenticationService authService)
     {
-        _authService = authService;
-        title = "Login";
+        this.authService = authService;
+        Title = "Login";
     }
+
 
     [RelayCommand]
     private async Task LoginAsync()
     {
-        if (isBusy) return;
+        if (IsBusy) return;
 
         try
         {
-            isBusy = true;
-            errorMessage = string.Empty;
+            IsBusy = true;
 
-            if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
-            {
-                errorMessage = "Please enter both email and password";
-                return;
-            }
-
-            var result = await _authService.LoginAsync(email, password);
+            var result = await authService.LoginAsync(Email, Password);
 
             if (result.Status == 200 && result.Data != null)
             {
                 await SecureStorage.SetAsync("auth_token", result.Data.Token);
-                await NavigateToAsync("//main");
+                await Shell.Current.GoToAsync("HomePage");
             }
             else
             {
-                errorMessage = result.Message ?? "Login failed";
+                var errorResponse = await result.Content.ReadAsStringAsync();
+                await Shell.Current.DisplayAlert("Hibás adatok!", errorResponse, "OK");
             }
         }
         catch (Exception ex)
         {
-            await HandleExceptionAsync(ex);
+            Debug.WriteLine($"Hiba a bejelentkezés során: {ex.Message}");
+            await Shell.Current.DisplayAlert("Hiba a bejelentkezés során:", ex.Message, "OK");
         }
         finally
         {
-            isBusy = false;
+            IsBusy = false;
         }
+
     }
 }
