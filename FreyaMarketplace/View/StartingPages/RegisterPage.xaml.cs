@@ -2,45 +2,47 @@ namespace FreyaMarketplace.View.StartingPages
 {
     public partial class RegisterPage : ContentPage
     {
-        public RegisterPage()
+        public RegisterPage(AuthViewModel viewModel)
         {
             InitializeComponent();
+            viewModel.Title = "Regisztráció"; // Set title for register
+            BindingContext = viewModel;
         }
 
-        private async void Register_Clicked(object sender, EventArgs e)
-        {
-            string userName = txtRegisterUserName.Text;
-            string email = txtRegisterEmail.Text;
-            string password = txtRegisterPassword.Text;
-            string confirmPassword = txtRegisterConfirmPassword.Text;
+        //private async void Register_Clicked(object sender, EventArgs e)
+        //{
+        //    string userName = txtRegisterUserName.Text;
+        //    string email = txtRegisterEmail.Text;
+        //    string password = txtRegisterPassword.Text;
+        //    string confirmPassword = txtRegisterConfirmPassword.Text;
 
-            if (string.IsNullOrWhiteSpace(userName) || string.IsNullOrWhiteSpace(email) ||
-                string.IsNullOrWhiteSpace(password) || string.IsNullOrWhiteSpace(confirmPassword))
-            {
-                await DisplayAlert("Error", "All fields are required", "OK");
-                return;
-            }
+        //    if (string.IsNullOrWhiteSpace(userName) || string.IsNullOrWhiteSpace(email) ||
+        //        string.IsNullOrWhiteSpace(password) || string.IsNullOrWhiteSpace(confirmPassword))
+        //    {
+        //        await DisplayAlert("Error", "All fields are required", "OK");
+        //        return;
+        //    }
 
-            if (password != confirmPassword)
-            {
-                await DisplayAlert("Error", "Passwords do not match", "OK");
-                return;
-            }
+        //    if (password != confirmPassword)
+        //    {
+        //        await DisplayAlert("Error", "Passwords do not match", "OK");
+        //        return;
+        //    }
 
-            //TODO: Registration logic here (to be replaced)
-            bool registrationSuccess = true;
+        //    //TODO: Registration logic here (to be replaced)
+        //    bool registrationSuccess = true;
 
-            if (registrationSuccess)
-            {
-                await DisplayAlert("Success", "Registration successful", "OK");
-                //TODO: log the user in, or popup sikeres regisztrávió, most már beléphetsz
-                await Shell.Current.GoToAsync("HomePage");
-            }
-            else
-            {
-                await DisplayAlert("Error", "Registration failed. Please try again.", "OK");
-            }
-        }
+        //    if (registrationSuccess)
+        //    {
+        //        await DisplayAlert("Success", "Registration successful", "OK");
+        //        //TODO: log the user in, or popup sikeres regisztrávió, most már beléphetsz
+        //        await Shell.Current.GoToAsync("HomePage");
+        //    }
+        //    else
+        //    {
+        //        await DisplayAlert("Error", "Registration failed. Please try again.", "OK");
+        //    }
+        //}
 
         private async void OnLoginClicked(object sender, EventArgs e)
         {

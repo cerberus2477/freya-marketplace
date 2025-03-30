@@ -1,8 +1,10 @@
 ﻿using FreyaMarketplace.Services;
+using System.Reflection.Metadata;
+using System.Windows.Input;
 
 namespace FreyaMarketplace.ViewModel;
 
-public partial class LoginViewModel : BaseViewModel
+public partial class AuthViewModel : BaseViewModel
 {
     AuthenticationService authService;
 
@@ -12,12 +14,14 @@ public partial class LoginViewModel : BaseViewModel
     [ObservableProperty]
     string password;
 
-    public LoginViewModel(AuthenticationService authService)
+    //TODO. mind legyen private vagy egyiksem, töbi viewmodelben is. lehet egy sorba is írni
+    [ObservableProperty]
+    private string title;
+
+    public AuthViewModel(AuthenticationService authService)
     {
         this.authService = authService;
-        Title = "Login";
     }
-
 
     [RelayCommand]
     private async Task LoginAsync()
@@ -37,6 +41,19 @@ public partial class LoginViewModel : BaseViewModel
             }
             else
             {
+                //TODO:
+                // Handle different error messages
+                //if (result.Status == 401)
+                //{
+                //    await Shell.Current.DisplayAlert("Bejelentkezési hiba", "Helytelen hitelesítő adatok", "OK");
+                //}
+                //else
+                //{
+                //    await Shell.Current.DisplayAlert("Hiba", result.Message, "OK");
+                //}
+
+                //vagy
+
                 var errorResponse = await result.Content.ReadAsStringAsync();
                 await Shell.Current.DisplayAlert("Hibás adatok!", errorResponse, "OK");
             }
@@ -52,4 +69,5 @@ public partial class LoginViewModel : BaseViewModel
         }
 
     }
+
 }

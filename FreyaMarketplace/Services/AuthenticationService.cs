@@ -16,7 +16,85 @@ public class AuthenticationService
     }
 
     LoginData logindata;
+    //todo:
+    //ez az újabb, proóbálja kezelni a 3 féle responset (amiből kettő logikus is.)
+    //errort visszaad,nem display, hogy a viewmodel kezelje.
 
+    //public async Task<ApiResponse<LoginData>> LoginAsync(string email, string password)
+    //{
+    //    var url = $"{AppSettings.ApiBaseUrl}login";
+    //    var request = new { Email = email, Password = password };
+    //    var content = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8, "application/json");
+
+    //    var response = await httpClient.PostAsync(url, content);
+    //    var responseText = await response.Content.ReadAsStringAsync();
+
+    //    try
+    //    {
+    //        var apiResponse = JsonSerializer.Deserialize<ApiResponse<LoginData>>(responseText, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+    //        if (apiResponse != null && apiResponse.Status == 200 && apiResponse.Data != null)
+    //        {
+    //            return apiResponse;
+    //        }
+    //        else
+    //        {
+    //            return new ApiResponse<LoginData> { Status = response.StatusCode, Message = apiResponse?.Message ?? "Unknown error" };
+    //        }
+    //    }
+    //    catch (JsonException)
+    //    {
+    //        // Handle validation errors (response does not have "status" field)
+    //        var errorResponse = JsonSerializer.Deserialize<ApiValidationError>(responseText, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+    //        return new ApiResponse<LoginData> { Status = response.StatusCode, Message = errorResponse?.Message ?? "Validation error" };
+    //    }
+    //}
+
+    //public class ApiValidationError
+    //{
+    //    public string Message { get; set; }
+    //    public Dictionary<string, string[]> Errors { get; set; }
+    //}
+
+
+
+    //clean lenne, de nem kezeli a sokféle responsunkot
+
+    //public async Task<ApiResponse<LoginData>> LoginAsync(string email, string password)
+    //{
+    //    var url = $"{AppSettings.ApiBaseUrl}login";
+    //    var request = new { Email = email, Password = password };
+    //    var content = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8, "application/json");
+
+    //    var response = await httpClient.PostAsync(url, content);
+    //    var responseText = await response.Content.ReadAsStringAsync();
+
+    //    try
+    //    {
+    //        var apiResponse = JsonSerializer.Deserialize<ApiResponse<LoginData>>(responseText, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+    //        if (apiResponse != null && apiResponse.Status == 200 && apiResponse.Data != null)
+    //        {
+    //            return apiResponse;
+    //        }
+    //        else
+    //        {
+    //            return new ApiResponse<LoginData> { Status = response.StatusCode, Message = apiResponse?.Message ?? "Unknown error" };
+    //        }
+    //    }
+    //    catch (JsonException)
+    //    {
+    //        // Handle validation errors (response does not have "status" field)
+    //        var errorResponse = JsonSerializer.Deserialize<ApiValidationError>(responseText, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+    //        return new ApiResponse<LoginData> { Status = response.StatusCode, Message = errorResponse?.Message ?? "Validation error" };
+    //    }
+    //}
+
+
+
+
+    //ez amit én frankensteineltem össze az andrás-levi féléből
+    //uj, regebbi, legregebbi sorban
     public async Task<LoginData> LoginAsync(string email, string password)
     {
         var url = $"{AppSettings.ApiBaseUrl}login";
@@ -51,8 +129,8 @@ public class AuthenticationService
 
         return logindata;
     }
-
-
+    //might need this
+    //builder.Services.AddSingleton<HttpClient>(); 
     public class LoginData
     {
         public User User { get; set; }
