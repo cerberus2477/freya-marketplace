@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FreyaMarketplace.Model
 {
-    public class ValidationErrorData
+    public class ValidationErrorData : IData
     {
         public Dictionary<string, List<string>> Errors { get; set; }
     }

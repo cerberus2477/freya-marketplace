@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace FreyaMarketplace.Model
 {
-    public class LoginData : IData
+    internal interface IData
     {
-        public User User { get; set; }
-        public string Token { get; set; }
     }
 }

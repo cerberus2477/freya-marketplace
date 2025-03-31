@@ -10,5 +10,7 @@ public class User
     public int RoleId { get; set; }
     public string Picture { get; set; }
     public string Description { get; set; }
+
+    //TODO: json desirialise. the json contains role_id
 }
 

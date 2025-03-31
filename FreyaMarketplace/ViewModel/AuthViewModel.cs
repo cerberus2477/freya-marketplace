@@ -1,4 +1,5 @@
 ﻿using FreyaMarketplace.Services;
+using Microsoft.Maui.ApplicationModel.Communication;
 using System.Reflection.Metadata;
 using System.Windows.Input;
 
@@ -8,8 +9,8 @@ public partial class AuthViewModel : BaseViewModel
 {
     AuthenticationService authService;
 
-    [ObservableProperty] private string user_email;
-    [ObservableProperty] private string user_password;
+    [ObservableProperty] private string userEmail;
+    [ObservableProperty] private string userPassword;
     [ObservableProperty] private string title;
     [ObservableProperty] private string emailError;
     [ObservableProperty] private string passwordError;
@@ -32,30 +33,31 @@ public partial class AuthViewModel : BaseViewModel
             EmailError = null;
             PasswordError = null;
 
-            var result = await authService.LoginAsync(User_email, User_password);
+            var result = await authService.LoginAsync(UserEmail, UserPassword);
 
-            if (result.Status == 200 && result.Data is LoginData loginData)
+
+            if (result is ApiResponse<LoginData> successResponse)
             {
-                await SecureStorage.SetAsync("auth_token", loginData.Token);
+                await SecureStorage.SetAsync("auth_token", successResponse.Data.Token);
                 // Store user information
-                User = loginData.User;
+                User = successResponse.Data.User;
                 Preferences.Set("user_id", User.Id);
                 Preferences.Set("username", User.Username);
-                Preferences.Set("user_email", User.Email);
+                Preferences.Set("UserEmail", User.Email);
 
-                await Shell.Current.GoToAsync("HomePage");
+                await Shell.Current.GoToAsync("///HomePage");
             }
             else if (result.Status == 401)
             {
                 await Shell.Current.DisplayAlert("Bejelentkezési hiba", result.Message, "OK");
             }
-            else if (result.Status == 422 && result.Data is ValidationErrorData errorData)
+            else if (result is ApiResponse<ValidationErrorData> errorResponse)
             {
                 // Handle validation errors
-                if (errorData.Errors.ContainsKey("email"))
-                    EmailError = string.Join("\n", errorData.Errors["email"]);
-                if (errorData.Errors.ContainsKey("password"))
-                    PasswordError = string.Join("\n", errorData.Errors["password"]);
+                if (errorResponse.Data.Errors.ContainsKey("email"))
+                    EmailError = string.Join("\n", errorResponse.Data.Errors["email"]);
+                if (errorResponse.Data.Errors.ContainsKey("password"))
+                    PasswordError = string.Join("\n", errorResponse.Data.Errors["password"]);
             }
             else
             {

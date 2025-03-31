@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace FreyaMarketplace.Model
 {
-    public class LoginData : IData
+   public interface IApiResponse
     {
-        public User User { get; set; }
-        public string Token { get; set; }
+        int Status { get; set; }
+        string Message { get; set; }
     }
+
 }

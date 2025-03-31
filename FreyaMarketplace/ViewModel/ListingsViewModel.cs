@@ -14,7 +14,7 @@ public partial class ListingsViewModel : BaseViewModel
         Title = "Listings";
         this.listingService = listingService;
         //load the listings automatically when navigated to the page
-        Task.Run(GetListingsAsync);
+        Task.Run(SearchListingsAsync);
     }
 
     //This code checks to see if the selected item is non-null
@@ -33,35 +33,6 @@ public partial class ListingsViewModel : BaseViewModel
         });
     }
 
-    [RelayCommand]
-    async Task GetListingsAsync()
-    {
-        if (IsBusy)
-            return;
-
-        try
-        {
-            IsBusy = true;
-            var listings = await listingService.GetListings();
-
-                Listings.Clear();
-
-            foreach (var listing in listings)
-                Listings.Add(listing);
-
-        }
-        catch (Exception ex)
-        {
-            Debug.WriteLine($"Hiba a keresés során: {ex.Message}");
-            await Shell.Current.DisplayAlert("Hiba a keresés során:", ex.Message, "OK");
-        }
-        finally
-        {
-            IsBusy = false;
-            IsRefreshing = false;
-        }
-    }
-
 
     [ObservableProperty]
     private string searchQuery = string.Empty;
@@ -75,7 +46,7 @@ public partial class ListingsViewModel : BaseViewModel
         try
         {
             IsBusy = true;
-            var listings = await listingService.GetListings(SearchQuery);
+            var listings = await listingService.SearchListings(SearchQuery);
 
             Listings.Clear();
             foreach (var listing in listings)
@@ -83,8 +54,7 @@ public partial class ListingsViewModel : BaseViewModel
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Hiba a keresés során: {ex.Message}");
-            await Shell.Current.DisplayAlert("Error!", ex.Message, "OK");
+            await HandleExceptionAsync(new Exception(ex.Message), "Hiba a hirdetések lekérése során:");
         }
         finally
         {

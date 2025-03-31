@@ -5,27 +5,33 @@
              x:Class="FreyaMarketplace.App">
     <Application.Resources>
         <ResourceDictionary>
-            <Color x:Key="Primary">#A0C107</Color>
-            <Color x:Key="PrimaryDark">#00A000</Color>
-            <Color x:Key="Accent">#800000</Color>
+            <!-- Define colors -->
+            <Color x:Key="LightGreen">#A0C107</Color>
+            <Color x:Key="MiddleGreen">#6A9E58</Color>
+            <Color x:Key="GreenBlack">#1A2B1A</Color>
+            <Color x:Key="GreenWhite">#F0F7EB</Color>
+            <Color x:Key="DarkMaroon">#4E1F1F</Color>
 
-            <Color x:Key="LightBackground">#FAF9F8</Color>
-            <Color x:Key="DarkBackground">Black</Color>
+            <Color x:Key="DarkGrey">#2E332E</Color>
+            <Color x:Key="LighterDarkGrey">#454C45</Color>
 
+
+            <!-- Styles -->
             <Style TargetType="Page" ApplyToDerivedTypes="True">
                 <Setter Property="BackgroundColor"
-                        Value="{StaticResource LightBackground}" />
+                        Value="{AppThemeBinding Light={StaticResource GreenWhite}, Dark={StaticResource DarkGrey}}" />
             </Style>
 
-			<Style ApplyToDerivedTypes="True" TargetType="NavigationPage">
-				<Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightBackground}, Dark={StaticResource DarkBackground}}" />
-				<Setter Property="BarBackgroundColor" Value="{StaticResource Primary}" />
-				<Setter Property="BarTextColor" Value="White" />
-			</Style>
+            <Style ApplyToDerivedTypes="True" TargetType="NavigationPage">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightGreen}, Dark={StaticResource LighterDarkGrey}}" />
+                <Setter Property="BarBackgroundColor" Value="{StaticResource LightGreen}" />
+                <Setter Property="BarTextColor" Value="White" />
+            </Style>
 
+            <!-- Label styles -->
             <Style TargetType="Label" x:Key="BaseLabel">
                 <Setter Property="FontFamily" Value="OpenSansRegular" />
-                <Setter Property="TextColor" Value="#1F1F1F" />
+                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource GreenBlack}, Dark={StaticResource LightGreen}}" />
             </Style>
 
             <Style x:Key="MicroLabel" BasedOn="{StaticResource BaseLabel}" TargetType="Label">
@@ -45,23 +51,43 @@
             </Style>
 
             <Style TargetType="RefreshView" ApplyToDerivedTypes="True">
-                <Setter Property="RefreshColor" Value="{StaticResource Primary}" />
+                <Setter Property="RefreshColor" Value="{StaticResource LightGreen}" />
             </Style>
 
-            <Style x:Key="ButtonOutline" TargetType="Button">
-                <Setter Property="Background" Value="{StaticResource LightBackground}"/>
-                <Setter Property="TextColor" Value="{StaticResource Primary}"/>
-                <Setter Property="BorderColor" Value="{StaticResource Primary}"/>
-                <Setter Property="BorderWidth" Value="2"/>
+            <!-- Button styles -->
+            <!-- Base Button Style -->
+            <Style x:Key="BaseButton" TargetType="Button">
+                <Setter Property="CornerRadius" Value="10" />
+                <Setter Property="Padding" Value="10,5" />
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
                 <Setter Property="HeightRequest" Value="40"/>
-                <Setter Property="CornerRadius" Value="20"/>
             </Style>
+
+            <Style x:Key="ButtonOutline" TargetType="Button" BasedOn="{StaticResource BaseButton}">
+                <Setter Property="BackgroundColor" Value="{StaticResource GreenWhite}"/>
+                <Setter Property="TextColor" Value="{StaticResource LightGreen}"/>
+                <Setter Property="BorderColor" Value="{StaticResource LightGreen}"/>
+            </Style>
+
+            <Style x:Key="PrimaryButton" TargetType="Button" BasedOn="{StaticResource BaseButton}">
+                <Setter Property="BackgroundColor" Value="{StaticResource LightGreen}" />
+                <Setter Property="TextColor" Value="White" />
+            </Style>
+
+            <Style x:Key="WarningButton" TargetType="Button" BasedOn="{StaticResource BaseButton}">
+                <Setter Property="BackgroundColor" Value="{StaticResource DarkMaroon}" />
+                <Setter Property="TextColor" Value="White" />
+            </Style>
+
+
+            <!-- Card view style -->
             <Style x:Key="CardView" TargetType="Border">
-                <Setter Property="Stroke" Value="#DDDDDD" />
+                <Setter Property="Stroke" Value="{StaticResource MiddleGreen}" />
                 <Setter Property="StrokeThickness" Value="1" />
                 <Setter Property="StrokeShape" Value="RoundRectangle 10"/>
                 <Setter Property="Padding" Value="0" />
-                <Setter Property="Background" Value="{StaticResource LightBackground}" />
+                <Setter Property="Background" Value="{StaticResource GreenWhite}" />
             </Style>
         </ResourceDictionary>
     </Application.Resources>

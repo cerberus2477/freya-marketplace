@@ -12,9 +12,14 @@ public partial class BaseViewModel : ObservableObject
     string title;
 
     // Helper method for common error handling
-    protected async Task HandleExceptionAsync(Exception ex, string customMessage = null, [CallerMemberName] string caller = null)
+    protected async Task HandleExceptionAsync(Exception ex, string customMessage = null, bool displayExMessage = true, [CallerMemberName] string caller = null)
     {
-        Debug.WriteLine($"Error in {caller}: {ex}");
-        await Shell.Current.DisplayAlert("Váratlan hiba", customMessage ?? "A kért kérés teljesítésae közben hiba állt fel", "OK");
+        Debug.WriteLine($"Error in {caller}: {ex.Message}\nException:{ex}");
+        string message = customMessage ?? "A kért kérés teljesítése közben hiba állt fel.";
+        if (displayExMessage)
+        {
+            message += $"\nHibaüzenet: {ex.Message}";
+        }
+        await Shell.Current.DisplayAlert("Váratlan hiba", message, "OK");
     }
 }

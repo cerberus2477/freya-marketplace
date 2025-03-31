@@ -12,7 +12,7 @@ public class ListingService
 
     List<Listing> listings;
 
-    public async Task<List<Listing>> GetListings(string query = "")
+    public async Task<List<Listing>> SearchListings(string query = "")
     {
         var url = $"{AppSettings.ApiBaseUrl}listings/search?all";
         if (!string.IsNullOrWhiteSpace(query))
