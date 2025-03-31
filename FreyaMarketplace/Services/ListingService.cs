@@ -12,7 +12,7 @@ public class ListingService
 
     List<Listing> listings;
 
-    public async Task<List<Listing>> GetListings(string query = "")
+    public async Task<List<Listing>> SearchListings(string query = "")
     {
         var url = $"{AppSettings.ApiBaseUrl}listings/search?all";
         if (!string.IsNullOrWhiteSpace(query))
@@ -23,7 +23,7 @@ public class ListingService
         var response = await httpClient.GetAsync(url);
         if (response.IsSuccessStatusCode)
         {
-            var apiResponse = await response.Content.ReadFromJsonAsync<ApiResponse>();
+            var apiResponse = await response.Content.ReadFromJsonAsync<ApiResponse<List<Listing>>>();
 
             if (apiResponse?.Status == 200)
             {
@@ -40,26 +40,3 @@ public class ListingService
         return listings;
     }
 }
-
-
-
-
-public class ApiResponse
-{
-    public int Status { get; set; }
-    public string Message { get; set; }
-    public List<Listing> Data { get; set; }
-}
-
-
-
-// Offline - use for testing without api
-/*using var stream = await FileSystem.OpenAppPackageFileAsync("Listingdata.json");
-using var reader = new StreamReader(stream);
-var contents = await reader.ReadToEndAsync();
-listings = JsonSerializer.Deserialize(contents, ListingContext.Default.ListListing);
-
-return listings;*/
-
-
-
