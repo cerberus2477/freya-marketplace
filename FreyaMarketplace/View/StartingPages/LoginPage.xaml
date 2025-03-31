@@ -1,30 +1,35 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="FreyaMarketplace.View.StartingPages.LoginPage"
-             Title="LoginPage">
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            x:Class="FreyaMarketplace.View.StartingPages.LoginPage"
+            Title="{Binding Title}"
+            BindingContext="{Binding Source={x:Reference Name=LoginPage}, Path=BindingContext}">
+
     <VerticalStackLayout Padding="20">
-        <Label Text="Email:" />
-        <Entry x:Name="txtEmail" />
 
-        <Label Text="Password:" />
-        <Entry x:Name="txtPassword" IsPassword="True" />
+    <Entry x:Name="txtEmail" Text="{Binding Email, Mode=TwoWay}" 
+    Style="{StaticResource EntryStyle}" />
+    <Label x:Name="lblEmailError" TextColor="Red" IsVisible="False"/>
 
-        <Button Text="Login" Clicked="Login_Clicked" />
+    <Entry x:Name="txtPassword" Text="{Binding Password, Mode=TwoWay}" IsPassword="True"
+    Style="{StaticResource EntryStyle}" />
+    <Label x:Name="lblPasswordError" TextColor="Red" IsVisible="False"/>
+
+    <Button Text="Login" Command="{Binding LoginCommand}" />
 
 
-        <!-- this is a button too functionally, but with different styling (label with onclick vs. button) -->
-        <Label Text="Forgot Password?" 
-       TextColor="Blue" 
-       HorizontalOptions="Center">
-            <Label.GestureRecognizers>
-                <TapGestureRecognizer Tapped="ForgotPassword_Tapped" />
-            </Label.GestureRecognizers>
-        </Label>
+    <!-- this is a button too functionally, but with different styling (label with onclick vs. button) -->
+    <Label Text="Forgot Password?" 
+    TextColor="Blue" 
+    HorizontalOptions="Center">
+        <Label.GestureRecognizers>
+            <TapGestureRecognizer Tapped="ForgotPassword_Tapped" />
+        </Label.GestureRecognizers>
+    </Label>
 
-        <Label Text="Don't have an account?" HorizontalOptions="Center" />
-        <Button Text="Register"
-                Clicked="OnRegisterClicked"
-                HorizontalOptions="Center" />
+    <Label Text="Don't have an account?" HorizontalOptions="Center" />
+    <Button Text="Register"
+            Clicked="OnRegisterClicked"
+            HorizontalOptions="Center" />
     </VerticalStackLayout>
 </ContentPage>

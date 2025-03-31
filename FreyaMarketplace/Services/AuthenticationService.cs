@@ -15,127 +15,61 @@ public class AuthenticationService
         httpClient.DefaultRequestHeaders.Add("Connection", "keep-alive");
     }
 
-    LoginData logindata;
-    //todo:
-    //ez az újabb, proóbálja kezelni a 3 féle responset (amiből kettő logikus is.)
-    //errort visszaad,nem display, hogy a viewmodel kezelje.
-
-    //public async Task<ApiResponse<LoginData>> LoginAsync(string email, string password)
-    //{
-    //    var url = $"{AppSettings.ApiBaseUrl}login";
-    //    var request = new { Email = email, Password = password };
-    //    var content = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8, "application/json");
-
-    //    var response = await httpClient.PostAsync(url, content);
-    //    var responseText = await response.Content.ReadAsStringAsync();
-
-    //    try
-    //    {
-    //        var apiResponse = JsonSerializer.Deserialize<ApiResponse<LoginData>>(responseText, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-
-    //        if (apiResponse != null && apiResponse.Status == 200 && apiResponse.Data != null)
-    //        {
-    //            return apiResponse;
-    //        }
-    //        else
-    //        {
-    //            return new ApiResponse<LoginData> { Status = response.StatusCode, Message = apiResponse?.Message ?? "Unknown error" };
-    //        }
-    //    }
-    //    catch (JsonException)
-    //    {
-    //        // Handle validation errors (response does not have "status" field)
-    //        var errorResponse = JsonSerializer.Deserialize<ApiValidationError>(responseText, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-    //        return new ApiResponse<LoginData> { Status = response.StatusCode, Message = errorResponse?.Message ?? "Validation error" };
-    //    }
-    //}
-
-    //public class ApiValidationError
-    //{
-    //    public string Message { get; set; }
-    //    public Dictionary<string, string[]> Errors { get; set; }
-    //}
 
 
 
-    //clean lenne, de nem kezeli a sokféle responsunkot
-
-    //public async Task<ApiResponse<LoginData>> LoginAsync(string email, string password)
-    //{
-    //    var url = $"{AppSettings.ApiBaseUrl}login";
-    //    var request = new { Email = email, Password = password };
-    //    var content = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8, "application/json");
-
-    //    var response = await httpClient.PostAsync(url, content);
-    //    var responseText = await response.Content.ReadAsStringAsync();
-
-    //    try
-    //    {
-    //        var apiResponse = JsonSerializer.Deserialize<ApiResponse<LoginData>>(responseText, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-
-    //        if (apiResponse != null && apiResponse.Status == 200 && apiResponse.Data != null)
-    //        {
-    //            return apiResponse;
-    //        }
-    //        else
-    //        {
-    //            return new ApiResponse<LoginData> { Status = response.StatusCode, Message = apiResponse?.Message ?? "Unknown error" };
-    //        }
-    //    }
-    //    catch (JsonException)
-    //    {
-    //        // Handle validation errors (response does not have "status" field)
-    //        var errorResponse = JsonSerializer.Deserialize<ApiValidationError>(responseText, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-    //        return new ApiResponse<LoginData> { Status = response.StatusCode, Message = errorResponse?.Message ?? "Validation error" };
-    //    }
-    //}
-
-
-
-
-    //ez amit én frankensteineltem össze az andrás-levi féléből
-    //uj, regebbi, legregebbi sorban
-    public async Task<LoginData> LoginAsync(string email, string password)
+    public async Task<ApiResponse<object>> LoginAsync(string user_email, string user_password)
     {
         var url = $"{AppSettings.ApiBaseUrl}login";
-
-        var request = new
-        {
-            Email = email,
-            Password = password
-        };
-
-        //var json = JsonConvert.SerializeObject(loginData);
-        var json = JsonSerializer.Serialize(request);
-        var content = new StringContent(json, Encoding.UTF8, "application/json");
+        var request = new { email = user_email, password = user_password };
+        var content = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8, "application/json");
 
         var response = await httpClient.PostAsync(url, content);
-        if (response.IsSuccessStatusCode)
+        var responseText = await response.Content.ReadAsStringAsync();
+
+        try
         {
-            var apiResponse = await response.Content.ReadFromJsonAsync<ApiResponse<LoginData>>();
+            // Try parsing the response as a successful login (LoginData)
+            var apiResponse = JsonSerializer.Deserialize<ApiResponse<LoginData>>(responseText, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
-            if (apiResponse?.Status == 200)
+            if (apiResponse != null)
             {
-                logindata = apiResponse.Data;
-
+                // Return the apiResponse as is (successful login), but assign the Data to object.
+                return new ApiResponse<object>
+                {
+                    Status = apiResponse.Status,
+                    Message = apiResponse.Message,
+                    Data = apiResponse.Data // this is of type LoginData
+                };
             }
-            else
-            {
-                // If the status is not 200, display the error message
-                Console.WriteLine($"Error: {apiResponse?.Message}");
+        }
+        catch (JsonException)
+        {
+            // Handle validation errors (422)
+            var validationResponse = JsonSerializer.Deserialize<ApiResponse<ValidationErrorData>>(responseText, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
+            if (validationResponse != null)
+            {
+                return new ApiResponse<object>
+                {
+                    Status = validationResponse.Status,
+                    Message = validationResponse.Message,
+                    Data = validationResponse.Data // this is of type ValidationErrorData
+                };
             }
         }
 
-        return logindata;
+        // Return a generic error if deserialization failed
+        return new ApiResponse<object>
+        {
+            Status = 500,
+            Message = "Ismeretlen hiba"
+        };
     }
-    //might need this
-    //builder.Services.AddSingleton<HttpClient>(); 
-    public class LoginData
-    {
-        public User User { get; set; }
-        public string Token { get; set; }
-    }
-
-    
 }
+
+
+
+            //try interpreting the response as either succesfull or unsiccesful login,
+            //catch it validation errors are returned (422), because the format of the data is incorrect (e.g. too short password or not an actual email address)
+            //generic error to be displayed in view. might be useful to uncomment and implemtent the errorhandling function in baseviewmodel
