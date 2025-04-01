@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace FreyaMarketplace.Model
 {
-    internal interface IData
+    public interface IApiResponse
     {
+        int Status { get; set; }
+        string Message { get; set; }
+
+        //string IData Data { get; set; }
+
     }
+
 }

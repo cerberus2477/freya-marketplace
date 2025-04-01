@@ -12,9 +12,12 @@ public partial class AuthViewModel : BaseViewModel
     [ObservableProperty] private string userEmail;
     [ObservableProperty] private string userPassword;
     [ObservableProperty] private string title;
-    [ObservableProperty] private string emailError;
-    [ObservableProperty] private string passwordError;
+    [ObservableProperty] [NotifyPropertyChangedFor(nameof(IsEmailErrorVisible))] private string emailError;
+    [ObservableProperty] [NotifyPropertyChangedFor(nameof(IsPasswordErrorVisible))] private string passwordError;
     [ObservableProperty] private User user;
+
+    public bool IsEmailErrorVisible => !string.IsNullOrEmpty(EmailError);
+    public bool IsPasswordErrorVisible => !string.IsNullOrEmpty(PasswordError);
 
 
     public AuthViewModel(AuthenticationService authService)
@@ -34,30 +37,52 @@ public partial class AuthViewModel : BaseViewModel
             PasswordError = null;
 
             var result = await authService.LoginAsync(UserEmail, UserPassword);
-
-
-            if (result is ApiResponse<LoginData> successResponse)
+            Debug.WriteLine($"Received API Response: {JsonSerializer.Serialize<LoginApiResponse>(result)}");
+            Debug.WriteLine($"\tReceived Data: {result.Data} {JsonSerializer.Serialize(result.Data)}");
+            if (result == null) return;
+            if (result.Data is LoginSuccessData successData)
             {
-                await SecureStorage.SetAsync("auth_token", successResponse.Data.Token);
+                await SecureStorage.SetAsync("auth_token", successData.Token);
                 // Store user information
-                User = successResponse.Data.User;
+                User = successData.User;
+                Debug.Write($"User: {JsonSerializer.Serialize(User)}");
                 Preferences.Set("user_id", User.Id);
                 Preferences.Set("username", User.Username);
                 Preferences.Set("UserEmail", User.Email);
 
                 await Shell.Current.GoToAsync("///HomePage");
             }
-            else if (result.Status == 401)
+            else if (result.Data is EmptyLoginData)
             {
                 await Shell.Current.DisplayAlert("Bejelentkezési hiba", result.Message, "OK");
             }
-            else if (result is ApiResponse<ValidationErrorData> errorResponse)
+            else if (result.Data is ValidationErrorData errorData)
             {
+                Debug.WriteLine($"Validation Errors: {JsonSerializer.Serialize(errorData.Errors)}");
+
+
+
                 // Handle validation errors
-                if (errorResponse.Data.Errors.ContainsKey("email"))
-                    EmailError = string.Join("\n", errorResponse.Data.Errors["email"]);
-                if (errorResponse.Data.Errors.ContainsKey("password"))
-                    PasswordError = string.Join("\n", errorResponse.Data.Errors["password"]);
+                //if (errorResponse.Data.Errors.ContainsKey("email"))
+                //    EmailError = string.Join("\n", errorResponse.Data.Errors["email"]);
+                //if (errorResponse.Data.Errors.ContainsKey("password"))
+                //    PasswordError = string.Join("\n", errorResponse.Data.Errors["password"]);
+
+                if (errorData.Errors.ContainsKey("email"))
+                {
+                    EmailError = string.Join("\n", errorData.Errors["email"]);
+                    Debug.WriteLine($"Email Error: {EmailError}");
+                    OnPropertyChanged(nameof(IsEmailErrorVisible)); // Ensure UI updates
+
+                }
+
+                if (errorData.Errors.ContainsKey("password"))
+                {
+                    PasswordError = string.Join("\n", errorData.Errors["password"]);
+                    Debug.WriteLine($"Password Error: {PasswordError}");
+                    OnPropertyChanged(nameof(IsPasswordErrorVisible)); // Ensure UI updates
+
+                }
             }
             else
             {

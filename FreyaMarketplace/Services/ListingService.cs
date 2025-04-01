@@ -23,19 +23,20 @@ public class ListingService
         var response = await httpClient.GetAsync(url);
         if (response.IsSuccessStatusCode)
         {
-            var apiResponse = await response.Content.ReadFromJsonAsync<ApiResponse<List<Listing>>>();
+            //TODO: make costum parser or just rewrite this 
+            //var apiResponse = await response.Content.ReadFromJsonAsync<LoginApiResponse<List<Listing>>>();
 
-            if (apiResponse?.Status == 200)
-            {
-                listings = apiResponse.Data;
+            //if (apiResponse?.Status == 200)
+            //{
+            //    listings = apiResponse.Data;
 
-            }
-            else
-            {
-                // If the status is not 200, display the error message
-                Console.WriteLine($"Error: {apiResponse?.Message}");
+            //}
+            //else
+            //{
+            //    // If the status is not 200, display the error message
+            //    Console.WriteLine($"Error: {apiResponse?.Message}");
 
-            }
+            //}
         }
         return listings;
     }

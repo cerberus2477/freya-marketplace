@@ -12,13 +12,20 @@
 
     <Entry x:Name="txtEmail" Text="{Binding UserEmail, Mode=TwoWay}" 
     Style="{StaticResource EntryStyle}" />
-    <Label x:Name="lblEmailError" TextColor="Red" IsVisible="False"/>
+        
+        <!--//TODO: use "warning" style"-->
+    <Label Text="{Binding EmailError}" 
+       TextColor="Red" 
+       IsVisible="{Binding IsEmailErrorVisible}" />
 
-    <Entry x:Name="txtPassword" Text="{Binding UserPassword, Mode=TwoWay}" IsPassword="True"
-    Style="{StaticResource EntryStyle}" />
-    <Label x:Name="lblPasswordError" TextColor="Red" IsVisible="False"/>
+        <Entry x:Name="txtPassword" Text="{Binding UserPassword, Mode=TwoWay}" IsPassword="True"
+        Style="{StaticResource EntryStyle}" />
+        <Label Text="{Binding PasswordError}" 
+       TextColor="Red" 
+       IsVisible="{Binding IsPasswordErrorVisible}" />
 
-    <Button Text="Login" Command="{Binding LoginCommand}" />
+
+        <Button Text="Login" Command="{Binding LoginCommand}" />
 
 
     <!-- this is a button too functionally, but with different styling (label with onclick vs. button) -->
