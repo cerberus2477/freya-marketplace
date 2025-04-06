@@ -43,6 +43,9 @@ public partial class AuthViewModel : BaseViewModel
             if (result.Data is LoginSuccessData successData)
             {
                 await SecureStorage.SetAsync("auth_token", successData.Token);
+
+                //var retrievedToken = await SecureStorage.GetAsync("auth_token");
+                //Debug.WriteLine($"Stored token: {retrievedToken}");
                 // Store user information
                 User = successData.User;
                 Debug.Write($"User: {JsonSerializer.Serialize(User)}");
