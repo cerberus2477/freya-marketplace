@@ -15,6 +15,32 @@ internal class LoginDataJsonConverter : JsonConverter<ILoginData>
 {
     public override ILoginData Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
+        //using (JsonDocument doc = JsonDocument.ParseValue(ref reader))
+        //{
+        //    var root = doc.RootElement;
+
+        //    // If "Errors" key exists, it's ValidationErrorData
+        //    if (root.TryGetProperty("errors", out _))
+        //    {
+        //        return JsonSerializer.Deserialize<ValidationErrorData>(root.GetRawText(), options);
+        //    }
+        //    // If "User" key exists, it's LoginSuccessData
+        //    else if (root.TryGetProperty("user", out _))
+        //    {
+        //        return JsonSerializer.Deserialize<LoginSuccessData>(root.GetRawText(), options);
+        //    }
+        //    // If "Data" is an empty array or object, return an EmptyLoginData instance
+        //    else if (root.ValueKind == JsonValueKind.Array && root.GetArrayLength() == 0)
+        //    {
+        //        return new EmptyLoginData();
+        //    }
+        //    else if (root.ValueKind == JsonValueKind.Object && !root.EnumerateObject().Any())
+        //    {
+        //        return new EmptyLoginData();
+        //    }
+        //}
+        //return new EmptyLoginData(); // Default case
+
         using (JsonDocument doc = JsonDocument.ParseValue(ref reader))
         {
             var root = doc.RootElement;
@@ -30,13 +56,16 @@ internal class LoginDataJsonConverter : JsonConverter<ILoginData>
                 return JsonSerializer.Deserialize<LoginSuccessData>(root.GetRawText(), options);
             }
             // If "Data" is an empty array or object, return an EmptyLoginData instance
-            else if (root.ValueKind == JsonValueKind.Array && root.GetArrayLength() == 0)
+            else if (root.TryGetProperty("data", out _))
             {
-                return new EmptyLoginData();
-            }
-            else if (root.ValueKind == JsonValueKind.Object && !root.EnumerateObject().Any())
-            {
-                return new EmptyLoginData();
+                if (root["data"].ValueKind == JsonValueKind.Array && root["data"].GetArrayLength() == 0)
+                {
+                    return new EmptyLoginData();
+                }
+                else if (root["data"].ValueKind == JsonValueKind.Object && !root["data"].EnumerateObject().Any())
+                {
+                    return new EmptyLoginData();
+                }
             }
         }
         return new EmptyLoginData(); // Default case
