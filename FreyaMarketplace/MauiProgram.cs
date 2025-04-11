@@ -28,7 +28,9 @@ public static class MauiProgram
 
         builder.Services.AddTransient<AuthViewModel>();
         builder.Services.AddSingleton<AuthenticationService>();
-        builder.Services.AddTransient<ExceptionHandlerUtil>();
+
+        builder.Services.AddSingleton<ExceptionHandlerUtil>();
+        //builder.Services.AddSingleton<ConverterUtil>();
 
         return builder.Build();
 	}

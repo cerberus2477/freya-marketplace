@@ -11,7 +11,7 @@ namespace FreyaMarketplace.Model
         int Status { get; set; }
         string Message { get; set; }
 
-        //string IData Data { get; set; }
+        string IData { get; set; }
     }
 
     public interface IData

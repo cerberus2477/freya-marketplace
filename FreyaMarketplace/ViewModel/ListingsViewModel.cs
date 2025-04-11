@@ -44,11 +44,12 @@ public partial class ListingsViewModel : BaseViewModel
     {
         if (IsBusy)
             return;
-
         try
         {
             IsBusy = true;
             var listings = await listingService.SearchListings(SearchQuery);
+            //Listings = new ObservableCollection<Listing>(listings ?? []);
+
             //if (listings == null) return;
             Listings.Clear();
             foreach (var listing in listings)
@@ -56,8 +57,9 @@ public partial class ListingsViewModel : BaseViewModel
         }
         catch (Exception ex)
         {
-            await exceptionHandlerUtil.HandleExceptionAsync(new Exception(ex.Message), "Hiba a hirdetések lekérése során:");
+            await exceptionHandlerUtil.HandleExceptionAsync(new Exception(ex.Message), "Hiba adódott a hirdetések lekérése során.");
         }
+
         finally
         {
             IsBusy = false;
