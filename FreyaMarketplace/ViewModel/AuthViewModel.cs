@@ -59,7 +59,7 @@ public partial class AuthViewModel : BaseViewModel
             }
             else if (result.Data is EmptyLoginData)
             {
-                await exceptionHandlerUtil.HandleExceptionAsync(new Exception(result.Message), "Sikertelen bejelentkezés:");
+                await exceptionHandlerUtil.HandleExceptionAsync(new Exception(result.Message), "");
             }
             else if (result.Data is ValidationErrorData errorData)
             {
