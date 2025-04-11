@@ -12,7 +12,10 @@ namespace FreyaMarketplace.Model
         string Message { get; set; }
 
         //string IData Data { get; set; }
+    }
 
+    public interface IData
+    {
     }
 
 }

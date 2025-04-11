@@ -1,13 +1,4 @@
-﻿//namespace FreyaMarketplace.Model;
-
-//public class ApiResponse<T> : IApiResponse
-//{
-//    public int Status { get; set; }
-//    public string Message { get; set; }
-//    public T Data { get; set; }
-//}
-
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace FreyaMarketplace.Model;
 
@@ -25,4 +16,24 @@ public class LoginApiResponse : IApiResponse
         Message = message;
         Data = data ?? new EmptyLoginData();
     }
+}
+
+public interface ILoginData : IData
+{
+}
+
+
+public class LoginSuccessData : ILoginData
+{
+    public User User { get; set; }
+    public string Token { get; set; }
+}
+
+public class EmptyLoginData : ILoginData
+{
+}
+
+public class LoginValidationErrorData : ILoginData
+{
+    public Dictionary<string, List<string>> Errors { get; set; }
 }

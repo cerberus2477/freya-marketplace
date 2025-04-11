@@ -10,13 +10,19 @@ public partial class AuthViewModel : BaseViewModel
     private readonly AuthenticationService authService;
     private readonly ExceptionHandlerUtil exceptionHandlerUtil;
 
+    [ObservableProperty] private string username;
     [ObservableProperty] private string userEmail;
     [ObservableProperty] private string userPassword;
+    [ObservableProperty] private string userPasswordConfirmation;
+
     [ObservableProperty] private string title;
-    [ObservableProperty] [NotifyPropertyChangedFor(nameof(IsEmailErrorVisible))] private string emailError;
-    [ObservableProperty] [NotifyPropertyChangedFor(nameof(IsPasswordErrorVisible))] private string passwordError;
+    [ObservableProperty][NotifyPropertyChangedFor(nameof(IsUsernameErrorVisible))] private string usernameError;
+    [ObservableProperty][NotifyPropertyChangedFor(nameof(IsEmailErrorVisible))] private string emailError;
+    [ObservableProperty][NotifyPropertyChangedFor(nameof(IsPasswordErrorVisible))] private string passwordError;
+
     [ObservableProperty] private User user;
 
+    public bool IsUsernameErrorVisible => !string.IsNullOrEmpty(UsernameError);
     public bool IsEmailErrorVisible => !string.IsNullOrEmpty(EmailError);
     public bool IsPasswordErrorVisible => !string.IsNullOrEmpty(PasswordError);
 
@@ -39,13 +45,11 @@ public partial class AuthViewModel : BaseViewModel
             PasswordError = null;
 
             var result = await authService.LoginAsync(UserEmail, UserPassword);
-            //Debug.WriteLine($"Received API Response: {JsonSerializer.Serialize<LoginApiResponse>(result)}");
-            //Debug.WriteLine($"\tReceived Data: {result.Data} {JsonSerializer.Serialize(result.Data)}");
             if (result == null) return;
             if (result.Data is LoginSuccessData successData)
             {
                 await SecureStorage.SetAsync("auth_token", successData.Token);
-
+                //TODO: actually store user, at least token and id?
                 //var retrievedToken = await SecureStorage.GetAsync("auth_token");
                 //Debug.WriteLine($"Stored token: {retrievedToken}");
                 // Store user information
@@ -61,30 +65,91 @@ public partial class AuthViewModel : BaseViewModel
             {
                 await exceptionHandlerUtil.HandleExceptionAsync(new Exception(result.Message), "");
             }
-            else if (result.Data is ValidationErrorData errorData)
+            else if (result.Data is LoginValidationErrorData errorData)
             {
 
                 if (errorData.Errors.ContainsKey("email"))
                 {
                     EmailError = string.Join("\n", errorData.Errors["email"]);
-                    OnPropertyChanged(nameof(IsEmailErrorVisible)); 
+                    OnPropertyChanged(nameof(IsEmailErrorVisible));
                 }
 
                 if (errorData.Errors.ContainsKey("password"))
                 {
                     PasswordError = string.Join("\n", errorData.Errors["password"]);
-                    OnPropertyChanged(nameof(IsPasswordErrorVisible)); 
+                    OnPropertyChanged(nameof(IsPasswordErrorVisible));
 
                 }
             }
             else
             {
-                await exceptionHandlerUtil.HandleExceptionAsync(new Exception(result.Message), "Hiba a bejelentkezés során:");
+                await exceptionHandlerUtil.HandleExceptionAsync(new Exception(result.Message), "Hiba adódott bejelentkezés során.");
             }
         }
         catch (Exception ex)
         {
-            await exceptionHandlerUtil.HandleExceptionAsync(ex, "Hiba a bejelentkezés során:");
+            await exceptionHandlerUtil.HandleExceptionAsync(ex, "Hiba adódott a bejelentkezés során.");
+        }
+        finally
+        {
+            IsBusy = false;
+        }
+    }
+
+
+    [RelayCommand]
+    private async Task RegisterAsync()
+    {
+        if (IsBusy) return;
+        try
+        {
+            IsBusy = true;
+            UsernameError = null;
+            EmailError = null;
+            PasswordError = null;
+
+            var result = await authService.RegisterAsync(Username, UserEmail, UserPassword, UserPasswordConfirmation);
+            if (result == null) return;
+            if (result.Data is RegisterSuccessData successData)
+            {
+                //TODO: login user with email and password.
+
+                await Shell.Current.DisplayAlert("Sikeres regisztráció", "Mostmár bejelentkezhetsz az alkalmazásba", "OK");
+
+                //await Shell.Current.GoToAsync("///HomePage");
+            }
+            else if (result.Data is EmptyLoginData)
+            {
+                await exceptionHandlerUtil.HandleExceptionAsync(new Exception(result.Message), "");
+            }
+            else if (result.Data is RegisterValidationErrorData errorData)
+            {
+                if (errorData.Errors.ContainsKey("username"))
+                {
+                    UsernameError = string.Join("\n", errorData.Errors["username"]);
+                    OnPropertyChanged(nameof(IsUsernameErrorVisible));
+                }
+
+                if (errorData.Errors.ContainsKey("email"))
+                {
+                    EmailError = string.Join("\n", errorData.Errors["email"]);
+                    OnPropertyChanged(nameof(IsEmailErrorVisible));
+                }
+
+                if (errorData.Errors.ContainsKey("password"))
+                {
+                    PasswordError = string.Join("\n", errorData.Errors["password"]);
+                    OnPropertyChanged(nameof(IsPasswordErrorVisible));
+                }
+            }
+            else
+            {
+                await exceptionHandlerUtil.HandleExceptionAsync(new Exception(result.Message), "Hiba adódott regisztráció során.");
+            }
+        }
+        catch (Exception ex)
+        {
+            await exceptionHandlerUtil.HandleExceptionAsync(ex, "Hiba adódott a regisztráció során.");
         }
         finally
         {

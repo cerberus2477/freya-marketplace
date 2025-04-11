@@ -10,26 +10,29 @@
 
     <VerticalStackLayout Padding="20">
 
-    <Entry x:Name="txtEmail" Text="{Binding UserEmail, Mode=TwoWay}" 
+        <Label Text="E-mail cím:" />
+        <Entry x:Name="txtEmail" Text="{Binding UserEmail, Mode=TwoWay}" 
     Style="{StaticResource EntryStyle}" />
         
         <!--//TODO: use "warning" style"-->
-    <Label Text="{Binding EmailError}" 
+
+        <Label Text="{Binding EmailError}" 
        TextColor="Red" 
        IsVisible="{Binding IsEmailErrorVisible}" />
 
-        <Entry x:Name="txtPassword" Text="{Binding UserPassword, Mode=TwoWay}" IsPassword="True"
+            <Label Text="Jeszó:" />
+            <Entry x:Name="txtPassword" Text="{Binding UserPassword, Mode=TwoWay}" IsPassword="True"
         Style="{StaticResource EntryStyle}" />
         <Label Text="{Binding PasswordError}" 
        TextColor="Red" 
        IsVisible="{Binding IsPasswordErrorVisible}" />
 
 
-        <Button Text="Login" Command="{Binding LoginCommand}" />
+        <Button Text="Bejelentketés" Command="{Binding LoginCommand}" />
 
 
     <!-- this is a button too functionally, but with different styling (label with onclick vs. button) -->
-    <Label Text="Forgot Password?" 
+    <Label Text="Elfejetett a jelszavad?" 
     TextColor="Blue" 
     HorizontalOptions="Center">
         <Label.GestureRecognizers>
@@ -37,8 +40,8 @@
         </Label.GestureRecognizers>
     </Label>
 
-    <Label Text="Don't have an account?" HorizontalOptions="Center" />
-    <Button Text="Register"
+    <Label Text="Nincs még fiókod?" HorizontalOptions="Center" />
+    <Button Text="Regisztráció"
             Clicked="OnRegisterClicked"
             HorizontalOptions="Center" />
     </VerticalStackLayout>
