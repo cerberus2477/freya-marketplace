@@ -15,60 +15,33 @@ internal class LoginDataJsonConverter : JsonConverter<ILoginData>
 {
     public override ILoginData Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        //using (JsonDocument doc = JsonDocument.ParseValue(ref reader))
-        //{
-        //    var root = doc.RootElement;
-
-        //    // If "Errors" key exists, it's ValidationErrorData
-        //    if (root.TryGetProperty("errors", out _))
-        //    {
-        //        return JsonSerializer.Deserialize<ValidationErrorData>(root.GetRawText(), options);
-        //    }
-        //    // If "User" key exists, it's LoginSuccessData
-        //    else if (root.TryGetProperty("user", out _))
-        //    {
-        //        return JsonSerializer.Deserialize<LoginSuccessData>(root.GetRawText(), options);
-        //    }
-        //    // If "Data" is an empty array or object, return an EmptyLoginData instance
-        //    else if (root.ValueKind == JsonValueKind.Array && root.GetArrayLength() == 0)
-        //    {
-        //        return new EmptyLoginData();
-        //    }
-        //    else if (root.ValueKind == JsonValueKind.Object && !root.EnumerateObject().Any())
-        //    {
-        //        return new EmptyLoginData();
-        //    }
-        //}
-        //return new EmptyLoginData(); // Default case
-
         using (JsonDocument doc = JsonDocument.ParseValue(ref reader))
         {
-            var root = doc.RootElement;
+            var data = doc.RootElement;
+            Debug.WriteLine($"Root: {data}");
+
+            // If "Data" is an empty array or object, return an EmptyLoginData instance
+            if ((data.ValueKind == JsonValueKind.Object && !data.EnumerateObject().Any()) 
+                || (data.ValueKind == JsonValueKind.Array && data.GetArrayLength() == 0))
+            {
+                return new EmptyLoginData();
+            }
 
             // If "Errors" key exists, it's ValidationErrorData
-            if (root.TryGetProperty("errors", out _))
+            if (data.TryGetProperty("errors", out _))
             {
-                return JsonSerializer.Deserialize<ValidationErrorData>(root.GetRawText(), options);
+                return JsonSerializer.Deserialize<ValidationErrorData>(data.GetRawText(), options);
             }
+
             // If "User" key exists, it's LoginSuccessData
-            else if (root.TryGetProperty("user", out _))
+            else if (data.TryGetProperty("user", out _))
             {
-                return JsonSerializer.Deserialize<LoginSuccessData>(root.GetRawText(), options);
-            }
-            // If "Data" is an empty array or object, return an EmptyLoginData instance
-            else if (root.TryGetProperty("data", out _))
-            {
-                if (root["data"].ValueKind == JsonValueKind.Array && root["data"].GetArrayLength() == 0)
-                {
-                    return new EmptyLoginData();
-                }
-                else if (root["data"].ValueKind == JsonValueKind.Object && !root["data"].EnumerateObject().Any())
-                {
-                    return new EmptyLoginData();
-                }
+                return JsonSerializer.Deserialize<LoginSuccessData>(data.GetRawText(), options);
             }
         }
-        return new EmptyLoginData(); // Default case
+
+        // Default case
+        return new EmptyLoginData(); 
     }
 
     public override void Write(Utf8JsonWriter writer, ILoginData value, JsonSerializerOptions options)

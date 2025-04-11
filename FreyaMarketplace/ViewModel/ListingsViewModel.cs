@@ -5,14 +5,16 @@ namespace FreyaMarketplace.ViewModel;
 public partial class ListingsViewModel : BaseViewModel
 {
     public ObservableCollection<Listing> Listings { get; } = new();
-    ListingService listingService;
+    private readonly ListingService listingService;
+    private readonly ExceptionHandlerUtil exceptionHandlerUtil;
 
     [ObservableProperty]
     bool isRefreshing;
-    public ListingsViewModel(ListingService listingService)
+    public ListingsViewModel(ListingService listingService, ExceptionHandlerUtil exceptionHandlerUtil)
     {
         Title = "Listings";
         this.listingService = listingService;
+        this.exceptionHandlerUtil = exceptionHandlerUtil;
         //load the listings automatically when navigated to the page
         Task.Run(SearchListingsAsync);
     }
@@ -47,14 +49,14 @@ public partial class ListingsViewModel : BaseViewModel
         {
             IsBusy = true;
             var listings = await listingService.SearchListings(SearchQuery);
-
+            //if (listings == null) return;
             Listings.Clear();
             foreach (var listing in listings)
                 Listings.Add(listing);
         }
         catch (Exception ex)
         {
-            await HandleExceptionAsync(new Exception(ex.Message), "Hiba a hirdetések lekérése során:");
+            await exceptionHandlerUtil.HandleExceptionAsync(new Exception(ex.Message), "Hiba a hirdetések lekérése során:");
         }
         finally
         {
@@ -62,6 +64,8 @@ public partial class ListingsViewModel : BaseViewModel
             IsRefreshing = false;
         }
     }
+
+    //TODO: implement filters
 
 
 

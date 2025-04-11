@@ -3,6 +3,7 @@ global using CommunityToolkit.Mvvm.Input;
 global using FreyaMarketplace.Model;
 global using FreyaMarketplace.ViewModel;
 global using FreyaMarketplace.Services;
+global using FreyaMarketplace.Utils;
 global using System.Collections.ObjectModel;
 global using System.ComponentModel;
 global using System.Diagnostics;

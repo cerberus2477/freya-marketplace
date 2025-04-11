@@ -7,7 +7,8 @@ namespace FreyaMarketplace.ViewModel;
 
 public partial class AuthViewModel : BaseViewModel
 {
-    AuthenticationService authService;
+    private readonly AuthenticationService authService;
+    private readonly ExceptionHandlerUtil exceptionHandlerUtil;
 
     [ObservableProperty] private string userEmail;
     [ObservableProperty] private string userPassword;
@@ -20,9 +21,10 @@ public partial class AuthViewModel : BaseViewModel
     public bool IsPasswordErrorVisible => !string.IsNullOrEmpty(PasswordError);
 
 
-    public AuthViewModel(AuthenticationService authService)
+    public AuthViewModel(AuthenticationService authService, ExceptionHandlerUtil exceptionHandlerUtil)
     {
         this.authService = authService;
+        this.exceptionHandlerUtil = exceptionHandlerUtil;
     }
 
 
@@ -37,8 +39,8 @@ public partial class AuthViewModel : BaseViewModel
             PasswordError = null;
 
             var result = await authService.LoginAsync(UserEmail, UserPassword);
-            Debug.WriteLine($"Received API Response: {JsonSerializer.Serialize<LoginApiResponse>(result)}");
-            Debug.WriteLine($"\tReceived Data: {result.Data} {JsonSerializer.Serialize(result.Data)}");
+            //Debug.WriteLine($"Received API Response: {JsonSerializer.Serialize<LoginApiResponse>(result)}");
+            //Debug.WriteLine($"\tReceived Data: {result.Data} {JsonSerializer.Serialize(result.Data)}");
             if (result == null) return;
             if (result.Data is LoginSuccessData successData)
             {
@@ -57,44 +59,32 @@ public partial class AuthViewModel : BaseViewModel
             }
             else if (result.Data is EmptyLoginData)
             {
-                await Shell.Current.DisplayAlert("Bejelentkezési hiba", result.Message, "OK");
+                await exceptionHandlerUtil.HandleExceptionAsync(new Exception(result.Message), "Sikertelen bejelentkezés:");
             }
             else if (result.Data is ValidationErrorData errorData)
             {
-                Debug.WriteLine($"Validation Errors: {JsonSerializer.Serialize(errorData.Errors)}");
-
-
-
-                // Handle validation errors
-                //if (errorResponse.Data.Errors.ContainsKey("email"))
-                //    EmailError = string.Join("\n", errorResponse.Data.Errors["email"]);
-                //if (errorResponse.Data.Errors.ContainsKey("password"))
-                //    PasswordError = string.Join("\n", errorResponse.Data.Errors["password"]);
 
                 if (errorData.Errors.ContainsKey("email"))
                 {
                     EmailError = string.Join("\n", errorData.Errors["email"]);
-                    Debug.WriteLine($"Email Error: {EmailError}");
-                    OnPropertyChanged(nameof(IsEmailErrorVisible)); // Ensure UI updates
-
+                    OnPropertyChanged(nameof(IsEmailErrorVisible)); 
                 }
 
                 if (errorData.Errors.ContainsKey("password"))
                 {
                     PasswordError = string.Join("\n", errorData.Errors["password"]);
-                    Debug.WriteLine($"Password Error: {PasswordError}");
-                    OnPropertyChanged(nameof(IsPasswordErrorVisible)); // Ensure UI updates
+                    OnPropertyChanged(nameof(IsPasswordErrorVisible)); 
 
                 }
             }
             else
             {
-                await HandleExceptionAsync(new Exception(result.Message), "Hiba a bejelentkezés során:");
+                await exceptionHandlerUtil.HandleExceptionAsync(new Exception(result.Message), "Hiba a bejelentkezés során:");
             }
         }
         catch (Exception ex)
         {
-            await HandleExceptionAsync(ex, "Hiba a bejelentkezés során:");
+            await exceptionHandlerUtil.HandleExceptionAsync(ex, "Hiba a bejelentkezés során:");
         }
         finally
         {
