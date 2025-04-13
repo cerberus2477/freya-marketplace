@@ -15,21 +15,31 @@ public class ListingService
 
     public async Task<List<Listing>> SearchListings(string query = "")
     {
-        var url = $"{AppSettings.ApiBaseUrl}listings/search?all";
+        //constructing the url
+        var url = $"{AppSettings.ApiBaseUrl}listings/search?pageSize=all";
+
         if (!string.IsNullOrWhiteSpace(query))
         {
             url += $"&q={Uri.EscapeDataString(query)}";
         }
+        //TODO: implement filters. (q will be rewritten probably, because it is handled in a similar way to filters. probably a loop of some kind
 
         try
         {
             var response = await httpClient.GetAsync(url);
-            var responseText = await response.Content.ReadFromJsonAsync(ApiResponse);
+            var responseText = await response.Content.ReadFromJsonAsync(ApiResponse.Defaul);
             Debug.WriteLine($"\n\nGET Listings request sent to API.\nRaw response: {responseText}");
 
-
-            if (!response.IsSuccessStatusCode)
+            var ApiResponse = JsonSerializer.Deserialize<ApiResponse>(responseText);
+            if (response.IsSuccessStatusCode)
             {
+                //this would be correct if the response was a list of listings, but we have the list of listings wrapped in a "data" field.
+                listings = await response.Content.ReadFromJsonAsync(ListingContext.Default.ListListing);
+                //i think the response should be decoded into an apiresponse object, which has a status, a message and a data field. 
+                //after that we extract the listings.
+            }
+
+            else { 
                 await exceptionHandlerUtil.HandleExceptionAsync(
                     new Exception($"API válasz: {response.StatusCode}"),
                     "Nem sikerült lekérni a hirdetéseket.");
@@ -53,23 +63,7 @@ public class ListingService
             
         }
 
-        //if (response.IsSuccessStatusCode)
-        //{
-            //TODO: make costum parser or just rewrite this 
-            //var apiResponse = await response.Content.ReadFromJsonAsync<LoginApiResponse<List<Listing>>>();
-
-            //if (apiResponse?.Status == 200)
-            //{
-            //    listings = apiResponse.Data;
-
-            //}
-            //else
-            //{
-            //    // If the status is not 200, display the error message
-            //    Console.WriteLine($"Error: {apiResponse?.Message}");
-
-            //}
-        //}
+        
        
     }
 
