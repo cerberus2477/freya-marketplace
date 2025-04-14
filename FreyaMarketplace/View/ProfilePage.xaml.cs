@@ -17,17 +17,19 @@ namespace FreyaMarketplace.View
 
         private void LoadUserData()
         {
-            // Simulating loading user data (Replace this with actual API call)
-            Username = Preferences.Get("Username", "admin");
-            Email = Preferences.Get("Email", "nacsalevi@gmail.com");
-            City = Preferences.Get("City", "bottyan");
-            Birthdate = Preferences.Get("Birthdate", "1972-05-30");
+            // Fetching the User object
+            string userJson = Preferences.Get("current_user", null);
+            if (userJson != null)
+            {
+                User user = JsonSerializer.Deserialize<User>(userJson);
 
-            // Bind to UI
-            UsernameEntry.Text = Username;
-            EmailEntry.Text = Email;
-            CityEntry.Text = City;
-            BirthdateEntry.Text = Birthdate;
+                // Bind to UI
+                UsernameEntry.Text = user.Username;
+                EmailEntry.Text = user.Email;
+                CityEntry.Text = user.City;
+                BirthdateEntry.Text = user.Birthdate;
+                DescriptionEntry.Text = user.Description;
+            }
         }
 
         private void EditProfile_Clicked(object sender, EventArgs e)
@@ -37,6 +39,7 @@ namespace FreyaMarketplace.View
             EmailEntry.IsEnabled = true;
             CityEntry.IsEnabled = true;
             BirthdateEntry.IsEnabled = true;
+            DescriptionEntry.IsEnabled = true;
 
             // Show Save button, hide Edit button
             EditButton.IsVisible = false;
@@ -45,17 +48,23 @@ namespace FreyaMarketplace.View
 
         private void SaveProfile_Clicked(object sender, EventArgs e)
         {
-            // Save changes (Replace with actual API call)
-            Preferences.Set("Username", UsernameEntry.Text);
-            Preferences.Set("Email", EmailEntry.Text);
-            Preferences.Set("City", CityEntry.Text);
-            Preferences.Set("Birthdate", BirthdateEntry.Text);
+            // Save changes (TODO: Add actual API call)
+            User user = new User();
+            user.Email = EmailEntry.Text;
+            user.Username = UsernameEntry.Text;
+            user.City = CityEntry.Text;
+            user.Description = DescriptionEntry.Text;
+            user.Birthdate = BirthdateEntry.Text;
+
+            string updatedJson = JsonSerializer.Serialize(user);
+            Preferences.Set("current_user", updatedJson);
 
             // Disable editing
             UsernameEntry.IsEnabled = false;
             EmailEntry.IsEnabled = false;
             CityEntry.IsEnabled = false;
             BirthdateEntry.IsEnabled = false;
+            DescriptionEntry.IsEnabled = false;
 
             // Show Edit button, hide Save button
             EditButton.IsVisible = true;
@@ -64,7 +73,25 @@ namespace FreyaMarketplace.View
 
         private async void Logout_Clicked(object sender, EventArgs e)
         {
-            Preferences.Set("IsLoggedIn", false);
+            try
+            {
+                //removing token
+                SecureStorage.Remove("auth_token");
+
+                //removing user data
+                Preferences.Remove("current_user");
+
+                //removing isloggedin
+                Preferences.Set("IsLoggedIn", false);
+
+                await Shell.Current.DisplayAlert("Sikeres kilépés", "", "OK");
+            }
+            catch (Exception ex)
+            {
+                // Log or handle errors
+                Debug.WriteLine($"Logout failed: {ex.Message}");
+                throw; // Or handle gracefully
+            }
 
             //TODO: make sure to (clear the navigation stack), hide the nav
             await Shell.Current.GoToAsync("LoginPage");

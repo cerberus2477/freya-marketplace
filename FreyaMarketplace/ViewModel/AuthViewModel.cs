@@ -49,15 +49,17 @@ public partial class AuthViewModel : BaseViewModel
             if (result.Data is LoginSuccessData successData)
             {
                 await SecureStorage.SetAsync("auth_token", successData.Token);
+
                 //TODO: actually store user, at least token and id?
                 //var retrievedToken = await SecureStorage.GetAsync("auth_token");
                 //Debug.WriteLine($"Stored token: {retrievedToken}");
                 // Store user information
+
                 User = successData.User;
-                Debug.Write($"User: {JsonSerializer.Serialize(User)}");
-                Preferences.Set("user_id", User.Id);
-                Preferences.Set("username", User.Username);
-                Preferences.Set("UserEmail", User.Email);
+                Debug.Write($"User: {JsonSerializer.Serialize(User)}\n");
+
+                string userJson = JsonSerializer.Serialize(User);
+                Preferences.Set("current_user", userJson);
 
                 await Shell.Current.GoToAsync("///HomePage");
             }
@@ -156,6 +158,5 @@ public partial class AuthViewModel : BaseViewModel
             IsBusy = false;
         }
     }
-
 
 }
