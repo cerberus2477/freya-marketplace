@@ -1,6 +1,4 @@
 ﻿using Microsoft.Extensions.Logging;
-using FreyaMarketplace.Services;
-using FreyaMarketplace.View;
 
 namespace FreyaMarketplace;
 

@@ -5,20 +5,14 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace FreyaMarketplace.Model.ApiResponse
+namespace FreyaMarketplace.Model
 {
     internal class ListingsApiResponse : IApiResponse
     {
         public int Status { get; set; }
         public string Message { get; set; }
 
-        public ListingsData Data { get; set; }
+        public List<Listing> Data { get; set; }
 
     }
-
-    public class ListingsData : IData
-    {
-        public List<Listing> listingList;
-    }
-
 }

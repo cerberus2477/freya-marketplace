@@ -35,7 +35,7 @@
         <RefreshView
             Grid.Row="2"
             Grid.ColumnSpan="2"
-            Command="{Binding GetListingsCommand}"
+            Command="{Binding SearchListingsCommand}"
             IsRefreshing="{Binding IsRefreshing}"
             Style="{StaticResource ButtonOutline}"
             >
@@ -43,7 +43,9 @@
             <ContentView>
                 <CollectionView
                     ItemsSource="{Binding Listings}"
-                    SelectionMode="None">
+                    SelectionMode="None"
+                    RemainingItemsThreshold="1"
+                    RemainingItemsThresholdReachedCommand="{Binding GetNextListingsCommand}">
 
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout Orientation="Vertical" Span="2" />
@@ -93,17 +95,21 @@
             </ContentView>
         </RefreshView>
 
-        <ActivityIndicator IsVisible="{Binding IsBusy}"
-                   IsRunning="{Binding IsBusy}"
-                   HorizontalOptions="Fill"
-                   VerticalOptions="Center"
-                   Color="{StaticResource Primary}"
-                   Grid.RowSpan="2"
-                   Grid.ColumnSpan="2"/>
+
+        <!--loading icon for the initial load. after that the refreshview handles loading-->
+        <Grid IsVisible="{Binding IsBusy}" BackgroundColor="#80000000">
+            <ActivityIndicator 
+          IsRunning="{Binding IsBusy}" 
+          VerticalOptions="Center" 
+          HorizontalOptions="Center" 
+          Color="{StaticResource Primary}" />
+        </Grid>
     </Grid>
     
     <!--TODO: if there are no listing (=empty collectionview, display something similar to this-->
     <!--erre van beépített logika, hogy ha üres akkor ez legyen benne-->
+    <!--saját fptó legyen, a törött növény-->
+    
     <!--<VerticalStackLayout
             IsVisible="{Binding NoListingsFound}"
             VerticalOptions="Center"

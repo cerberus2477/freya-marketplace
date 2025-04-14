@@ -8,8 +8,8 @@ namespace FreyaMarketplace.Services;
 
 public class AuthenticationService
 {
-    HttpClient httpClient;
-    private readonly JsonSerializerOptions jsonOptions;
+   HttpClient httpClient;
+    JsonSerializerOptions jsonOptions;
 
     public AuthenticationService()
     {
