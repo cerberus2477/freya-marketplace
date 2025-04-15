@@ -16,8 +16,12 @@ public class Listing
     [JsonPropertyName("description")]
     public string Description { get; set; }
 
+
     [JsonPropertyName("media")]
     public List<string> Media { get; set; } = new();
+
+    //get the first image of the image list to display as the thumnail (when viewing listings in a list view).
+    public string Thumbnail => Media?.FirstOrDefault();
 
     [JsonPropertyName("price")]
     public decimal Price { get; set; }
