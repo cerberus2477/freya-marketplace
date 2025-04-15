@@ -4,12 +4,17 @@ namespace FreyaMarketplace.ViewModel;
 
 public partial class ListingsViewModel : BaseViewModel
 {
-    public ObservableCollection<Listing> Listings { get; } = new();
+    List<Listing> allListings = new();
+    int PageSize = 20;
+
+    //public ObservableCollection<Listing> Listings { get; } = new();
+    public ObservableRangeCollection<Listing> Listings { get; set; } = new ObservableRangeCollection<Listing>();
     private readonly ListingService listingService;
     private readonly ExceptionHandlerUtil exceptionHandlerUtil;
 
     [ObservableProperty]
     bool isRefreshing;
+
     public ListingsViewModel(ListingService listingService, ExceptionHandlerUtil exceptionHandlerUtil)
     {
         Title = "Listings";
@@ -44,20 +49,26 @@ public partial class ListingsViewModel : BaseViewModel
     {
         if (IsBusy)
             return;
-
         try
         {
             IsBusy = true;
-            var listings = await listingService.SearchListings(SearchQuery);
-            //if (listings == null) return;
-            Listings.Clear();
-            foreach (var listing in listings)
-                Listings.Add(listing);
+
+            allListings = await listingService.SearchListings(SearchQuery);
+
+            if (allListings == null) return;
+
+            //Listings.Clear();
+            //foreach (var listing in listings)
+            //    Listings.Add(listing);
+
+            Listings.AddRange(allListings.Take(PageSize));
+
         }
         catch (Exception ex)
         {
-            await exceptionHandlerUtil.HandleExceptionAsync(new Exception(ex.Message), "Hiba a hirdetések lekérése során:");
+            await exceptionHandlerUtil.HandleExceptionAsync(ex, "Hiba adódott a hirdetések lekérése során.");
         }
+
         finally
         {
             IsBusy = false;
@@ -68,5 +79,27 @@ public partial class ListingsViewModel : BaseViewModel
     //TODO: implement filters
 
 
+    [RelayCommand]
+    public async Task GetNextListings()
+    {
+        if (IsBusy)
+            return;
+        try
+        {
+            if (Listings.Count > 0)
+            {
+                Listings.AddRange(allListings.Skip(Listings.Count).Take(PageSize));
+            }
+        }
+        catch (Exception ex)
+        {
+            await exceptionHandlerUtil.HandleExceptionAsync(ex, "Hiba adódott a következő hirdetések lekérése során.");
+        }
+        finally
+        {
+            IsBusy = false;
+            IsRefreshing = false;
+        }
+    }
 
 }

@@ -35,7 +35,7 @@
         <RefreshView
             Grid.Row="2"
             Grid.ColumnSpan="2"
-            Command="{Binding GetListingsCommand}"
+            Command="{Binding SearchListingsCommand}"
             IsRefreshing="{Binding IsRefreshing}"
             Style="{StaticResource ButtonOutline}"
             >
@@ -43,7 +43,9 @@
             <ContentView>
                 <CollectionView
                     ItemsSource="{Binding Listings}"
-                    SelectionMode="None">
+                    SelectionMode="None"
+                    RemainingItemsThreshold="1"
+                    RemainingItemsThresholdReachedCommand="{Binding GetNextListingsCommand}">
 
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout Orientation="Vertical" Span="2" />
@@ -75,12 +77,13 @@
                                             Grid.Row="1"
                                             Padding="10">
                                             <Label Style="{StaticResource LargeLabel}" Text="{Binding Title}" />
-                                            <Label Style="{StaticResource MediumLabel}" Text="{Binding Plant}" />
-                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding Type}" />
-                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding Stage}" />
-                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding User}" />
+                                            <Label Style="{StaticResource MediumLabel}" Text="{Binding PlantName}" />
+                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding TypeName}" />
+                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding StageName}" />
+                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding UserName}" /> 
+                                            <!--TODO: implement other users profile-->
                                             <Label Style="{StaticResource SmallLabel}" Text="{Binding Price, StringFormat='₤{0:F2}'}" />
-                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding CreatedAt, StringFormat='{0:yyyy-MM-dd}'}" />
+                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding CreatedAtFormatted}" />
                                         </VerticalStackLayout>
                                     </VerticalStackLayout>
                                 </Border>
@@ -92,12 +95,34 @@
             </ContentView>
         </RefreshView>
 
-        <ActivityIndicator IsVisible="{Binding IsBusy}"
-                   IsRunning="{Binding IsBusy}"
-                   HorizontalOptions="Fill"
-                   VerticalOptions="Center"
-                   Color="{StaticResource Primary}"
-                   Grid.RowSpan="2"
-                   Grid.ColumnSpan="2"/>
+
+        <!--loading icon for the initial load. after that the refreshview handles loading-->
+        <Grid IsVisible="{Binding IsBusy}" BackgroundColor="#80000000">
+            <ActivityIndicator 
+          IsRunning="{Binding IsBusy}" 
+          VerticalOptions="Center" 
+          HorizontalOptions="Center" 
+          Color="{StaticResource Primary}" />
+        </Grid>
     </Grid>
+    
+    <!--TODO: if there are no listing (=empty collectionview, display something similar to this-->
+    <!--erre van beépített logika, hogy ha üres akkor ez legyen benne-->
+    <!--saját fptó legyen, a törött növény-->
+    
+    <!--<VerticalStackLayout
+            IsVisible="{Binding NoListingsFound}"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            Spacing="15">
+        <Image Source="dotnet_bot.png"
+                   WidthRequest="120"
+                   HeightRequest="120"
+                   HorizontalOptions="Center"/>
+        <Label Text="Nem található a keresésnek megfelelő hirdetés."
+                   FontAttributes="Bold"
+                   FontSize="Medium"
+                   TextColor="Gray"
+                   HorizontalTextAlignment="Center"/>
+    </VerticalStackLayout>-->
 </ContentPage>
