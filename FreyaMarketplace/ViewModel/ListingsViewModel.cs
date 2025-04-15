@@ -5,15 +5,24 @@ namespace FreyaMarketplace.ViewModel;
 public partial class ListingsViewModel : BaseViewModel
 {
     List<Listing> allListings = new();
-    int PageSize = 20;
+    int PageSize = 4;
 
-    //public ObservableCollection<Listing> Listings { get; } = new();
     public ObservableRangeCollection<Listing> Listings { get; set; } = new ObservableRangeCollection<Listing>();
     private readonly ListingService listingService;
     private readonly ExceptionHandlerUtil exceptionHandlerUtil;
 
     [ObservableProperty]
     bool isRefreshing;
+    //TODO: isbusy kell??
+
+    [ObservableProperty]
+    private string searchQuery = string.Empty;
+
+    //when the searchtext changes, send a get request to the api to get the matching listings. load the first page into the UI.
+    partial void OnSearchQueryChanged(string value)
+    {
+        SearchListingsCommand.Execute(null);
+    }
 
     public ListingsViewModel(ListingService listingService, ExceptionHandlerUtil exceptionHandlerUtil)
     {
@@ -41,14 +50,11 @@ public partial class ListingsViewModel : BaseViewModel
     }
 
 
-    [ObservableProperty]
-    private string searchQuery = string.Empty;
-
     [RelayCommand]
     async Task SearchListingsAsync()
     {
-        if (IsBusy)
-            return;
+        if (IsBusy) return;
+
         try
         {
             IsBusy = true;
@@ -57,18 +63,16 @@ public partial class ListingsViewModel : BaseViewModel
 
             if (allListings == null) return;
 
-            //Listings.Clear();
-            //foreach (var listing in listings)
-            //    Listings.Add(listing);
+            Listings.Clear();
 
-            Listings.AddRange(allListings.Take(PageSize));
-
+            // Add first page manually
+            Listings.AddRange(allListings.Take(PageSize).ToList());
+            Debug.WriteLine($"📄 Loaded first page into Listings.");
         }
         catch (Exception ex)
         {
             await exceptionHandlerUtil.HandleExceptionAsync(ex, "Hiba adódott a hirdetések lekérése során.");
         }
-
         finally
         {
             IsBusy = false;
@@ -80,26 +84,28 @@ public partial class ListingsViewModel : BaseViewModel
 
 
     [RelayCommand]
-    public async Task GetNextListings()
+    async Task GetNextListingsAsync()
     {
-        if (IsBusy)
-            return;
-        try
+        if (IsBusy) return;
+      
+        IsBusy = true;
+        int remaining = allListings.Count - Listings.Count;
+
+        //if first page has been loaded and there are more listings, load next page.
+        if (remaining > 0 && Listings.Count > 0)
         {
-            if (Listings.Count > 0)
-            {
-                Listings.AddRange(allListings.Skip(Listings.Count).Take(PageSize));
-            }
+            var nextPage = allListings.Skip(Listings.Count).Take(PageSize).ToList();
+            Listings.AddRange(nextPage);
+            Debug.WriteLine($"✅ Loaded next page of listings ({nextPage.Count} items). Total now: {Listings.Count} Remaining: {remaining}");
         }
-        catch (Exception ex)
+        else
         {
-            await exceptionHandlerUtil.HandleExceptionAsync(ex, "Hiba adódott a következő hirdetések lekérése során.");
+            Debug.WriteLine("✅ All listings already loaded.");
         }
-        finally
-        {
-            IsBusy = false;
-            IsRefreshing = false;
-        }
+ 
+        IsBusy = false;
+        IsRefreshing = false;
+
     }
 
 }

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 //SOURCE: https://dev.to/vhugogarcia/observablerangecollection-in-net-maui-k9j
+//modified AddArrangeCore from line 145
 namespace FreyaMarketplace.Extensions;
 
 /// <summary> 
@@ -141,16 +142,28 @@ public class ObservableRangeCollection<T> : ObservableCollection<T>
         RaiseChangeNotificationEvents(action: NotifyCollectionChangedAction.Reset);
     }
 
+    //we modified this funtion to add elements in correct order (reverse of original)
+    //more verbose code instead of .Reverse() (LinQ) to avoid creating garbage and hurting performance when called frequently (paginated UI).
     private bool AddArrangeCore(IEnumerable<T> collection)
     {
         var itemAdded = false;
-        foreach (var item in collection)
+        //foreach (var item in collection)
+        //{
+        //    Items.Add(item);
+        //    itemAdded = true;
+        //}
+        //return itemAdded;
+
+        var list = collection as IList<T> ?? new List<T>(collection);
+        for (int i = list.Count - 1; i >= 0; i--)
         {
-            Items.Add(item);
+            Items.Add(list[i]);
             itemAdded = true;
         }
+
         return itemAdded;
     }
+
 
     private void RaiseChangeNotificationEvents(NotifyCollectionChangedAction action, List<T>? changedItems = null, int startingIndex = -1)
     {
