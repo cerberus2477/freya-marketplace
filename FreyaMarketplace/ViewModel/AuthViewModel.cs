@@ -50,7 +50,6 @@ public partial class AuthViewModel : BaseViewModel
             {
                 await SecureStorage.SetAsync("auth_token", successData.Token);
 
-                //TODO: actually store user, at least token and id?
                 //var retrievedToken = await SecureStorage.GetAsync("auth_token");
                 //Debug.WriteLine($"Stored token: {retrievedToken}");
                 // Store user information

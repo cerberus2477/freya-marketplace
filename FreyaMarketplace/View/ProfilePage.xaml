@@ -9,28 +9,45 @@
 
         <!-- Username -->
         <Label Text="Felhasználónév:" FontSize="16"/>
-        <Entry x:Name="UsernameEntry" Text="{Binding Username}" IsEnabled="False"/>
+        <Entry x:Name="UsernameEntry" Text="{Binding ProfileUsername}" IsEnabled="False"/>
+        <Label Text="{Binding ProfileUsernameError}" 
+            TextColor="Red" 
+            IsVisible="{Binding IsProfileUsernameErrorVisible}" />
 
         <!-- Email -->
         <Label Text="Email:" FontSize="16"/>
-        <Entry x:Name="EmailEntry" Text="{Binding Email}" IsEnabled="False"/>
+        <Entry x:Name="EmailEntry" Text="{Binding ProfileEmail}" IsEnabled="False"/>
+        <Label Text="{Binding ProfileEmailError}" 
+            TextColor="Red" 
+            IsVisible="{Binding IsProfileEmailErrorVisible}" />
 
         <!-- City -->
         <Label Text="Település:" FontSize="16"/>
-        <Entry x:Name="CityEntry" Text="{Binding City}" IsEnabled="False"/>
+        <Entry x:Name="CityEntry" Text="{Binding ProfileCity}" IsEnabled="False"/>
+        <Label Text="{Binding ProfileCityError}" 
+            TextColor="Red" 
+            IsVisible="{Binding IsProfileCityErrorVisible}" />
 
         <!-- Birthdate -->
         <Label Text="Születési dátum:" FontSize="16"/>
-        <Entry x:Name="BirthdateEntry" Text="{Binding Birthdate}" IsEnabled="False"/>
-        
+        <DatePicker x:Name="BirthdateEntry" Date="{Binding ProfileBirthdate, Converter={StaticResource StringToDateConverter}}"
+                Format="yyyy-mm-dd"
+                IsEnabled="False"/>
+        <Label Text="{Binding ProfileBirthdateError}" 
+            TextColor="Red" 
+            IsVisible="{Binding IsProfileBirthdateErrorVisible}" />
+
         <!--Description-->
         <Label Text="Leírás:" FontSize="16"/>
-        <Entry x:Name="DescriptionEntry" Text="{Binding Description}" IsEnabled="False"/>
+        <Entry x:Name="DescriptionEntry" Text="{Binding ProfileDescription}" IsEnabled="False"/>
 
         <!-- Edit & Save Buttons -->
         <Button x:Name="EditButton" Text="Módosítás" Clicked="EditProfile_Clicked" Margin="10"/>
-        <Button x:Name="SaveButton" Text="Mentés - Not implemented" Clicked="SaveProfile_Clicked" IsVisible="False" Margin="10"/>
+        <Button x:Name="SaveButton" Text="Mentés - Not implemented" Clicked="SaveProfile_Clicked" Command="{Binding SaveProfileCommand}" IsVisible="False" Margin="10"/>
+        
 
+        
+        
         <!-- Other Actions -->
         <Label Text="Not implemented yet" FontSize="16"/>
         <Button Text="Saját növényeim" Margin="10"/>
