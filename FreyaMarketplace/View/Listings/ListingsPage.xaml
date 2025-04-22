@@ -65,7 +65,7 @@
                                     </Border.GestureRecognizers>
                                     <VerticalStackLayout>
                                         <!-- Image (if available) -->
-                                        <Image Aspect="AspectFill" Source="{Binding Media}"
+                                        <Image Aspect="AspectFill" Source="{Binding Thumbnail}"
                                            WidthRequest="150"
                                            HeightRequest="150"
                                            BackgroundColor="LightGray"
@@ -82,7 +82,8 @@
                                             <Label Style="{StaticResource SmallLabel}" Text="{Binding StageName}" />
                                             <Label Style="{StaticResource SmallLabel}" Text="{Binding UserName}" /> 
                                             <!--TODO: implement other users profile-->
-                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding Price, StringFormat='₤{0:F2}'}" />
+                                            <!--<Label Style="{StaticResource SmallLabel}" Text="{Binding Price, StringFormat='{0:F2}Ft'}" />-->
+                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding Price, StringFormat='{0:N0} Ft'}" />
                                             <Label Style="{StaticResource SmallLabel}" Text="{Binding CreatedAtFormatted}" />
                                         </VerticalStackLayout>
                                     </VerticalStackLayout>
