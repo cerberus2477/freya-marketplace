@@ -11,7 +11,7 @@ namespace FreyaMarketplace.View
             BindingContext = viewModel;
         }
 
-
+        //todo: ezek jó helyen vannak itt vagy menjenek a viewmodelbe?
         private void EditProfile_Clicked(object sender, EventArgs e)
         {
             // Enable editing
@@ -42,6 +42,8 @@ namespace FreyaMarketplace.View
             SaveButton.IsVisible = false;
         }
 
+        //todo: use usersessionservice to log out.
+        //should this be here or in the viewmodel?
         private async void Logout_Clicked(object sender, EventArgs e)
         {
             try
@@ -69,6 +71,13 @@ namespace FreyaMarketplace.View
 
             
             
+        }
+
+
+        private async void MyListings_Clicked(object sender, EventArgs e)
+        {
+            // Navigate to MyListingsPage
+            await Shell.Current.GoToAsync("MyListingsPage");
         }
     }
 }

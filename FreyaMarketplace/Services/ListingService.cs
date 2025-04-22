@@ -24,11 +24,9 @@ public class ListingService
 
     List<Listing> listings;
 
-    public async Task<List<Listing>> SearchListings(string query = "")
+    //TODO: option to get paginated results, e.g only first 4 listings (homepage and profilepage sneak peak of userslistings, or e.g. same city listings)
+    public async Task<List<Listing>> SearchListings(string query = "", string username = "")
     {
-        //TODO: mindig csak hozzáadódik az előzőkhöz. először nullázni kéne ig
-        //if (monkeyList?.Count > 0)
-        //    return monkeyList;
 
         //constructing the url
         var url = $"{AppSettings.ApiBaseUrl}listings?pageSize=all";
@@ -36,6 +34,10 @@ public class ListingService
         if (!string.IsNullOrWhiteSpace(query))
         {
             url += $"&q={Uri.EscapeDataString(query)}";
+        }
+        if (!string.IsNullOrWhiteSpace(username))
+        {
+            url += $"&user={Uri.EscapeDataString(username)}";
         }
         //TODO: implement filters. (q will be rewritten probably, because it is handled in a similar way to filters. probably a loop of some kind
 

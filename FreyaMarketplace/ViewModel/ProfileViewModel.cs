@@ -10,6 +10,7 @@ public partial class ProfileViewModel : BaseViewModel
 {
     private readonly ProfileService profileService;
     private readonly ExceptionHandlerUtil exceptionHandlerUtil;
+    private readonly UserSessionService userSessionService;
 
     [ObservableProperty] private string profileUsername;
     [ObservableProperty] private string profileEmail;
@@ -23,24 +24,22 @@ public partial class ProfileViewModel : BaseViewModel
     [ObservableProperty][NotifyPropertyChangedFor(nameof(IsProfileCityErrorVisible))] private string profileCityError;
     [ObservableProperty][NotifyPropertyChangedFor(nameof(IsProfileBirthdateErrorVisible))] private string profileBirthdateError;
 
-    [ObservableProperty] private User user;
-
     public bool IsProfileUsernameErrorVisible => !string.IsNullOrEmpty(ProfileUsernameError);
     public bool IsProfileEmailErrorVisible => !string.IsNullOrEmpty(ProfileEmailError);
     public bool IsProfileCityErrorVisible => !string.IsNullOrEmpty(ProfileCityError);
     public bool IsProfileBirthdateErrorVisible => !string.IsNullOrEmpty(ProfileBirthdateError);
 
-    public ProfileViewModel(ProfileService profileService, ExceptionHandlerUtil exceptionHandlerUtil)
+    public ProfileViewModel(ProfileService profileService, ExceptionHandlerUtil exceptionHandlerUtil, UserSessionService userSessionService)
     {
         this.profileService = profileService;
         this.exceptionHandlerUtil = exceptionHandlerUtil;
-
-        User savedUser = JsonSerializer.Deserialize<User>(Preferences.Get("current_user", null));
+        this.userSessionService = userSessionService;
+        User savedUser = userSessionService.GetCurrentUser();
         ProfileUsername = savedUser.Username;
         ProfileEmail = savedUser.Email;
         ProfileCity = savedUser.City;
         ProfileBirthdate = savedUser.Birthdate;
-        ProfileDescription = savedUser.Description;
+        ProfileDescription = savedUser.Description; 
     }
 
     [RelayCommand]
@@ -59,14 +58,11 @@ public partial class ProfileViewModel : BaseViewModel
             if (result == null) return;
             if (result.Data is ProfileSuccessData successData)
             {
-                User = successData.User;
-                Debug.Write($"User: {JsonSerializer.Serialize(User)}\n");
-                string newDataJson = JsonSerializer.Serialize(User);
-                Preferences.Set("current_user", newDataJson);
+                userSessionService.SetCurrentUser(successData.User);
             }
             else if (result.Data is EmptyProfileData)
             {
-                await exceptionHandlerUtil.HandleExceptionAsync(new Exception(result.Message), "asdasd");
+                await exceptionHandlerUtil.HandleExceptionAsync(new Exception(result.Message), "Hiba adódott profiladatok mentése során.");
             }
             else if (result.Data is ProfileValidationErrorData errorData)
             {
@@ -100,12 +96,12 @@ public partial class ProfileViewModel : BaseViewModel
             }
             else
             {
-                await exceptionHandlerUtil.HandleExceptionAsync(new Exception(result.Message), "Hiba adódott mentés során.");
+                await exceptionHandlerUtil.HandleExceptionAsync(new Exception(result.Message), "Hiba adódott profiladatok mentése során.");
             }
         }
         catch (Exception ex)
         {
-            await exceptionHandlerUtil.HandleExceptionAsync(ex, "Hiba adódott a mentés során.");
+            await exceptionHandlerUtil.HandleExceptionAsync(ex, "Hiba adódott a profiladatok mentése során.");
         }
         finally
         {

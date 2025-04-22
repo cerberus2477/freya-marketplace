@@ -43,16 +43,17 @@
 
         <!-- Edit & Save Buttons -->
         <Button x:Name="EditButton" Text="Módosítás" Clicked="EditProfile_Clicked" Margin="10"/>
-        <Button x:Name="SaveButton" Text="Mentés - Not implemented" Clicked="SaveProfile_Clicked" Command="{Binding SaveProfileCommand}" IsVisible="False" Margin="10"/>
-        
+        <Button x:Name="SaveButton" Text="Mentés" Clicked="SaveProfile_Clicked" Command="{Binding SaveProfileCommand}" IsVisible="False" Margin="10"/>
+<!--TODO: két külön parancs legyen? egy a viewben ami kikapcsolja a mezők módosítását, egy a viewmodelben ami menti az apiba az adatokat.-->
 
-        
-        
+        <Button Text="Saját hirdetéseim"
+            Clicked="MyListings_Clicked"
+            HorizontalOptions="Center" />
         <!-- Other Actions -->
         <Label Text="Not implemented yet" FontSize="16"/>
         <Button Text="Saját növényeim" Margin="10"/>
         <Button Text="Kedvencek" Margin="10"/>
-        <Button Text="Saját hirdetéseim" Margin="10"/>
+
 
         <!-- Logout -->
         <Button Text="Kijelentkezés" BackgroundColor="Red" TextColor="White" Clicked="Logout_Clicked" Margin="10"/>

@@ -1,0 +1,117 @@
+﻿using FreyaMarketplace.Services;
+
+namespace FreyaMarketplace.ViewModel;
+
+public partial class MyListingsViewModel : BaseViewModel
+{
+    List<Listing> allListings = new();
+    //pageSize must be more than the size of the screen
+    int PageSize = 4;
+
+    public ObservableRangeCollection<Listing> MyListings { get; set; } = new ObservableRangeCollection<Listing>();
+    private readonly ListingService listingService;
+    private readonly ExceptionHandlerUtil exceptionHandlerUtil;
+    private readonly UserSessionService userSessionService;
+
+    [ObservableProperty]
+    bool isRefreshing;
+    //TODO: isbusy kell??
+
+    [ObservableProperty]
+    private string searchQuery = string.Empty;
+
+    string username;
+
+    //when the searchtext changes, send a get request to the api to get the matching listings. load the first page into the UI.
+    partial void OnSearchQueryChanged(string value)
+    {
+        SearchMyListingsCommand.Execute(null);
+    }
+
+    public MyListingsViewModel(ListingService listingService, ExceptionHandlerUtil exceptionHandlerUtil, UserSessionService userSessionService)
+    {
+        Title = "MyListings";
+        this.listingService = listingService;
+        this.exceptionHandlerUtil = exceptionHandlerUtil;
+        this.userSessionService = userSessionService;
+        username = userSessionService.GetCurrentUsername();
+        //load the listings automatically when navigated to the page
+        Task.Run(SearchMyListingsAsync);
+    }
+
+    //This code checks to see if the selected item is non-null
+    //and then uses the built in Shell Navigation API to push a new page
+    //with the listing as a parameter and then deselects the item.
+
+    [RelayCommand]
+    async Task GoToUpdateListing(Listing listing)
+    {
+        if (listing == null)
+            return;
+
+        await Shell.Current.GoToAsync("UpdateListingPage", true, new Dictionary<string, object>
+        {
+            {"Listing", listing }
+        });
+    }
+
+
+    [RelayCommand]
+    async Task SearchMyListingsAsync()
+    {
+        if (IsBusy) return;
+
+        try
+        {
+            IsBusy = true;
+
+            allListings = await listingService.SearchListings(SearchQuery, username);
+
+            if (allListings == null) return;
+
+            MyListings.Clear();
+
+            // Add first page manually
+            MyListings.AddRange(allListings.Take(PageSize).ToList());
+            Debug.WriteLine($"📄 Loaded first page into MyListings.");
+        }
+        catch (Exception ex)
+        {
+            await exceptionHandlerUtil.HandleExceptionAsync(ex, "Hiba adódott a saját hirdetések lekérése során.");
+        }
+        finally
+        {
+            IsBusy = false;
+            IsRefreshing = false;
+        }
+    }
+
+    //TODO: implement filters
+
+
+    [RelayCommand]
+    async Task GetNextListingsAsync()
+    {
+        if (IsBusy) return;
+      
+        IsBusy = true;
+        int remaining = allListings.Count - MyListings.Count;
+
+        //if first page has been loaded and there are more listings, load next page.
+        if (remaining > 0 && MyListings.Count > 0)
+        {
+            var nextPage = allListings.Skip(MyListings.Count).Take(PageSize).ToList();
+            MyListings.AddRange(nextPage);
+            Debug.WriteLine($"✅ Loaded next page of users listings ({nextPage.Count} items). Total now: {MyListings.Count} Remaining: {remaining}");
+        }
+        else
+        {
+            Debug.WriteLine("✅ Users all listings already loaded.");
+        }
+ 
+        IsBusy = false;
+        IsRefreshing = false;
+
+    }
+
+}

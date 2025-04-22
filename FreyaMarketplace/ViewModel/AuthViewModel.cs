@@ -9,6 +9,7 @@ public partial class AuthViewModel : BaseViewModel
 {
     private readonly AuthenticationService authService;
     private readonly ExceptionHandlerUtil exceptionHandlerUtil;
+    private readonly UserSessionService userSessionService;
 
     [ObservableProperty] private string username;
     [ObservableProperty] private string userEmail;
@@ -20,17 +21,16 @@ public partial class AuthViewModel : BaseViewModel
     [ObservableProperty][NotifyPropertyChangedFor(nameof(IsEmailErrorVisible))] private string emailError;
     [ObservableProperty][NotifyPropertyChangedFor(nameof(IsPasswordErrorVisible))] private string passwordError;
 
-    [ObservableProperty] private User user;
-
     public bool IsUsernameErrorVisible => !string.IsNullOrEmpty(UsernameError);
     public bool IsEmailErrorVisible => !string.IsNullOrEmpty(EmailError);
     public bool IsPasswordErrorVisible => !string.IsNullOrEmpty(PasswordError);
 
 
-    public AuthViewModel(AuthenticationService authService, ExceptionHandlerUtil exceptionHandlerUtil)
+    public AuthViewModel(AuthenticationService authService, ExceptionHandlerUtil exceptionHandlerUtil, UserSessionService userSessionService)
     {
         this.authService = authService;
         this.exceptionHandlerUtil = exceptionHandlerUtil;
+        this.userSessionService = userSessionService;
     }
 
 
@@ -48,17 +48,8 @@ public partial class AuthViewModel : BaseViewModel
             if (result == null) return;
             if (result.Data is LoginSuccessData successData)
             {
-                await SecureStorage.SetAsync("auth_token", successData.Token);
-
-                //var retrievedToken = await SecureStorage.GetAsync("auth_token");
-                //Debug.WriteLine($"Stored token: {retrievedToken}");
-                // Store user information
-
-                User = successData.User;
-                Debug.Write($"User: {JsonSerializer.Serialize(User)}\n");
-
-                string userJson = JsonSerializer.Serialize(User);
-                Preferences.Set("current_user", userJson);
+                await userSessionService.SetAuthTokenAsync(successData.Token);
+                userSessionService.SetCurrentUser(successData.User);
 
                 await Shell.Current.GoToAsync("///HomePage");
             }

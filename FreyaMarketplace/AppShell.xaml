@@ -27,8 +27,10 @@
     <ShellContent Title="Bejelentkezés" Route="LoginPage" ContentTemplate="{DataTemplate startingPages:LoginPage}" IsVisible="False"/>
     <ShellContent Title="Regisztráció" Route="RegisterPage" ContentTemplate="{DataTemplate startingPages:RegisterPage}" IsVisible="False"/>
     <ShellContent Title="Hirdetés részletei" Route="ListingDetailsPage" ContentTemplate="{DataTemplate listings:ListingDetailsPage}" IsVisible="False" />
+    <ShellContent Title="Hirdetés módosítása" Route="UpdateListingPage" ContentTemplate="{DataTemplate listings:UpdateListingPage}" IsVisible="False" />
+    <ShellContent Title="Saját hirdetések" Route="MyListingsPage" ContentTemplate="{DataTemplate listings:MyListingsPage}" IsVisible="False" />
 
- 
+
     <!-- Main Navigation Tabs (hidden when not logged in) -->
     <FlyoutItem x:Name="MainFlyoutItem" Title="Dashboard"  IsVisible="True" FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent

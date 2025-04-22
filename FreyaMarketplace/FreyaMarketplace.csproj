@@ -48,7 +48,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Include="fromdev\devMauiProgram.cs.txt" />
+	  <Compile Remove="fromdev\**" />
+	  <EmbeddedResource Remove="fromdev\**" />
+	  <MauiCss Remove="fromdev\**" />
+	  <MauiXaml Remove="fromdev\**" />
+	  <None Remove="fromdev\**" />
 	</ItemGroup>
 	
 	<ItemGroup>
@@ -59,16 +63,28 @@
 	</ItemGroup>
 	
 	<ItemGroup>
+	  <Compile Update="View\Listings\MyListingsPage.xaml.cs">
+	    <DependentUpon>MyListingsPage.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+	
+	<ItemGroup>
 	  <MauiXaml Update="View\HomePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\Listings\ListingDetailsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="View\Listings\MyListingsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="View\Listings\ListingsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\Listings\NewListingPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\Listings\UpdateListingPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\Listing\GreetingPage.xaml">

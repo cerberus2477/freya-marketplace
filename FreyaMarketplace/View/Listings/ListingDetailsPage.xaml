@@ -44,9 +44,9 @@
                     <Label Style="{StaticResource MediumLabel}" Text="{Binding Listing.Description}" />
                 
                     <!-- TODO: make plant a link to website -->
-                    <Label Style="{StaticResource SmallLabel}" Text="{Binding Listing.Plant, StringFormat='Plant: {0}'}" />
+                    <Label Style="{StaticResource SmallLabel}" Text="{Binding Listing.PlantName, StringFormat='Plant: {0}'}" />
                
-                    <Label Style="{StaticResource SmallLabel}" Text="{Binding Listing.Type, StringFormat='Type: {0}'}" />
+                    <Label Style="{StaticResource SmallLabel}" Text="{Binding Listing.PlantType, StringFormat='Type: {0}'}" />
              
                     <Label Style="{StaticResource SmallLabel}" Text="{Binding Listing.Stage, StringFormat='Stage: {0}'}" />
           

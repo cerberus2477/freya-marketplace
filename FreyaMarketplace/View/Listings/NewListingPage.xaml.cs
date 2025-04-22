@@ -102,13 +102,10 @@ namespace FreyaMarketplace.View.Listings
         }
 
 
-        // TODO: Handle the button click to navigate to MyPlantsPage
         private async void OnMyListingsClicked(object sender, EventArgs e)
         {
-
-            // Navigate to the MyPlantsPage
-            //await Shell.Current.GoToAsync("");
-            await DisplayAlert("Saját hirdetések", "Saját hirdetések - Notimplemented, ki kell listázni õket és módosítani (külön EditListingPage ig)", "OK");
+            // Navigate to MyListingsPage
+            await Shell.Current.GoToAsync("MyListingsPage");
         }
     }
 }
