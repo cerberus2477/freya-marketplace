@@ -30,6 +30,10 @@ public static class MauiProgram
         builder.Services.AddSingleton<ExceptionHandlerUtil>();
         //builder.Services.AddSingleton<ConverterUtil>();
 
+        builder.Services.AddSingleton<ProfileService>();
+        builder.Services.AddTransient<ProfilePage>();
+        builder.Services.AddTransient<ProfileViewModel>();
+
         return builder.Build();
 	}
 }
