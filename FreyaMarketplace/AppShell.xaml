@@ -30,7 +30,6 @@
     <ShellContent Title="Hirdetés módosítása" Route="UpdateListingPage" ContentTemplate="{DataTemplate listings:UpdateListingPage}" IsVisible="False" />
     <ShellContent Title="Saját hirdetések" Route="MyListingsPage" ContentTemplate="{DataTemplate listings:MyListingsPage}" IsVisible="False" />
 
-
     <!-- Main Navigation Tabs (hidden when not logged in) -->
     <FlyoutItem x:Name="MainFlyoutItem" Title="Dashboard"  IsVisible="True" FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent

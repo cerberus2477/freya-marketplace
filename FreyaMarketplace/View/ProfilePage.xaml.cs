@@ -1,14 +1,18 @@
 using Microsoft.Maui.Controls;
 
+
 namespace FreyaMarketplace.View
 {
+    
     public partial class ProfilePage : ContentPage
     {
+        private readonly UserSessionService userSessionService;
 
-        public ProfilePage(ProfileViewModel viewModel)
+        public ProfilePage(ProfileViewModel viewModel, UserSessionService userSessionService)
         {
             InitializeComponent();
             BindingContext = viewModel;
+            this.userSessionService = userSessionService;
         }
 
         //todo: ezek jó helyen vannak itt vagy menjenek a viewmodelbe?
@@ -48,19 +52,11 @@ namespace FreyaMarketplace.View
         {
             try
             {
-                //removing token
-                SecureStorage.Remove("auth_token");
+                
+                userSessionService.Logout();
 
-                //removing user data
-                Preferences.Remove("current_user");
-
-                //removing isloggedin
-                Preferences.Set("IsLoggedIn", false);
-
-                await Shell.Current.DisplayAlert("Sikeres kilépés", "", "OK");
-
-                //TODO: make sure to (clear the navigation stack), hide the nav
-                await Shell.Current.GoToAsync("LoginPage");
+                // Navigate to the login page
+                await Shell.Current.GoToAsync("/LoginPage");
             }
             catch (Exception ex)
             {

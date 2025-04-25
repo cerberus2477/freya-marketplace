@@ -55,7 +55,7 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="model:Listing">
                             <Grid Padding="10">
-                                <Border>
+                                <Border Style="{StaticResource ListingContainer}">
                                     <!--//TODO: ez miért relativesource? mit lehet ezzel pontosan elérni
                                         which means that it isn't binding to the listing anymore in the DataTemplate, but instead it is looking up the hierarchy specifically for an AncestorType of ListingsViewModel. This allows for more advanced scenarios like this.-->
                                     <Border.GestureRecognizers>
