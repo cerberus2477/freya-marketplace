@@ -38,7 +38,7 @@ public partial class AppShell : Shell
     private void AdjustNavigationBar()
     {
         bool isMobile = DeviceDisplay.MainDisplayInfo.Width < 800;
-        Shell.SetFlyoutBehavior(this, isMobile ? FlyoutBehavior.Disabled : FlyoutBehavior.Locked);
+        Shell.SetFlyoutBehavior(this, isMobile ? FlyoutBehavior.Disabled : FlyoutBehavior.Flyout);
         Shell.SetTabBarIsVisible(this, true);
     }
 
@@ -49,6 +49,6 @@ public partial class AppShell : Shell
                           args.Current.Location.OriginalString.Contains("LoginPage") ||
                           args.Current.Location.OriginalString.Contains("RegisterPage");
 
-        SetFlyoutBehavior(this, hideFlyout ? FlyoutBehavior.Disabled : FlyoutBehavior.Locked);
+        SetFlyoutBehavior(this, hideFlyout ? FlyoutBehavior.Disabled : FlyoutBehavior.Flyout);
     }
 }

@@ -16,6 +16,11 @@ public class Listing
     [JsonPropertyName("description")]
     public string Description { get; set; }
 
+    //TODO
+    //[JsonPropertyName("city")] and others
+    
+    [JsonIgnore]
+    public string City { get; set; } = "egyelőre nem kapjuk meg az apiból a várost";
 
     [JsonPropertyName("media")]
     public List<string> Media { get; set; } = new();
@@ -63,23 +68,6 @@ public class ListingUser
     public string Username { get; set; }
 }
 
-public class Plant
-{
-    [JsonPropertyName("id")]
-    public int Id { get; set; }
-
-    [JsonPropertyName("name")]
-    public string Name { get; set; }
-
-    [JsonPropertyName("type")]
-    public string Type { get; set; }
-}
-
-public class Stage
-{
-    [JsonPropertyName("name")]
-    public string Name { get; set; }
-}
 
 [JsonSerializable(typeof(List<Listing>))]
 internal sealed partial class ListingContext : JsonSerializerContext

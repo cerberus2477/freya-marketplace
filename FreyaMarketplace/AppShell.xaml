@@ -5,7 +5,7 @@
         xmlns:view="clr-namespace:FreyaMarketplace.View"
         xmlns:startingPages="clr-namespace:FreyaMarketplace.View.StartingPages"
         xmlns:listings="clr-namespace:FreyaMarketplace.View.Listings"
-        Shell.FlyoutBehavior="Locked"
+        Shell.FlyoutBehavior="Flyout"
  
 
     Shell.TabBarIsVisible="False"

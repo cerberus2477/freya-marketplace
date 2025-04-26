@@ -56,10 +56,10 @@
                     </x:Array>
                 </Picker.ItemsSource>
             </Picker>
+			<Button Text="Mentés" BackgroundColor="Green" TextColor="White" Command="{Binding SendPatchPequestsCommand}" />
 
-            <!--<Button Text="OK" BackgroundColor="Green" TextColor="White" Clicked="OnOkClicked"/>-->
 
-        </VerticalStackLayout>
+		</VerticalStackLayout>
     </ScrollView>
 </ContentPage>
     

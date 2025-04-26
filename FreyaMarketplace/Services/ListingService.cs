@@ -1,13 +1,13 @@
-﻿using System.Net.Http.Json;
+﻿using System.Net.Http.Headers;
 using System.Text;
 
 namespace FreyaMarketplace.Services;
 
 public class ListingService
 {
-     HttpClient httpClient;
-     JsonSerializerOptions jsonOptions;
-     ExceptionHandlerUtil exceptionHandlerUtil;
+    HttpClient httpClient;
+    JsonSerializerOptions jsonOptions;
+    ExceptionHandlerUtil exceptionHandlerUtil;
     public ListingService(ExceptionHandlerUtil exceptionHandlerUtil)
     {
         this.httpClient = new HttpClient();
@@ -55,10 +55,11 @@ public class ListingService
                 listings = listingsApiResponse.Data;
             }
 
-            else {
+            else
+            {
 
                 //TODO: ez valamiért breakeli az appot, és a uion nem jelenik meg az üzenet, csak a debug windowban.
-                await exceptionHandlerUtil.HandleExceptionAsync( new Exception($"GET Listings request sent to API.\nResponse status: {response.StatusCode}"), "Nem sikerült lekérni a hirdetéseket, mert az API nem 200 (OK) választ adot vissza.");
+                await exceptionHandlerUtil.HandleExceptionAsync(new Exception($"GET Listings request sent to API.\nResponse status: {response.StatusCode}"), "Nem sikerült lekérni a hirdetéseket, mert az API nem 200 (OK) választ adott vissza.");
             }
 
         }
@@ -75,6 +76,113 @@ public class ListingService
 
     }
 
+    public async Task<PostPatchListingApiResponse> UpdateListingAsync(Listing oldListing, string title, string description, string city, decimal price, List<string> images)
+    {
+        var patchData = new Dictionary<string, object>();
+
+        if (title != oldListing.Title)
+            patchData["title"] = title;
+
+        if (description != oldListing.Description)
+            patchData["description"] = description;
+
+        if (city != oldListing.City)
+            patchData["city"] = city;
+
+        if (price != oldListing.Price)
+            patchData["price"] = price;
+
+        //TODO: handle images
+        //todo:  if none are different then skip request
+        // Assuming images are compared outside or handled separately
+   
+        if (images?.Count > 0)
+            patchData["images[]"] = images;
+
+
+        // Skip request if nothing changed
+        if (patchData.Count == 0)
+        {
+            return new PostPatchListingApiResponse(200, "Nem történt változás, frissítés kihagyva.");
+        }
+
+
+        var url = $"{AppSettings.ApiBaseUrl}listings/{oldListing.Id}";
+        var token = await SecureStorage.GetAsync("auth_token");
+
+        var request = new HttpRequestMessage(HttpMethod.Patch, url);
+        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+        request.Content = new StringContent(JsonSerializer.Serialize(patchData), Encoding.UTF8, "application/json");
+
+
+        try
+        {
+            var response = await httpClient.SendAsync(request);
+            var responseText = await response.Content.ReadAsStringAsync();
+            Debug.WriteLine($"\n\nhListing patch request sent to API.\nRaw response: {responseText}");
+            var profileApiResponse = JsonSerializer.Deserialize<PostPatchListingApiResponse>(responseText, jsonOptions);
+            Debug.WriteLine($"Deseriaolized response: \n\ttype:{profileApiResponse} \n\tcontent:{JsonSerializer.Serialize(profileApiResponse)}");
+
+            if (profileApiResponse != null) return profileApiResponse;
+            else return new PostPatchListingApiResponse(500, "Hibás válaszformátum az API-tól");
+        }
+        catch (JsonException ex)
+        {
+            return new PostPatchListingApiResponse(500, "Hibás válaszformátum az API-tól");
+        }
+        catch (Exception ex)
+        {
+            return new PostPatchListingApiResponse(500, $"Váratlan hiba történt a hirdetés módosítása során. ({ex.Message})");
+        }
+    }
+
+    public async Task<PostPatchListingApiResponse> UpdateUserPlantAsync(Listing oldListing, int plantId, int stageId)
+    {
+        //check is plantid and stageid are unchanged. only add them to the request if they are different. if none are different then skip
+        var patchData = new Dictionary<string, object>();
+
+        if (plantId != oldListing.Plant.Id)
+            patchData["plant"] = plantId;
+
+        if (stageId != oldListing.Stage.Id)
+            patchData["stage"] = stageId;
+
+        if (patchData.Count == 0)
+        {
+            return new PostPatchListingApiResponse(200, "Nem történt változás, frissítés kihagyva.");
+        }
+
+        //TODO: add userplantsid once in api
+        //var url = $"{AppSettings.ApiBaseUrl}profile/plants/{oldListing.userplant.id};
+        var url = $"{AppSettings.ApiBaseUrl}profile/plants/17";
+        var token = await SecureStorage.GetAsync("auth_token");
+
+        var request = new HttpRequestMessage(HttpMethod.Patch, url);
+        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+        request.Content = new StringContent(JsonSerializer.Serialize(patchData), Encoding.UTF8, "application/json");
+
+        try
+        {
+            var response = await httpClient.SendAsync(request);
+            var responseText = await response.Content.ReadAsStringAsync();
+            Debug.WriteLine($"\n\nPostPatchListing patch request sent to API.\nRaw response: {responseText}");
+            var profileApiResponse = JsonSerializer.Deserialize<PostPatchListingApiResponse>(responseText, jsonOptions);
+            Debug.WriteLine($"Deseriaolized response: \n\ttype:{profileApiResponse} \n\tcontent:{JsonSerializer.Serialize(profileApiResponse)}");
+
+            if (profileApiResponse != null) return profileApiResponse;
+            else return new PostPatchListingApiResponse(500, "Hibás válaszformátum az API-tól");
+        }
+        catch (JsonException ex)
+        {
+            return new PostPatchListingApiResponse(500, "Hibás válaszformátum az API-tól");
+        }
+        catch (Exception ex)
+        {
+            return new PostPatchListingApiResponse(500, $"Váratlan hiba történt a hirdetés növény/státusz módosítása során. ({ex.Message})");
+        }
+    }
 }
+
+
 
 //TODO: If you want to inject HttpClient properly for testing/DI, you can later refactor it using IHttpClientFactory.

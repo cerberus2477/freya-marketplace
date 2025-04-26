@@ -33,7 +33,7 @@
             
             <ContentView>
                 <CollectionView
-                    ItemsSource="{Binding Listings}"
+                    ItemsSource="{Binding MyListings}"
                     SelectionMode="None"
                     RemainingItemsThreshold="2"
                     RemainingItemsThresholdReachedCommand="{Binding GetNextListingsCommand}">
@@ -52,7 +52,7 @@
                                         which means that it isn't binding to the listing anymore in the DataTemplate, but instead it is looking up the hierarchy specifically for an AncestorType of ListingsViewModel. This allows for more advanced scenarios like this.-->
                                     <Border.GestureRecognizers>
                                         <TapGestureRecognizer 
-                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ListingsViewModel}}, x:DataType=viewmodel:ListingsViewModel, Path=GoToUpdateListingCommand}"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MyListingsViewModel}}, x:DataType=viewmodel:MyListingsViewModel, Path=GoToUpdateListingCommand}"
                                             CommandParameter="{Binding .}"/>
                                     </Border.GestureRecognizers>
                                     <VerticalStackLayout>

@@ -55,7 +55,6 @@ public partial class ProfileViewModel : BaseViewModel
             ProfileBirthdateError = null;
 
             var result = await profileService.SaveProfileAsync(ProfileUsername, ProfileEmail, ProfileCity, ProfileBirthdate, ProfileDescription);
-            if (result == null) return;
             if (result.Data is ProfileSuccessData successData)
             {
                 userSessionService.SetCurrentUser(successData.User);

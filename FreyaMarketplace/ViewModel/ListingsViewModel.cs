@@ -1,4 +1,5 @@
 ﻿using FreyaMarketplace.Services;
+using System.Threading;
 
 namespace FreyaMarketplace.ViewModel;
 
@@ -21,15 +22,17 @@ public partial class ListingsViewModel : BaseViewModel
     //when the searchtext changes, send a get request to the api to get the matching listings. load the first page into the UI.
     partial void OnSearchQueryChanged(string value)
     {
+        //runs the relaycommand, respects UI command logic, disables button if busy, etc
         SearchListingsCommand.Execute(null);
     }
 
     public ListingsViewModel(ListingService listingService, ExceptionHandlerUtil exceptionHandlerUtil)
     {
-        Title = "Listings";
+        Title = "Hirdetések";
         this.listingService = listingService;
         this.exceptionHandlerUtil = exceptionHandlerUtil;
         //load the listings automatically when navigated to the page
+        //Directly runs the SearchListingsAsync() method in a background thread.
         Task.Run(SearchListingsAsync);
     }
 

@@ -30,7 +30,7 @@ public partial class MyListingsViewModel : BaseViewModel
 
     public MyListingsViewModel(ListingService listingService, ExceptionHandlerUtil exceptionHandlerUtil, UserSessionService userSessionService)
     {
-        Title = "MyListings";
+        Title = "Saját hirdetések";
         this.listingService = listingService;
         this.exceptionHandlerUtil = exceptionHandlerUtil;
         this.userSessionService = userSessionService;
