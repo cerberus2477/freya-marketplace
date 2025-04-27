@@ -34,9 +34,7 @@
             <ContentView>
                 <CollectionView
                     ItemsSource="{Binding MyListings}"
-                    SelectionMode="None"
-                    RemainingItemsThreshold="2"
-                    RemainingItemsThresholdReachedCommand="{Binding GetNextListingsCommand}">
+                    SelectionMode="None">
 
 
                     <CollectionView.ItemsLayout>

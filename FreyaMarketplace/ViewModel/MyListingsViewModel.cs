@@ -65,15 +65,12 @@ public partial class MyListingsViewModel : BaseViewModel
         {
             IsBusy = true;
 
-            allListings = await listingService.SearchListings(SearchQuery, username);
-
-            if (allListings == null) return;
+            var listings = await listingService.SearchListings(SearchQuery, username);
 
             MyListings.Clear();
 
-            // Add first page manually
-            MyListings.AddRange(allListings.Take(PageSize).ToList());
-            Debug.WriteLine($"📄 Loaded first page into MyListings.");
+            MyListings.AddRange(listings);
+            Debug.WriteLine($"📄 Loaded mylistings.");
         }
         catch (Exception ex)
         {
@@ -86,32 +83,11 @@ public partial class MyListingsViewModel : BaseViewModel
         }
     }
 
+
+
     //TODO: implement filters
 
 
-    [RelayCommand]
-    async Task GetNextListingsAsync()
-    {
-        if (IsBusy) return;
-      
-        IsBusy = true;
-        int remaining = allListings.Count - MyListings.Count;
-
-        //if first page has been loaded and there are more listings, load next page.
-        if (remaining > 0 && MyListings.Count > 0)
-        {
-            var nextPage = allListings.Skip(MyListings.Count).Take(PageSize).ToList();
-            MyListings.AddRange(nextPage);
-            Debug.WriteLine($"✅ Loaded next page of users listings ({nextPage.Count} items). Total now: {MyListings.Count} Remaining: {remaining}");
-        }
-        else
-        {
-            Debug.WriteLine("✅ Users all listings already loaded.");
-        }
- 
-        IsBusy = false;
-        IsRefreshing = false;
-
-    }
+    //here we dont use pagination, because there might be too few listings. this might cause unwanted behaviour (like loading listings multiple times.)
 
 }
