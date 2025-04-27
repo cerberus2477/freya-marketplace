@@ -35,6 +35,8 @@ public static class MauiProgram
         builder.Services.AddSingleton<ProfileService>();
         builder.Services.AddSingleton<AuthenticationService>();
         builder.Services.AddSingleton<UserSessionService>();
+        builder.Services.AddSingleton<StageService>();
+        builder.Services.AddSingleton<PlantService>();
 
         //Utils
         builder.Services.AddSingleton<ExceptionHandlerUtil>();

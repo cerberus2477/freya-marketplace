@@ -38,10 +38,10 @@ public partial class UpdateListingViewModel : BaseViewModel
     [ObservableProperty] private string priceError;
     //[ObservableProperty] private string imageError;
 
-    public bool IsTitleErrorVisible => !string.IsNullOrEmpty(TitleError);
-    public bool IsDescriptionErrorVisible => !string.IsNullOrEmpty(DescriptionError);
-    public bool IsCityErrorVisible => !string.IsNullOrEmpty(CityError);
-    public bool IsPriceErrorVisible => !string.IsNullOrEmpty(PriceError);
+    private bool IsTitleErrorVisible => !string.IsNullOrEmpty(TitleError);
+    private bool IsDescriptionErrorVisible => !string.IsNullOrEmpty(DescriptionError);
+    private bool IsCityErrorVisible => !string.IsNullOrEmpty(CityError);
+    private bool IsPriceErrorVisible => !string.IsNullOrEmpty(PriceError);
     //public bool IsImageErrorVisible => !string.IsNullOrEmpty(ImageError);
 
 
@@ -50,8 +50,8 @@ public partial class UpdateListingViewModel : BaseViewModel
     [ObservableProperty] private string plantName;
     [ObservableProperty] private string stageName;
     [ObservableProperty] private string count;
-    public ObservableRangeCollection<Stage> allStages { get; set; } = new ObservableRangeCollection<Stage>();
-    public ObservableRangeCollection<Plant> allPlants { get; set; } = new ObservableRangeCollection<Plant>();
+    private ObservableRangeCollection<Stage> allStages { get; set; } = new ObservableRangeCollection<Stage>();
+    private ObservableRangeCollection<Plant> allPlants { get; set; } = new ObservableRangeCollection<Plant>();
 
     [ObservableProperty] private string plantError;
     [ObservableProperty] private string stageError;
@@ -97,8 +97,8 @@ public partial class UpdateListingViewModel : BaseViewModel
             IsBusy = true;
             var stages = await stageService.GetStages();
 
-            AllStages.Clear();
-            AllStages.AddRange(stages);
+            allStages.Clear();
+            allStages.AddRange(stages);
             Debug.WriteLine($"📄 Loaded stages.");
         }
         catch (Exception ex)
@@ -124,8 +124,8 @@ public partial class UpdateListingViewModel : BaseViewModel
             IsBusy = true;
             var plants = await plantService.GetPlants();
 
-            AllPlants.Clear();
-            AllPlants.AddRange(plants);
+            allPlants.Clear();
+            allPlants.AddRange(plants);
             Debug.WriteLine($"📄 Loaded plants.");
         }
         catch (Exception ex)
