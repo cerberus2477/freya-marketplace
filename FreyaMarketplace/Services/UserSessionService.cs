@@ -1,4 +1,4 @@
-﻿using Microsoft.Maui.Storage; 
+﻿using Microsoft.Maui.Storage;
 
 namespace FreyaMarketplace.Services
 {

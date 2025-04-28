@@ -1,14 +1,17 @@
 using Microsoft.Maui.Controls;
+using FreyaMarketplace.View;
+using FreyaMarketplace.View.StartingPages;
 
 namespace FreyaMarketplace.View
 {
     public partial class ProfilePage : ContentPage
     {
-
-        public ProfilePage(ProfileViewModel viewModel)
+        private UserSessionService userSessionService;
+        public ProfilePage(ProfileViewModel viewModel, UserSessionService userSessionService)
         {
             InitializeComponent();
             BindingContext = viewModel;
+            this.userSessionService = userSessionService;
         }
 
         //todo: ezek jó helyen vannak itt vagy menjenek a viewmodelbe?
@@ -60,7 +63,7 @@ namespace FreyaMarketplace.View
                 await Shell.Current.DisplayAlert("Sikeres kilépés", "", "OK");
 
                 //TODO: make sure to (clear the navigation stack), hide the nav
-                await Shell.Current.GoToAsync("LoginPage");
+                await Shell.Current.GoToAsync("../LoginPage");
             }
             catch (Exception ex)
             {
@@ -69,8 +72,8 @@ namespace FreyaMarketplace.View
                 throw; // Or handle gracefully
             }
 
-            
-            
+
+
         }
 
 

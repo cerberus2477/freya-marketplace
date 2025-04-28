@@ -11,12 +11,12 @@ namespace FreyaMarketplace.View
 
         private async void OnListingsClicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync("ListingsPage");
+            await Shell.Current.GoToAsync("///ListingsPage");
         }
 
         private async void OnNewListingClicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync("NewListingPage");
+            await Shell.Current.GoToAsync("///NewListingPage");
         }
 
     }

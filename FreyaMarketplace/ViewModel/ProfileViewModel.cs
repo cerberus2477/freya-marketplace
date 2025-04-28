@@ -10,7 +10,7 @@ public partial class ProfileViewModel : BaseViewModel
 {
     private readonly ProfileService profileService;
     private readonly ExceptionHandlerUtil exceptionHandlerUtil;
-    private readonly UserSessionService userSessionService;
+    public UserSessionService userSessionService;
 
     [ObservableProperty] private string profileUsername;
     [ObservableProperty] private string profileEmail;
