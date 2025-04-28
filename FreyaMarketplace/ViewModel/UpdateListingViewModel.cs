@@ -69,21 +69,27 @@ public partial class UpdateListingViewModel : BaseViewModel
         this.userSessionService = userSessionService;
         this.stageService = stageService;
         this.plantService = plantService;
-        ListingTitle = listing.Title;
-        Description = listing.Description;
-        City = listing.City;
-        Price = listing.Price;
-
-        PlantName = listing.PlantName;
-        StageName = listing.StageName;
-
-        //todo: load all fields ...
-
 
         //load the stages and plants automatically when navigated to the page
         //Directly runs the methods in a background thread.
         Task.Run(GetStagesAsync);
         Task.Run(GetPlantsAsync);
+    }
+
+    partial void OnListingChanged(Listing value)
+    {
+        if (value == null)
+            return;
+
+        ListingTitle = value.Title;
+        Description = value.Description;
+        City = value.City;
+        Price = value.Price;
+
+        PlantName = value.PlantName;
+        StageName = value.StageName;
+        //todo: load all fields ...
+        // stb, ha még több mező kell
     }
 
     [RelayCommand]
