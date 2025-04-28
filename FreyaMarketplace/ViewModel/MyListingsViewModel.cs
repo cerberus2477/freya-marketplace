@@ -4,10 +4,6 @@ namespace FreyaMarketplace.ViewModel;
 
 public partial class MyListingsViewModel : BaseViewModel
 {
-    List<Listing> allListings = new();
-    //pageSize must be more than the size of the screen
-    int PageSize = 4;
-
     public ObservableRangeCollection<Listing> MyListings { get; set; } = new ObservableRangeCollection<Listing>();
     private readonly ListingService listingService;
     private readonly ExceptionHandlerUtil exceptionHandlerUtil;
@@ -82,12 +78,5 @@ public partial class MyListingsViewModel : BaseViewModel
             IsRefreshing = false;
         }
     }
-
-
-
-    //TODO: implement filters
-
-
-    //here we dont use pagination, because there might be too few listings. this might cause unwanted behaviour (like loading listings multiple times.)
 
 }

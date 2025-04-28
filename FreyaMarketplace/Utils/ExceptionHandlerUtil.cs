@@ -16,7 +16,25 @@ namespace FreyaMarketplace.Utils
             {
                 message += ex.Message;
             }
-            await Shell.Current.DisplayAlert(title, message, "OK");
+            try
+            {
+                if (MainThread.IsMainThread)
+                {
+                    await Shell.Current.DisplayAlert(title, message, "OK");
+                }
+                else
+                {
+                    MainThread.BeginInvokeOnMainThread(async () =>
+                    {
+                        await Shell.Current.DisplayAlert(title, message, "OK");
+                    });
+                }
+            }
+            catch (Exception innerEx)
+            {
+                Debug.WriteLine($"Failed to show DisplayAlert: {innerEx.Message}");
+                // Even if displaying alert fails, don't crash the app
+            }
         }
     }
 }
