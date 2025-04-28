@@ -17,14 +17,14 @@
         <!--//TODO: use "warning" style"-->
 
         <Label Text="{Binding EmailError}" 
-       TextColor="Red" 
+       Style="{StaticResource WarningLabel}"
        IsVisible="{Binding IsEmailErrorVisible}" />
 
             <Label Text="Jeszó:" />
             <Entry x:Name="txtPassword" Text="{Binding UserPassword, Mode=TwoWay}" IsPassword="True"
         Style="{StaticResource EntryStyle}" />
         <Label Text="{Binding PasswordError}" 
-       TextColor="Red" 
+       Style="{StaticResource WarningLabel}"
        IsVisible="{Binding IsPasswordErrorVisible}" />
 
 

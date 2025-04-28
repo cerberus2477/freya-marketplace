@@ -9,7 +9,7 @@
         <Entry x:Name="txtUsername" Text="{Binding Username, Mode=TwoWay}" 
             Style="{StaticResource EntryStyle}" />
         <Label Text="{Binding UsernameError}" 
-            TextColor="Red" 
+            Style="{StaticResource WarningLabel}"
             IsVisible="{Binding IsUsernameErrorVisible}" />
 
         <Label Text="E-mail cím:" />
@@ -17,7 +17,7 @@
             Style="{StaticResource EntryStyle}" />
         <!--//TODO: use "warning" style"-->
         <Label Text="{Binding EmailError}" 
-            TextColor="Red" 
+            Style="{StaticResource WarningLabel}"
             IsVisible="{Binding IsEmailErrorVisible}" />
 
         <Label Text="Jelszó:" />
@@ -28,7 +28,7 @@
         <Entry x:Name="txtPasswordConfirmation" Text="{Binding UserPasswordConfirmation, Mode=TwoWay}" IsPassword="True" 
                Style="{StaticResource EntryStyle}" />
         <Label Text="{Binding PasswordError}" 
-            TextColor="Red" 
+            Style="{StaticResource WarningLabel}"
             IsVisible="{Binding IsPasswordErrorVisible}" />
 
         <Button Text="Regisztráció" Command="{Binding RegisterCommand}" />

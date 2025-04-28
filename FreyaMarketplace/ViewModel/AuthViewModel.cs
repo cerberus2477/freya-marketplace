@@ -51,6 +51,7 @@ public partial class AuthViewModel : BaseViewModel
                 await userSessionService.SetAuthTokenAsync(successData.Token);
                 userSessionService.SetCurrentUser(successData.User);
 
+                await Shell.Current.Navigation.PopToRootAsync();
                 await Shell.Current.GoToAsync("///HomePage");
             }
             else if (result.Data is EmptyLoginData)

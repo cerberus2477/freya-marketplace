@@ -5,6 +5,7 @@ namespace FreyaMarketplace.View.StartingPages
         public GreetingPage()
         {
             InitializeComponent();
+            NavigationPage.SetHasBackButton(this, false);
         }
 
         private async void OnLoginClicked(object sender, EventArgs e)
@@ -16,5 +17,6 @@ namespace FreyaMarketplace.View.StartingPages
         {
             await Shell.Current.GoToAsync("RegisterPage");
         }
+
     }
 }

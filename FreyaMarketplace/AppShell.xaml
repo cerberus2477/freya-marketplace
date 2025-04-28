@@ -72,31 +72,32 @@
        Shell.TabBarIsVisible="False"
        Shell.NavBarIsVisible="false">
 
+
     <!-- Main Flyout Items -->
     <FlyoutItem x:Name="MainFlyoutItem" Title="Dashboard" IsVisible="True" FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent
             Title="Kezdőlap"
             ContentTemplate="{DataTemplate view:HomePage}"
             Route="HomePage" 
-            Icon="dotnet_bot.png"/>
+            Icon="logo_white.png"/>
 
         <ShellContent
             Title="Keresés"
             ContentTemplate="{DataTemplate listings:ListingsPage}"
             Route="ListingsPage" 
-            Icon="dotnet_bot.png"/>
+            Icon="search_icon.png"/>
 
         <ShellContent
             Title="Eladás"
             ContentTemplate="{DataTemplate listings:NewListingPage}"
             Route="NewListingPage" 
-            Icon="dotnet_bot.png"/>
+            Icon="new_listing_icon.png"/>
 
         <ShellContent
             Title="Profil"
             ContentTemplate="{DataTemplate view:ProfilePage}"
             Route="ProfilePage" 
-            Icon="dotnet_bot.png"/>
+            Icon="profile_icon.png"/>
     </FlyoutItem>
 
 </Shell>
