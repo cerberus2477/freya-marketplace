@@ -44,42 +44,69 @@
 
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="model:Listing">
-                            <Grid Padding="10">
-                                <Border>
-                                    <!--//TODO: ez miért relativesource? mit lehet ezzel pontosan elérni
-                                        which means that it isn't binding to the listing anymore in the DataTemplate, but instead it is looking up the hierarchy specifically for an AncestorType of ListingsViewModel. This allows for more advanced scenarios like this.-->
-                                    <Border.GestureRecognizers>
-                                        <TapGestureRecognizer 
-                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MyListingsViewModel}}, x:DataType=viewmodel:MyListingsViewModel, Path=GoToUpdateListingCommand}"
-                                            CommandParameter="{Binding .}"/>
-                                    </Border.GestureRecognizers>
-                                    <VerticalStackLayout>
-                                        <!-- Image (if available) -->
-                                        <Image Aspect="AspectFill" Source="{Binding Thumbnail}"
-                                           WidthRequest="150"
-                                           HeightRequest="150"
-                                           BackgroundColor="LightGray"
-                                           VerticalOptions="Start"/>
+                            <Border 
+            Style="{StaticResource ListingContainer}"
+            HeightRequest="150"  
+                                HorizontalOptions="Fill"
+                                StrokeThickness="1"
+            Stroke="#DDDDDD"
+            Padding="10">
+                                <Grid ColumnDefinitions="Auto, *, Auto"
+                  RowDefinitions="Auto"
+                  ColumnSpacing="10"
+                  VerticalOptions="Fill"
+                  HorizontalOptions="Fill">
 
-                                        <!-- Listing Details -->
-                                        <VerticalStackLayout
-                                            VerticalOptions="Center"
-                                            Grid.Row="1"
-                                            Padding="10">
-                                            <!--TODO. delete id, this is only here for debugging reasons-->
-                                            <Label Style="{StaticResource LargeLabel}" Text="{Binding Id}" />
+                                    <!-- Thumbnail -->
+                                    <Image 
+                    Source="{Binding Thumbnail}"
+                    Aspect="AspectFill"
+                    VerticalOptions="Fill"
+                    HorizontalOptions="Start"
+                    WidthRequest="120" 
+                                        />
+
+                                        <!-- Textual Content -->
+                                        <VerticalStackLayout 
+                    Grid.Column="1" 
+                    Spacing="5"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Fill">
+
                                             <Label Style="{StaticResource LargeLabel}" Text="{Binding Title}" />
-                                            <Label Style="{StaticResource MediumLabel}" Text="{Binding PlantName}" />
+                                            <Label Style="{StaticResource MediumLabel}" Text="{Binding City}" />
+                                            <Label Style="{StaticResource MediumLabel}" 
+                           Text="{Binding Price, StringFormat='{0:N0} Ft'}"
+                           TextColor="{StaticResource DarkGreen2}" />
+
+                                            <Label Style="{StaticResource SmallLabel}" Text="Növény adatok:" FontAttributes="Bold" />
+                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding PlantName}" />
                                             <Label Style="{StaticResource SmallLabel}" Text="{Binding PlantType}" />
                                             <Label Style="{StaticResource SmallLabel}" Text="{Binding StageName}" />
-                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding Price, StringFormat='{0:N0} Ft'}" />
-                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding CreatedAtFormatted}" />
+                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding Userplant.Count, StringFormat='Darabszám: {0} db'}" />
+                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding Description}" LineBreakMode="TailTruncation" MaxLines="2" />
+
                                         </VerticalStackLayout>
-                                    </VerticalStackLayout>
-                                </Border>
-                            </Grid>
+                                        <!-- TODO: Update here with icon! -->
+                                        <!-- Edit Button (Tree Icon) -->
+                                        <ImageButton 
+                                        Grid.Column="2"
+                                        Source="edit_icon.png" 
+                                                                BackgroundColor="Transparent"
+                                        HeightRequest="30"
+                                        WidthRequest="30"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MyListingsViewModel}}, Path=GoToUpdateListingCommand}"
+                                        CommandParameter="{Binding .}"
+                                        VerticalOptions="Start"
+                                        HorizontalOptions="End"
+                                    />
+                                </Grid>
+                            </Border>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
+
+
+
                 </CollectionView>
 
             </ContentView>

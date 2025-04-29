@@ -81,7 +81,7 @@
                                             Grid.Row="1"
                                             Padding="10">
                                             <!--TODO. delete id, this is only here for debugging reasons-->
-                                            <Label Style="{StaticResource LargeLabel}" Text="{Binding Id}" />
+                                            <!--<Label Style="{StaticResource LargeLabel}" Text="{Binding Id}" />-->
                                             <Label Style="{StaticResource LargeLabel}" Text="{Binding Title}" />
                                             <Label Style="{StaticResource MediumLabel}" Text="{Binding PlantName}" />
                                             <Label Style="{StaticResource SmallLabel}" Text="{Binding PlantType}" />

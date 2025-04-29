@@ -12,7 +12,7 @@
 
         <Label Text="E-mail cím:" />
         <Entry x:Name="txtEmail" Text="{Binding UserEmail, Mode=TwoWay}" 
-    Style="{StaticResource EntryStyle}" />
+     />
         
         <!--//TODO: use "warning" style"-->
 
@@ -22,7 +22,7 @@
 
             <Label Text="Jeszó:" />
             <Entry x:Name="txtPassword" Text="{Binding UserPassword, Mode=TwoWay}" IsPassword="True"
-        Style="{StaticResource EntryStyle}" />
+         />
         <Label Text="{Binding PasswordError}" 
        Style="{StaticResource WarningLabel}"
        IsVisible="{Binding IsPasswordErrorVisible}" />

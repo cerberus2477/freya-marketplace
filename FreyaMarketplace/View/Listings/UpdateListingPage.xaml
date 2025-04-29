@@ -10,57 +10,48 @@
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="15">
 
-            <Label Text="Eladás" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center" />
+            <Label Text="Hirdetés szerkesztése"
+                   Style="{StaticResource LargeLabel}"
+                   HorizontalOptions="Center" />
 
-            <!-- Multiple Image Upload -->
-            <!--<Button Text="Upload Photos" Clicked="OnUploadPhotosClicked"/>-->
+            <Label Text="Cím" Style="{StaticResource MediumLabel}" />
+            <Entry Text="{Binding ListingTitle}" Placeholder="Pl. Almafa eladó" />
+            <Label Text="{Binding TitleError}" Style="{StaticResource WarningLabel}" IsVisible="{Binding IsTitleErrorVisible}" />
 
-            <ScrollView Orientation="Horizontal" HeightRequest="150">
-                <StackLayout x:Name="ImageContainer" Orientation="Horizontal" Spacing="10"/>
-            </ScrollView>
+            <Label Text="Leírás" Style="{StaticResource MediumLabel}" />
+            <Editor Text="{Binding Description}" Placeholder="Rövid leírás..." AutoSize="TextChanges" HeightRequest="100" />
+            <Label Text="{Binding DescriptionError}" Style="{StaticResource WarningLabel}" IsVisible="{Binding IsDescriptionErrorVisible}" />
 
-            <Entry x:Name="TitleEntry" Placeholder="Title" />
+            <Label Text="Település" Style="{StaticResource MediumLabel}" />
+            <Entry Text="{Binding City}" Placeholder="Pl. Budapest" />
+            <Label Text="{Binding CityError}" Style="{StaticResource WarningLabel}" IsVisible="{Binding IsCityErrorVisible}" />
 
-            <Editor x:Name="DescriptionEditor" Placeholder="Description" AutoSize="TextChanges" HeightRequest="100"/>
+            <Label Text="Ár (Ft)" Style="{StaticResource MediumLabel}" />
+            <Entry Text="{Binding Price}" Keyboard="Numeric" Placeholder="Pl. 1500" />
+            <Label Text="{Binding PriceError}" Style="{StaticResource WarningLabel}" IsVisible="{Binding IsPriceErrorVisible}" />
 
-            <Entry x:Name="PriceEntry" Placeholder="Price" Keyboard="Numeric"/>
+            <Label Text="Növény" Style="{StaticResource MediumLabel}" />
+            <Picker Title="Válassz növényt"
+                    ItemsSource="{Binding allPlants}"
+                    ItemDisplayBinding="{Binding Name}"
+                    SelectedItem="{Binding Plant}" />
+            <Label Text="{Binding PlantError}" Style="{StaticResource WarningLabel}" IsVisible="{Binding IsPlantErrorVisible}" />
 
-            <Picker x:Name="PlantPicker" Title="Select a Plant">
-                <Picker.ItemsSource>
-                    <x:Array Type="{x:Type x:String}">
-                        <x:String>Körte</x:String>
-                        <x:String>Áfonya</x:String>
-                        <x:String>Alma</x:String>
-                        <x:String>Cseresznye</x:String>
-                    </x:Array>
-                </Picker.ItemsSource>
-            </Picker>
+            <Label Text="Növekedési stádium" Style="{StaticResource MediumLabel}" />
+            <Picker Title="Válassz stádiumot"
+                    ItemsSource="{Binding allStages}"
+                    ItemDisplayBinding="{Binding Name}"
+                    SelectedItem="{Binding Stage}" />
+            <Label Text="{Binding StageError}" Style="{StaticResource WarningLabel}" IsVisible="{Binding IsStageErrorVisible}" />
 
-            <Picker x:Name="TypePicker" Title="Select Type">
-                <Picker.ItemsSource>
-                    <x:Array Type="{x:Type x:String}">
-                        <x:String>Gyümölcs</x:String>
-                        <x:String>Zöldség</x:String>
-                        <x:String>Fűszernövény</x:String>
-                    </x:Array>
-                </Picker.ItemsSource>
-            </Picker>
+            <Label Text="Darabszám" Style="{StaticResource MediumLabel}" />
+            <Entry Text="{Binding Count}" Keyboard="Numeric" Placeholder="Pl. 10" />
+            <Label Text="{Binding CountError}" Style="{StaticResource WarningLabel}" IsVisible="{Binding IsCountErrorVisible}" />
 
-            <Picker x:Name="StagePicker" Title="Select Growth Stage">
-                <Picker.ItemsSource>
-                    <x:Array Type="{x:Type x:String}">
-                        <x:String>Mag</x:String>
-                        <x:String>Palánta</x:String>
-                        <x:String>Növény</x:String>
-                        <x:String>Termés</x:String>
-                    </x:Array>
-                </Picker.ItemsSource>
-            </Picker>
-			<Button Text="Mentés" BackgroundColor="Green" TextColor="White" Command="{Binding SendPatchPequestsCommand}" />
+            <Button Text="Mentés"
+                    Style="{StaticResource PrimaryButton}"
+                    Command="{Binding SendPatchRequestsCommand}" />
 
-
-		</VerticalStackLayout>
+        </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
-    
-    <!--TODO: make this look nice, fields should be editable. should look like listingdetailspage and new listing at the same time. more of the latter-->

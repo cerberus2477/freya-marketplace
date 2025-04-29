@@ -38,20 +38,19 @@ public partial class UpdateListingViewModel : BaseViewModel
     [ObservableProperty] private string priceError;
     //[ObservableProperty] private string imageError;
 
-    private bool IsTitleErrorVisible => !string.IsNullOrEmpty(TitleError);
-    private bool IsDescriptionErrorVisible => !string.IsNullOrEmpty(DescriptionError);
-    private bool IsCityErrorVisible => !string.IsNullOrEmpty(CityError);
-    private bool IsPriceErrorVisible => !string.IsNullOrEmpty(PriceError);
+    public bool IsTitleErrorVisible => !string.IsNullOrEmpty(TitleError);
+    public bool IsDescriptionErrorVisible => !string.IsNullOrEmpty(DescriptionError);
+    public bool IsCityErrorVisible => !string.IsNullOrEmpty(CityError);
+    public bool IsPriceErrorVisible => !string.IsNullOrEmpty(PriceError);
     //public bool IsImageErrorVisible => !string.IsNullOrEmpty(ImageError);
 
 
     //Userplant fields
-    //TODO: maybe this will be a stage and a plant.
-    [ObservableProperty] private string plantName;
-    [ObservableProperty] private string stageName;
+    [ObservableProperty] private Plant plant;
+    [ObservableProperty] private Stage stage;
     [ObservableProperty] private string count;
-    private ObservableRangeCollection<Stage> allStages { get; set; } = new ObservableRangeCollection<Stage>();
-    private ObservableRangeCollection<Plant> allPlants { get; set; } = new ObservableRangeCollection<Plant>();
+    [ObservableProperty] public ObservableRangeCollection<Stage> allStages = new();
+    [ObservableProperty] public ObservableRangeCollection<Plant> allPlants = new();
 
     [ObservableProperty] private string plantError;
     [ObservableProperty] private string stageError;
@@ -86,8 +85,8 @@ public partial class UpdateListingViewModel : BaseViewModel
         City = value.City;
         Price = value.Price;
 
-        PlantName = value.PlantName;
-        StageName = value.StageName;
+        plant = value.Plant;
+        stage = value.Stage;
         //todo: load all fields ...
         // stb, ha még több mező kell
     }
@@ -103,8 +102,8 @@ public partial class UpdateListingViewModel : BaseViewModel
             IsBusy = true;
             var stages = await stageService.GetStages();
 
-            allStages.Clear();
-            allStages.AddRange(stages);
+            AllStages.Clear();
+            AllStages.AddRange(stages);
             Debug.WriteLine($"📄 Loaded stages.");
         }
         catch (Exception ex)
@@ -130,8 +129,8 @@ public partial class UpdateListingViewModel : BaseViewModel
             IsBusy = true;
             var plants = await plantService.GetPlants();
 
-            allPlants.Clear();
-            allPlants.AddRange(plants);
+            AllPlants.Clear();
+            AllPlants.AddRange(plants);
             Debug.WriteLine($"📄 Loaded plants.");
         }
         catch (Exception ex)
@@ -180,17 +179,25 @@ public partial class UpdateListingViewModel : BaseViewModel
             else if (result.Data is PostPatchListingValidationErrorData errorData)
             {
                 if (errorData.Errors.TryGetValue("title", out var titleErrors))
+                {
                     TitleError = string.Join("\n", titleErrors);
-
+                    OnPropertyChanged(nameof(IsTitleErrorVisible));
+                }
                 if (errorData.Errors.TryGetValue("description", out var descriptionErrors))
+                {
                     DescriptionError = string.Join("\n", descriptionErrors);
-
+                    OnPropertyChanged(nameof(IsDescriptionErrorVisible));
+                }
                 if (errorData.Errors.TryGetValue("city", out var cityErrors))
+                {
                     CityError = string.Join("\n", cityErrors);
-
+                    OnPropertyChanged(nameof(IsCityErrorVisible));
+                }
                 if (errorData.Errors.TryGetValue("price", out var priceErrors))
+                {
                     PriceError = string.Join("\n", priceErrors);
-
+                    OnPropertyChanged(nameof(IsPriceErrorVisible));
+                }
                 return;
             }
             else
@@ -232,20 +239,20 @@ public partial class UpdateListingViewModel : BaseViewModel
             else if (result.Data is PostPatchListingValidationErrorData errorData)
             {
                 //todo: modify for plant stage count fields
-                if (errorData.Errors.TryGetValue("title", out var titleErrors))
+                if (errorData.Errors.TryGetValue("plant", out var plantErrors))
                 {
-                    TitleError = string.Join("\n", titleErrors);
-                    OnPropertyChanged(nameof(IsTitleErrorVisible));
+                    PlantError = string.Join("\n", plantErrors);
+                    OnPropertyChanged(nameof(IsPlantErrorVisible));
                 }
-                if (errorData.Errors.TryGetValue("city", out var cityErrors))
+                if (errorData.Errors.TryGetValue("stage", out var stageErrors))
                 {
-                    CityError = string.Join("\n", cityErrors);
-                    OnPropertyChanged(nameof(IsCityErrorVisible));
+                    StageError = string.Join("\n", stageErrors);
+                    OnPropertyChanged(nameof(IsStageErrorVisible));
                 }
-                if (errorData.Errors.TryGetValue("price", out var priceErrors))
+                if (errorData.Errors.TryGetValue("count", out var countErrors))
                 {
-                    PriceError = string.Join("\n", priceErrors);
-                    OnPropertyChanged(nameof(IsPriceErrorVisible));
+                    CountError = string.Join("\n", countErrors);
+                    OnPropertyChanged(nameof(IsCountErrorVisible));
                 }
                 return;
             }

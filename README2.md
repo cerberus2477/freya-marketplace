@@ -1,2 +1,2 @@
 # Freya-dev
-## Ez az "asztali" alkalmazás, táblák CRUD felületével, bejelentkezéssel, admin funkciókkal rangtól függően.
+## Ez az "asztali" alkalmazás, táblák CRUD felületével, cikkek kezelésével, bejelentkezéssel, admin funkciókkal rangtól függően.

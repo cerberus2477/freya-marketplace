@@ -19,7 +19,7 @@ public class PlantService
         this.exceptionHandlerUtil = exceptionHandlerUtil;
     }
 
-    List<Plant> stages;
+    List<Plant> plants;
 
     //TODO: lehet kell jogosultság (tbh minden kéréshez kb)
     public async Task<List<Plant>> GetPlants()
@@ -33,10 +33,10 @@ public class PlantService
             {
                 var responseText = await response.Content.ReadAsStringAsync();
                 Debug.WriteLine($"\n\nGET Plants request sent to API.\nRaw response: {responseText}");
-                var stagesApiResponse = JsonSerializer.Deserialize<PlantsApiResponse>(responseText, jsonOptions);
-                Debug.WriteLine($"Deserialized response: \n\tcontent:{JsonSerializer.Serialize(stagesApiResponse)}");
+                var plantsApiResponse = JsonSerializer.Deserialize<PlantsApiResponse>(responseText, jsonOptions);
+                Debug.WriteLine($"Deserialized response: \n\tcontent:{JsonSerializer.Serialize(plantsApiResponse)}");
 
-                stages = stagesApiResponse.Data;
+                plants = plantsApiResponse.Data;
             }
 
             else
@@ -53,10 +53,10 @@ public class PlantService
         }
         catch (Exception ex)
         {
-            await exceptionHandlerUtil.HandleExceptionAsync(ex, "Váratlan hiba történt a növények növekedési fázisainak lekérése közben.");
+            await exceptionHandlerUtil.HandleExceptionAsync(ex, "Váratlan hiba történt a növények lekérése közben.");
         }
 
-        return stages;
+        return plants;
 
     }
 

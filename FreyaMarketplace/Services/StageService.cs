@@ -40,7 +40,6 @@
 
                 else
                 {
-
                     //TODO: ez valamiért breakeli az appot, és a uion nem jelenik meg az üzenet, csak a debug windowban.
                     await exceptionHandlerUtil.HandleExceptionAsync(new Exception($"GET Stages request sent to API.\nResponse status: {response.StatusCode}"), "Nem sikerült lekérni a növények növekedési fázisait, mert az API nem 200 (OK) választ adott vissza.");
                 }
