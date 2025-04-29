@@ -51,19 +51,11 @@ namespace FreyaMarketplace.View
         {
             try
             {
-                //removing token
-                SecureStorage.Remove("auth_token");
 
-                //removing user data
-                Preferences.Remove("current_user");
-
-                //removing isloggedin
-                Preferences.Set("IsLoggedIn", false);
-
-                await Shell.Current.DisplayAlert("Sikeres kilépés", "", "OK");
-
-                //TODO: make sure to (clear the navigation stack), hide the nav
-                await Shell.Current.GoToAsync("../LoginPage");
+                userSessionService.Logout();
+                // (TODO: make sure to (clear the navigation stack), hide the nav)
+                // Navigate to the login page
+                await Shell.Current.GoToAsync("/LoginPage");
             }
             catch (Exception ex)
             {

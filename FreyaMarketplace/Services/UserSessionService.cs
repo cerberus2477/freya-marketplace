@@ -54,6 +54,7 @@ namespace FreyaMarketplace.Services
         {
             Preferences.Remove(UserKey);
             SecureStorage.Remove(TokenKey);
+            Preferences.Set("IsLoggedIn", false);
         }
     }
 }

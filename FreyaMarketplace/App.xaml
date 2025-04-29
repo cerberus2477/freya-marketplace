@@ -91,10 +91,24 @@
             </Style>
 
             <!--Listing Page-->
-            <Style TargetType="Border" x:Key="ListingBorderStyle">
+            <!--TODO: which one is needed?-->
+            <!--<Style TargetType="Border" x:Key="ListingContainer">
                 <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource GreenWhite}, Dark={StaticResource Green}}" />
                 <Setter Property="Padding" Value="5" />
 
+            </Style>-->
+
+            <!-- Card style -->
+            <Style x:Key="ListingContainer" TargetType="Border">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightGreen2}, Dark={StaticResource LighterDarkGrey}}" />
+                <Setter Property="Stroke" Value="LightGray" />
+                <Setter Property="StrokeThickness" Value="2" />
+                <Setter Property="Padding" Value="10" />
+                <Setter Property="Shadow">
+                    <Setter.Value>
+                        <Shadow Brush="Black" Opacity="0.2" Offset="5,5" Radius="10" />
+                    </Setter.Value>
+                </Setter>
             </Style>
 
 
