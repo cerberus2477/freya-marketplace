@@ -16,11 +16,8 @@ public class Listing
     [JsonPropertyName("description")]
     public string Description { get; set; }
 
-    //TODO
-    //[JsonPropertyName("city")] and others
-    
-    [JsonIgnore]
-    public string City { get; set; } = "egyelőre nem kapjuk meg az apiból a várost";
+    [JsonPropertyName("city")]
+    public string City { get; set; }
 
     [JsonPropertyName("media")]
     public List<string> Media { get; set; } = new();
@@ -38,7 +35,7 @@ public class Listing
     public string CreatedAtFormatted => ConverterUtil.GetRelativeTime(CreatedAt);
 
     [JsonPropertyName("user")]
-    public User User { get; set; }
+    public ListingUser User { get; set; }
 
     [JsonIgnore]
     public string Username => User?.Username;
@@ -57,6 +54,9 @@ public class Listing
 
     [JsonIgnore]
     public string StageName => Stage?.Name ?? "";
+
+    [JsonPropertyName("user_plant")]
+    public UserPlant UserPlant { get; set; }
 }
 
 public class ListingUser
@@ -66,6 +66,15 @@ public class ListingUser
 
     [JsonPropertyName("username")]
     public string Username { get; set; }
+}
+
+public class UserPlant
+{
+    [JsonPropertyName("id")]
+    public int Id { get; set; }
+
+    [JsonPropertyName("count")]
+    public int Count { get; set; }
 }
 
 
