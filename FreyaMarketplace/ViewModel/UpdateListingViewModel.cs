@@ -59,7 +59,7 @@ public partial class UpdateListingViewModel : BaseViewModel
 
     public bool IsPlantErrorVisible => !string.IsNullOrEmpty(PlantError);
     public bool IsStageErrorVisible => !string.IsNullOrEmpty(StageError);
-    public bool IsCountrrorVisible => !string.IsNullOrEmpty(CountError);
+    public bool IsCountErrorVisible => !string.IsNullOrEmpty(CountError);
 
 
     public UpdateListingViewModel(ListingService listingService, ExceptionHandlerUtil exceptionHandlerUtil, UserSessionService userSessionService, StageService stageService, PlantService plantService)
@@ -227,14 +227,20 @@ public partial class UpdateListingViewModel : BaseViewModel
             {
                 //todo: modify for plant stage count fields
                 if (errorData.Errors.TryGetValue("title", out var titleErrors))
+                {
                     TitleError = string.Join("\n", titleErrors);
-
+                    OnPropertyChanged(nameof(IsTitleErrorVisible));
+                }
                 if (errorData.Errors.TryGetValue("city", out var cityErrors))
+                {
                     CityError = string.Join("\n", cityErrors);
-
+                    OnPropertyChanged(nameof(IsCityErrorVisible));
+                }
                 if (errorData.Errors.TryGetValue("price", out var priceErrors))
+                {
                     PriceError = string.Join("\n", priceErrors);
-
+                    OnPropertyChanged(nameof(IsPriceErrorVisible));
+                }
                 return;
             }
             else
