@@ -30,7 +30,7 @@ public partial class MyListingsViewModel : BaseViewModel
         this.listingService = listingService;
         this.exceptionHandlerUtil = exceptionHandlerUtil;
         this.userSessionService = userSessionService;
-        username = userSessionService.GetCurrentUser().Username;
+        username = userSessionService.GetCurrentUsername();
         //load the listings automatically when navigated to the page
         Task.Run(SearchMyListingsAsync);
     }
