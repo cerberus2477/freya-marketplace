@@ -5,13 +5,22 @@
              Title="Home">
 
     <VerticalStackLayout Padding="20">
-        <Label Text="Welcome to FreyaDev!" FontSize="24" HorizontalOptions="Center"/>
-        <Label Text="This is your home page. Browse and explore." FontSize="16" HorizontalOptions="Center"/>
+        <Image Source="logo_white.png"
+               HorizontalOptions="Center"
+               Style="{StaticResource LogoImage}"/>
+        
+        <Label Text="Welcome to Freyas Garden!"
+               Style="{StaticResource LargeLabel}"
+               HorizontalOptions="Center"/>
+        
+        <Label Text="This is your home page. Browse and explore."
+               Style="{StaticResource MediumLabel}"
+               HorizontalOptions="Center"/>
 
-        <Button Text="Go to Listings" Margin="10" Clicked="OnListingsClicked"
-HorizontalOptions="Center" />
-        <Button Text="Create New Listing" Margin="10" Clicked="OnNewListingClicked"
-HorizontalOptions="Center" />
+        <Button Text="Go to Listings" Style="{StaticResource BaseButton}" Clicked="OnListingsClicked"
+            HorizontalOptions="Center" />
+        <Button Text="Create New Listing" Style="{StaticResource BaseButton}" Clicked="OnNewListingClicked"
+            HorizontalOptions="Center" />
     </VerticalStackLayout>
 
 </ContentPage>

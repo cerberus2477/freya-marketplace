@@ -46,7 +46,7 @@ public class AuthenticationService
         }
         catch (JsonException ex)
         {
-            return new LoginApiResponse(500, "Hibás válaszformátum az API-tól");
+            return new LoginApiResponse(500, $"Hibás válaszformátum az API-tól. ({ex.Message})");
         }
         catch (Exception ex)
         {
