@@ -8,7 +8,7 @@ namespace FreyaMarketplace.View.StartingPages
         public LoginPage(AuthViewModel viewModel)
         {
             InitializeComponent();
-            viewModel.Title = "Bejelentkezés"; 
+            viewModel.Title = "Bejelentkezés";
             BindingContext = viewModel;
         }
 
@@ -21,5 +21,15 @@ namespace FreyaMarketplace.View.StartingPages
         {
             await DisplayAlert("Forgot Password - not implemened", "Password reset functionality not implemented yet.", "OK");
         }
+
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            double screenWidth = DeviceDisplay.MainDisplayInfo.Width / DeviceDisplay.MainDisplayInfo.Density;
+            ((AuthViewModel)BindingContext).IsWideScreen = screenWidth > 720;
+        }
+
     }
 }

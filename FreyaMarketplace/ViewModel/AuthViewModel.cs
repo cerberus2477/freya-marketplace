@@ -10,6 +10,8 @@ public partial class AuthViewModel : BaseViewModel
     private readonly AuthenticationService authService;
     private readonly ExceptionHandlerUtil exceptionHandlerUtil;
     private readonly UserSessionService userSessionService;
+    [ObservableProperty]
+    private bool isWideScreen;
 
     [ObservableProperty] private string username;
     [ObservableProperty] private string userEmail;
@@ -25,12 +27,31 @@ public partial class AuthViewModel : BaseViewModel
     public bool IsEmailErrorVisible => !string.IsNullOrEmpty(EmailError);
     public bool IsPasswordErrorVisible => !string.IsNullOrEmpty(PasswordError);
 
+    [ObservableProperty] private bool isPasswordHidden = true;  // To control visibility of password
+    [ObservableProperty] private string passwordButtonText = "Show";  // Text on the toggle button
+
+    [ObservableProperty] private bool isPasswordConfirmationHidden = true;  // To control visibility of password
+    [ObservableProperty] private string passwordConfirmationButtonText = "Show";  // Text on the toggle button
 
     public AuthViewModel(AuthenticationService authService, ExceptionHandlerUtil exceptionHandlerUtil, UserSessionService userSessionService)
     {
         this.authService = authService;
         this.exceptionHandlerUtil = exceptionHandlerUtil;
         this.userSessionService = userSessionService;
+    }
+
+    [RelayCommand]
+    private void TogglePasswordVisibility()
+    {
+        IsPasswordHidden = !IsPasswordHidden;
+        PasswordButtonText = IsPasswordHidden ? "Show" : "Hide";
+    }
+
+    [RelayCommand]
+    private void TogglePasswordConfirmationVisibility()
+    {
+        IsPasswordConfirmationHidden = !IsPasswordConfirmationHidden;
+        PasswordConfirmationButtonText = IsPasswordConfirmationHidden ? "Show" : "Hide";
     }
 
 

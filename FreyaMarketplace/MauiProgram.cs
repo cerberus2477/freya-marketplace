@@ -12,8 +12,10 @@ public static class MauiProgram
             .UseMauiCommunityToolkit()
             .ConfigureFonts(fonts =>
             {
-                fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-                fonts.AddFont("FontAwesome.ttf", "FontAwesome");
+            fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+            fonts.AddFont("FontAwesome.ttf", "FontAwesome");
+            fonts.AddFont("NocturneSerif-Regular.ttf", "Nocturne");
+            fonts.AddFont("Inter_18pt-Regular.ttf", "Inter");
             });
 
 #if DEBUG

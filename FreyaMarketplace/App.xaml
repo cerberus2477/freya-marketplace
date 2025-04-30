@@ -8,7 +8,6 @@
         <ResourceDictionary>
             <utils:InverseBooleanConverter x:Key="InverseBooleanConverter" />
 
-
             <!-- Define colors -->
             <Color x:Key="LightGreen1">#f6ffd5</Color>
             <Color x:Key="LightGreen2">#DFF29D</Color>
@@ -17,14 +16,11 @@
             <Color x:Key="DarkGreen1">#27400f</Color>
             <Color x:Key="DarkGreen2">#1A2B1A</Color>
             <Color x:Key="GreenWhite">#F0F7EB</Color>
-            <Color x:Key="Red">Red</Color>
+            <Color x:Key="Red">#d84d49</Color>
             <Color x:Key="DarkMaroon">#4E1F1F</Color>
             <Color x:Key="MutedGreen">#737b5e</Color>
-
-
             <Color x:Key="DarkGrey">#2E332E</Color>
             <Color x:Key="LighterDarkGrey">#454C45</Color>
-
 
             <!-- Styles -->
             <Style TargetType="Page" ApplyToDerivedTypes="True">
@@ -40,12 +36,8 @@
 
             <!-- Label styles -->
             <Style TargetType="Label" x:Key="BaseLabel">
-                <Setter Property="FontFamily" Value="OpenSansRegular" />
+                <Setter Property="FontFamily" Value="Inter" />
                 <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource DarkGreen2}, Dark={StaticResource GreenWhite}}" />
-            </Style>
-
-            <Style x:Key="MicroLabel" BasedOn="{StaticResource BaseLabel}" TargetType="Label">
-                <Setter Property="FontSize" Value="10"/>
             </Style>
 
             <Style x:Key="SmallLabel" BasedOn="{StaticResource BaseLabel}" TargetType="Label">
@@ -59,7 +51,20 @@
             <Style x:Key="LargeLabel" BasedOn="{StaticResource BaseLabel}" TargetType="Label">
                 <Setter Property="FontSize" Value="20"/>
             </Style>
+            <Style x:Key="Header2" BasedOn="{StaticResource BaseLabel}" TargetType="Label">
+                <Setter Property="FontSize" Value="25"/>
+                <Setter Property="FontFamily" Value="Nocturne" />
+                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource DarkGreen2}, Dark={StaticResource GreenWhite}}" />
+            </Style>
 
+            <Style x:Key="GreenLabel" BasedOn="{StaticResource BaseLabel}" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource LightGreen3}"/>
+            </Style>
+
+            <Style x:Key="GrayLabel" BasedOn="{StaticResource BaseLabel}" TargetType="Label">
+                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource LighterDarkGrey}, Dark={StaticResource MutedGreen}}"/>
+            </Style>
+            
             <Style TargetType="RefreshView" ApplyToDerivedTypes="True">
                 <Setter Property="RefreshColor" Value="{StaticResource LightGreen2}" />
             </Style>
@@ -72,10 +77,11 @@
             <!-- Base Button Style -->
             <Style x:Key="BaseButton" TargetType="Button">
                 <Setter Property="CornerRadius" Value="10" />
-                <Setter Property="Padding" Value="10,5" />
-                <Setter Property="FontSize" Value="16"/>
-                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="Padding" Value="11" />
+                <Setter Property="FontSize" Value="15"/>
+                <!--<Setter Property="FontAttributes" Value="Bold"/>-->
                 <Setter Property="HeightRequest" Value="40"/>
+                <Setter Property="FontFamily" Value="Inter"/>
             </Style>
 
             <Style x:Key="ButtonOutline" TargetType="Button" BasedOn="{StaticResource BaseButton}">
@@ -94,14 +100,6 @@
                 <Setter Property="TextColor" Value="White" />
             </Style>
 
-            <!--Listing Page-->
-            <!--TODO: which one is needed?-->
-            <!--<Style TargetType="Border" x:Key="ListingContainer">
-                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource GreenWhite}, Dark={StaticResource Green}}" />
-                <Setter Property="Padding" Value="5" />
-
-            </Style>-->
-
             <!-- Card style -->
             <Style x:Key="ListingContainer" TargetType="Border">
                 <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightGreen2}, Dark={StaticResource LighterDarkGrey}}" />
@@ -115,7 +113,6 @@
                 </Setter>
             </Style>
 
-
             <Style TargetType="Image" x:Key="ListingImage">
                 <Setter Property="HorizontalOptions" Value="Fill" />
                 <Setter Property="VerticalOptions" Value="Fill" />
@@ -125,14 +122,39 @@
                 <Setter Property="MaximumHeightRequest" Value="400" />
                 <Setter Property="Margin" Value="0,0,0,10" />
             </Style>
-            
-            
+
             <!--Entry-->
             <Style TargetType="Entry">
                 <Setter Property="TextColor" Value="{AppThemeBinding Light=Black, Dark=White}" />
                 <Setter Property="PlaceholderColor" Value="{AppThemeBinding Light=Gray, Dark=LightGray}" />
+                <Setter Property="FontFamily" Value="Inter" />
+                <!--<Setter Property="BackgroundColor" Value="Transparent" />-->
+                <!-- Optional -->
+                <!--Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Focused">
+                                <VisualState.Setters>
+                                    <Setter Property="BorderColor" Value="{StaticResource LightGreen3}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="BorderColor" Value="Gray" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>-->
             </Style>
-            
+
+
+
+            <!--formfield-->
+            <Style x:Key="FormField" TargetType="VerticalStackLayout">
+                <Setter Property="Spacing" Value="2"/>
+            </Style>
+
             <!--Logo-->
             <Style x:Key="LogoImage" TargetType="Image">
                 <Setter Property="WidthRequest" Value="200" />
@@ -156,7 +178,24 @@
                 <Setter Property="HorizontalOptions" Value="Center" />
                 <Setter Property="VerticalOptions" Value="Center" />
             </Style>
-            
+
+            <Style x:Key="TitleLogoLabel" TargetType="Label" BasedOn="{StaticResource LargeLabel}">
+                <Setter Property="TextColor" Value="{StaticResource Green}" />
+                <!--<Setter Property="FontAttributes" Value="Bold" />-->
+                <Setter Property="FontFamily" Value="Nocturne" />
+                <Setter Property="FontSize" Value="32" />
+            </Style>
+
+            <Style x:Key="FormEntry" TargetType="Entry">
+                <Setter Property="WidthRequest" Value="280" />
+                <Setter Property="FontFamily" Value="Inter" />
+            </Style>
+
+            <Style x:Key="FormButton" TargetType="Button">
+                <Setter Property="WidthRequest" Value="280" />
+                <Setter Property="FontFamily" Value="Inter" />
+            </Style>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

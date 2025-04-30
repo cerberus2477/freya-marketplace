@@ -1,56 +1,108 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage 
-    x:Class="FreyaMarketplace.View.StartingPages.LoginPage"
-    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:model="clr-namespace:FreyaMarketplace.Model"
-    xmlns:viewmodel="clr-namespace:FreyaMarketplace.ViewModel"
-    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-    x:DataType="viewmodel:AuthViewModel"
-    Title="{Binding Title}">
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FreyaMarketplace.View.StartingPages.LoginPage"
+             xmlns:viewmodel="clr-namespace:FreyaMarketplace.ViewModel"
+             x:DataType="viewmodel:AuthViewModel"
+             Title="Bejelentkezés">
 
-    <VerticalStackLayout Padding="20">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
 
-        <Label Text="E-mail cím:" />
-        <Entry x:Name="txtEmail" Text="{Binding UserEmail, Mode=TwoWay}" 
-     />
-        
-        <!--//TODO: use "warning" style"-->
+        <!-- FORM SIDE -->
+        <Grid Grid.Column="0">
 
-        <Label Text="{Binding EmailError}" 
-       Style="{StaticResource WarningLabel}"
-       IsVisible="{Binding IsEmailErrorVisible}" />
+            <!-- Decorative top-left -->
+            <Image Source="rick.png" Opacity="0.1"
+                   Rotation="30" Aspect="AspectFit"
+                   TranslationX="-70" TranslationY="-70"
+                   WidthRequest="300"
+                   HorizontalOptions="Start" VerticalOptions="Start"
+                   InputTransparent="True" />
 
-            <Label Text="Jeszó:" />
-            <Entry x:Name="txtPassword" Text="{Binding UserPassword, Mode=TwoWay}" IsPassword="True"
-         />
-        <Label Text="{Binding PasswordError}" 
-       Style="{StaticResource WarningLabel}"
-       IsVisible="{Binding IsPasswordErrorVisible}" />
+            <!-- Decorative bottom-right -->
+            <Image Source="spicy.png" Opacity="0.1"
+                   Rotation="-40" Aspect="AspectFit"
+                   TranslationX="70" TranslationY="70"
+                   WidthRequest="300"
+                   HorizontalOptions="End" VerticalOptions="End"
+                   InputTransparent="True" />
 
+            <!-- Main form layout -->
+            <VerticalStackLayout VerticalOptions="Center"
+                                 HorizontalOptions="Center"
+                                 Spacing="15"
+                                 Padding="30"
+                                 MaximumWidthRequest="400"
+                                 MinimumWidthRequest="300">
 
-        <Button Text="Bejelentketés" Command="{Binding LoginCommand}" />
+                <Image Source="logo_green.png" HeightRequest="80" />
+                <Label Text="Freya's Garden"
+                       Style="{StaticResource TitleLogoLabel}"
+                       HorizontalOptions="Center" />
+                <Label Text="Örülünk hogy újra itt vagy!"
+                       HorizontalOptions="Center" 
+                       Style="{StaticResource Header2}"/>
 
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="5">
+                    <Label Text="Nincs még fiókod?"  Style="{StaticResource GrayLabel}" />
+                    <Label Text="Regisztráció" Style="{StaticResource GreenLabel}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnRegisterClicked" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
 
-    <!-- this is a button too functionally, but with different styling (label with onclick vs. button) -->
-    <Label Text="Elfejetett a jelszavad?" 
-    TextColor="Blue" 
-    HorizontalOptions="Center">
-        <Label.GestureRecognizers>
-            <TapGestureRecognizer Tapped="ForgotPassword_Tapped" />
-        </Label.GestureRecognizers>
-    </Label>
+                <VerticalStackLayout Style="{StaticResource FormField}">
+                    <Label Text="E-mail cím:" />
+                    <Entry Text="{Binding UserEmail}" />
+                    <Label Text="{Binding EmailError}" Style="{StaticResource WarningLabel}" IsVisible="{Binding IsEmailErrorVisible}" />
+                </VerticalStackLayout>
 
-    <Label Text="Nincs még fiókod?" HorizontalOptions="Center" />
-    <Button Text="Regisztráció"
-            Clicked="OnRegisterClicked"
-            HorizontalOptions="Center" />
+                <VerticalStackLayout Style="{StaticResource FormField}">
+                    <Label Text="Jelszó:" />
+                    <Grid ColumnSpacing="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Entry Grid.Column="0"
+                           Text="{Binding UserPassword}"
+                           IsPassword="{Binding IsPasswordHidden}" />
+                        <Button Grid.Column="1"
+                            WidthRequest="80"
+                            Text="{Binding PasswordButtonText}"
+                            Command="{Binding TogglePasswordVisibilityCommand}" />
+                    </Grid>
+                    <Label Text="{Binding PasswordError}" Style="{StaticResource WarningLabel}" IsVisible="{Binding IsPasswordErrorVisible}" />
+                </VerticalStackLayout>
 
-        <!-- ActivityIndicator (Loading Spinner) -->
-        <ActivityIndicator 
+                <Button Text="Bejelentkezés" Style="{StaticResource PrimaryButton}" Command="{Binding LoginCommand}" />
+
+                <Label Text="Elfelejtetted a jelszavad?" Style="{StaticResource GreenLabel}" HorizontalOptions="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="ForgotPassword_Tapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+            </VerticalStackLayout>
+        </Grid>
+
+        <!-- IMAGE SIDE with ActivityIndicator overlay -->
+        <Grid Grid.Column="1" IsVisible="{Binding IsWideScreen}" >
+            <Image Source="hero2.jpeg"
+               Aspect="AspectFill"
+               />
+
+            <ActivityIndicator 
             Style="{StaticResource ActivityIndicatorStyle}"
             IsRunning="{Binding IsBusy}" 
-            IsVisible="{Binding IsBusy}" 
-            Grid.Row="3"/>
-    </VerticalStackLayout>
+            IsVisible="{Binding IsBusy}"
+            HorizontalOptions="Center"
+            VerticalOptions="Center" />
+        </Grid>
+
+    </Grid>
 </ContentPage>

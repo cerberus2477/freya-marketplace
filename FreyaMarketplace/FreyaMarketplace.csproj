@@ -32,6 +32,7 @@
 	<ItemGroup>
 		<!-- App Icon -->
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+		<MauiIcon Include="Resources\Images\marketplace_icon.png" />
 
 		<!-- Splash Screen -->
 		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
@@ -54,6 +55,10 @@
 	  <MauiCss Remove="fromdev\**" />
 	  <MauiXaml Remove="fromdev\**" />
 	  <None Remove="fromdev\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiImage Remove="Resources\Images\marketplace_icon.png" />
 	</ItemGroup>
 	
 	<ItemGroup>
