@@ -58,6 +58,13 @@
 
         <!-- Logout -->
         <Button Text="Kijelentkezés" BackgroundColor="Red" TextColor="White" Clicked="Logout_Clicked" Margin="10"/>
+       
+        <!-- ActivityIndicator (Loading Spinner) -->
+        <ActivityIndicator 
+            Style="{StaticResource ActivityIndicatorStyle}"
+            IsRunning="{Binding IsBusy}" 
+            IsVisible="{Binding IsBusy}" 
+            Grid.Row="3"/>
     </VerticalStackLayout>
 
 </ContentPage>

@@ -10,13 +10,14 @@
     Title="{Binding Title}">
 
 
-    <!--<Grid
-     ColumnSpacing="5"
-    RowDefinitions="*,Auto"
-            RowSpacing="0"
-        >-->
-    <Grid RowDefinitions="Auto, Auto, *" ColumnSpacing="5" RowSpacing="10" HorizontalOptions="Center" WidthRequest="1000">
+    <Grid RowDefinitions="Auto, Auto, Auto, *" ColumnSpacing="5" RowSpacing="10" HorizontalOptions="Center" WidthRequest="1000">
         <VerticalStackLayout Padding="10" Grid.Row="0" HorizontalOptions="Fill">
+            <Label Style="{StaticResource LargeLabel}" Text="Aktív hirdetések" />
+            <Label Style="{StaticResource MediumLabel}" 
+                   Text="{Binding ActiveListingsCount, StringFormat='{0} Aktív hirdetés'}" />
+        </VerticalStackLayout>
+        <!--searchbar-->
+        <VerticalStackLayout Padding="10" Grid.Row="1" HorizontalOptions="Fill">
             <Entry 
             x:Name="SearchEntry"
             Placeholder="Keresés..."
@@ -27,19 +28,34 @@
 
         <RefreshView
             Grid.Row="2"
-            Grid.ColumnSpan="2"
             Command="{Binding SearchMyListingsCommand}"
             IsRefreshing="{Binding IsRefreshing}"
             >
-            
+
             <ContentView>
                 <CollectionView
                     ItemsSource="{Binding MyListings}"
                     SelectionMode="None">
 
+                    <!-- EmptyView for No Listings Found -->
+                    <CollectionView.EmptyView>
+                        <StackLayout Padding="100">
+                            <Image
+                                HorizontalOptions="Center"
+                                Source="not_found_trans.png"
+                                HeightRequest="160"
+                                WidthRequest="160"
+                                VerticalOptions="Center" />
+                            <Label Text="Nem található a keresésnek megfelelő hirdetés."
+                                   FontAttributes="Bold"
+                                   FontSize="Medium"
+                                   TextColor="Gray"
+                                   HorizontalTextAlignment="Center" />
+                        </StackLayout>
+                    </CollectionView.EmptyView>
 
                     <CollectionView.ItemsLayout>
-                        <GridItemsLayout Orientation="Vertical" Span="2" />
+                        <LinearItemsLayout Orientation="Vertical"/>
                     </CollectionView.ItemsLayout>
 
 
@@ -48,10 +64,7 @@
                             <Border 
             Style="{StaticResource ListingContainer}"
             HeightRequest="150"  
-                                HorizontalOptions="Fill"
-                                StrokeThickness="1"
-            Stroke="#DDDDDD"
-            Padding="10">
+                                HorizontalOptions="Fill">
                                 <Grid ColumnDefinitions="Auto, *, Auto"
                   RowDefinitions="Auto"
                   ColumnSpacing="10"
@@ -67,33 +80,33 @@
                     WidthRequest="120" 
                                         />
 
-                                        <!-- Textual Content -->
-                                        <VerticalStackLayout 
+                                    <!-- Text -->
+                                    <VerticalStackLayout 
                     Grid.Column="1" 
                     Spacing="5"
                     VerticalOptions="Center"
                     HorizontalOptions="Fill">
 
-                                            <Label Style="{StaticResource LargeLabel}" Text="{Binding Title}" />
-                                            <Label Style="{StaticResource MediumLabel}" Text="{Binding City}" />
-                                            <Label Style="{StaticResource MediumLabel}" 
+                                        <Label Style="{StaticResource LargeLabel}" Text="{Binding Title}" />
+                                        <Label Style="{StaticResource MediumLabel}" Text="{Binding City}" />
+                                        <Label Style="{StaticResource MediumLabel}" 
                            Text="{Binding Price, StringFormat='{0:N0} Ft'}"
                            TextColor="{StaticResource DarkGreen2}" />
 
-                                            <Label Style="{StaticResource SmallLabel}" Text="Növény adatok:" FontAttributes="Bold" />
-                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding PlantName}" />
-                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding PlantType}" />
-                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding StageName}" />
-                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding Count, StringFormat='Darabszám: {0} db'}" />
-                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding Description}" LineBreakMode="TailTruncation" MaxLines="2" />
+                                        <Label Style="{StaticResource SmallLabel}" Text="Növény adatok:" FontAttributes="Bold" />
+                                        <Label Style="{StaticResource SmallLabel}" Text="{Binding PlantName}" />
+                                        <Label Style="{StaticResource SmallLabel}" Text="{Binding PlantType}" />
+                                        <Label Style="{StaticResource SmallLabel}" Text="{Binding StageName}" />
+                                        <Label Style="{StaticResource SmallLabel}" Text="{Binding Count, StringFormat='Darabszám: {0} db'}" />
+                                        <Label Style="{StaticResource SmallLabel}" Text="{Binding Description}" LineBreakMode="TailTruncation" MaxLines="2" />
 
-                                        </VerticalStackLayout>
-                                        <!-- TODO: Update here with icon! -->
-                                        <!-- Edit Button (Tree Icon) -->
-                                        <ImageButton 
+                                    </VerticalStackLayout>
+                                    <!-- TODO: Update here with icon! -->
+                                    <!--todo: add icon-->
+                                    <Button 
                                         Grid.Column="2"
-                                        Source="edit_icon.png" 
-                                                                BackgroundColor="Transparent"
+ 
+                                                                BackgroundColor="Blue"
                                         HeightRequest="30"
                                         WidthRequest="30"
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MyListingsViewModel}}, Path=GoToUpdateListingCommand}"
@@ -113,34 +126,12 @@
             </ContentView>
         </RefreshView>
 
+        <!-- ActivityIndicator (Loading Spinner) -->
+        <ActivityIndicator 
+            Style="{StaticResource ActivityIndicatorStyle}"
+            IsRunning="{Binding IsBusy}" 
+            IsVisible="{Binding IsBusy}" 
+            Grid.Row="3"/>
 
-        <!--loading icon for the initial load. after that the refreshview handles loading-->
-        <!--<Grid IsVisible="{Binding IsBusy}" BackgroundColor="#80000000">
-            <ActivityIndicator 
-          IsRunning="{Binding IsBusy}" 
-          VerticalOptions="Center" 
-          HorizontalOptions="Center" 
-          Color="{StaticResource Primary}" />
-        </Grid>-->
     </Grid>
-    
-    <!--TODO: if there are no listing (=empty collectionview, display something similar to this-->
-    <!--erre van beépített logika, hogy ha üres akkor ez legyen benne-->
-    <!--saját fptó legyen, a törött növény-->
-    
-    <!--<VerticalStackLayout
-            IsVisible="{Binding NoListingsFound}"
-            VerticalOptions="Center"
-            HorizontalOptions="Center"
-            Spacing="15">
-        <Image Source="dotnet_bot.png"
-                   WidthRequest="120"
-                   HeightRequest="120"
-                   HorizontalOptions="Center"/>
-        <Label Text="Nem található a keresésnek megfelelő hirdetés."
-                   FontAttributes="Bold"
-                   FontSize="Medium"
-                   TextColor="Gray"
-                   HorizontalTextAlignment="Center"/>
-    </VerticalStackLayout>-->
 </ContentPage>

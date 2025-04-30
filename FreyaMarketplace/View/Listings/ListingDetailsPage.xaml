@@ -34,19 +34,27 @@
             <!-- === Card: Alapadatok === -->
             <Border Style="{StaticResource ListingContainer}">
                 <VerticalStackLayout>
-
-                    <!-- Price -->
                     <Label Text="{Binding Listing.Price, StringFormat='{0:N0} Ft'}" 
                            Style="{StaticResource LargeLabel}" 
                            FontAttributes="Bold" />
 
-                    <!-- City with Icon Placeholder -->
-                    <Label Text="{Binding Listing.City, StringFormat='📍 Város: {0}'}" 
-                           Style="{StaticResource MediumLabel}" />
+                    <Label Style="{StaticResource MediumLabel}">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{x:Static viewmodel:FontAwesomeIcons.Location}" FontFamily="FontAwesome" Style="{StaticResource IconPaddingStyle}"  />
+                                <Span Text="{Binding Listing.City, StringFormat='Város: {0}'}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
 
-                    <!-- Created/Updated Timestamp with Icon Placeholder -->
-                    <Label Text="{Binding Listing.CreatedAtFormattedLong, StringFormat='🕒 Feladás ideje: {0} (Frissítve: {1})'}" 
-                           Style="{StaticResource MediumLabel}"/>
+                    <Label Style="{StaticResource MediumLabel}">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{x:Static viewmodel:FontAwesomeIcons.Clock}" FontFamily="FontAwesome" Style="{StaticResource IconPaddingStyle}"/>
+                                <Span Text="{Binding Listing.CreatedAtFormattedLong, StringFormat='Feladás ideje: {0} (Frissítve: {1})'}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
                 </VerticalStackLayout>
             </Border>
             
@@ -94,7 +102,7 @@
                     <Label Text="{Binding Listing.Username}" 
                            Style="{StaticResource MediumLabel}" />
 
-
+                    <!--email section-->
                     <HorizontalStackLayout>
                         <!-- Reveal Email Button -->
                         <Button Text="Email felfedése"
@@ -102,9 +110,10 @@
                             Style="{StaticResource PrimaryButton}"
                             IsVisible="{Binding IsEmailRevealed, Converter={StaticResource InverseBooleanConverter}}" />
 
+                        <!--//TODO: add icon-->
                         <!-- Revealed Email with actions -->
                         <HorizontalStackLayout IsVisible="{Binding IsEmailRevealed}" Spacing="10">
-                            <Button Text="✉️ {Binding Listing.User.Email}"
+                            <Button Text="{Binding Listing.User.Email}"
                                     Command="{Binding OpenEmailAppCommand}"
                                     CommandParameter="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ListingDetailsViewModel}},
                                    Path=EmailCommandParameter}" />
@@ -125,7 +134,7 @@
 
                         <!-- Revealed City with actions -->
                         <HorizontalStackLayout IsVisible="{Binding IsCityRevealed}" Spacing="10">
-                            <Button Text="📍 {Binding Listing.User.City}"
+                            <Button Text="{Binding Listing.User.City}"
                                 Command="{Binding OpenMapAppCommand}" />
 
                             <Button Text="📋"

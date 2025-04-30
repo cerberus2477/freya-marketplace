@@ -38,5 +38,12 @@
         <Button Text="Bejelentkezés"
                 Clicked="OnLoginClicked"
                 HorizontalOptions="Center" />
+
+        <!-- ActivityIndicator (Loading Spinner) -->
+        <ActivityIndicator 
+            Style="{StaticResource ActivityIndicatorStyle}"
+            IsRunning="{Binding IsBusy}" 
+            IsVisible="{Binding IsBusy}" 
+            Grid.Row="3"/>
     </VerticalStackLayout>
 </ContentPage>

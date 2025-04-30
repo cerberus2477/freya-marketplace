@@ -142,6 +142,21 @@
                 <Setter Property="VerticalOptions" Value="Center" />
             </Style>
 
+            <!-- Padding style for FontAwesome Icons -->
+            <Style x:Key="IconPaddingStyle" TargetType="Span">
+                <!--<Setter Property="Padding" Value="5,0,10,0" />-->
+            </Style>
+
+            <!--loading circle-->
+            <Style x:Key="ActivityIndicatorStyle" TargetType="ActivityIndicator">
+                <Setter Property="Color" Value="{StaticResource Green}" />
+                <Setter Property="WidthRequest" Value="50" />
+                <Setter Property="HeightRequest" Value="50" />
+                <Setter Property="IsRunning" Value="True" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>
