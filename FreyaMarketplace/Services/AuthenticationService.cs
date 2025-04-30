@@ -51,7 +51,7 @@ public class AuthenticationService
     }
 
     //TODO: jelszavakat itt is már titkosítani kéne? akár egyből a viewmodelben hogy ne tároljukaz actual tartalmát?
-    public async Task<RegisterApiResponse> RegisterAsync(string username, string userEmail, string userPassword, string userPasswordConfirmation)
+    public async Task<SignupApiResponse> SignupAsync(string username, string userEmail, string userPassword, string userPasswordConfirmation)
     {
         var url = $"{AppSettings.ApiBaseUrl}register";
         var requestData = new {username = username, email = userEmail, password = userPassword, password_confirmation = userPasswordConfirmation};
@@ -62,15 +62,15 @@ public class AuthenticationService
             var response = await httpClient.PostAsync(url, content);
             var responseText = await response.Content.ReadAsStringAsync();
             Debug.WriteLine($"\n\nRegister request sent to API.\nRaw response: {responseText}");
-            var registerApiResponse = JsonSerializer.Deserialize<RegisterApiResponse>(responseText, jsonOptions);
-            Debug.WriteLine($"Deseriaolized response: \n\ttype:{registerApiResponse} \n\tcontent:{JsonSerializer.Serialize(registerApiResponse)}");
+            var signupApiResponse = JsonSerializer.Deserialize<SignupApiResponse>(responseText, jsonOptions);
+            Debug.WriteLine($"Deseriaolized response: \n\ttype:{signupApiResponse} \n\tcontent:{JsonSerializer.Serialize(signupApiResponse)}");
 
-            if (registerApiResponse != null) return registerApiResponse;
-            else return new RegisterApiResponse(500, "Hibás válaszformátum az API-tól");
+            if (signupApiResponse != null) return signupApiResponse;
+            else return new SignupApiResponse(500, "Hibás válaszformátum az API-tól");
         }
         catch (Exception ex)
         {
-            return new RegisterApiResponse(500, ExceptionHelperUtil.GetFriendlyMessage(ex) ?? $"Váratlan hiba történt a regisztráció során. ({ex.Message})");
+            return new SignupApiResponse(500, ExceptionHelperUtil.GetFriendlyMessage(ex) ?? $"Váratlan hiba történt a regisztráció során. ({ex.Message})");
         }
     }
 }

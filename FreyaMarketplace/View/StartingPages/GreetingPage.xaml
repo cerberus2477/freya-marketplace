@@ -11,16 +11,16 @@
         <Image Source="logo_white.png"
                HorizontalOptions="Center"
                Style="{StaticResource LogoImage}"/>
-        <Label Text="Welcome to FreyaMarketplace!"
+        <Label Text="Üdvözlünk a FreyaMarketplace-n!"
                Style="{StaticResource LargeLabel}"
                HorizontalOptions="Center" />
-        <Button Text="Login"
+        <Button Text="Bejelentkezés"
                 Style="{StaticResource PrimaryButton}"
                 Clicked="OnLoginClicked"
                 HorizontalOptions="Center" />
-        <Button Text="Register"
+        <Button Text="Regisztráció"
                 Style="{StaticResource BaseButton}"
-                Clicked="OnRegisterClicked"
+                Clicked="OnSignupClicked"
                 HorizontalOptions="Center" />
     </VerticalStackLayout>
 </ContentPage>

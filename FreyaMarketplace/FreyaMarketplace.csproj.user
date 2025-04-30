@@ -45,7 +45,7 @@
     <MauiXaml Update="View\StartingPages\LoginPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
-    <MauiXaml Update="View\StartingPages\RegisterPage.xaml">
+    <MauiXaml Update="View\StartingPages\SignupPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
   </ItemGroup>

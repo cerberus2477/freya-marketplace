@@ -1,6 +1,6 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="FreyaMarketplace.View.StartingPages.RegisterPage"
+             x:Class="FreyaMarketplace.View.StartingPages.SignupPage"
              xmlns:viewmodel="clr-namespace:FreyaMarketplace.ViewModel"
              x:DataType="viewmodel:AuthViewModel"
              Title="Regisztráció">
@@ -108,7 +108,7 @@
                     <Label Text="{Binding PasswordError}" Style="{StaticResource WarningLabel}" IsVisible="{Binding IsPasswordErrorVisible}" />
                 </VerticalStackLayout>
 
-                <Button Text="Regisztráció" Style="{StaticResource PrimaryButton}" Command="{Binding RegisterCommand}" />
+                <Button Text="Regisztráció" Style="{StaticResource PrimaryButton}" Command="{Binding SignupCommand}" />
             </VerticalStackLayout>
         </Grid>
 

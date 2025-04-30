@@ -112,7 +112,7 @@ public partial class AuthViewModel : BaseViewModel
 
 
     [RelayCommand]
-    private async Task RegisterAsync()
+    private async Task SignupAsync()
     {
         if (IsBusy) return;
         try
@@ -122,19 +122,19 @@ public partial class AuthViewModel : BaseViewModel
             EmailError = null;
             PasswordError = null;
 
-            var result = await authService.RegisterAsync(Username, UserEmail, UserPassword, UserPasswordConfirmation);
+            var result = await authService.SignupAsync(Username, UserEmail, UserPassword, UserPasswordConfirmation);
             if (result == null) return;
-            if (result.Data is RegisterSuccessData successData)
+            if (result.Data is SignupSuccessData successData)
             {
                 await ToastUtil.ShowToastAsync("Sikeres regisztráció");
 
-                //await Shell.Current.GoToAsync("///HomePage");
+                await Shell.Current.GoToAsync("LoginPage");
             }
             else if (result.Data is EmptyLoginData)
             {
                 await exceptionHandlerUtil.HandleExceptionAsync(new Exception(), result.Message, displayExMessage: false);
             }
-            else if (result.Data is RegisterValidationErrorData errorData)
+            else if (result.Data is SignupValidationErrorData errorData)
             {
                 if (errorData.Errors.ContainsKey("username"))
                 {

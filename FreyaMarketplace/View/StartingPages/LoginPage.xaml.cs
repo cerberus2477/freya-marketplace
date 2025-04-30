@@ -12,9 +12,9 @@ namespace FreyaMarketplace.View.StartingPages
             BindingContext = viewModel;
         }
 
-        private async void OnRegisterClicked(object sender, EventArgs e)
+        private async void OnSignupClicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync("RegisterPage");
+            await Shell.Current.GoToAsync("SignupPage");
         }
 
         private async void ForgotPassword_Tapped(object sender, EventArgs e)

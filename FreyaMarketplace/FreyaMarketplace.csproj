@@ -73,6 +73,9 @@
 	  <Compile Update="View\Listings\MyListingsPage.xaml.cs">
 	    <DependentUpon>MyListingsPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="View\StartingPages\SignupPage.xaml.cs">
+	    <DependentUpon>SignupPage.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 	
 	<ItemGroup>
@@ -100,7 +103,7 @@
 	  <MauiXaml Update="View\Listing\LoginPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\Listing\RegisterPage.xaml">
+	  <MauiXaml Update="View\Listing\SignupPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\ProfilePage.xaml">
@@ -112,7 +115,7 @@
 	  <MauiXaml Update="View\StartingPages\LoginPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\StartingPages\RegisterPage.xaml">
+	  <MauiXaml Update="View\StartingPages\SignupPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

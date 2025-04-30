@@ -11,9 +11,9 @@ namespace FreyaMarketplace.Model;
 //a converter that deserializes Data into the correct type(LoginData or ValidationErrorData).
 //this is needed becaese our apiresponses data can be of both types, we dont know which before deserialising.
 
-internal class RegisterDataJsonConverter : JsonConverter<IRegisterData>
+internal class SignupDataJsonConverter : JsonConverter<ISignupData>
 {
-    public override IRegisterData Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override ISignupData Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         using (JsonDocument doc = JsonDocument.ParseValue(ref reader))
         {
@@ -24,21 +24,21 @@ internal class RegisterDataJsonConverter : JsonConverter<IRegisterData>
             // If "Errors" key exists, it's ValidationErrorData
             if (data.TryGetProperty("errors", out _))
             {
-                return JsonSerializer.Deserialize<RegisterValidationErrorData>(data.GetRawText(), options);
+                return JsonSerializer.Deserialize<SignupValidationErrorData>(data.GetRawText(), options);
             }
 
             // If "User" key exists, it's LoginSuccessData
             else if (data.TryGetProperty("user", out _))
             {
-                return JsonSerializer.Deserialize<RegisterSuccessData>(data.GetRawText(), options);
+                return JsonSerializer.Deserialize<SignupSuccessData>(data.GetRawText(), options);
             }
         }
 
         //TODO: Default case ?
-        return new RegisterValidationErrorData();
+        return new SignupValidationErrorData();
     }
 
-    public override void Write(Utf8JsonWriter writer, IRegisterData value, JsonSerializerOptions options)
+    public override void Write(Utf8JsonWriter writer, ISignupData value, JsonSerializerOptions options)
     {
         JsonSerializer.Serialize(writer, value, value.GetType(), options);
     }

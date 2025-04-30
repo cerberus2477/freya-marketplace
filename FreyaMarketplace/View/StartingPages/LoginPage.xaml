@@ -50,7 +50,7 @@
                     <Label Text="Nincs még fiókod?"  Style="{StaticResource GrayLabel}" />
                     <Label Text="Regisztráció" Style="{StaticResource GreenLabel}">
                         <Label.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="OnRegisterClicked" />
+                            <TapGestureRecognizer Tapped="OnSignupClicked" />
                         </Label.GestureRecognizers>
                     </Label>
                 </StackLayout>

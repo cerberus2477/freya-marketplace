@@ -1,11 +1,11 @@
 namespace FreyaMarketplace.View.StartingPages
 {
-    public partial class RegisterPage : ContentPage
+    public partial class SignupPage : ContentPage
     {
-        public RegisterPage(AuthViewModel viewModel)
+        public SignupPage(AuthViewModel viewModel)
         {
             InitializeComponent();
-            viewModel.Title = "Regisztráció"; // Set title for register
+            viewModel.Title = "Regisztráció"; 
             BindingContext = viewModel;
         }
 
