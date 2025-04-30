@@ -15,3 +15,5 @@ global using FreyaMarketplace.View;
 global using FreyaMarketplace.View.StartingPages;
 global using System.Globalization;
 global using CommunityToolkit.Maui;
+global using CommunityToolkit.Maui.Alerts;
+global using CommunityToolkit.Maui.Core;

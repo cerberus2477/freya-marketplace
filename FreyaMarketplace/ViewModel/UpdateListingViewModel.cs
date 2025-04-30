@@ -170,11 +170,12 @@ public partial class UpdateListingViewModel : BaseViewModel
             //TODO: images
 
 
-            var result = await listingService.UpdateListingAsync(listing, ListingTitle, Description, City, Price, new List<string>());
+            var result = await listingService.UpdateListingAsync(Listing, ListingTitle, Description, City, Price, new List<string>());
             if (result.Data is PostPatchListingSuccessData successData)
             {
                 Listing = successData.Listing;
-                //Todo: toast sikeres módosítás
+                await ToastUtil.ShowToastAsync("Sikeres módosítás");
+
             }
             else if (result.Data is PostPatchListingValidationErrorData errorData)
             {
@@ -234,7 +235,7 @@ public partial class UpdateListingViewModel : BaseViewModel
             if (result.Data is PostPatchListingSuccessData successData)
             {
                 Listing = successData.Listing;
-                //Todo: toast sikeres módosítás
+                await ToastUtil.ShowToastAsync("Sikeres módosítás");
             }
             else if (result.Data is PostPatchListingValidationErrorData errorData)
             {

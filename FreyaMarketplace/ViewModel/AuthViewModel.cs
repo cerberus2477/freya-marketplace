@@ -71,13 +71,13 @@ public partial class AuthViewModel : BaseViewModel
             {
                 await userSessionService.SetAuthTokenAsync(successData.Token);
                 userSessionService.SetCurrentUser(successData.User);
-
+                await ToastUtil.ShowToastAsync("Sikeres bejelentkezés");
                 await Shell.Current.Navigation.PopToRootAsync();
                 await Shell.Current.GoToAsync("///HomePage");
             }
             else if (result.Data is EmptyLoginData)
             {
-                await exceptionHandlerUtil.HandleExceptionAsync(new Exception(result.Message), "");
+                await ToastUtil.ShowToastAsync("Helytelen hitelesítőadatok", true);
             }
             else if (result.Data is LoginValidationErrorData errorData)
             {
@@ -126,9 +126,7 @@ public partial class AuthViewModel : BaseViewModel
             if (result == null) return;
             if (result.Data is RegisterSuccessData successData)
             {
-                //TODO: login user with email and password.
-
-                await Shell.Current.DisplayAlert("Sikeres regisztráció", "Mostmár bejelentkezhetsz az alkalmazásba", "OK");
+                await ToastUtil.ShowToastAsync("Sikeres regisztráció");
 
                 //await Shell.Current.GoToAsync("///HomePage");
             }

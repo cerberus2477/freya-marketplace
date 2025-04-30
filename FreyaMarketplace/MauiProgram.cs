@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using CommunityToolkit.Maui;
+
 namespace FreyaMarketplace;
 
 public static class MauiProgram
@@ -7,15 +8,21 @@ public static class MauiProgram
     public static MauiApp CreateMauiApp()
     {
         var builder = MauiApp.CreateBuilder();
+
         builder
             .UseMauiApp<App>()
-            .UseMauiCommunityToolkit()
+            .UseMauiCommunityToolkit(options =>
+            {
+#if WINDOWS
+                options.SetShouldEnableSnackbarOnWindows(true);
+#endif
+            }) // <-- FIXED: moved closing parenthesis here
             .ConfigureFonts(fonts =>
             {
-            fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-            fonts.AddFont("FontAwesome.ttf", "FontAwesome");
-            fonts.AddFont("NocturneSerif-Regular.ttf", "Nocturne");
-            fonts.AddFont("Inter_18pt-Regular.ttf", "Inter");
+                fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+                fonts.AddFont("FontAwesome.ttf", "FontAwesome");
+                fonts.AddFont("NocturneSerif-Regular.ttf", "Nocturne");
+                fonts.AddFont("Inter_18pt-Regular.ttf", "Inter");
             });
 
 #if DEBUG
@@ -35,7 +42,7 @@ public static class MauiProgram
         builder.Services.AddTransient<ProfileViewModel>();
         builder.Services.AddTransient<AuthViewModel>();
 
-        //Services
+        // Services
         builder.Services.AddSingleton<ListingService>();
         builder.Services.AddSingleton<ProfileService>();
         builder.Services.AddSingleton<AuthenticationService>();
@@ -43,10 +50,8 @@ public static class MauiProgram
         builder.Services.AddSingleton<StageService>();
         builder.Services.AddSingleton<PlantService>();
 
-
-        //Utils
+        // Utils
         builder.Services.AddSingleton<ExceptionHandlerUtil>();
-
 
         return builder.Build();
     }

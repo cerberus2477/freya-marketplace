@@ -10,6 +10,9 @@ public partial class MyListingsViewModel : BaseViewModel
     private readonly UserSessionService userSessionService;
 
     [ObservableProperty]
+    private int ActiveListingsCount;
+
+    [ObservableProperty]
     bool isRefreshing;
     //TODO: isbusy kell??
 
@@ -64,8 +67,8 @@ public partial class MyListingsViewModel : BaseViewModel
             var listings = await listingService.SearchListings(SearchQuery, username);
 
             MyListings.Clear();
-
             MyListings.AddRange(listings);
+            ActiveListingsCount = MyListings.Count;
             Debug.WriteLine($"📄 Loaded mylistings.");
         }
         catch (Exception ex)

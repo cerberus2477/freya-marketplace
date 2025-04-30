@@ -58,6 +58,7 @@ public partial class ProfileViewModel : BaseViewModel
             if (result.Data is ProfileSuccessData successData)
             {
                 userSessionService.SetCurrentUser(successData.User);
+                await ToastUtil.ShowToastAsync("Sikerres mentés");
             }
             else if (result.Data is EmptyProfileData)
             {
