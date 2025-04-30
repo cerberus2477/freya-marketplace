@@ -83,10 +83,6 @@ namespace FreyaMarketplace.Services
                 if (profileApiResponse != null) return profileApiResponse;
                 else return new ProfileApiResponse(500, "Hibás válaszformátum az API-tól");
             }
-            catch (JsonException ex)
-            {
-                return new ProfileApiResponse(500, "Hibás válaszformátum az API-tól");
-            }
             catch (Exception ex)
             {
                 return new ProfileApiResponse(500, $"Váratlan hiba történt a mentés során. ({ex.Message})");

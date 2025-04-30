@@ -41,15 +41,8 @@ public class PlantService
 
             else
             {
-
-                //TODO: ez valamiért breakeli az appot, és a uion nem jelenik meg az üzenet, csak a debug windowban.
                 await exceptionHandlerUtil.HandleExceptionAsync(new Exception($"GET Plants request sent to API.\nResponse status: {response.StatusCode}"), "Nem sikerült lekérni a növényeket, mert az API nem 200 (OK) választ adott vissza.");
             }
-
-        }
-        catch (JsonException ex)
-        {
-            await exceptionHandlerUtil.HandleExceptionAsync(ex, "Hibás válaszformátum az API-tól.");
         }
         catch (Exception ex)
         {

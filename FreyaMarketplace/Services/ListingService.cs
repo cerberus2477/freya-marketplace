@@ -63,10 +63,6 @@ public class ListingService
             }
 
         }
-        catch (JsonException ex)
-        {
-            await exceptionHandlerUtil.HandleExceptionAsync(ex, "Hibás válaszformátum az API-tól.");
-        }
         catch (Exception ex)
         {
             await exceptionHandlerUtil.HandleExceptionAsync(ex, "Váratlan hiba történt a hirdetések lekérése közben.");
@@ -126,13 +122,9 @@ public class ListingService
             if (profileApiResponse != null) return profileApiResponse;
             else return new PostPatchListingApiResponse(500, "Hibás válaszformátum az API-tól");
         }
-        catch (JsonException ex)
-        {
-            return new PostPatchListingApiResponse(500, "Hibás válaszformátum az API-tól");
-        }
         catch (Exception ex)
         {
-            return new PostPatchListingApiResponse(500, $"Váratlan hiba történt a hirdetés módosítása során. ({ex.Message})");
+            return new PostPatchListingApiResponse(500, ExceptionHelperUtil.GetFriendlyMessage(ex) ?? $"Váratlan hiba történt a hirdetés növény/státusz módosítása során. ({ex.Message})");
         }
     }
 
@@ -172,13 +164,9 @@ public class ListingService
             if (profileApiResponse != null) return profileApiResponse;
             else return new PostPatchListingApiResponse(500, "Hibás válaszformátum az API-tól");
         }
-        catch (JsonException ex)
-        {
-            return new PostPatchListingApiResponse(500, "Hibás válaszformátum az API-tól");
-        }
         catch (Exception ex)
         {
-            return new PostPatchListingApiResponse(500, $"Váratlan hiba történt a hirdetés növény/státusz módosítása során. ({ex.Message})");
+            return new PostPatchListingApiResponse(500, ExceptionHelperUtil.GetFriendlyMessage(ex) ?? $"Váratlan hiba történt a hirdetés növény/státusz módosítása során. ({ex.Message})");
         }
     }
 }

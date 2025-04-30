@@ -33,6 +33,11 @@ public class EmptyLoginData : ILoginData
 {
 }
 
+public class ExceptionLoginData : ILoginData
+{
+}
+
+
 public class LoginValidationErrorData : ILoginData
 {
     public Dictionary<string, List<string>> Errors { get; set; }

@@ -140,7 +140,6 @@ public partial class UpdateListingViewModel : BaseViewModel
         finally
         {
             IsBusy = false;
-            //IsRefreshing = false;
         }
     }
 

@@ -132,7 +132,7 @@ public partial class AuthViewModel : BaseViewModel
             }
             else if (result.Data is EmptyLoginData)
             {
-                await exceptionHandlerUtil.HandleExceptionAsync(new Exception(result.Message), "");
+                await exceptionHandlerUtil.HandleExceptionAsync(new Exception(), result.Message, displayExMessage: false);
             }
             else if (result.Data is RegisterValidationErrorData errorData)
             {
@@ -153,6 +153,10 @@ public partial class AuthViewModel : BaseViewModel
                     PasswordError = string.Join("\n", errorData.Errors["password"]);
                     OnPropertyChanged(nameof(IsPasswordErrorVisible));
                 }
+            }
+            else if (result.Data is ExceptionLoginData)
+            {
+                await exceptionHandlerUtil.HandleExceptionAsync(new Exception(), result.Message, displayExMessage: false);
             }
             else
             {

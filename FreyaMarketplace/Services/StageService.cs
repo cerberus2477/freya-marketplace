@@ -45,10 +45,6 @@
                 }
 
             }
-            catch (JsonException ex)
-            {
-                await exceptionHandlerUtil.HandleExceptionAsync(ex, "Hibás válaszformátum az API-tól.");
-            }
             catch (Exception ex)
             {
                 await exceptionHandlerUtil.HandleExceptionAsync(ex, "Váratlan hiba történt a növények növekedési fázisainak lekérése közben.");

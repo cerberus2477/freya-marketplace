@@ -44,13 +44,9 @@ public class AuthenticationService
             if (loginApiResponse != null) return loginApiResponse;
             else return new LoginApiResponse(500, "Hibás válaszformátum az API-tól");
         }
-        catch (JsonException ex)
-        {
-            return new LoginApiResponse(500, $"Hibás válaszformátum az API-tól. ({ex.Message})");
-        }
         catch (Exception ex)
         {
-            return new LoginApiResponse(500, $"Váratlan hiba történt a bejelentkezés során. ({ex.Message})");
+            return new LoginApiResponse(500, ExceptionHelperUtil.GetFriendlyMessage(ex) ?? $"Váratlan hiba történt a bejelentkezés során. ({ex.Message})", new ExceptionLoginData());
         }
     }
 
@@ -72,13 +68,9 @@ public class AuthenticationService
             if (registerApiResponse != null) return registerApiResponse;
             else return new RegisterApiResponse(500, "Hibás válaszformátum az API-tól");
         }
-        catch (JsonException ex)
-        {
-            return new RegisterApiResponse(500, "Hibás válaszformátum az API-tól");
-        }
         catch (Exception ex)
         {
-            return new RegisterApiResponse(500, $"Váratlan hiba történt a regisztráció során. ({ex.Message})");
+            return new RegisterApiResponse(500, ExceptionHelperUtil.GetFriendlyMessage(ex) ?? $"Váratlan hiba történt a regisztráció során. ({ex.Message})");
         }
     }
 }
