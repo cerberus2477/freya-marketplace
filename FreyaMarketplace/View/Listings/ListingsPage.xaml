@@ -97,11 +97,11 @@
                                             <Label Style="{StaticResource MediumLabel}">
                                                 <Label.FormattedText>
                                                     <FormattedString>
-                                                        <Span Text="{Binding Listing.Count}"  />
+                                                        <Span Text="{Binding Count}"  />
                                                         <Span Text=" db " />
-                                                        <Span Text="{Binding Listing.PlantName}" FontAttributes="Bold"/>
+                                                        <Span Text="{Binding PlantName}" FontAttributes="Bold"/>
                                                         <Span Text=" " />
-                                                        <Span Text="{Binding Listing.StageName}" />
+                                                        <Span Text="{Binding StageName}" />
                                                     </FormattedString>
                                                 </Label.FormattedText>
                                             </Label>

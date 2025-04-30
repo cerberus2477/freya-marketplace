@@ -62,36 +62,43 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="model:Listing">
                             <Border 
-            Style="{StaticResource ListingContainer}"
-            HeightRequest="150"  
+                                Style="{StaticResource ListingContainer}"
+                                HeightRequest="150" 
                                 HorizontalOptions="Fill">
+
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MyListingsViewModel}}, Path=GoToUpdateListingCommand}"
+                                        CommandParameter="{Binding .}" />
+                                </Border.GestureRecognizers>
+
                                 <Grid ColumnDefinitions="Auto, *, Auto"
-                  RowDefinitions="Auto"
-                  ColumnSpacing="10"
-                  VerticalOptions="Fill"
-                  HorizontalOptions="Fill">
+                                  RowDefinitions="Auto"
+                                  ColumnSpacing="10"
+                                  VerticalOptions="Fill"
+                                  HorizontalOptions="Fill">
 
                                     <!-- Thumbnail -->
                                     <Image 
-                    Source="{Binding Thumbnail}"
-                    Aspect="AspectFill"
-                    VerticalOptions="Fill"
-                    HorizontalOptions="Start"
-                    WidthRequest="120" 
-                                        />
+                                        Source="{Binding Thumbnail}"
+                                        Aspect="AspectFill"
+                                        VerticalOptions="Fill"
+                                        HorizontalOptions="Start"
+                                        WidthRequest="120" 
+                                                            />
 
                                     <!-- Text -->
                                     <VerticalStackLayout 
-                    Grid.Column="1" 
-                    Spacing="5"
-                    VerticalOptions="Center"
-                    HorizontalOptions="Fill">
+                                        Grid.Column="1" 
+                                        Spacing="5"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="Fill">
 
                                         <Label Style="{StaticResource LargeLabel}" Text="{Binding Title}" />
                                         <Label Style="{StaticResource MediumLabel}" Text="{Binding City}" />
                                         <Label Style="{StaticResource MediumLabel}" 
-                           Text="{Binding Price, StringFormat='{0:N0} Ft'}"
-                           TextColor="{StaticResource DarkGreen2}" />
+                                        Text="{Binding Price, StringFormat='{0:N0} Ft'}"
+                                        TextColor="{StaticResource DarkGreen2}" />
 
                                         <Label Style="{StaticResource SmallLabel}" Text="Növény adatok:" FontAttributes="Bold" />
                                         <Label Style="{StaticResource SmallLabel}" Text="{Binding PlantName}" />
@@ -102,18 +109,16 @@
 
                                     </VerticalStackLayout>
                                     <!-- TODO: Update here with icon! -->
-                                    <!--todo: add icon-->
-                                    <Button 
+                                    <!--<Button 
                                         Grid.Column="2"
- 
-                                                                BackgroundColor="Blue"
+                                        Style="{StaticResource PrimaryButton}"
                                         HeightRequest="30"
                                         WidthRequest="30"
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MyListingsViewModel}}, Path=GoToUpdateListingCommand}"
                                         CommandParameter="{Binding .}"
                                         VerticalOptions="Start"
-                                        HorizontalOptions="End"
-                                    />
+                                        HorizontalOptions="End"-->
+                                    <!--/>-->
                                 </Grid>
                             </Border>
                         </DataTemplate>

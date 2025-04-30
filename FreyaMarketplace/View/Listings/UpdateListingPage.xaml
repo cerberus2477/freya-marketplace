@@ -12,47 +12,81 @@
         <VerticalStackLayout Padding="20" Spacing="15">
 
             <Label Text="Hirdetés szerkesztése"
-                   Style="{StaticResource LargeLabel}"
-                   HorizontalOptions="Center" />
+           Style="{StaticResource LargeLabel}"
+           HorizontalOptions="Center" />
 
-            <Label Text="Cím" Style="{StaticResource MediumLabel}" />
-            <Entry Text="{Binding ListingTitle}" Placeholder="Pl. Almafa eladó" />
-            <Label Text="{Binding TitleError}" Style="{StaticResource WarningLabel}" IsVisible="{Binding IsTitleErrorVisible}" />
+            <!-- Cím -->
+            <VerticalStackLayout Style="{StaticResource FormField}">
+                <Label Text="Cím" />
+                <Entry Text="{Binding ListingTitle}" Placeholder="Pl. Almafa eladó" />
+                <Label Text="{Binding TitleError}" Style="{StaticResource WarningLabel}" IsVisible="{Binding IsTitleErrorVisible}" />
+            </VerticalStackLayout>
 
-            <Label Text="Leírás" Style="{StaticResource MediumLabel}" />
-            <Editor Text="{Binding Description}" Placeholder="Rövid leírás..." AutoSize="TextChanges" HeightRequest="100" />
-            <Label Text="{Binding DescriptionError}" Style="{StaticResource WarningLabel}" IsVisible="{Binding IsDescriptionErrorVisible}" />
+            <!-- Leírás -->
+            <VerticalStackLayout Style="{StaticResource FormField}">
+                <Label Text="Leírás" />
+                <Editor Text="{Binding Description}" Placeholder="Rövid leírás..." AutoSize="TextChanges" HeightRequest="100" />
+                <Label Text="{Binding DescriptionError}" Style="{StaticResource WarningLabel}" IsVisible="{Binding IsDescriptionErrorVisible}" />
+            </VerticalStackLayout>
 
-            <Label Text="Település" Style="{StaticResource MediumLabel}" />
-            <Entry Text="{Binding City}" Placeholder="Pl. Budapest" />
-            <Label Text="{Binding CityError}" Style="{StaticResource WarningLabel}" IsVisible="{Binding IsCityErrorVisible}" />
+            <!-- Település -->
+            <VerticalStackLayout Style="{StaticResource FormField}">
+                <Label Text="Település" />
+                <Entry Text="{Binding City}" Placeholder="Pl. Budapest" />
+                <Label Text="{Binding CityError}" Style="{StaticResource WarningLabel}" IsVisible="{Binding IsCityErrorVisible}" />
+            </VerticalStackLayout>
 
-            <Label Text="Ár (Ft)" Style="{StaticResource MediumLabel}" />
-            <Entry Text="{Binding Price}" Keyboard="Numeric" Placeholder="Pl. 1500" />
-            <Label Text="{Binding PriceError}" Style="{StaticResource WarningLabel}" IsVisible="{Binding IsPriceErrorVisible}" />
+            <!-- Ár -->
+            <VerticalStackLayout Style="{StaticResource FormField}">
+                <Label Text="Ár (Ft)" />
+                <Entry Text="{Binding Price}" Keyboard="Numeric" Placeholder="Pl. 1500" />
+                <Label Text="{Binding PriceError}" Style="{StaticResource WarningLabel}" IsVisible="{Binding IsPriceErrorVisible}" />
+            </VerticalStackLayout>
 
-            <Label Text="Növény" Style="{StaticResource MediumLabel}" />
-            <Picker Title="Válassz növényt"
-                    ItemsSource="{Binding allPlants}"
-                    ItemDisplayBinding="{Binding Name}"
-                    SelectedItem="{Binding Plant}" />
-            <Label Text="{Binding PlantError}" Style="{StaticResource WarningLabel}" IsVisible="{Binding IsPlantErrorVisible}" />
+            <!-- Növény -->
+            <VerticalStackLayout Style="{StaticResource FormField}">
+                <Label Text="Növény" />
+                <Picker Title="Válassz növényt"
+                ItemsSource="{Binding AllPlants}"
+                ItemDisplayBinding="{Binding Name}"
+                SelectedItem="{Binding Plant}" />
+                <Label Text="{Binding PlantError}" Style="{StaticResource WarningLabel}" IsVisible="{Binding IsPlantErrorVisible}" />
+            </VerticalStackLayout>
 
-            <Label Text="Növekedési stádium" Style="{StaticResource MediumLabel}" />
-            <Picker Title="Válassz stádiumot"
-                    ItemsSource="{Binding allStages}"
-                    ItemDisplayBinding="{Binding Name}"
-                    SelectedItem="{Binding Stage}" />
-            <Label Text="{Binding StageError}" Style="{StaticResource WarningLabel}" IsVisible="{Binding IsStageErrorVisible}" />
+            <!--todo: type icker for easier plant finding-->
+            <!-- Típus (ha van ilyen mező) -->
+            <!--<VerticalStackLayout Style="{StaticResource FormField}">
+                <Label Text="Típus" />
+                <Picker Title="Válassz típust"
+                ItemsSource="{Binding AllTypes}"
+                ItemDisplayBinding="{Binding Name}"
+                SelectedItem="{Binding Type}" />
+                <Label Text="{Binding TypeError}" Style="{StaticResource WarningLabel}" IsVisible="{Binding IsTypeErrorVisible}" />
+            </VerticalStackLayout>-->
 
-            <Label Text="Darabszám" Style="{StaticResource MediumLabel}" />
-            <Entry Text="{Binding Count}" Keyboard="Numeric" Placeholder="Pl. 10" />
-            <Label Text="{Binding CountError}" Style="{StaticResource WarningLabel}" IsVisible="{Binding IsCountErrorVisible}" />
+            <!-- Növekedési stádium -->
+            <VerticalStackLayout Style="{StaticResource FormField}">
+                <Label Text="Növekedési stádium" />
+                <Picker Title="Válassz stádiumot"
+                ItemsSource="{Binding AllStages}"
+                ItemDisplayBinding="{Binding Name}"
+                SelectedItem="{Binding Stage}" />
+                <Label Text="{Binding StageError}" Style="{StaticResource WarningLabel}" IsVisible="{Binding IsStageErrorVisible}" />
+            </VerticalStackLayout>
 
+            <!-- Darabszám -->
+            <VerticalStackLayout Style="{StaticResource FormField}">
+                <Label Text="Darabszám" />
+                <Entry Text="{Binding Count}" Keyboard="Numeric" Placeholder="Pl. 10" />
+                <Label Text="{Binding CountError}" Style="{StaticResource WarningLabel}" IsVisible="{Binding IsCountErrorVisible}" />
+            </VerticalStackLayout>
+
+            <!-- Mentés gomb -->
             <Button Text="Mentés"
-                    Style="{StaticResource PrimaryButton}"
-                    Command="{Binding SendPatchRequestsCommand}" />
+            Style="{StaticResource PrimaryButton}"
+            Command="{Binding SendPatchRequestsCommand}" />
 
         </VerticalStackLayout>
+
     </ScrollView>
 </ContentPage>

@@ -9,8 +9,9 @@ public partial class MyListingsViewModel : BaseViewModel
     private readonly ExceptionHandlerUtil exceptionHandlerUtil;
     private readonly UserSessionService userSessionService;
 
+    private bool _isCountInitialized = false;
     [ObservableProperty]
-    private int ActiveListingsCount;
+    private int activeListingsCount;
 
     [ObservableProperty]
     bool isRefreshing;
@@ -68,7 +69,12 @@ public partial class MyListingsViewModel : BaseViewModel
 
             MyListings.Clear();
             MyListings.AddRange(listings);
-            ActiveListingsCount = MyListings.Count;
+            // Display the total number of the users listings
+            if (!_isCountInitialized)
+            {
+                ActiveListingsCount = listings.Count;
+                _isCountInitialized = true;
+            }
             Debug.WriteLine($"📄 Loaded mylistings.");
         }
         catch (Exception ex)
