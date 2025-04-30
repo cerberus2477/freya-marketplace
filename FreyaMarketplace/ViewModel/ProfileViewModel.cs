@@ -12,6 +12,9 @@ public partial class ProfileViewModel : BaseViewModel
     private readonly ExceptionHandlerUtil exceptionHandlerUtil;
     private readonly UserSessionService userSessionService;
 
+    [ObservableProperty]
+    private bool isDirty = false;
+
     [ObservableProperty] private string profileUsername;
     [ObservableProperty] private string profileEmail;
     [ObservableProperty] private string profileCity;
@@ -41,6 +44,34 @@ public partial class ProfileViewModel : BaseViewModel
         ProfileBirthdate = savedUser.Birthdate;
         ProfileDescription = savedUser.Description; 
     }
+
+    //private async Task<bool> ConfirmLeaveIfDirty()
+    //{
+    //    if (isDirty)
+    //    {
+    //        bool confirm = await DisplayAlert("Figyelem", "Biztos el akarsz navigálni? A mentetlen módosításaid elvesznek.", "Igen", "Mégsem");
+    //        if (confirm)
+    //        {
+    //            // reset the state
+    //            var vm = BindingContext as ProfileViewModel;
+    //            vm.ProfileUsername = originalUser.Username;
+    //            vm.ProfileEmail = originalUser.Email;
+    //            vm.ProfileCity = originalUser.City;
+    //            vm.ProfileBirthdate = originalUser.Birthdate;
+    //            vm.ProfileDescription = originalUser.Description;
+    //            isDirty = false;
+    //            return true;
+    //        }
+    //        else
+    //        {
+    //            return false;
+    //        }
+    //    }
+    //    return true;
+    //}
+
+
+
 
     [RelayCommand]
     private async Task SaveProfileAsync()
