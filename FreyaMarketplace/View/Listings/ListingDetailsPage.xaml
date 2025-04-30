@@ -93,25 +93,47 @@
                     <Label Text="{Binding Listing.Username}" 
                            Style="{StaticResource MediumLabel}" />
 
-                    <!-- Reveal Buttons & Copiable Info -->
-                    <!-- These will need to be bound to commands and state in the ViewModel -->
 
-                    <!-- Email Reveal Button -->
-                    <Button Text="Elérhetőség felfedése"
+                    <HorizontalStackLayout>
+                        <!-- Reveal Email Button -->
+                        <Button Text="Email felfedése"
                             Command="{Binding RevealEmailCommand}"
-                            Style="{StaticResource PrimaryButton}" />
+                            Style="{StaticResource PrimaryButton}"
+                            IsVisible="{Binding IsEmailRevealed, Converter={StaticResource InverseBooleanConverter}}" />
 
-                    <!-- Email shown after reveal -->
-                    <!-- Optional: add TapGestureRecognizer for opening mail app -->
+                        <!-- Revealed Email with actions -->
+                        <HorizontalStackLayout IsVisible="{Binding IsEmailRevealed}" Spacing="10">
+                            <Button Text="✉️ {Binding Listing.User.Email}"
+                                    Command="{Binding OpenEmailAppCommand}"
+                                    CommandParameter="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ListingDetailsViewModel}},
+                                   Path=EmailCommandParameter}" />
 
-                    <!-- City Reveal Button (Only if city exists) -->
-                    <Button Text="Helység felfedése"
+                            <Button Text="📋"
+                                Command="{Binding CopyToClipboardCommand}"
+                                CommandParameter="{Binding Listing.User.Email}" />  
+                        </HorizontalStackLayout>
+                    </HorizontalStackLayout>
+
+                    <!-- City section -->
+                    <HorizontalStackLayout IsVisible="{Binding IsCityRevealButtonVisible}">
+                        <!-- Reveal City Button -->
+                        <Button Text="Helység felfedése"
                             Command="{Binding RevealCityCommand}"
                             Style="{StaticResource PrimaryButton}"
-                            IsVisible="{Binding Listing.City, Converter={StaticResource NullToBooleanConverter}}" />
+                            IsVisible="{Binding IsCityRevealed, Converter={StaticResource InverseBooleanConverter}}" />
 
-                    <!-- Copy buttons for email/city if visible -->
-                    <!-- Add small copy buttons to the right of each field once shown -->
+                        <!-- Revealed City with actions -->
+                        <HorizontalStackLayout IsVisible="{Binding IsCityRevealed}" Spacing="10">
+                            <Button Text="📍 {Binding Listing.User.City}"
+                                Command="{Binding OpenMapAppCommand}" />
+
+                            <Button Text="📋"
+                                Command="{Binding CopyToClipboardCommand}"
+                                CommandParameter="{Binding Listing.User.City}" />
+                        </HorizontalStackLayout>
+                    </HorizontalStackLayout>
+
+
                 </VerticalStackLayout>
             </Border>
 

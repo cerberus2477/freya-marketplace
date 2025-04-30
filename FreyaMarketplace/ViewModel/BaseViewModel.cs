@@ -12,8 +12,33 @@ public partial class BaseViewModel : ObservableObject
     string title;
 
     [RelayCommand]
-    private async Task OpenImageViewer(string imageUrl)
+    public async Task OpenImageViewer(string imageUrl)
     {
         await Shell.Current.GoToAsync($"imageviewer?imageUrl={Uri.EscapeDataString(imageUrl)}");
+    }
+
+    [RelayCommand]
+    public async Task CopyToClipboard(string text)
+    {
+        await Clipboard.SetTextAsync(text);
+    }
+
+    [RelayCommand]
+    public async Task OpenEmailApp((string subject, string to) args)
+    {
+        var message = new EmailMessage
+        {
+            Subject = args.subject,
+            To = new List<string> { args.to }
+        };
+
+        await Email.ComposeAsync(message);
+    }
+
+    [RelayCommand]
+    public async Task OpenMapApp(string searchterm)
+    {
+        var locationUri = $"https://www.google.com/maps/search/?api=1&query={Uri.EscapeDataString(searchterm)}";
+        await Launcher.Default.OpenAsync(locationUri);
     }
 }
