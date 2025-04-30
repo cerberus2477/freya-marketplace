@@ -34,6 +34,18 @@ public class Listing
     [JsonIgnore]
     public string CreatedAtFormatted => ConverterUtil.GetRelativeTime(CreatedAt);
 
+    [JsonIgnore]
+    public string CreatedAtFormattedLong => ConverterUtil.GetRelativeDateTime(CreatedAt);
+
+    [JsonPropertyName("updated_at")]
+    public DateTime UpdatedAt { get; set; }
+
+    [JsonIgnore]
+    public string UpdatedAtFormatted => ConverterUtil.GetRelativeTime(UpdatedAt);
+
+    [JsonIgnore]
+    public string UpdatedAtFormattedLong => ConverterUtil.GetRelativeDateTime(UpdatedAt);
+
     [JsonPropertyName("user")]
     public ListingUser User { get; set; }
 
@@ -57,6 +69,11 @@ public class Listing
 
     [JsonPropertyName("user_plant")]
     public UserPlant UserPlant { get; set; }
+
+    [JsonIgnore]
+    public int Count => UserPlant.Count;
+
+
 }
 
 public class ListingUser
@@ -66,6 +83,12 @@ public class ListingUser
 
     [JsonPropertyName("username")]
     public string Username { get; set; }
+
+    [JsonPropertyName("city")]
+    public string City { get; set; }
+
+    [JsonPropertyName("email")]
+    public string Email { get; set; }
 }
 
 public class UserPlant

@@ -37,5 +37,23 @@ namespace FreyaMarketplace.Utils
             return result;
         }
 
+        public static string GetRelativeDateTime(DateTime dateTime)
+        {
+            var local = dateTime.ToLocalTime();
+            var now = DateTime.Now;
+
+            string datePart = "";
+            if (local.Date != now.Date)
+            {
+                var format = local.Year != now.Year ? "yyyy. MMMM d." : "MMMM d.";
+                datePart = local.ToString(format + " ");
+            }
+
+            string timePart = local.ToString("HH:mm");
+            string relative = GetRelativeTime(dateTime);
+
+            return $"{datePart}{timePart} ({relative})";
+        }
+
     }
 }

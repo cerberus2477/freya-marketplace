@@ -1,63 +1,120 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage
-    x:Class="FreyaMarketplace.View.Listings.ListingDetailsPage"
-    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:viewmodel="clr-namespace:FreyaMarketplace.ViewModel"
-    x:DataType="viewmodel:ListingDetailsViewModel"
-    Title="{Binding Listing.Title}">
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:FreyaMarketplace.ViewModel"
+             x:Class="FreyaMarketplace.View.Listings.ListingDetailsPage"
+             Title="Hirdetés részletei"
+             x:DataType="viewmodel:ListingDetailsViewModel">
 
     <ScrollView>
-        <Grid RowDefinitions="Auto,Auto,*">
-            <BoxView
-                BackgroundColor="{StaticResource Primary}"
-                Grid.RowSpan="2"
-                HorizontalOptions="Fill"
-                VerticalOptions="Fill"/>
+        <VerticalStackLayout Padding="20" Spacing="16">
 
-            <Border StrokeShape="RoundRectangle 80"
-                    Stroke="White"
-                    StrokeThickness="6"
-                    HeightRequest="172"
-                    WidthRequest="172"
-                    Margin="0,8,0,0"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center">
-                    <Image Aspect="AspectFill"
-                        HeightRequest="160"
-                        HorizontalOptions="Center"
-                        VerticalOptions="Center"
-                        Source="{Binding Listing.Media}" 
-                        WidthRequest="160"/>
-                    <!-- TODO: Bind Media to display image (probably an api request) -->
+            <!-- Image Gallery -->
+            <CollectionView ItemsSource="{Binding Listing.Media}" 
+                            HeightRequest="150" 
+                            ItemsLayout="HorizontalList">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Image Source="{Binding .}" WidthRequest="150" Margin="5"
+                               Style="{StaticResource ListingImage}">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ListingDetailsViewModel}}, Path=OpenImageViewerCommand}"
+                                                      CommandParameter="{Binding .}" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Title -->
+            <Label Text="{Binding Listing.Title}" 
+                   Style="{StaticResource LargeLabel}" 
+                   FontAttributes="Bold" />
+
+            <!-- === Card: Alapadatok === -->
+            <Border Style="{StaticResource ListingContainer}">
+                <VerticalStackLayout>
+
+                    <!-- Price -->
+                    <Label Text="{Binding Listing.Price, StringFormat='{0:N0} Ft'}" 
+                           Style="{StaticResource LargeLabel}" 
+                           FontAttributes="Bold" />
+
+                    <!-- City with Icon Placeholder -->
+                    <Label Text="{Binding Listing.City, StringFormat='📍 Város: {0}'}" 
+                           Style="{StaticResource MediumLabel}" />
+
+                    <!-- Created/Updated Timestamp with Icon Placeholder -->
+                    <Label Text="{Binding Listing.CreatedAtFormattedLong, StringFormat='🕒 Feladás ideje: {0} (Frissítve: {1})'}" 
+                           Style="{StaticResource MediumLabel}"/>
+                </VerticalStackLayout>
+            </Border>
+            
+            <!-- === Card: Tulajdonságok === -->
+            <Border Style="{StaticResource ListingContainer}">
+                <VerticalStackLayout>
+                    <Label Text="Tulajdonságok" Style="{StaticResource CardTitleLabel}" />
+
+                    <!-- Summary Line (Count, Name, Stage) -->
+                    <Label Style="{StaticResource MediumLabel}">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding Listing.Count}" FontAttributes="Bold" />
+                                <Span Text=" db " />
+                                <Span Text="{Binding Listing.PlantName}" />
+                                <Span Text=" " />
+                                <Span Text="{Binding Listing.StageName}" FontAttributes="Italic" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <!-- Additional Plant Info -->
+                    <Label Text="{Binding Listing.PlantName, StringFormat='Növény: {0}'}" 
+                           Style="{StaticResource MediumLabel}" />
+                    <Label Text="{Binding Listing.PlantType, StringFormat='Típus: {0}'}" 
+                           Style="{StaticResource MediumLabel}" />
+                </VerticalStackLayout>
             </Border>
 
-            <Label Style="{StaticResource LargeLabel}" 
-                   Grid.Row="1"
-                   TextColor="White"
-                   FontAttributes="Bold"
-                   Text="{Binding Listing.Title}"  
-                    HorizontalOptions="Center"
-                   Margin="0,0,0,8"/>
-
-                <VerticalStackLayout Grid.Row="2" Padding="10" Spacing="10">
-                    <Label Style="{StaticResource MediumLabel}" Text="{Binding Listing.Description}" />
-                
-                    <!-- TODO: make plant a link to website -->
-                    <Label Style="{StaticResource SmallLabel}" Text="{Binding Listing.PlantName, StringFormat='Plant: {0}'}" />
-               
-                    <Label Style="{StaticResource SmallLabel}" Text="{Binding Listing.PlantType, StringFormat='Type: {0}'}" />
-             
-                    <Label Style="{StaticResource SmallLabel}" Text="{Binding Listing.Stage, StringFormat='Stage: {0}'}" />
-          
-                    <Label Style="{StaticResource SmallLabel}" Text="{Binding Listing.Price, StringFormat='Price: {0:C}'}" />
-
-                    <!-- TODO: make user a link - make userpage -->
-                    <Label Style="{StaticResource SmallLabel}" Text="{Binding Listing.User, StringFormat='User: {0}'}" />
-               
-                    <Label Style="{StaticResource SmallLabel}" Text="{Binding Listing.CreatedAt, StringFormat='Created At: {0:MMM dd, yyyy}'}" />
-
+            <!-- === Card: Leírás === -->
+            <Border Style="{StaticResource ListingContainer}">
+                <VerticalStackLayout>
+                    <Label Text="Leírás" Style="{StaticResource CardTitleLabel}" />
+                    <Label Text="{Binding Listing.Description}" 
+                           Style="{StaticResource MediumLabel}" />
                 </VerticalStackLayout>
-        </Grid>
+            </Border>
+
+
+            <!-- === Card: Hirdető Adatai === -->
+            <Border Style="{StaticResource ListingContainer}">
+                <VerticalStackLayout>
+                    <Label Text="Hirdető adatai" Style="{StaticResource CardTitleLabel}" />
+
+                    <Label Text="{Binding Listing.Username}" 
+                           Style="{StaticResource MediumLabel}" />
+
+                    <!-- Reveal Buttons & Copiable Info -->
+                    <!-- These will need to be bound to commands and state in the ViewModel -->
+
+                    <!-- Email Reveal Button -->
+                    <Button Text="Elérhetőség felfedése"
+                            Command="{Binding RevealEmailCommand}"
+                            Style="{StaticResource PrimaryButton}" />
+
+                    <!-- Email shown after reveal -->
+                    <!-- Optional: add TapGestureRecognizer for opening mail app -->
+
+                    <!-- City Reveal Button (Only if city exists) -->
+                    <Button Text="Helység felfedése"
+                            Command="{Binding RevealCityCommand}"
+                            Style="{StaticResource PrimaryButton}"
+                            IsVisible="{Binding Listing.City, Converter={StaticResource NullToBooleanConverter}}" />
+
+                    <!-- Copy buttons for email/city if visible -->
+                    <!-- Add small copy buttons to the right of each field once shown -->
+                </VerticalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

@@ -83,7 +83,7 @@
                                             <Label Style="{StaticResource SmallLabel}" Text="{Binding PlantName}" />
                                             <Label Style="{StaticResource SmallLabel}" Text="{Binding PlantType}" />
                                             <Label Style="{StaticResource SmallLabel}" Text="{Binding StageName}" />
-                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding Userplant.Count, StringFormat='Darabszám: {0} db'}" />
+                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding Count, StringFormat='Darabszám: {0} db'}" />
                                             <Label Style="{StaticResource SmallLabel}" Text="{Binding Description}" LineBreakMode="TailTruncation" MaxLines="2" />
 
                                         </VerticalStackLayout>

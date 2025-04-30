@@ -83,13 +83,23 @@
                                             <!--TODO. delete id, this is only here for debugging reasons-->
                                             <!--<Label Style="{StaticResource LargeLabel}" Text="{Binding Id}" />-->
                                             <Label Style="{StaticResource LargeLabel}" Text="{Binding Title}" />
-                                            <Label Style="{StaticResource MediumLabel}" Text="{Binding PlantName}" />
-                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding PlantType}" />
-                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding StageName}" />
+                                            <Label Style="{StaticResource MediumLabel}">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{Binding Listing.Count}"  />
+                                                        <Span Text=" db " />
+                                                        <Span Text="{Binding Listing.PlantName}" FontAttributes="Bold"/>
+                                                        <Span Text=" " />
+                                                        <Span Text="{Binding Listing.StageName}" />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+
+                                            <!--todo: show this only on computer-->
                                             <Label Style="{StaticResource SmallLabel}" Text="{Binding Username}" /> 
                                             <!--TODO: implement other users profile-->
                                             <!--<Label Style="{StaticResource SmallLabel}" Text="{Binding Price, StringFormat='{0:F2}Ft'}" />-->
-                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding Price, StringFormat='{0:N0} Ft'}" />
+                                            <Label Style="{StaticResource LargelLabel}" Text="{Binding Price, StringFormat='{0:N0} Ft'}" />
                                             <Label Style="{StaticResource SmallLabel}" Text="{Binding CreatedAtFormatted}" />
                                         </VerticalStackLayout>
                                     </VerticalStackLayout>

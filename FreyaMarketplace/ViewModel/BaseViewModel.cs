@@ -11,4 +11,9 @@ public partial class BaseViewModel : ObservableObject
     [ObservableProperty]
     string title;
 
+    [RelayCommand]
+    private async Task OpenImageViewer(string imageUrl)
+    {
+        await Shell.Current.GoToAsync($"imageviewer?imageUrl={Uri.EscapeDataString(imageUrl)}");
+    }
 }
