@@ -74,7 +74,7 @@ public partial class ProfileViewModel : BaseViewModel
 
 
     [RelayCommand]
-    private async Task SaveProfileAsync()
+    private async Task UpdateProfileAsync()
     {
         if (IsBusy) return;
         try
@@ -85,7 +85,7 @@ public partial class ProfileViewModel : BaseViewModel
             ProfileUsernameError = null;
             ProfileBirthdateError = null;
 
-            var result = await profileService.SaveProfileAsync(ProfileUsername, ProfileEmail, ProfileCity, ProfileBirthdate, ProfileDescription);
+            var result = await profileService.UpdateProfileAsync(ProfileUsername, ProfileEmail, ProfileCity, ProfileBirthdate, ProfileDescription);
             if (result.Data is ProfileSuccessData successData)
             {
                 userSessionService.SetCurrentUser(successData.User);

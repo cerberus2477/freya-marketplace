@@ -1,15 +1,12 @@
-﻿
+﻿namespace FreyaMarketplace.ViewModel;
 
-//TODO: await Shell.Current.GoToAsync(".."); // Goes back to the previous page in Shell
-namespace FreyaMarketplace.ViewModel;
-
-[QueryProperty(nameof(Listing), "Listing")]
-public partial class UpdateListingViewModel : BaseViewModel
+public partial class CreateListingViewModel : BaseViewModel
 {
     [ObservableProperty]
     Listing listing;
 
     private readonly ListingService listingService;
+    private readonly UserplantService userplantService;
     private readonly StageService stageService;
     private readonly PlantService plantService;
     private readonly ExceptionHandlerUtil exceptionHandlerUtil;
@@ -36,9 +33,9 @@ public partial class UpdateListingViewModel : BaseViewModel
 
 
     //Userplant fields
-    [ObservableProperty] private ListingPlant plant;
-    [ObservableProperty] private Stage stage;
-    [ObservableProperty] private string count;
+    [ObservableProperty] private Plant selectedPlant;
+    [ObservableProperty] private Stage selectedStage;
+    [ObservableProperty] private int count;
     [ObservableProperty] public ObservableRangeCollection<Stage> allStages = new();
     [ObservableProperty] public ObservableRangeCollection<Plant> allPlants = new();
 
@@ -51,13 +48,15 @@ public partial class UpdateListingViewModel : BaseViewModel
     public bool IsCountErrorVisible => !string.IsNullOrEmpty(CountError);
 
 
-    public UpdateListingViewModel(ListingService listingService, ExceptionHandlerUtil exceptionHandlerUtil, UserSessionService userSessionService, StageService stageService, PlantService plantService)
+    public CreateListingViewModel(ListingService listingService, ExceptionHandlerUtil exceptionHandlerUtil, UserSessionService userSessionService, StageService stageService, PlantService plantService, UserplantService userplantService)
     {
+        this.userplantService = userplantService;
         this.listingService = listingService;
         this.exceptionHandlerUtil = exceptionHandlerUtil;
         this.userSessionService = userSessionService;
         this.stageService = stageService;
         this.plantService = plantService;
+        Title = "Új hirdetés hozzáadása";
 
         //load the stages and plants automatically when navigated to the page
         //Directly runs the methods in a background thread.
@@ -65,21 +64,6 @@ public partial class UpdateListingViewModel : BaseViewModel
         Task.Run(GetPlantsAsync);
     }
 
-    partial void OnListingChanged(Listing value)
-    {
-        if (value == null)
-            return;
-
-        ListingTitle = value.Title;
-        Description = value.Description;
-        City = value.City;
-        Price = value.Price;
-
-        plant = value.Plant;
-        stage = value.Stage;
-        //todo: load all fields ...
-        // stb, ha még több mező kell
-    }
 
     [RelayCommand]
     async Task GetStagesAsync()
@@ -103,7 +87,6 @@ public partial class UpdateListingViewModel : BaseViewModel
         finally
         {
             IsBusy = false;
-            //IsRefreshing = false;
         }
     }
 
@@ -134,18 +117,8 @@ public partial class UpdateListingViewModel : BaseViewModel
     }
 
 
-
-    //this command is binded to the ui. when the update button is pressed, the userplant or listing or both commands get excecuted.
     [RelayCommand]
-    private async Task SendPatchRequests()
-    {
-        UpdateListingCommand.Execute(null);
-        UpdateUserplantCommand.Execute(null);
-    }
-
-
-    [RelayCommand]
-    private async Task UpdateListingAsync()
+    private async Task CreateListingWithUserplantAsync()
     {
         if (IsBusy) return;
 
@@ -157,104 +130,84 @@ public partial class UpdateListingViewModel : BaseViewModel
             PriceError = null;
             //ImageError = null;
             //TODO: images
-
-
-            var result = await listingService.UpdateListingAsync(Listing, ListingTitle, Description, City, Price, new List<string>());
-            if (result.Data is PostPatchListingSuccessData successData)
-            {
-                Listing = successData.Listing;
-                await ToastUtil.ShowToastAsync("Sikeres módosítás");
-
-            }
-            else if (result.Data is PostPatchListingValidationErrorData errorData)
-            {
-                if (errorData.Errors.TryGetValue("title", out var titleErrors))
-                {
-                    TitleError = string.Join("\n", titleErrors);
-                    OnPropertyChanged(nameof(IsTitleErrorVisible));
-                }
-                if (errorData.Errors.TryGetValue("description", out var descriptionErrors))
-                {
-                    DescriptionError = string.Join("\n", descriptionErrors);
-                    OnPropertyChanged(nameof(IsDescriptionErrorVisible));
-                }
-                if (errorData.Errors.TryGetValue("city", out var cityErrors))
-                {
-                    CityError = string.Join("\n", cityErrors);
-                    OnPropertyChanged(nameof(IsCityErrorVisible));
-                }
-                if (errorData.Errors.TryGetValue("price", out var priceErrors))
-                {
-                    PriceError = string.Join("\n", priceErrors);
-                    OnPropertyChanged(nameof(IsPriceErrorVisible));
-                }
-                return;
-            }
-            else
-            {
-                await exceptionHandlerUtil.HandleExceptionAsync(new Exception(result.Message), "Hirdetés módosítása sikertelen.");
-            }
-        }
-        catch (Exception ex)
-        {
-            await exceptionHandlerUtil.HandleExceptionAsync(ex, "Hiba adódott a hirdetés módosítása során.");
-        }
-        finally
-        {
-            IsBusy = false;
-        }
-    }
-
-
-    [RelayCommand]
-   async Task UpdateUserplantAsync()
-    {
-        if (IsBusy) return;
-
-        try
-        {
-            IsBusy = true;
             PlantError = null;
             StageError = null;
             CountError = null;
-            //TODO: images
 
+            // Adding the userplant first
+            var result_uplant = await userplantService.CreateUserplantAsync(SelectedPlant.Id, SelectedStage.Id, Count);
 
-            var result = await listingService.UpdateListingAsync(listing, ListingTitle, Description, City, Price, new List<string>());
-            if (result.Data is PostPatchListingSuccessData successData)
+            // Userplant can't be added, display the validation errors.
+            if (result_uplant.Data is PostPatchUserplantValidationErrorData errorData_uplant)
             {
-                Listing = successData.Listing;
-                await ToastUtil.ShowToastAsync("Sikeres módosítás");
-            }
-            else if (result.Data is PostPatchListingValidationErrorData errorData)
-            {
-                //todo: modify for plant stage count fields
-                if (errorData.Errors.TryGetValue("plant", out var plantErrors))
+                if (errorData_uplant.Errors.TryGetValue("plant", out var plantErrors))
                 {
                     PlantError = string.Join("\n", plantErrors);
                     OnPropertyChanged(nameof(IsPlantErrorVisible));
                 }
-                if (errorData.Errors.TryGetValue("stage", out var stageErrors))
+                if (errorData_uplant.Errors.TryGetValue("stage", out var stageErrors))
                 {
                     StageError = string.Join("\n", stageErrors);
                     OnPropertyChanged(nameof(IsStageErrorVisible));
                 }
-                if (errorData.Errors.TryGetValue("count", out var countErrors))
+                if (errorData_uplant.Errors.TryGetValue("count", out var countErrors))
                 {
                     CountError = string.Join("\n", countErrors);
                     OnPropertyChanged(nameof(IsCountErrorVisible));
                 }
-                return;
+            }
+
+            // Adding userplant has been succesfull, adding new listing with the userplant
+            else if (result_uplant.Data is PostPatchUserplantSuccessData successData_uplant)
+            {
+                //TODO: actual images should be sent
+                var uplant_id = successData_uplant.Userplant.Id;
+                var result_listing = await listingService.CreateListingAsync(uplant_id, ListingTitle, Description, City, Price, new List<FileResult>());
+
+                // Adding listing has been successfull. Display message to user and navigate back.
+                if (result_listing.Data is PostPatchListingSuccessData successData)
+                {
+                    await ToastUtil.ShowToastAsync("Hirdetés sikeresen hozzáadva");
+                    await Shell.Current.GoToAsync("..");
+                }
+
+                // Listing can't be added, display the validation errors.
+                else if (result_listing.Data is PostPatchListingValidationErrorData errorData)
+                {
+                    if (errorData.Errors.TryGetValue("title", out var titleErrors))
+                    {
+                        TitleError = string.Join("\n", titleErrors);
+                        OnPropertyChanged(nameof(IsTitleErrorVisible));
+                    }
+                    if (errorData.Errors.TryGetValue("description", out var descriptionErrors))
+                    {
+                        DescriptionError = string.Join("\n", descriptionErrors);
+                        OnPropertyChanged(nameof(IsDescriptionErrorVisible));
+                    }
+                    if (errorData.Errors.TryGetValue("city", out var cityErrors))
+                    {
+                        CityError = string.Join("\n", cityErrors);
+                        OnPropertyChanged(nameof(IsCityErrorVisible));
+                    }
+                    if (errorData.Errors.TryGetValue("price", out var priceErrors))
+                    {
+                        PriceError = string.Join("\n", priceErrors);
+                        OnPropertyChanged(nameof(IsPriceErrorVisible));
+                    }
+                }
+                else
+                {
+                    await exceptionHandlerUtil.HandleExceptionAsync(new Exception(result_uplant.Message), "Hirdetés hozzáadása sikertelen.");
+                }
             }
             else
             {
-                await exceptionHandlerUtil.HandleExceptionAsync(new Exception(result.Message), "Hirdetés módosítása sikertelen.");
+                await exceptionHandlerUtil.HandleExceptionAsync(new Exception(result_uplant.Message), "Hirdetés (növény/státusz/darabszám) hozzáadása sikertelen.");
             }
         }
-
         catch (Exception ex)
         {
-            await exceptionHandlerUtil.HandleExceptionAsync(ex, "Hiba adódott a hirdetés növény/státusz módosítása során.");
+            await exceptionHandlerUtil.HandleExceptionAsync(ex, "Hiba adódott a hirdetés hozzáadása során.");
         }
         finally
         {

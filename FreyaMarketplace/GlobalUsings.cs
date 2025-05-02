@@ -17,3 +17,6 @@ global using System.Globalization;
 global using CommunityToolkit.Maui;
 global using CommunityToolkit.Maui.Alerts;
 global using CommunityToolkit.Maui.Core;
+global using System.Net.Http.Headers;
+global using System.Text;
+global using System.Text.Json.Serialization;

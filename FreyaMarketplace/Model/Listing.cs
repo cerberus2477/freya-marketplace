@@ -1,9 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace FreyaMarketplace.Model;
-
-//TODO: handle possible null values (plant?)
-//TODO: lehet nem kell a flattening
+﻿namespace FreyaMarketplace.Model;
 
 public class Listing
 {
@@ -53,7 +48,7 @@ public class Listing
     public string Username => User?.Username;
 
     [JsonPropertyName("plant")]
-    public Plant Plant { get; set; }
+    public ListingPlant Plant { get; set; }
 
     [JsonIgnore]
     public string PlantName => Plant?.Name ?? "";
@@ -68,10 +63,10 @@ public class Listing
     public string StageName => Stage?.Name ?? "";
 
     [JsonPropertyName("user_plant")]
-    public UserPlant UserPlant { get; set; }
+    public ListingUserplant Userplant { get; set; }
 
     [JsonIgnore]
-    public int Count => UserPlant.Count;
+    public int Count => Userplant.Count;
 
 
 }
@@ -91,14 +86,28 @@ public class ListingUser
     public string Email { get; set; }
 }
 
-public class UserPlant
+public class ListingUserplant
 {
     [JsonPropertyName("id")]
     public int Id { get; set; }
 
     [JsonPropertyName("count")]
     public int Count { get; set; }
+
 }
+
+public class ListingPlant
+{
+    [JsonPropertyName("id")]
+    public int Id { get; set; }
+
+    [JsonPropertyName("name")]
+    public string Name { get; set; }
+
+    [JsonPropertyName("type")]
+    public string Type { get; set; }
+}
+
 
 
 [JsonSerializable(typeof(List<Listing>))]

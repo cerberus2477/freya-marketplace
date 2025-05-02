@@ -25,8 +25,8 @@
 
         <ShellContent
             Title="Eladás"
-            ContentTemplate="{DataTemplate listings:NewListingPage}"
-            Route="NewListingPage" 
+            ContentTemplate="{DataTemplate listings:CreateListingPage}"
+            Route="CreateListingPage" 
             Icon="new_listing_icon.png"/>
 
         <ShellContent

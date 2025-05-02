@@ -1,5 +1,4 @@
-﻿using System.Text.Json.Serialization;
-namespace FreyaMarketplace.Model;
+﻿namespace FreyaMarketplace.Model;
 
 internal class PostPatchListingDataJsonConverter : JsonConverter<IPostPatchListingData>
 {

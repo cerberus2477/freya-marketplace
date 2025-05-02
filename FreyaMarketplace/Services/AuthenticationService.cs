@@ -1,29 +1,14 @@
-﻿using System.Buffers.Text;
-using System.Net.Http.Json;
-using System.Text;
-using System.Net;
-
-
-namespace FreyaMarketplace.Services;
+﻿namespace FreyaMarketplace.Services;
 
 public class AuthenticationService
 {
-   HttpClient httpClient;
-    JsonSerializerOptions jsonOptions;
+    private readonly HttpClient httpClient;
+    private readonly JsonSerializerOptions jsonOptions;
 
-    public AuthenticationService()
+    public AuthenticationService(HttpClient httpClient, JsonSerializerOptions jsonSerializerOptions)
     {
-        this.httpClient = new HttpClient();
-        httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
-        httpClient.DefaultRequestHeaders.Add("Accept-Encoding", "gzip, deflate, br");
-        httpClient.DefaultRequestHeaders.Add("Connection", "keep-alive");
-
-        this.jsonOptions = new JsonSerializerOptions
-        {
-            PropertyNameCaseInsensitive = true,  // Allow flexible casing
-            AllowTrailingCommas = false,        // No extra commas allowed
-            DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.Never // Require all fields
-        };
+        this.httpClient = httpClient;
+        jsonOptions = jsonSerializerOptions;
     }
 
 
@@ -33,16 +18,14 @@ public class AuthenticationService
         var requestData = new { email = userEmail, password = userPassword };
         var content = new StringContent(JsonSerializer.Serialize(requestData), Encoding.UTF8, "application/json");
 
+        // Sending the request
         try
         {
             var response = await httpClient.PostAsync(url, content);
             var responseText = await response.Content.ReadAsStringAsync();
-            Debug.WriteLine($"\n\nLogin request sent to API.\nRaw response: {responseText}");
-            var loginApiResponse = JsonSerializer.Deserialize<LoginApiResponse>(responseText, jsonOptions);
-            Debug.WriteLine($"Deseriaolized response: \n\ttype:{loginApiResponse} \n\tcontent:{JsonSerializer.Serialize(loginApiResponse)}");
+            Debug.WriteLine($"\n\nPOST Login request sent to API.");
 
-            if (loginApiResponse != null) return loginApiResponse;
-            else return new LoginApiResponse(500, "Hibás válaszformátum az API-tól");
+            return JsonSerializer.Deserialize<LoginApiResponse>(responseText, jsonOptions);
         }
         catch (Exception ex)
         {
@@ -50,23 +33,21 @@ public class AuthenticationService
         }
     }
 
-    //TODO: jelszavakat itt is már titkosítani kéne? akár egyből a viewmodelben hogy ne tároljukaz actual tartalmát?
+
     public async Task<SignupApiResponse> SignupAsync(string username, string userEmail, string userPassword, string userPasswordConfirmation)
     {
         var url = $"{AppSettings.ApiBaseUrl}register";
         var requestData = new {username = username, email = userEmail, password = userPassword, password_confirmation = userPasswordConfirmation};
         var content = new StringContent(JsonSerializer.Serialize(requestData), Encoding.UTF8, "application/json");
 
+        // Sending the request
         try
         {
             var response = await httpClient.PostAsync(url, content);
             var responseText = await response.Content.ReadAsStringAsync();
-            Debug.WriteLine($"\n\nRegister request sent to API.\nRaw response: {responseText}");
-            var signupApiResponse = JsonSerializer.Deserialize<SignupApiResponse>(responseText, jsonOptions);
-            Debug.WriteLine($"Deseriaolized response: \n\ttype:{signupApiResponse} \n\tcontent:{JsonSerializer.Serialize(signupApiResponse)}");
-
-            if (signupApiResponse != null) return signupApiResponse;
-            else return new SignupApiResponse(500, "Hibás válaszformátum az API-tól");
+            Debug.WriteLine($"\n\nPOST Register request sent to API.");
+            
+            return JsonSerializer.Deserialize<SignupApiResponse>(responseText, jsonOptions);
         }
         catch (Exception ex)
         {
@@ -74,5 +55,3 @@ public class AuthenticationService
         }
     }
 }
-
-//TODO: kérdés. ugye a serviceket di-jal adjuk át (ott construktorban a cucc) de pl a httpclient éls a jsonoptionst nem. lehet ezeket egységesen kéne

@@ -9,19 +9,20 @@
         <Image Source="logo_white.png"
                HorizontalOptions="Center"
                Style="{StaticResource LogoImage}"/>
-        
+
         <Label Text="Welcome to Freyas Garden!"
                Style="{StaticResource LargeLabel}"
                HorizontalOptions="Center"/>
-        
+
         <Label Text="This is your home page. Browse and explore."
                Style="{StaticResource MediumLabel}"
                HorizontalOptions="Center"/>
 
         <Button Text="Go to Listings" Style="{StaticResource BaseButton}" Clicked="OnListingsClicked"
             HorizontalOptions="Center" />
-        <Button Text="Create New Listing" Style="{StaticResource BaseButton}" Clicked="OnNewListingClicked"
+        <Button Text="Create New Listing" Style="{StaticResource BaseButton}" Clicked="OnCreateListingClicked"
             HorizontalOptions="Center" />
     </VerticalStackLayout>
 
 </ContentPage>
+<!--TODO: make homepage pretyy-->

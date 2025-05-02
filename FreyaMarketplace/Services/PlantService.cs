@@ -2,26 +2,18 @@
 
 public class PlantService
 {
-    HttpClient httpClient;
-    JsonSerializerOptions jsonOptions;
-    ExceptionHandlerUtil exceptionHandlerUtil;
-    public PlantService(ExceptionHandlerUtil exceptionHandlerUtil)
+    private readonly HttpClient httpClient;
+    private readonly JsonSerializerOptions jsonOptions;
+    private readonly ExceptionHandlerUtil exceptionHandlerUtil;
+    public PlantService(HttpClient httpClient, JsonSerializerOptions jsonSerializerOptions, ExceptionHandlerUtil exceptionHandlerUtil)
     {
-        this.httpClient = new HttpClient();
-
-        this.jsonOptions = new JsonSerializerOptions
-        {
-            PropertyNameCaseInsensitive = true,  // Allow flexible casing
-            AllowTrailingCommas = false,        // No extra commas allowed
-            DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.Never // Require all fields
-        };
-
+        this.httpClient = httpClient;
+        this.jsonOptions = jsonSerializerOptions;
         this.exceptionHandlerUtil = exceptionHandlerUtil;
     }
 
     List<Plant> plants;
 
-    //TODO: lehet kell jogosultság (tbh minden kéréshez kb)
     public async Task<List<Plant>> GetPlants()
     {
         var url = $"{AppSettings.ApiBaseUrl}plants";
@@ -54,5 +46,3 @@ public class PlantService
     }
 
 }
-    //TODO: If you want to inject HttpClient properly for testing/DI, you can later refactor it using IHttpClientFactory.}
-

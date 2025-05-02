@@ -1,25 +1,17 @@
-﻿using System.Net.Http.Headers;
-using System.Text;
-
-namespace FreyaMarketplace.Services;
+﻿namespace FreyaMarketplace.Services;
 
 public class ListingService
 {
-    HttpClient httpClient;
-    JsonSerializerOptions jsonOptions;
-    ExceptionHandlerUtil exceptionHandlerUtil;
-    public ListingService(ExceptionHandlerUtil exceptionHandlerUtil)
+    private readonly HttpClient httpClient;
+    private readonly JsonSerializerOptions jsonOptions;
+    private readonly ExceptionHandlerUtil exceptionHandlerUtil;
+    private readonly UserSessionService userSessionService;
+    public ListingService(HttpClient httpClient, JsonSerializerOptions jsonSerializerOptions, ExceptionHandlerUtil exceptionHandlerUtil, UserSessionService userSessionService)
     {
-        this.httpClient = new HttpClient();
-
-        this.jsonOptions = new JsonSerializerOptions
-        {
-            PropertyNameCaseInsensitive = true,  // Allow flexible casing
-            AllowTrailingCommas = false,        // No extra commas allowed
-            DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.Never // Require all fields
-        };
-
+        this.httpClient = httpClient;
+        this.jsonOptions = jsonSerializerOptions;
         this.exceptionHandlerUtil = exceptionHandlerUtil;
+        this.userSessionService = userSessionService;
     }
 
     List<Listing> listings;
@@ -27,8 +19,7 @@ public class ListingService
     //TODO: option to get paginated results, e.g only first 4 listings (homepage and profilepage sneak peak of userslistings, or e.g. same city listings)
     public async Task<List<Listing>> SearchListings(string query = "", string username = "")
     {
-
-        //constructing the url
+        // Constructing the url
         var url = $"{AppSettings.ApiBaseUrl}listings?pageSize=all";
 
         if (!string.IsNullOrWhiteSpace(query))
@@ -41,6 +32,7 @@ public class ListingService
         }
         //TODO: implement filters. (q will be rewritten probably, because it is handled in a similar way to filters. probably a loop of some kind
 
+        // Sending the request
         try
         {
             var response = await httpClient.GetAsync(url);
@@ -50,15 +42,13 @@ public class ListingService
                 var responseText = await response.Content.ReadAsStringAsync();
                 Debug.WriteLine($"\n\nGET Listings request sent to API.\nRaw response: {responseText}");
                 var listingsApiResponse = JsonSerializer.Deserialize<ListingsApiResponse>(responseText, jsonOptions);
-                Debug.WriteLine($"Deserialized response: \n\tcontent:{JsonSerializer.Serialize(listingsApiResponse)}");
 
                 listings = listingsApiResponse.Data;
             }
 
             else
             {
-
-                //TODO: ez valamiért breakeli az appot, és a uion nem jelenik meg az üzenet, csak a debug windowban.
+                //TODO: put this in exceptionhelper 
                 await exceptionHandlerUtil.HandleExceptionAsync(new Exception($"GET Listings request sent to API.\nResponse status: {response.StatusCode}"), "Nem sikerült lekérni a hirdetéseket, mert az API nem 200 (OK) választ adott vissza.");
             }
 
@@ -74,6 +64,18 @@ public class ListingService
 
     public async Task<PostPatchListingApiResponse> UpdateListingAsync(Listing oldListing, string title, string description, string city, decimal price, List<string> images)
     {
+
+        var url = $"{AppSettings.ApiBaseUrl}listings/{oldListing.Id}";
+
+        // Checking whether login_token is valid
+        var token = await userSessionService.GetAuthTokenAsync();
+        if (string.IsNullOrEmpty(token))
+        {
+            return new PostPatchListingApiResponse(401, "Kérjük jelentkezz be újra.");
+        }
+
+        // Constructing the request content (only the fields that are different from the old ones are sent)
+        // TODO: make this  (multipart/form-data)
         var patchData = new Dictionary<string, object>();
 
         if (title != oldListing.Title)
@@ -102,25 +104,18 @@ public class ListingService
             return new PostPatchListingApiResponse(200, "Nem történt változás, frissítés kihagyva.");
         }
 
-
-        var url = $"{AppSettings.ApiBaseUrl}listings/{oldListing.Id}";
-        var token = await SecureStorage.GetAsync("auth_token");
-
         var request = new HttpRequestMessage(HttpMethod.Patch, url);
         request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
         request.Content = new StringContent(JsonSerializer.Serialize(patchData), Encoding.UTF8, "application/json");
 
-
+        // Sending the request
         try
         {
             var response = await httpClient.SendAsync(request);
             var responseText = await response.Content.ReadAsStringAsync();
             Debug.WriteLine($"\n\nhListing patch request sent to API.\nRaw response: {responseText}");
-            var profileApiResponse = JsonSerializer.Deserialize<PostPatchListingApiResponse>(responseText, jsonOptions);
-            Debug.WriteLine($"Deseriaolized response: \n\ttype:{profileApiResponse} \n\tcontent:{JsonSerializer.Serialize(profileApiResponse)}");
 
-            if (profileApiResponse != null) return profileApiResponse;
-            else return new PostPatchListingApiResponse(500, "Hibás válaszformátum az API-tól");
+            return JsonSerializer.Deserialize<PostPatchListingApiResponse>(responseText, jsonOptions);
         }
         catch (Exception ex)
         {
@@ -128,49 +123,59 @@ public class ListingService
         }
     }
 
-    public async Task<PostPatchListingApiResponse> UpdateUserPlantAsync(Listing oldListing, int plantId, int stageId)
+    public async Task<PostPatchListingApiResponse> CreateListingAsync(int userplantId, string title, string description, string city, decimal price, List<FileResult> mediaFiles)
     {
-        //check is plantid and stageid are unchanged. only add them to the request if they are different. if none are different then skip
-        var patchData = new Dictionary<string, object>();
+        var url = $"{AppSettings.ApiBaseUrl}listings";
 
-        if (plantId != oldListing.Plant.Id)
-            patchData["plant"] = plantId;
-
-        if (stageId != oldListing.Stage.Id)
-            patchData["stage"] = stageId;
-
-        if (patchData.Count == 0)
+        // Checking whether login_token is valid
+        var token = await userSessionService.GetAuthTokenAsync();
+        if (string.IsNullOrEmpty(token))
         {
-            return new PostPatchListingApiResponse(200, "Nem történt változás, frissítés kihagyva.");
+            return new PostPatchListingApiResponse(401, "Kérjük jelentkezz be újra.");
         }
 
-        //TODO: add userplantsid once in api
-        //var url = $"{AppSettings.ApiBaseUrl}profile/plants/{oldListing.userplant.id};
-        var url = $"{AppSettings.ApiBaseUrl}profile/plants/17";
-        var token = await SecureStorage.GetAsync("auth_token");
+        // Constructing the request content (multipart/form-data)
+        using var content = new MultipartFormDataContent
+        {
+            { new StringContent(userplantId.ToString()), "user_plants_id" },
+            { new StringContent(title), "title" },
+            { new StringContent(description), "description" },
+            { new StringContent(city), "city" },
+            { new StringContent(price.ToString()), "price" }
+        };
 
-        var request = new HttpRequestMessage(HttpMethod.Patch, url);
-        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
-        request.Content = new StringContent(JsonSerializer.Serialize(patchData), Encoding.UTF8, "application/json");
+        //TODO: make this compatible with the image logic
+        // Adding the images to the request
+        if (mediaFiles != null && mediaFiles.Count > 0)
+        {
+            foreach (var file in mediaFiles)
+            {
+                var stream = await file.OpenReadAsync();
+                var streamContent = new StreamContent(stream);
+                streamContent.Headers.ContentType = new MediaTypeHeaderValue("image/jpeg"); // adjust based on actual content type if needed
+                content.Add(streamContent, "media[]", file.FileName);
+            }
+        }
 
+        var request = new HttpRequestMessage(HttpMethod.Post, url)
+        {
+            Headers = { Authorization = new AuthenticationHeaderValue("Bearer", token) },
+            Content = content
+        };
+
+        // Sending the request
         try
         {
             var response = await httpClient.SendAsync(request);
             var responseText = await response.Content.ReadAsStringAsync();
-            Debug.WriteLine($"\n\nPostPatchListing patch request sent to API.\nRaw response: {responseText}");
-            var profileApiResponse = JsonSerializer.Deserialize<PostPatchListingApiResponse>(responseText, jsonOptions);
-            Debug.WriteLine($"Deseriaolized response: \n\ttype:{profileApiResponse} \n\tcontent:{JsonSerializer.Serialize(profileApiResponse)}");
+            Debug.WriteLine($"\n\nPOST (Create) Listing request sent to API.\nRaw response: {responseText}");
 
-            if (profileApiResponse != null) return profileApiResponse;
-            else return new PostPatchListingApiResponse(500, "Hibás válaszformátum az API-tól");
+            return JsonSerializer.Deserialize<PostPatchListingApiResponse>(responseText, jsonOptions);
         }
         catch (Exception ex)
         {
-            return new PostPatchListingApiResponse(500, ExceptionHelperUtil.GetFriendlyMessage(ex) ?? $"Váratlan hiba történt a hirdetés növény/státusz módosítása során. ({ex.Message})");
+            return new PostPatchListingApiResponse(500, ExceptionHelperUtil.GetFriendlyMessage(ex) ?? $"Váratlan hiba történt a hirdetés létrehozása során. ({ex.Message})");
         }
     }
+
 }
-
-
-
-//TODO: If you want to inject HttpClient properly for testing/DI, you can later refactor it using IHttpClientFactory.

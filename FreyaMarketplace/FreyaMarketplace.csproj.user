@@ -30,7 +30,7 @@
     <MauiXaml Update="View\Listings\ListingsPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
-    <MauiXaml Update="View\Listings\NewListingPage.xaml">
+    <MauiXaml Update="View\Listings\CreateListingPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
     <MauiXaml Update="View\Listings\UpdateListingPage.xaml">

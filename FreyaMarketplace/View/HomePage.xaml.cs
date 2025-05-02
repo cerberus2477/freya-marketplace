@@ -16,9 +16,9 @@ namespace FreyaMarketplace.View
             await Shell.Current.GoToAsync("///ListingsPage");
         }
 
-        private async void OnNewListingClicked(object sender, EventArgs e)
+        private async void OnCreateListingClicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync("///NewListingPage");
+            await Shell.Current.GoToAsync("///CreateListingPage");
         } 
     }
 }

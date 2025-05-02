@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace FreyaMarketplace.Model;
+﻿namespace FreyaMarketplace.Model;
 
 public class Plant
 {
@@ -10,10 +8,20 @@ public class Plant
     [JsonPropertyName("name")]
     public string Name { get; set; }
 
-    [JsonPropertyName("type")]
-    public string Type { get; set; }
+    [JsonPropertyName("latin_name")]
+    public string LatinName { get; set; }
 
-    //TODO: optionally latin name and the other fields? might not work like this (or at least with the current jsonoptions in service)
+    [JsonPropertyName("type")]
+    public PlantType Type { get; set; }
+}
+
+public class PlantType
+{
+    [JsonPropertyName("id")]
+    public int Id { get; set; }
+
+    [JsonPropertyName("name")]
+    public string Name { get; set; }
 }
 
 

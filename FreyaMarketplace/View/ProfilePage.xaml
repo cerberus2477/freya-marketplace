@@ -42,9 +42,9 @@
         <Label Text="Leírás:" FontSize="16"/>
         <Entry x:Name="DescriptionEntry" Text="{Binding ProfileDescription}" IsEnabled="False"/>
 
-        <!-- Edit & Save Buttons -->
+        <!-- Edit & Update Buttons -->
         <Button x:Name="EditButton" Text="Módosítás" Clicked="EditProfile_Clicked" Margin="10"/>
-        <Button x:Name="SaveButton" Text="Mentés" Clicked="SaveProfile_Clicked" Command="{Binding SaveProfileCommand}" IsVisible="False" Margin="10"/>
+        <Button x:Name="UpdateButton" Text="Mentés" Clicked="UpdateProfile_Clicked" Command="{Binding UpdateProfileCommand}" IsVisible="False" Margin="10"/>
 <!--TODO: két külön parancs legyen? egy a viewben ami kikapcsolja a mezők módosítását, egy a viewmodelben ami menti az apiba az adatokat.-->
 
         <Button Text="Saját hirdetéseim"
@@ -68,3 +68,5 @@
     </VerticalStackLayout>
 
 </ContentPage>
+    
+    <!--TODO: style profilepage with existing styles-->

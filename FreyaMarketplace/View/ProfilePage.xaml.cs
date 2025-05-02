@@ -24,12 +24,12 @@ namespace FreyaMarketplace.View
             BirthdateEntry.IsEnabled = true;
             DescriptionEntry.IsEnabled = true;
 
-            // Show Save button, hide Edit button
+            // Show Update button, hide Edit button
             EditButton.IsVisible = false;
-            SaveButton.IsVisible = true;
+            UpdateButton.IsVisible = true;
         }
 
-        private void SaveProfile_Clicked(object sender, EventArgs e)
+        private void UpdateProfile_Clicked(object sender, EventArgs e)
         {
             // Disable editing
             UsernameEntry.IsEnabled = false;
@@ -40,12 +40,11 @@ namespace FreyaMarketplace.View
 
             
 
-            // Show Edit button, hide Save button
+            // Show Edit button, hide Update button
             EditButton.IsVisible = true;
-            SaveButton.IsVisible = false;
+            UpdateButton.IsVisible = false;
         }
 
-        //todo: use usersessionservice to log out.
         //should this be here or in the viewmodel?
         private async void Logout_Clicked(object sender, EventArgs e)
         {
@@ -53,12 +52,11 @@ namespace FreyaMarketplace.View
             {
 
                 userSessionService.Logout();
-                // (TODO: make sure to (clear the navigation stack), hide the nav)
-                // Navigate to the login page
                 await Shell.Current.GoToAsync("/LoginPage");
             }
             catch (Exception ex)
             {
+                // use exceptionhandler
                 // Log or handle errors
                 Debug.WriteLine($"Logout failed: {ex.Message}");
                 throw; // Or handle gracefully
