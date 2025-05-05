@@ -1,52 +1,48 @@
+using Microsoft.Maui.Controls;
+
 namespace FreyaMarketplace.View.Listings
 {
     public partial class CreateListingPage : ContentPage
     {
-        List<string> uploadedImages = new List<string>();
+        private CreateListingViewModel ViewModel => (CreateListingViewModel)BindingContext;
 
-        public CreateListingPage()
+        public CreateListingPage(CreateListingViewModel viewModel)
         {
             InitializeComponent();
+            BindingContext = viewModel;
+            RefreshImageGrid(); // Initial call to show "+" box even if empty
         }
 
-        private async void OnUploadPhotosClicked(object sender, EventArgs e)
+        protected override async void OnAppearing()
         {
-            try
+            base.OnAppearing();
+            if (BindingContext is CreateListingViewModel vm)
             {
-                var results = await FilePicker.PickMultipleAsync(new PickOptions
-                {
-                    PickerTitle = "Válaszd ki a képeket",
-                    //TODO: milyen típusok lehetnek az apiban?
-                    // TODO: max 10 db legyen
-                    FileTypes = FilePickerFileType.Images
-                });
-
-                if (results != null)
-                {
-                    foreach (var file in results)
-                    {
-                        var stream = await file.OpenReadAsync();
-                        uploadedImages.Add(file.FullPath);
-
-                        // make a new image that is fit to size
-                        var image = new Image
-                        {
-                            Source = ImageSource.FromStream(() => stream),
-                            HeightRequest = 100,
-                            WidthRequest = 100
-                        };
-
-                        ImageContainer.Children.Add(image);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                await DisplayAlert("Error", "Failed to upload photos: " + ex.Message, "OK");
-                    // TODO exceptionhandler
+                await vm.GetStagesAsync();
+                await vm.GetPlantsAsync();
             }
         }
 
+        private async void OnAddImageClicked()
+        {
+            await ViewModel.AddImagesAsync();
+            RefreshImageGrid();
+        }
+        private void RefreshImageGrid()
+        {
+            ImageDisplayHelperUtil.RenderPickedImagesOnly(
+                ImageContainer,
+                ViewModel.PickedFiles.ToList(),
+                OnAddImageClicked,
+                isEditable: true,
+                maxImages: 10,
+                onDeleteFile: file =>
+                {
+                    ViewModel.RemovePickedFile(file);
+                    RefreshImageGrid();
+                }
+            );
+        }
 
         private async void OnMyListingsClicked(object sender, EventArgs e)
         {
@@ -55,3 +51,4 @@ namespace FreyaMarketplace.View.Listings
         }
     }
 }
+

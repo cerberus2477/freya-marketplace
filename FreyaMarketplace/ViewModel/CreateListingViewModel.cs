@@ -2,9 +2,6 @@
 
 public partial class CreateListingViewModel : BaseViewModel
 {
-    [ObservableProperty]
-    Listing listing;
-
     private readonly ListingService listingService;
     private readonly UserplantService userplantService;
     private readonly StageService stageService;
@@ -17,27 +14,32 @@ public partial class CreateListingViewModel : BaseViewModel
     [ObservableProperty] private string description;
     [ObservableProperty] private string city;
     [ObservableProperty] private decimal price;
-    //image?
+    //images
+    private ObservableCollection<FileResult> _pickedFiles = new();
+    public ReadOnlyObservableCollection<FileResult> PickedFiles { get; }
 
     [ObservableProperty] private string titleError;
     [ObservableProperty] private string descriptionError;
     [ObservableProperty] private string cityError;
     [ObservableProperty] private string priceError;
-    //[ObservableProperty] private string imageError;
+    [ObservableProperty] private string imageError;
 
     public bool IsTitleErrorVisible => !string.IsNullOrEmpty(TitleError);
     public bool IsDescriptionErrorVisible => !string.IsNullOrEmpty(DescriptionError);
     public bool IsCityErrorVisible => !string.IsNullOrEmpty(CityError);
     public bool IsPriceErrorVisible => !string.IsNullOrEmpty(PriceError);
-    //public bool IsImageErrorVisible => !string.IsNullOrEmpty(ImageError);
+    public bool IsImageErrorVisible => !string.IsNullOrEmpty(ImageError);
 
 
     //Userplant fields
     [ObservableProperty] private Plant selectedPlant;
     [ObservableProperty] private Stage selectedStage;
     [ObservableProperty] private int count;
-    [ObservableProperty] public ObservableRangeCollection<Stage> allStages = new();
-    [ObservableProperty] public ObservableRangeCollection<Plant> allPlants = new();
+    // Options for the dropdowns
+    // TODO: make this work lmao
+    [ObservableProperty] private ObservableRangeCollection<Stage> allStages = new();
+    [ObservableProperty] private ObservableRangeCollection<Plant> allPlants = new();
+
 
     [ObservableProperty] private string plantError;
     [ObservableProperty] private string stageError;
@@ -58,15 +60,34 @@ public partial class CreateListingViewModel : BaseViewModel
         this.plantService = plantService;
         Title = "Új hirdetés hozzáadása";
 
+        PickedFiles = new ReadOnlyObservableCollection<FileResult>(_pickedFiles);
+
+        //TODO: delete this once final (now in page)
         //load the stages and plants automatically when navigated to the page
         //Directly runs the methods in a background thread.
-        Task.Run(GetStagesAsync);
-        Task.Run(GetPlantsAsync);
+        //Task.Run(GetStagesAsync);
+        //Task.Run(GetPlantsAsync);
     }
 
 
+
+
+    // Image handling
+    public async Task AddImagesAsync()
+    {
+        var newFiles = await ImagePickerUtil.PickImagesAsync(PickedFiles.Count);
+        foreach (var file in newFiles)
+            _pickedFiles.Add(file);
+    }
+
+    public void AddPickedFile(FileResult file) => _pickedFiles.Add(file);
+    public void RemovePickedFile(FileResult file) => _pickedFiles.Remove(file);
+
+
+
+    // API calls
     [RelayCommand]
-    async Task GetStagesAsync()
+    public async Task GetStagesAsync()
     {
         if (IsBusy)
             return;
@@ -92,7 +113,7 @@ public partial class CreateListingViewModel : BaseViewModel
 
 
     [RelayCommand]
-    async Task GetPlantsAsync()
+    public async Task GetPlantsAsync()
     {
         if (IsBusy)
             return;
@@ -128,11 +149,33 @@ public partial class CreateListingViewModel : BaseViewModel
             TitleError = null;
             CityError = null;
             PriceError = null;
-            //ImageError = null;
-            //TODO: images
+            ImageError = null;
             PlantError = null;
             StageError = null;
             CountError = null;
+
+            // Checking whether we have a plant and a stage
+            bool hasValidationError = false;
+
+            if (SelectedPlant == null)
+            {
+                PlantError = "Kérlek válassz növényt.";
+                OnPropertyChanged(nameof(IsPlantErrorVisible));
+                hasValidationError = true;
+            }
+
+            if (SelectedStage == null)
+            {
+                StageError = "Kérlek válassz növekedési fázist.";
+                OnPropertyChanged(nameof(IsStageErrorVisible));
+                hasValidationError = true;
+            }
+
+            if (hasValidationError)
+            {
+                IsBusy = false;
+                return;
+            }
 
             // Adding the userplant first
             var result_uplant = await userplantService.CreateUserplantAsync(SelectedPlant.Id, SelectedStage.Id, Count);
@@ -162,7 +205,7 @@ public partial class CreateListingViewModel : BaseViewModel
             {
                 //TODO: actual images should be sent
                 var uplant_id = successData_uplant.Userplant.Id;
-                var result_listing = await listingService.CreateListingAsync(uplant_id, ListingTitle, Description, City, Price, new List<FileResult>());
+                var result_listing = await listingService.CreateListingAsync(uplant_id, ListingTitle, Description, City, Price, PickedFiles.ToList());
 
                 // Adding listing has been successfull. Display message to user and navigate back.
                 if (result_listing.Data is PostPatchListingSuccessData successData)

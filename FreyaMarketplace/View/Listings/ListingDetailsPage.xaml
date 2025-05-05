@@ -10,21 +10,7 @@
         <VerticalStackLayout Padding="20" Spacing="16">
 
             <!-- Image Gallery -->
-            <CollectionView ItemsSource="{Binding Listing.Media}" 
-                            HeightRequest="150" 
-                            ItemsLayout="HorizontalList">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Image Source="{Binding .}" WidthRequest="150" Margin="5"
-                               Style="{StaticResource ListingImage}">
-                            <Image.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ListingDetailsViewModel}}, Path=OpenImageViewerCommand}"
-                                                      CommandParameter="{Binding .}" />
-                            </Image.GestureRecognizers>
-                        </Image>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+            <StackLayout x:Name="ImageContainer" Orientation="Horizontal" Spacing="8" />
 
             <!-- Title -->
             <Label Text="{Binding Listing.Title}" 

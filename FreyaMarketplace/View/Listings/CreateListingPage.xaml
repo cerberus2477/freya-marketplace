@@ -1,65 +1,83 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="FreyaMarketplace.View.Listings.CreateListingPage"
-             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             Title="New Listing">
+<ContentPage
+    x:Class="FreyaMarketplace.View.Listings.CreateListingPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodel="clr-namespace:FreyaMarketplace.ViewModel"
+    x:DataType="viewmodel:CreateListingViewModel"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    Title="{Binding Title}">
 
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="15">
             <!-- Add a button to navigate to MyPlantsPage -->
             <Button Text="Saját hirdetéseim" BackgroundColor="Blue" TextColor="White" Clicked="OnMyListingsClicked"/>
+            
+            <Label Text="Új hirdetés hozzáadása" Style="{StaticResource LargeLabel}" HorizontalOptions="Center" />
 
-            <Label Text="Eladás" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center" />
 
             <!-- Multiple Image Upload -->
-            <Button Text="Upload Photos" Clicked="OnUploadPhotosClicked"/>
-
-            <ScrollView Orientation="Horizontal" HeightRequest="150">
-                <StackLayout x:Name="ImageContainer" Orientation="Horizontal" Spacing="10"/>
-            </ScrollView>
-
-            <Entry x:Name="TitleEntry" Placeholder="Title" />
-
-            <Editor x:Name="DescriptionEditor" Placeholder="Description" AutoSize="TextChanges" HeightRequest="100"/>
-
-            <Entry x:Name="PriceEntry" Placeholder="Price" Keyboard="Numeric"/>
-
-            <Picker x:Name="PlantPicker" Title="Select a Plant">
-                <Picker.ItemsSource>
-                    <x:Array Type="{x:Type x:String}">
-                        <x:String>Körte</x:String>
-                        <x:String>Áfonya</x:String>
-                        <x:String>Alma</x:String>
-                        <x:String>Cseresznye</x:String>
-                    </x:Array>
-                </Picker.ItemsSource>
-            </Picker>
-
-            <Picker x:Name="TypePicker" Title="Select Type">
-                <Picker.ItemsSource>
-                    <x:Array Type="{x:Type x:String}">
-                        <x:String>Gyümölcs</x:String>
-                        <x:String>Zöldség</x:String>
-                        <x:String>Fűszernövény</x:String>
-                    </x:Array>
-                </Picker.ItemsSource>
-            </Picker>
-
-            <Picker x:Name="StagePicker" Title="Select Growth Stage">
-                <Picker.ItemsSource>
-                    <x:Array Type="{x:Type x:String}">
-                        <x:String>Mag</x:String>
-                        <x:String>Palánta</x:String>
-                        <x:String>Növény</x:String>
-                        <x:String>Termés</x:String>
-                    </x:Array>
-                </Picker.ItemsSource>
-            </Picker>
+            <StackLayout x:Name="ImageContainer" Orientation="Horizontal" Spacing="8" />
             
-            <Button Text="OK" BackgroundColor="Green" TextColor="White"/>
-            
+            <!-- Cím -->
+            <VerticalStackLayout Style="{StaticResource FormField}">
+                <Label Text="Cím" />
+                <Entry Text="{Binding ListingTitle}" Placeholder="Pl. Almafa eladó" />
+                <Label Text="{Binding TitleError}" Style="{StaticResource WarningLabel}" IsVisible="{Binding IsTitleErrorVisible}" />
+            </VerticalStackLayout>
+
+            <!-- Leírás -->
+            <VerticalStackLayout Style="{StaticResource FormField}">
+                <Label Text="Leírás" />
+                <Editor Text="{Binding Description}" Placeholder="Rövid leírás..." AutoSize="TextChanges" HeightRequest="100" />
+                <Label Text="{Binding DescriptionError}" Style="{StaticResource WarningLabel}" IsVisible="{Binding IsDescriptionErrorVisible}" />
+            </VerticalStackLayout>
+
+            <!-- Település -->
+            <VerticalStackLayout Style="{StaticResource FormField}">
+                <Label Text="Település" />
+                <Entry Text="{Binding City}" Placeholder="Pl. Budapest" />
+                <Label Text="{Binding CityError}" Style="{StaticResource WarningLabel}" IsVisible="{Binding IsCityErrorVisible}" />
+            </VerticalStackLayout>
+
+            <!-- Ár -->
+            <VerticalStackLayout Style="{StaticResource FormField}">
+                <Label Text="Ár (Ft)" />
+                <Entry Text="{Binding Price}" Keyboard="Numeric" Placeholder="Pl. 1500" />
+                <Label Text="{Binding PriceError}" Style="{StaticResource WarningLabel}" IsVisible="{Binding IsPriceErrorVisible}" />
+            </VerticalStackLayout>
+
+            <!-- Növény -->
+            <VerticalStackLayout Style="{StaticResource FormField}">
+                <Label Text="Növény" />
+                <Picker Title="Válassz növényt"
+                        ItemsSource="{Binding AllPlants}"
+                        ItemDisplayBinding="{Binding Name}"
+                        SelectedItem="{Binding SelectedPlant}" />
+                <Label Text="{Binding PlantError}" Style="{StaticResource WarningLabel}" IsVisible="{Binding IsPlantErrorVisible}" />
+            </VerticalStackLayout>
+
+            <!-- Növekedési stádium -->
+            <VerticalStackLayout Style="{StaticResource FormField}">
+                <Label Text="Növekedési stádium" />
+                <Picker Title="Válassz stádiumot"
+                        ItemsSource="{Binding AllStages}"
+                        ItemDisplayBinding="{Binding Name}"
+                        SelectedItem="{Binding SelectedStage}" />
+                <Label Text="{Binding StageError}" Style="{StaticResource WarningLabel}" IsVisible="{Binding IsStageErrorVisible}" />
+            </VerticalStackLayout>
+
+            <!-- Darabszám -->
+            <VerticalStackLayout Style="{StaticResource FormField}">
+                <Label Text="Darabszám" />
+                <Entry Text="{Binding Count}" Keyboard="Numeric" Placeholder="Pl. 10" />
+                <Label Text="{Binding CountError}" Style="{StaticResource WarningLabel}" IsVisible="{Binding IsCountErrorVisible}" />
+            </VerticalStackLayout>
+
+            <!-- Létrehozás gomb -->
+            <Button Text="Létrehozás"
+                    Style="{StaticResource PrimaryButton}"
+                    Command="{Binding CreateListingWithUserplantCommand}" />
         </VerticalStackLayout>
     </ScrollView>
-
 </ContentPage>

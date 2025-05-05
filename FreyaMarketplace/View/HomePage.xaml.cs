@@ -1,7 +1,3 @@
-using Microsoft.Maui.Controls;
-using System;
-using Microsoft.Maui;
-
 namespace FreyaMarketplace.View
 {
     public partial class HomePage : ContentPage

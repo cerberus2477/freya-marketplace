@@ -80,6 +80,9 @@
 	</ItemGroup>
 	
 	<ItemGroup>
+	  <MauiXaml Update="View\FullImageViewerPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="View\HomePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

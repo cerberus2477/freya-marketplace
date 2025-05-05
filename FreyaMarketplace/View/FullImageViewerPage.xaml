@@ -1,0 +1,35 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FreyaMarketplace.View.FullImageViewerPage"
+             BackgroundColor="Black">
+
+
+    <Grid x:Name="MainGrid">
+        <Image x:Name="FullImage" Aspect="AspectFit" />
+
+        <Button Text="X"
+                Clicked="Close_Clicked"
+                HorizontalOptions="End"
+                VerticalOptions="Start"
+                BackgroundColor="Transparent"
+                TextColor="White"/>
+
+        <Button Text="←"
+                Clicked="Previous_Clicked"
+                HorizontalOptions="Start"
+                VerticalOptions="Center"
+                IsVisible="False"
+                x:Name="PrevButton"
+                BackgroundColor="Transparent"
+                TextColor="White"/>
+
+        <Button Text="→"
+                Clicked="Next_Clicked"
+                HorizontalOptions="End"
+                VerticalOptions="Center"
+                IsVisible="False"
+                x:Name="NextButton"
+                BackgroundColor="Transparent"
+                TextColor="White"/>
+    </Grid>
+</ContentPage>

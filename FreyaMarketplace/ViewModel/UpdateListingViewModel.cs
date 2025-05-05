@@ -20,19 +20,23 @@ public partial class UpdateListingViewModel : BaseViewModel
     [ObservableProperty] private string description;
     [ObservableProperty] private string city;
     [ObservableProperty] private decimal price;
-    //image?
+    //images
+    private ObservableCollection<FileResult> _pickedFiles = new();
+    public ReadOnlyObservableCollection<FileResult> PickedFiles { get; }
+    private ObservableCollection<string> _existingUrls = new();
+    public ReadOnlyObservableCollection<string> ExistingUrls { get; }
 
     [ObservableProperty] private string titleError;
     [ObservableProperty] private string descriptionError;
     [ObservableProperty] private string cityError;
     [ObservableProperty] private string priceError;
-    //[ObservableProperty] private string imageError;
+    [ObservableProperty] private string imageError;
 
     public bool IsTitleErrorVisible => !string.IsNullOrEmpty(TitleError);
     public bool IsDescriptionErrorVisible => !string.IsNullOrEmpty(DescriptionError);
     public bool IsCityErrorVisible => !string.IsNullOrEmpty(CityError);
     public bool IsPriceErrorVisible => !string.IsNullOrEmpty(PriceError);
-    //public bool IsImageErrorVisible => !string.IsNullOrEmpty(ImageError);
+    public bool IsImageErrorVisible => !string.IsNullOrEmpty(ImageError);
 
 
     //Userplant fields
@@ -81,6 +85,21 @@ public partial class UpdateListingViewModel : BaseViewModel
         // stb, ha még több mező kell
     }
 
+    // Image handling
+    public async Task AddImagesAsync()
+    {
+        var newFiles = await ImagePickerUtil.PickImagesAsync(PickedFiles.Count);
+        foreach (var file in newFiles)
+            _pickedFiles.Add(file);
+    }
+
+    public void AddImageUrl(string url) => _existingUrls.Add(url);
+    public void RemoveImageUrl(string url) => _existingUrls.Remove(url);
+
+    public void AddPickedFile(FileResult file) => _pickedFiles.Add(file);
+    public void RemovePickedFile(FileResult file) => _pickedFiles.Remove(file);
+
+    //API calls
     [RelayCommand]
     async Task GetStagesAsync()
     {
@@ -134,7 +153,7 @@ public partial class UpdateListingViewModel : BaseViewModel
     }
 
 
-
+    // TODO: make this in a similar way to createlistingpage
     //this command is binded to the ui. when the update button is pressed, the userplant or listing or both commands get excecuted.
     [RelayCommand]
     private async Task SendPatchRequests()
@@ -143,7 +162,7 @@ public partial class UpdateListingViewModel : BaseViewModel
         UpdateUserplantCommand.Execute(null);
     }
 
-
+    // TODO: put this in one function like in createlistingpage
     [RelayCommand]
     private async Task UpdateListingAsync()
     {
@@ -159,7 +178,7 @@ public partial class UpdateListingViewModel : BaseViewModel
             //TODO: images
 
 
-            var result = await listingService.UpdateListingAsync(Listing, ListingTitle, Description, City, Price, new List<string>());
+            var result = await listingService.UpdateListingAsync(Listing, ListingTitle, Description, City, Price, PickedFiles.ToList(), ExistingUrls.ToList());
             if (result.Data is PostPatchListingSuccessData successData)
             {
                 Listing = successData.Listing;
@@ -220,7 +239,7 @@ public partial class UpdateListingViewModel : BaseViewModel
             //TODO: images
 
 
-            var result = await listingService.UpdateListingAsync(listing, ListingTitle, Description, City, Price, new List<string>());
+            var result = await listingService.UpdateListingAsync(listing, ListingTitle, Description, City, Price, PickedFiles.ToList(), ExistingUrls.ToList());
             if (result.Data is PostPatchListingSuccessData successData)
             {
                 Listing = successData.Listing;

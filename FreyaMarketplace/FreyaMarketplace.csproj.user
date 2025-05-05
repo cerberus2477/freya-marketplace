@@ -18,6 +18,9 @@
     <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
   </PropertyGroup>
   <ItemGroup>
+    <MauiXaml Update="View\FullImageViewerPage.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
     <MauiXaml Update="View\HomePage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>

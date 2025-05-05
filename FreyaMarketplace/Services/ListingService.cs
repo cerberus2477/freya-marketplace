@@ -59,12 +59,11 @@ public class ListingService
         }
 
         return listings;
-
     }
 
-    public async Task<PostPatchListingApiResponse> UpdateListingAsync(Listing oldListing, string title, string description, string city, decimal price, List<string> images)
-    {
 
+    public async Task<PostPatchListingApiResponse> UpdateListingAsync(Listing oldListing, string title, string description, string city, decimal price, List<FileResult> localFiles, List<string> remoteUrls)
+    {
         var url = $"{AppSettings.ApiBaseUrl}listings/{oldListing.Id}";
 
         // Checking whether login_token is valid
@@ -75,38 +74,54 @@ public class ListingService
         }
 
         // Constructing the request content (only the fields that are different from the old ones are sent)
-        // TODO: make this  (multipart/form-data)
-        var patchData = new Dictionary<string, object>();
+        var content = new MultipartFormDataContent();
 
-        if (title != oldListing.Title)
-            patchData["title"] = title;
+        if(title != oldListing.Title)
+            content.Add(new StringContent(title), "title");
 
         if (description != oldListing.Description)
-            patchData["description"] = description;
+            content.Add(new StringContent(description), "description");
 
         if (city != oldListing.City)
-            patchData["city"] = city;
+            content.Add(new StringContent(city), "city");
 
         if (price != oldListing.Price)
-            patchData["price"] = price;
+            content.Add(new StringContent(price.ToString()), "price");
 
-        //TODO: handle images
-        //todo:  if none are different then skip request
-        // Assuming images are compared outside or handled separately
-   
-        if (images?.Count > 0)
-            patchData["images[]"] = images;
+        // If no fields changed, no images uploaded, remote images stayed the same (no deletion) skip the request
+        bool remoteImagesUnchanged = oldListing.Media.OrderBy(x => x).SequenceEqual((remoteUrls ?? new()).OrderBy(x => x));
 
-
-        // Skip request if nothing changed
-        if (patchData.Count == 0)
+        if (!content.Any() && (localFiles?.Count ?? 0) == 0 && remoteImagesUnchanged)
         {
             return new PostPatchListingApiResponse(200, "Nem történt változás, frissítés kihagyva.");
         }
 
-        var request = new HttpRequestMessage(HttpMethod.Patch, url);
-        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
-        request.Content = new StringContent(JsonSerializer.Serialize(patchData), Encoding.UTF8, "application/json");
+        // Adding both the newly uploaded images and the previous undeleted images (url) to the request content as files
+        await AddImagesToMultipartContentAsync(content, localFiles, remoteUrls);
+
+        //TODO: remove debug
+        Debug.WriteLine("Multipart Content:");
+
+        foreach (var part in content)
+        {
+            if (part is StringContent stringContent)
+            {
+                Debug.WriteLine($"Field: {part.Headers.ContentDisposition?.Name} = {await stringContent.ReadAsStringAsync()}");
+            }
+            else if (part is StreamContent streamContent)
+            {
+                var name = part.Headers.ContentDisposition?.Name;
+                var fileName = part.Headers.ContentDisposition?.FileName;
+                Debug.WriteLine($"File: {name}, Filename: {fileName}, Content-Type: {part.Headers.ContentType}");
+            }
+        }
+
+        // Forming the request
+        var request = new HttpRequestMessage(HttpMethod.Patch, url)
+        {
+            Headers = { Authorization = new AuthenticationHeaderValue("Bearer", token) },
+            Content = content
+        };
 
         // Sending the request
         try
@@ -123,7 +138,8 @@ public class ListingService
         }
     }
 
-    public async Task<PostPatchListingApiResponse> CreateListingAsync(int userplantId, string title, string description, string city, decimal price, List<FileResult> mediaFiles)
+
+    public async Task<PostPatchListingApiResponse> CreateListingAsync(int userplantId, string title, string description, string city, decimal price, List<FileResult> localFiles)
     {
         var url = $"{AppSettings.ApiBaseUrl}listings";
 
@@ -144,25 +160,33 @@ public class ListingService
             { new StringContent(price.ToString()), "price" }
         };
 
-        //TODO: make this compatible with the image logic
-        // Adding the images to the request
-        if (mediaFiles != null && mediaFiles.Count > 0)
+        // Adding the images to the request content
+        await AddImagesToMultipartContentAsync(content, localFiles);
+
+        //TODO: remove log
+        Debug.WriteLine("Multipart Content:");
+
+        foreach (var part in content)
         {
-            foreach (var file in mediaFiles)
+            if (part is StringContent stringContent)
             {
-                var stream = await file.OpenReadAsync();
-                var streamContent = new StreamContent(stream);
-                streamContent.Headers.ContentType = new MediaTypeHeaderValue("image/jpeg"); // adjust based on actual content type if needed
-                content.Add(streamContent, "media[]", file.FileName);
+                Debug.WriteLine($"Field: {part.Headers.ContentDisposition?.Name} = {await stringContent.ReadAsStringAsync()}");
+            }
+            else if (part is StreamContent streamContent)
+            {
+                var name = part.Headers.ContentDisposition?.Name;
+                var fileName = part.Headers.ContentDisposition?.FileName;
+                Debug.WriteLine($"File: {name}, Filename: {fileName}, Content-Type: {part.Headers.ContentType}");
             }
         }
 
+        // Forming the request
         var request = new HttpRequestMessage(HttpMethod.Post, url)
         {
             Headers = { Authorization = new AuthenticationHeaderValue("Bearer", token) },
             Content = content
         };
-
+        
         // Sending the request
         try
         {
@@ -177,5 +201,67 @@ public class ListingService
             return new PostPatchListingApiResponse(500, ExceptionHelperUtil.GetFriendlyMessage(ex) ?? $"Váratlan hiba történt a hirdetés létrehozása során. ({ex.Message})");
         }
     }
+
+
+    private async Task AddImagesToMultipartContentAsync(
+        MultipartFormDataContent content,
+        List<FileResult> localFiles,
+        List<string>? remoteUrls = null)
+    {
+        // Add local images
+        if (localFiles != null)
+        {
+            foreach (var file in localFiles)
+            {
+                var stream = await file.OpenReadAsync();
+                var streamContent = new StreamContent(stream);
+
+                var extension = Path.GetExtension(file.FileName)?.ToLowerInvariant();
+                var mimeType = extension switch
+                {
+                    ".jpg" or ".jpeg" => "image/jpeg",
+                    ".png" => "image/png",
+                    ".webp" => "image/webp",
+                    ".gif" => "image/gif",
+                    _ => "application/octet-stream"
+                };
+
+                streamContent.Headers.ContentType = new MediaTypeHeaderValue(mimeType);
+                content.Add(streamContent, "media[]", file.FileName);
+            }
+        }
+
+        // Add remote images (optional)
+        if (remoteUrls != null && remoteUrls.Any())
+        {
+            foreach (var imgUrl in remoteUrls)
+            {
+                try
+                {
+                    var stream = await httpClient.GetStreamAsync(imgUrl);
+                    var streamContent = new StreamContent(stream);
+
+                    var extension = Path.GetExtension(imgUrl)?.ToLowerInvariant();
+                    var mimeType = extension switch
+                    {
+                        ".jpg" or ".jpeg" => "image/jpeg",
+                        ".png" => "image/png",
+                        ".webp" => "image/webp",
+                        ".gif" => "image/gif",
+                        _ => "application/octet-stream"
+                    };
+
+                    streamContent.Headers.ContentType = new MediaTypeHeaderValue(mimeType);
+                    var fileName = Path.GetFileName(new Uri(imgUrl).AbsolutePath);
+                    content.Add(streamContent, "media[]", fileName);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"Failed to fetch remote image: {imgUrl} — {ex.Message}");
+                }
+            }
+        }
+    }
+
 
 }
