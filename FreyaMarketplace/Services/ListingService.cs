@@ -62,7 +62,7 @@ public class ListingService
     }
 
 
-    public async Task<PostPatchListingApiResponse> UpdateListingAsync(Listing oldListing, string title, string description, string city, decimal price, List<FileResult> localFiles, List<string> remoteUrls)
+    public async Task<PostPatchListingApiResponse> UpdateListingAsync(Listing oldListing, string title, string description, string city, int price, List<FileResult> localFiles, List<string> remoteUrls)
     {
         var url = $"{AppSettings.ApiBaseUrl}listings/{oldListing.Id}";
 
@@ -139,7 +139,7 @@ public class ListingService
     }
 
 
-    public async Task<PostPatchListingApiResponse> CreateListingAsync(int userplantId, string title, string description, string city, decimal price, List<FileResult> localFiles)
+    public async Task<PostPatchListingApiResponse> CreateListingAsync(int userplantId, string title, string description, string city, int price, List<FileResult> localFiles)
     {
         var url = $"{AppSettings.ApiBaseUrl}listings";
 

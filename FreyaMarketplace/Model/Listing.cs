@@ -21,7 +21,7 @@ public class Listing
     public string Thumbnail => Media?.FirstOrDefault();
 
     [JsonPropertyName("price")]
-    public decimal Price { get; set; }
+    public int Price { get; set; }
 
     [JsonPropertyName("created_at")]
     public DateTime CreatedAt { get; set; }

@@ -39,7 +39,7 @@
             <!-- Ár -->
             <VerticalStackLayout Style="{StaticResource FormField}">
                 <Label Text="Ár (Ft)" />
-                <Entry Text="{Binding Price}" Keyboard="Numeric" Placeholder="Pl. 1500" />
+                <Entry Text="{Binding Price, StringFormat='{0:N0} Ft'}" Keyboard="Numeric" Placeholder="Pl. 1500" />
                 <Label Text="{Binding PriceError}" Style="{StaticResource WarningLabel}" IsVisible="{Binding IsPriceErrorVisible}" />
             </VerticalStackLayout>
 

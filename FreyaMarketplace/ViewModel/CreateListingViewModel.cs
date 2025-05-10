@@ -13,7 +13,7 @@ public partial class CreateListingViewModel : BaseViewModel
     [ObservableProperty] private string listingTitle;
     [ObservableProperty] private string description;
     [ObservableProperty] private string city;
-    [ObservableProperty] private decimal price;
+    [ObservableProperty] private int price;
     //images
     private ObservableCollection<FileResult> _pickedFiles = new();
     public ReadOnlyObservableCollection<FileResult> PickedFiles { get; }
