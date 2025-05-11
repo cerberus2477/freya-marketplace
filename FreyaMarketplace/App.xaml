@@ -179,6 +179,15 @@
                 <Setter Property="VerticalOptions" Value="Center" />
             </Style>
 
+            <!--white loader for green button-->
+            <Style x:Key="ActivityIndicatorOnButtonStyle" TargetType="ActivityIndicator" BasedOn="{StaticResource ActivityIndicatorStyle}">
+                <Setter Property="Color" Value="{StaticResource GreenWhite}" />
+                <Setter Property="WidthRequest" Value="20" />
+                <Setter Property="HeightRequest" Value="20" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+            
             <Style x:Key="TitleLogoLabel" TargetType="Label" BasedOn="{StaticResource LargeLabel}">
                 <Setter Property="TextColor" Value="{StaticResource Green}" />
                 <!--<Setter Property="FontAttributes" Value="Bold" />-->
@@ -195,6 +204,8 @@
                 <Setter Property="WidthRequest" Value="280" />
                 <Setter Property="FontFamily" Value="Inter" />
             </Style>
+            
+            
 
         </ResourceDictionary>
     </Application.Resources>

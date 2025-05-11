@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="FreyaMarketplace.Controls.BorderButtonWithSpinner"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Name="This">
+
+    <Border StrokeThickness="0"
+BackgroundColor="{Binding ButtonBackgroundColor, Source={x:Reference This}}"
+            StrokeShape="RoundRectangle 10"
+            HeightRequest="40"
+            IsEnabled="{Binding IsBusy, Source={x:Reference This}, Converter={StaticResource InverseBooleanConverter}}"
+            >
+        <Grid Padding="10"
+              HorizontalOptions="Center"
+              VerticalOptions="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Text="{Binding Text, Source={x:Reference This}}"
+                   TextColor="{Binding TextColor, Source={x:Reference This}}"
+                   VerticalOptions="Center"
+                   FontFamily="Inter"
+                   FontSize="15" />
+
+            <ActivityIndicator 
+                Grid.Column="2"
+                IsVisible="{Binding IsBusy, Source={x:Reference This}}"
+                IsRunning="{Binding IsBusy, Source={x:Reference This}}"
+                Style="{StaticResource ActivityIndicatorOnButtonStyle}" />
+        </Grid>
+
+        <Border.GestureRecognizers>
+            <TapGestureRecognizer Command="{Binding Command, Source={x:Reference This}}" />
+        </Border.GestureRecognizers>
+    </Border>
+</ContentView>

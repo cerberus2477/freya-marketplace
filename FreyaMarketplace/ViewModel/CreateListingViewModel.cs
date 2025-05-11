@@ -61,15 +61,7 @@ public partial class CreateListingViewModel : BaseViewModel
         Title = "Új hirdetés hozzáadása";
 
         PickedFiles = new ReadOnlyObservableCollection<FileResult>(_pickedFiles);
-
-        //TODO: delete this once final (now in page)
-        //load the stages and plants automatically when navigated to the page
-        //Directly runs the methods in a background thread.
-        //Task.Run(GetStagesAsync);
-        //Task.Run(GetPlantsAsync);
     }
-
-
 
 
     // Image handling
@@ -82,7 +74,6 @@ public partial class CreateListingViewModel : BaseViewModel
 
     public void AddPickedFile(FileResult file) => _pickedFiles.Add(file);
     public void RemovePickedFile(FileResult file) => _pickedFiles.Remove(file);
-
 
 
     // API calls
@@ -183,12 +174,12 @@ public partial class CreateListingViewModel : BaseViewModel
             // Userplant can't be added, display the validation errors.
             if (result_uplant.Data is PostPatchUserplantValidationErrorData errorData_uplant)
             {
-                if (errorData_uplant.Errors.TryGetValue("plant", out var plantErrors))
+                if (errorData_uplant.Errors.TryGetValue("plant_id", out var plantErrors))
                 {
                     PlantError = string.Join("\n", plantErrors);
                     OnPropertyChanged(nameof(IsPlantErrorVisible));
                 }
-                if (errorData_uplant.Errors.TryGetValue("stage", out var stageErrors))
+                if (errorData_uplant.Errors.TryGetValue("stage_id", out var stageErrors))
                 {
                     StageError = string.Join("\n", stageErrors);
                     OnPropertyChanged(nameof(IsStageErrorVisible));
@@ -203,9 +194,9 @@ public partial class CreateListingViewModel : BaseViewModel
             // Adding userplant has been succesfull, adding new listing with the userplant
             else if (result_uplant.Data is PostPatchUserplantSuccessData successData_uplant)
             {
-                //TODO: actual images should be sent
                 var uplant_id = successData_uplant.Userplant.Id;
-                var result_listing = await listingService.CreateListingAsync(uplant_id, ListingTitle, Description, City, Price, PickedFiles.ToList());
+                // Replace 'null' values with empty strings before passing to the API to avoid errors.
+                var result_listing = await listingService.CreateListingAsync(uplant_id, ListingTitle ?? "", Description ?? "", City ?? "", Price, PickedFiles.ToList());
 
                 // Adding listing has been successfull. Display message to user and navigate back.
                 if (result_listing.Data is PostPatchListingSuccessData successData)
@@ -237,10 +228,15 @@ public partial class CreateListingViewModel : BaseViewModel
                         PriceError = string.Join("\n", priceErrors);
                         OnPropertyChanged(nameof(IsPriceErrorVisible));
                     }
+                    if (errorData.Errors.TryGetValue("media", out var imageErrors))
+                    {
+                        ImageError = string.Join("\n", imageErrors);
+                        OnPropertyChanged(nameof(IsImageErrorVisible));
+                    }
                 }
                 else
                 {
-                    await exceptionHandlerUtil.HandleExceptionAsync(new Exception(result_uplant.Message), "Hirdetés hozzáadása sikertelen.");
+                    await exceptionHandlerUtil.HandleExceptionAsync(new Exception(result_listing.Message), "Hirdetés hozzáadása sikertelen.");
                 }
             }
             else

@@ -71,6 +71,9 @@
 	</ItemGroup>
 	
 	<ItemGroup>
+	  <Compile Update="Controls\BorderButtonWithSpinner.xaml.cs">
+	    <DependentUpon>BorderButtonWithSpinner.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="View\Listings\MyListingsPage.xaml.cs">
 	    <DependentUpon>MyListingsPage.xaml</DependentUpon>
 	  </Compile>
@@ -80,6 +83,9 @@
 	</ItemGroup>
 	
 	<ItemGroup>
+	  <MauiXaml Update="Controls\BorderButtonWithSpinner.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="View\FullImageViewerPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

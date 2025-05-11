@@ -143,21 +143,14 @@ public class ObservableRangeCollection<T> : ObservableCollection<T>
     }
 
     //we modified this funtion to add elements in correct order (reverse of original)
-    //more verbose code instead of .Reverse() (LinQ) to avoid creating garbage and hurting performance when called frequently (paginated UI).
     private bool AddArrangeCore(IEnumerable<T> collection)
     {
         var itemAdded = false;
-        //foreach (var item in collection)
-        //{
-        //    Items.Add(item);
-        //    itemAdded = true;
-        //}
-        //return itemAdded;
 
-        var list = collection as IList<T> ?? new List<T>(collection);
-        for (int i = list.Count - 1; i >= 0; i--)
+        var enumerator = collection.GetEnumerator();
+        while (enumerator.MoveNext())
         {
-            Items.Add(list[i]);
+            Items.Add(enumerator.Current);
             itemAdded = true;
         }
 

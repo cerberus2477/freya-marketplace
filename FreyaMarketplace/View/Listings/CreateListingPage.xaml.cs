@@ -1,5 +1,3 @@
-using Microsoft.Maui.Controls;
-
 namespace FreyaMarketplace.View.Listings
 {
     public partial class CreateListingPage : ContentPage

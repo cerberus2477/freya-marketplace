@@ -6,18 +6,20 @@
     xmlns:viewmodel="clr-namespace:FreyaMarketplace.ViewModel"
     x:DataType="viewmodel:CreateListingViewModel"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-    Title="{Binding Title}">
+    xmlns:controls="clr-namespace:FreyaMarketplace.Controls;assembly=FreyaMarketplace"
+    Title="Hirdetés létrehozása">
 
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="15">
             <!-- Add a button to navigate to MyPlantsPage -->
             <Button Text="Saját hirdetéseim" BackgroundColor="Blue" TextColor="White" Clicked="OnMyListingsClicked"/>
-            
+
             <Label Text="Új hirdetés hozzáadása" Style="{StaticResource LargeLabel}" HorizontalOptions="Center" />
 
 
             <!-- Multiple Image Upload -->
             <StackLayout x:Name="ImageContainer" Orientation="Horizontal" Spacing="8" />
+            <Label Text="{Binding ImageError}" Style="{StaticResource WarningLabel}" IsVisible="{Binding IsImageErrorVisible}" />
             
             <!-- Cím -->
             <VerticalStackLayout Style="{StaticResource FormField}">
@@ -43,7 +45,7 @@
             <!-- Ár -->
             <VerticalStackLayout Style="{StaticResource FormField}">
                 <Label Text="Ár (Ft)" />
-                <Entry Text="{Binding Price, StringFormat='{0:N0} Ft'}" Keyboard="Numeric" Placeholder="Pl. 1500" />
+                <Entry Text="{Binding Price}" Keyboard="Numeric" Placeholder="Pl. 1500" />
                 <Label Text="{Binding PriceError}" Style="{StaticResource WarningLabel}" IsVisible="{Binding IsPriceErrorVisible}" />
             </VerticalStackLayout>
 
@@ -75,9 +77,15 @@
             </VerticalStackLayout>
 
             <!-- Létrehozás gomb -->
-            <Button Text="Létrehozás"
-                    Style="{StaticResource PrimaryButton}"
-                    Command="{Binding CreateListingWithUserplantCommand}" />
+            <!--TODO: implement this elsewhere too-->
+            <!--Using contum control for placing the activityindicator spinner inside the button-->
+            <controls:BorderButtonWithSpinner
+                Text="Létrehozás"
+                Command="{Binding CreateListingWithUserplantCommand}"
+                IsBusy="{Binding IsBusy}"
+                TextColor="White"
+                BackgroundColor="Green"
+                VerticalOptions="Center" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
