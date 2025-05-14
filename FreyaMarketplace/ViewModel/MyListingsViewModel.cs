@@ -39,22 +39,6 @@ public partial class MyListingsViewModel : BaseViewModel
         Task.Run(SearchMyListingsAsync);
     }
 
-    //This code checks to see if the selected item is non-null
-    //and then uses the built in Shell Navigation API to push a new page
-    //with the listing as a parameter and then deselects the item.
-
-    [RelayCommand]
-    async Task GoToUpdateListing(Listing listing)
-    {
-        if (listing == null)
-            return;
-
-        await Shell.Current.GoToAsync("UpdateListingPage", true, new Dictionary<string, object>
-        {
-            {"Listing", listing }
-        });
-    }
-
 
     [RelayCommand]
     async Task SearchMyListingsAsync()
@@ -87,5 +71,69 @@ public partial class MyListingsViewModel : BaseViewModel
             IsRefreshing = false;
         }
     }
+    //TODO: i have duplicated of delete and modify
+
+    [RelayCommand]
+    async Task DeleteListing(Listing listing)
+    {
+        if (IsBusy) return;
+
+        try
+        {
+            if (listing == null) return;
+
+            bool confirm = await Shell.Current.DisplayAlert("Törlés megerősítése", $"Biztosan törölni szeretnéd a(z) {listing.Title} hirdetést?", "Igen", "Mégsem");
+
+            if (!confirm) return;
+
+            //TODO
+            Debug.WriteLine($"Deleting listing {listing.Id}...");
+            //await listingService.DeleteListing(listing.Id);
+            MyListings.Remove(listing);
+            ActiveListingsCount = MyListings.Count;
+        }
+        catch (Exception ex)
+        {
+            await exceptionHandlerUtil.HandleExceptionAsync(ex, "Hiba történt a hirdetés törlésekor.");
+        }
+    }
+
+
+    //This code checks to see if the selected item is non-null
+    //and then uses the built in Shell Navigation API to push a new page
+    //with the listing as a parameter and then deselects the item.
+
+
+    //TODO: should these be relaycommands?
+    //TODO: updatelistingpage is not recognised
+    private async void OnEdit(Listing listing)
+    {
+        if (listing == null) return;
+        await Shell.Current.GoToAsync(nameof(UpdateListingPage), true,
+            new Dictionary<string, object> { ["Listing"] = listing });
+    }
+
+    async Task GoToUpdateListing(Listing listing)
+    {
+        if (listing == null)
+            return;
+
+        await Shell.Current.GoToAsync("UpdateListingPage", true, new Dictionary<string, object>
+        {
+            {"Listing", listing }
+        });
+    }
+
+    private async void OnDelete(Listing listing)
+    {
+        if (listing == null) return;
+
+        bool confirm = await Shell.Current.DisplayAlert("Törlés", "Biztos vagy benne, hogy törölni szeretnéd?", "Igen", "Mégse");
+        if (!confirm) return;
+
+        await listingService.DeleteListingAsync(listing.Id);
+        await LoadListingsAsync(); // Or remove from ObservableCollection
+    }
+
 
 }

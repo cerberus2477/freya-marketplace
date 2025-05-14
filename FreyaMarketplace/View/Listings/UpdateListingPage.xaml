@@ -53,7 +53,7 @@
                 <Label Text="{Binding PlantError}" Style="{StaticResource WarningLabel}" IsVisible="{Binding IsPlantErrorVisible}" />
             </VerticalStackLayout>
 
-            <!--todo: type icker for easier plant finding-->
+            <!--todo: type picker for easier plant finding-->
             <!-- Típus (ha van ilyen mező) -->
             <!--<VerticalStackLayout Style="{StaticResource FormField}">
                 <Label Text="Típus" />

@@ -3,131 +3,110 @@
     x:Class="FreyaMarketplace.View.Listings.MyListingsPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:model="clr-namespace:FreyaMarketplace.Model"
     xmlns:viewmodel="clr-namespace:FreyaMarketplace.ViewModel"
+    xmlns:model="clr-namespace:FreyaMarketplace.Model"
     x:DataType="viewmodel:MyListingsViewModel"
-    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     Title="Saját hirdetések">
 
     <Grid RowDefinitions="Auto, Auto, Auto, *" ColumnSpacing="5" RowSpacing="10" HorizontalOptions="Center" WidthRequest="1000">
+
+        <!-- Title -->
         <VerticalStackLayout Padding="10" Grid.Row="0" HorizontalOptions="Fill">
             <Label Style="{StaticResource LargeLabel}" Text="Aktív hirdetések" />
             <Label Style="{StaticResource MediumLabel}" 
                    Text="{Binding ActiveListingsCount, StringFormat='{0} Aktív hirdetés'}" />
         </VerticalStackLayout>
-        <!--searchbar-->
+
+        <!-- Searchbar -->
         <VerticalStackLayout Padding="10" Grid.Row="1" HorizontalOptions="Fill">
-            <Entry 
-            x:Name="SearchEntry"
-            Placeholder="Keresés..."
-            Text="{Binding SearchQuery, Mode=TwoWay}"
-            HorizontalOptions="Fill"
-            WidthRequest="1000"/>
+            <Entry Placeholder="Keresés..."
+                   Text="{Binding SearchQuery, Mode=TwoWay}"
+                   HorizontalOptions="Fill"/>
         </VerticalStackLayout>
 
-        <RefreshView
-            Grid.Row="2"
-            Command="{Binding SearchMyListingsCommand}"
-            IsRefreshing="{Binding IsRefreshing}"
-            >
+        <!-- Listings -->
+        <RefreshView Grid.Row="2"
+                     Command="{Binding SearchMyListingsCommand}"
+                     IsRefreshing="{Binding IsRefreshing}">
 
-            <ContentView>
-                <CollectionView
-                    ItemsSource="{Binding MyListings}"
-                    SelectionMode="None">
+            <CollectionView
+                ItemsSource="{Binding MyListings}"
+                SelectionMode="None"
+                ItemsLayout="VerticalList">
+                <!-- EmptyView for No Listings Found -->
+                <CollectionView.EmptyView>
+                    <StackLayout Padding="100">
+                        <Image Source="not_found_trans.png" WidthRequest="160" HeightRequest="160" HorizontalOptions="Center" VerticalOptions="Center"/>
+                        <Label Text="Nem található a keresésnek megfelelő hirdetés."
+                               FontAttributes="Bold"
+                               FontSize="Medium"
+                               TextColor="Gray"
+                               HorizontalTextAlignment="Center"/>
+                    </StackLayout>
+                </CollectionView.EmptyView>
 
-                    <!-- EmptyView for No Listings Found -->
-                    <CollectionView.EmptyView>
-                        <StackLayout Padding="100">
-                            <Image
-                                HorizontalOptions="Center"
-                                Source="not_found_trans.png"
-                                HeightRequest="160"
-                                WidthRequest="160"
-                                VerticalOptions="Center" />
-                            <Label Text="Nem található a keresésnek megfelelő hirdetés."
-                                   FontAttributes="Bold"
-                                   FontSize="Medium"
-                                   TextColor="Gray"
-                                   HorizontalTextAlignment="Center" />
-                        </StackLayout>
-                    </CollectionView.EmptyView>
-
-                    <CollectionView.ItemsLayout>
-                        <LinearItemsLayout Orientation="Vertical"/>
-                    </CollectionView.ItemsLayout>
-
-
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="model:Listing">
-                            <Border 
-                                Style="{StaticResource ListingContainer}"
-                                HeightRequest="150" 
+                <CollectionView.ItemTemplate>
+                    <!--<DataTemplate x:DataType="model:Listing">-->
+                    <DataTemplate>
+                        <Border Style="{StaticResource ListingContainer}"
+                                HeightRequest="150"
                                 HorizontalOptions="Fill">
 
-                                <Border.GestureRecognizers>
-                                    <TapGestureRecognizer
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MyListingsViewModel}}, Path=GoToUpdateListingCommand}"
-                                        CommandParameter="{Binding .}" />
-                                </Border.GestureRecognizers>
-
-                                <Grid ColumnDefinitions="Auto, *, Auto"
-                                  RowDefinitions="Auto"
+                            <Grid ColumnDefinitions="Auto, *, Auto"
                                   ColumnSpacing="10"
-                                  VerticalOptions="Fill"
-                                  HorizontalOptions="Fill">
-
-                                    <!-- Thumbnail -->
-                                    <Image 
-                                        Source="{Binding Thumbnail}"
-                                        Aspect="AspectFill"
-                                        VerticalOptions="Fill"
+                                  VerticalOptions="Fill">
+                                <!--HorizontalOptions="Fill">-->
+                                <!-- Thumbnail -->
+                                <Image Source="{Binding Thumbnail}"
+                                   
                                         HorizontalOptions="Start"
-                                        WidthRequest="120" 
-                                                            />
+                                       WidthRequest="120"
+                                       HeightRequest="120"
+                                       Aspect="AspectFill"
+                                    <!-- Text Info -->
 
-                                    <!-- Text -->
-                                    <VerticalStackLayout 
-                                        Grid.Column="1" 
-                                        Spacing="5"
-                                        VerticalOptions="Center"
-                                        HorizontalOptions="Fill">
+                                <VerticalStackLayout Grid.Column="1"
+                                                     Spacing="4"
+                                                     VerticalOptions="Center">
+                                    <Label Text="{Binding Title}" Style="{StaticResource LargeLabel}"/>
+                                    <Label Text="{Binding City}" Style="{StaticResource MediumLabel}"/>
+                                    <Label Text="{Binding Price, StringFormat='{0:N0} Ft'}" TextColor="{StaticResource DarkGreen2}" Style="{StaticResource MediumLabel}"/>
+                                    <Label Text="Növény adatok:" FontAttributes="Bold" Style="{StaticResource SmallLabel}"/>
+                                    <Label Text="{Binding PlantName}" Style="{StaticResource SmallLabel}"/>
+                                    <Label Text="{Binding PlantType}" Style="{StaticResource SmallLabel}"/>
+                                    <Label Text="{Binding StageName}" Style="{StaticResource SmallLabel}"/>
+                                    <Label Text="{Binding Count, StringFormat='Darabszám: {0} db'}" Style="{StaticResource SmallLabel}"/>
+                                    <Label Text="{Binding Description}" LineBreakMode="TailTruncation" MaxLines="2" Style="{StaticResource SmallLabel}"/>
+                                </VerticalStackLayout>
+                                    <!--<Label Style="{StaticResource MediumLabel}" 
+            Text="{Binding Price, StringFormat='{0:N0} Ft'}"
+            TextColor="{StaticResource DarkGreen2}" />-->
 
-                                        <Label Style="{StaticResource LargeLabel}" Text="{Binding Title}" />
-                                        <Label Style="{StaticResource MediumLabel}" Text="{Binding City}" />
-                                        <Label Style="{StaticResource MediumLabel}" 
-                                        Text="{Binding Price, StringFormat='{0:N0} Ft'}"
-                                        TextColor="{StaticResource DarkGreen2}" />
-
-                                        <Label Style="{StaticResource SmallLabel}" Text="Növény adatok:" FontAttributes="Bold" />
-                                        <Label Style="{StaticResource SmallLabel}" Text="{Binding PlantName}" />
-                                        <Label Style="{StaticResource SmallLabel}" Text="{Binding PlantType}" />
-                                        <Label Style="{StaticResource SmallLabel}" Text="{Binding StageName}" />
-                                        <Label Style="{StaticResource SmallLabel}" Text="{Binding Count, StringFormat='Darabszám: {0} db'}" />
-                                        <Label Style="{StaticResource SmallLabel}" Text="{Binding Description}" LineBreakMode="TailTruncation" MaxLines="2" />
-
-                                    </VerticalStackLayout>
-                                    <!-- TODO: Update here with icon! -->
-                                    <!--<Button 
-                                        Grid.Column="2"
-                                        Style="{StaticResource PrimaryButton}"
-                                        HeightRequest="30"
-                                        WidthRequest="30"
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MyListingsViewModel}}, Path=GoToUpdateListingCommand}"
-                                        CommandParameter="{Binding .}"
-                                        VerticalOptions="Start"
-                                        HorizontalOptions="End"-->
-                                    <!--/>-->
-                                </Grid>
-                            </Border>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-
-
-
-                </CollectionView>
-
-            </ContentView>
+                                    <!--TODO: icons-->
+                                    <!-- Edit & Delete Buttons -->
+                                    <VerticalStackLayout Grid.Column="2"
+                                                     Spacing="5"
+                                                     VerticalOptions="Center"
+                                                     HorizontalOptions="End">
+                                        <!-- Edit Button -->
+                                        <Button Text="Módosítás"
+                                     
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.GoToUpdateListingCommand}"
+                                            CommandParameter="{Binding .}"
+                                            BackgroundColor="Transparent"
+                                            WidthRequest="30" HeightRequest="30"/>
+                                    <Button Text="🗑"
+                                            FontSize="16"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DeleteListingCommand}"
+                                            CommandParameter="{Binding .}"
+                                            BackgroundColor="Transparent"
+                                            WidthRequest="30" HeightRequest="30"/>
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </RefreshView>
 
         <!-- ActivityIndicator (Loading Spinner) -->
@@ -136,6 +115,5 @@
             IsRunning="{Binding IsBusy}" 
             IsVisible="{Binding IsBusy}" 
             Grid.Row="3"/>
-
     </Grid>
 </ContentPage>
