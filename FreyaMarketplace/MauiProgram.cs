@@ -62,8 +62,9 @@ public static class MauiProgram
         builder.Services.AddHttpClient<PlantService>();
         builder.Services.AddHttpClient<StageService>();
 
-        // This one does not communicate with the API, therefore no need for HttpClient
+        // These do not communicate with the API, therefore no need for HttpClient
         builder.Services.AddSingleton<UserSessionService>();
+        builder.Services.AddSingleton<INavigationGuardService, NavigationGuardService>();
 
         // Utils
         builder.Services.AddSingleton<ExceptionHandlerUtil>();

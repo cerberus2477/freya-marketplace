@@ -40,4 +40,12 @@ public class ExceptionHandlerUtil
             Debug.WriteLine($"Failed to show DisplayAlert: {innerEx.Message}");
         }
     }
+
+    public async Task<bool> ConfirmNavigationWithUnsavedChangesAsync()
+    {
+        return await Shell.Current.DisplayAlert(
+            "El nem mentett módosítások",
+            "Biztosan el szeretnél navigálni? A mentetlen módosításaid elvesznek.",
+            "Igen", "Mégsem");
+    }
 }

@@ -8,6 +8,14 @@ public partial class CreateListingViewModel : BaseViewModel
     private readonly PlantService plantService;
     private readonly ExceptionHandlerUtil exceptionHandlerUtil;
     private readonly UserSessionService userSessionService;
+    private readonly INavigationGuardService navigationGuardService;
+
+    private bool hasUnsavedChanges;
+    private int? savedUserplantId;
+    private int? lastSubmittedPlantId;
+    private int? lastSubmittedStageId;
+    private int? lastSubmittedCount;
+
 
     //Listing fields
     [ObservableProperty] private string listingTitle;
@@ -50,7 +58,7 @@ public partial class CreateListingViewModel : BaseViewModel
     public bool IsCountErrorVisible => !string.IsNullOrEmpty(CountError);
 
 
-    public CreateListingViewModel(ListingService listingService, ExceptionHandlerUtil exceptionHandlerUtil, UserSessionService userSessionService, StageService stageService, PlantService plantService, UserplantService userplantService)
+    public CreateListingViewModel(ListingService listingService, ExceptionHandlerUtil exceptionHandlerUtil, UserSessionService userSessionService, StageService stageService, PlantService plantService, UserplantService userplantService, INavigationGuardService navigationGuardService)
     {
         this.userplantService = userplantService;
         this.listingService = listingService;
@@ -61,6 +69,22 @@ public partial class CreateListingViewModel : BaseViewModel
         Title = "Új hirdetés hozzáadása";
 
         PickedFiles = new ReadOnlyObservableCollection<FileResult>(_pickedFiles);
+        this.navigationGuardService = navigationGuardService;
+
+        navigationGuardService.SetNavigationGuard(async () =>
+        {
+            if (!hasUnsavedChanges)
+                return true;
+
+            bool confirm = await exceptionHandlerUtil.ConfirmNavigationWithUnsavedChangesAsync();
+
+            if (confirm)
+            {
+                await ResetFormAsync();
+            }
+
+            return confirm;
+        });
     }
 
 
@@ -128,6 +152,37 @@ public partial class CreateListingViewModel : BaseViewModel
         }
     }
 
+    // Track unsaved changes for navigation guard
+    partial void OnListingTitleChanged(string value) => hasUnsavedChanges = true;
+    partial void OnDescriptionChanged(string value) => hasUnsavedChanges = true;
+    partial void OnCityChanged(string value) => hasUnsavedChanges = true;
+    partial void OnPriceChanged(int value) => hasUnsavedChanges = true;
+    partial void OnSelectedPlantChanged(Plant value) => hasUnsavedChanges = true;
+    partial void OnSelectedStageChanged(Stage value) => hasUnsavedChanges = true;
+    partial void OnCountChanged(int value) => hasUnsavedChanges = true;
+
+    private async Task ResetFormAsync()
+    {
+        ListingTitle = Description = City = "";
+        Price = 0;
+        _pickedFiles.Clear();
+
+        SelectedPlant = null;
+        SelectedStage = null;
+        Count = 0;
+
+        ClearValidationErrors();
+        hasUnsavedChanges = false;
+
+        if (savedUserplantId.HasValue)
+        {
+            //await userplantService.DeleteUserplantAsync(savedUserplantId.Value);
+            Debug.WriteLine($"Deleting old userplant with id {savedUserplantId.Value} from db.");
+            //TODO
+            savedUserplantId = null;
+        }
+    }
+
 
     [RelayCommand]
     private async Task CreateListingWithUserplantAsync()
@@ -137,120 +192,184 @@ public partial class CreateListingViewModel : BaseViewModel
         try
         {
             IsBusy = true;
-            TitleError = null;
-            CityError = null;
-            PriceError = null;
-            ImageError = null;
-            PlantError = null;
-            StageError = null;
-            CountError = null;
+            ClearValidationErrors();
 
             // Checking whether we have a plant and a stage
-            bool hasValidationError = false;
-
-            if (SelectedPlant == null)
-            {
-                PlantError = "Kérlek válassz növényt.";
-                OnPropertyChanged(nameof(IsPlantErrorVisible));
-                hasValidationError = true;
-            }
-
-            if (SelectedStage == null)
-            {
-                StageError = "Kérlek válassz növekedési fázist.";
-                OnPropertyChanged(nameof(IsStageErrorVisible));
-                hasValidationError = true;
-            }
-
-            if (hasValidationError)
+            if (!ValidateUserplantFields())
             {
                 IsBusy = false;
                 return;
             }
 
-            // Adding the userplant first
-            var result_uplant = await userplantService.CreateUserplantAsync(SelectedPlant.Id, SelectedStage.Id, Count);
-
-            // Userplant can't be added, display the validation errors.
-            if (result_uplant.Data is PostPatchUserplantValidationErrorData errorData_uplant)
+            // Delete old unused userplant from db if data has changed
+            if (savedUserplantId.HasValue && HasUserplantChanged())
             {
-                if (errorData_uplant.Errors.TryGetValue("plant_id", out var plantErrors))
-                {
-                    PlantError = string.Join("\n", plantErrors);
-                    OnPropertyChanged(nameof(IsPlantErrorVisible));
-                }
-                if (errorData_uplant.Errors.TryGetValue("stage_id", out var stageErrors))
-                {
-                    StageError = string.Join("\n", stageErrors);
-                    OnPropertyChanged(nameof(IsStageErrorVisible));
-                }
-                if (errorData_uplant.Errors.TryGetValue("count", out var countErrors))
-                {
-                    CountError = string.Join("\n", countErrors);
-                    OnPropertyChanged(nameof(IsCountErrorVisible));
-                }
+                //TODO
+                //await userplantService.DeleteUserplantAsync(savedUserplantId.Value);
+                Debug.WriteLine($"Deleting old userplant with id {savedUserplantId.Value} from db.");
+                savedUserplantId = null;
             }
 
-            // Adding userplant has been succesfull, adding new listing with the userplant
-            else if (result_uplant.Data is PostPatchUserplantSuccessData successData_uplant)
+            // Create new userplant if none saved yet
+            if (!savedUserplantId.HasValue)
             {
-                var uplant_id = successData_uplant.Userplant.Id;
-                // Replace 'null' values with empty strings before passing to the API to avoid errors.
-                var result_listing = await listingService.CreateListingAsync(uplant_id, ListingTitle ?? "", Description ?? "", City ?? "", Price, PickedFiles.ToList());
+                var resultUplant = await userplantService.CreateUserplantAsync(
+                    SelectedPlant.Id, SelectedStage.Id, Count);
 
-                // Adding listing has been successfull. Display message to user and navigate back.
-                if (result_listing.Data is PostPatchListingSuccessData successData)
+                // Userplant can't be added, display the validation errors.
+                if (resultUplant.Data is PostPatchUserplantValidationErrorData uplantError)
                 {
-                    await ToastUtil.ShowToastAsync("Hirdetés sikeresen hozzáadva");
-                    await Shell.Current.GoToAsync("..");
+                    ShowUserplantValidationErrors(uplantError);
+                    return;
                 }
 
-                // Listing can't be added, display the validation errors.
-                else if (result_listing.Data is PostPatchListingValidationErrorData errorData)
+                if (resultUplant.Data is not PostPatchUserplantSuccessData uplantSuccess)
                 {
-                    if (errorData.Errors.TryGetValue("title", out var titleErrors))
-                    {
-                        TitleError = string.Join("\n", titleErrors);
-                        OnPropertyChanged(nameof(IsTitleErrorVisible));
-                    }
-                    if (errorData.Errors.TryGetValue("description", out var descriptionErrors))
-                    {
-                        DescriptionError = string.Join("\n", descriptionErrors);
-                        OnPropertyChanged(nameof(IsDescriptionErrorVisible));
-                    }
-                    if (errorData.Errors.TryGetValue("city", out var cityErrors))
-                    {
-                        CityError = string.Join("\n", cityErrors);
-                        OnPropertyChanged(nameof(IsCityErrorVisible));
-                    }
-                    if (errorData.Errors.TryGetValue("price", out var priceErrors))
-                    {
-                        PriceError = string.Join("\n", priceErrors);
-                        OnPropertyChanged(nameof(IsPriceErrorVisible));
-                    }
-                    if (errorData.Errors.TryGetValue("media", out var imageErrors))
-                    {
-                        ImageError = string.Join("\n", imageErrors);
-                        OnPropertyChanged(nameof(IsImageErrorVisible));
-                    }
+                    await exceptionHandlerUtil.HandleExceptionAsync(
+                        new Exception(resultUplant.Message),
+                        "Növény hozzáadása sikertelen.");
+                    return;
                 }
-                else
-                {
-                    await exceptionHandlerUtil.HandleExceptionAsync(new Exception(result_listing.Message), "Hirdetés hozzáadása sikertelen.");
-                }
+
+                // Save created userplant data locally for potential reuse
+                // (listing creation fails first, then new listing created with same userplant) 
+                savedUserplantId = uplantSuccess.Userplant.Id;
+                lastSubmittedPlantId = SelectedPlant.Id;
+                lastSubmittedStageId = SelectedStage.Id;
+                lastSubmittedCount = Count;
             }
+
+            // Userplant creation was successfull, now we create the listing with the created userplantid
+            // Replace 'null' values with empty strings before passing to the API to avoid errors.
+            var resultListing = await listingService.CreateListingAsync(savedUserplantId.Value, ListingTitle ?? "", Description ?? "", City ?? "", Price, PickedFiles.ToList());
+
+            // Listing can't be added, display the validation errors.
+            if (resultListing.Data is PostPatchListingValidationErrorData listingError)
+            {
+                ShowListingValidationErrors(listingError);
+                return;
+            }
+
+            // Adding listing has been successfull. Deleting local userplant data so we don't reuse it anymore.
+            if (resultListing.Data is PostPatchListingSuccessData)
+            {
+                await ToastUtil.ShowToastAsync("Hirdetés sikeresen hozzáadva");
+                savedUserplantId = null;
+                hasUnsavedChanges = false;
+                navigationGuardService.ClearNavigationGuard();
+                await Shell.Current.GoToAsync("..");
+            }
+
             else
             {
-                await exceptionHandlerUtil.HandleExceptionAsync(new Exception(result_uplant.Message), "Hirdetés (növény/státusz/darabszám) hozzáadása sikertelen.");
+                await exceptionHandlerUtil.HandleExceptionAsync(
+                    new Exception(resultListing.Message),
+                    "Hirdetés hozzáadása sikertelen.");
             }
         }
+
         catch (Exception ex)
         {
-            await exceptionHandlerUtil.HandleExceptionAsync(ex, "Hiba adódott a hirdetés hozzáadása során.");
+            await exceptionHandlerUtil.HandleExceptionAsync(ex, "Hiba történt.");
         }
         finally
         {
             IsBusy = false;
         }
     }
+
+
+    // Helper methods
+    private void ClearValidationErrors()
+    {
+        TitleError = DescriptionError = CityError = PriceError = ImageError =
+            PlantError = StageError = CountError = null;
+
+        OnPropertyChanged(nameof(IsTitleErrorVisible));
+        OnPropertyChanged(nameof(IsDescriptionErrorVisible));
+        OnPropertyChanged(nameof(IsCityErrorVisible));
+        OnPropertyChanged(nameof(IsPriceErrorVisible));
+        OnPropertyChanged(nameof(IsImageErrorVisible));
+        OnPropertyChanged(nameof(IsPlantErrorVisible));
+        OnPropertyChanged(nameof(IsStageErrorVisible));
+        OnPropertyChanged(nameof(IsCountErrorVisible));
+    }
+
+    private bool HasUserplantChanged()
+    {
+        return lastSubmittedPlantId != SelectedPlant?.Id ||
+               lastSubmittedStageId != SelectedStage?.Id ||
+               lastSubmittedCount != Count;
+    }
+
+    private bool ValidateUserplantFields()
+    {
+        bool hasError = false;
+
+        if (SelectedPlant == null)
+        {
+            PlantError = "Kérlek válassz növényt.";
+            OnPropertyChanged(nameof(IsPlantErrorVisible));
+            hasError = true;
+        }
+        if (SelectedStage == null)
+        {
+            StageError = "Kérlek válassz növekedési fázist.";
+            OnPropertyChanged(nameof(IsStageErrorVisible));
+            hasError = true;
+        }
+
+        return !hasError;
+    }
+
+    private void ShowUserplantValidationErrors(PostPatchUserplantValidationErrorData error)
+    {
+        if (error.Errors.TryGetValue("plant_id", out var plantErrors))
+        {
+            PlantError = string.Join("\n", plantErrors);
+            OnPropertyChanged(nameof(IsPlantErrorVisible));
+        }
+        if (error.Errors.TryGetValue("stage_id", out var stageErrors))
+        {
+            StageError = string.Join("\n", stageErrors);
+            OnPropertyChanged(nameof(IsStageErrorVisible));
+        }
+        if (error.Errors.TryGetValue("count", out var countErrors))
+        {
+            CountError = string.Join("\n", countErrors);
+            OnPropertyChanged(nameof(IsCountErrorVisible));
+        }
+    }
+
+    private void ShowListingValidationErrors(PostPatchListingValidationErrorData error)
+    {
+        if (error.Errors.TryGetValue("title", out var titleErrors))
+        {
+            TitleError = string.Join("\n", titleErrors);
+            OnPropertyChanged(nameof(IsTitleErrorVisible));
+        }
+        if (error.Errors.TryGetValue("description", out var descriptionErrors))
+        {
+            DescriptionError = string.Join("\n", descriptionErrors);
+            OnPropertyChanged(nameof(IsDescriptionErrorVisible));
+        }
+        if (error.Errors.TryGetValue("city", out var cityErrors))
+        {
+            CityError = string.Join("\n", cityErrors);
+            OnPropertyChanged(nameof(IsCityErrorVisible));
+        }
+        if (error.Errors.TryGetValue("price", out var priceErrors))
+        {
+            PriceError = string.Join("\n", priceErrors);
+            OnPropertyChanged(nameof(IsPriceErrorVisible));
+        }
+        if (error.Errors.TryGetValue("media", out var imageErrors))
+        {
+            ImageError = string.Join("\n", imageErrors);
+            OnPropertyChanged(nameof(IsImageErrorVisible));
+        }
+    }
+
 }
+
+
